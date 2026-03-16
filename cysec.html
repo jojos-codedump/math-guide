@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zero to Hero — Cybersecurity Roadmap</title>
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --bg2: #141416;
+    --bg3: #1a1a1d;
+    --bg4: #202024;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --border3: rgba(255,255,255,0.20);
+    --text: #e8e6de;
+    --text2: #9a9890;
+    --text3: #5e5d58;
+    --blue: #5b8af5;
+    --blue-bg: rgba(91,138,245,0.1);
+    --green: #4caf7d;
+    --green-bg: rgba(76,175,125,0.1);
+    --amber: #e8a838;
+    --amber-bg: rgba(232,168,56,0.1);
+    --red: #e05c5c;
+    --red-bg: rgba(224,92,92,0.1);
+    --purple: #9b7ef8;
+    --purple-bg: rgba(155,126,248,0.1);
+    --teal: #3ecfb2;
+    --teal-bg: rgba(62,207,178,0.1);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .page { max-width: 940px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+  /* Header */
+  .eyebrow { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+  .hdr-title { font-size: 23px; font-weight: 600; color: var(--text); line-height: 1.3; margin-bottom: 8px; }
+  .hdr-sub { font-size: 13px; color: var(--text2); line-height: 1.7; max-width: 700px; margin-bottom: 14px; }
+  .stats { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .stat { font-size: 11px; padding: 3px 10px; border-radius: 20px; border: 0.5px solid var(--border2); color: var(--text2); background: var(--bg3); }
+
+  /* Gap analysis banner */
+  .gap-banner {
+    background: var(--amber-bg);
+    border: 0.5px solid rgba(232,168,56,0.3);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .gap-banner-title { font-size: 12px; font-weight: 600; color: var(--amber); margin-bottom: 8px; letter-spacing: .04em; text-transform: uppercase; }
+  .gap-list { display: flex; flex-direction: column; gap: 4px; }
+  .gap-item { font-size: 11px; color: var(--text2); line-height: 1.5; display: flex; gap: 8px; }
+  .gap-dot { color: var(--amber); flex-shrink: 0; font-weight: 700; margin-top: 1px; }
+
+  /* Legend */
+  .legend-row { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
+  .ll { font-size: 11px; color: var(--text3); margin-right: 2px; }
+  .bdg { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+  .b-own  { background: var(--green-bg);  color: var(--green); }
+  .b-miss { background: var(--amber-bg);  color: var(--amber); }
+  .b-free { background: var(--blue-bg);   color: var(--blue); }
+  .b-crit { background: var(--red-bg);    color: var(--red); }
+  .tier-f { background: var(--bg4); color: var(--text2); border: 0.5px solid var(--border2); }
+  .tier-i { background: var(--amber-bg);  color: var(--amber); }
+  .tier-a { background: var(--purple-bg); color: var(--purple); }
+  .tier-r { background: var(--red-bg);    color: var(--red); }
+
+  /* Nav */
+  .pnav {
+    display: flex; gap: 5px; flex-wrap: wrap;
+    margin: 1.75rem 0 1.25rem;
+    position: sticky; top: 0; background: var(--bg);
+    padding: 10px 0; z-index: 10;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .pbtn {
+    font-size: 11px; font-family: inherit; padding: 5px 12px;
+    border-radius: 20px; border: 0.5px solid var(--border2);
+    background: transparent; cursor: pointer; color: var(--text2);
+    transition: all .15s; line-height: 1.4; white-space: nowrap;
+  }
+  .pbtn:hover { background: var(--bg3); color: var(--text); border-color: var(--border3); }
+  .pbtn.active { background: var(--bg4); border-color: var(--border3); color: var(--text); font-weight: 600; }
+
+  /* Panels */
+  .pcon { display: none; }
+  .pcon.active { display: block; }
+
+  .pdesc {
+    border-left: 2px solid var(--border3);
+    padding: 10px 14px; background: var(--bg3);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 14px;
+  }
+  .pdesc-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+  .pdesc-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .pdesc-why { font-size: 12px; color: var(--text2); line-height: 1.65; }
+
+  /* Cards */
+  .tstack { display: flex; flex-direction: column; gap: 10px; }
+  .tcard {
+    background: var(--bg2); border: 0.5px solid var(--border);
+    border-radius: var(--radius); padding: 14px 16px;
+    transition: border-color .15s;
+  }
+  .tcard:hover { border-color: var(--border2); }
+  .tcard.has-gap { border-left: 2px solid var(--amber); }
+  .tcard.has-critgap { border-left: 2px solid var(--red); }
+
+  .thead { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+  .tnum { font-size: 10px; font-weight: 600; background: var(--bg4); color: var(--text3); border-radius: 4px; padding: 2px 8px; min-width: 24px; text-align: center; flex-shrink: 0; }
+  .tname { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; }
+  .prereq { font-size: 10px; padding: 2px 8px; border-radius: 4px; background: var(--bg4); color: var(--text3); border: 0.5px solid var(--border); white-space: nowrap; }
+
+  .twhy { font-size: 12px; color: var(--text2); margin-bottom: 12px; padding: 9px 12px; background: var(--bg3); border-radius: var(--radius-sm); line-height: 1.7; border-left: 2px solid var(--border2); }
+
+  /* Book sections */
+  .book-section { margin-bottom: 10px; }
+  .bsec-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text3); margin-bottom: 6px; }
+  .book-list { display: flex; flex-direction: column; gap: 5px; }
+  .bitem { display: flex; gap: 10px; align-items: flex-start; }
+  .bitem-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--text3); flex-shrink: 0; margin-top: 7px; }
+  .bitem-dot.own  { background: var(--green); }
+  .bitem-dot.miss { background: var(--amber); }
+  .bitem-dot.crit { background: var(--red); }
+  .bitem-body { flex: 1; }
+  .bitem-title { font-size: 12px; font-style: italic; color: var(--text); display: flex; align-items: center; gap: 5px; flex-wrap: wrap; line-height: 1.4; }
+  .bitem-auth { font-size: 11px; color: var(--text2); margin-top: 1px; }
+  .bitem-note { font-size: 10px; color: var(--text3); margin-top: 2px; line-height: 1.5; }
+
+  /* Missing gap alert */
+  .gap-alert {
+    background: var(--amber-bg); border: 0.5px solid rgba(232,168,56,0.25);
+    border-radius: var(--radius-sm); padding: 8px 11px; margin-bottom: 10px;
+    font-size: 11px; color: var(--amber); line-height: 1.6;
+  }
+  .gap-alert.crit { background: var(--red-bg); border-color: rgba(224,92,92,0.25); color: var(--red); }
+  .gap-alert strong { font-weight: 600; }
+
+  /* Resources */
+  .rrow { border-top: 0.5px solid var(--border); padding-top: 9px; display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+  .rlbl { font-size: 10px; color: var(--text3); flex-shrink: 0; margin-right: 2px; }
+  .rchip { font-size: 10px; color: var(--blue); background: var(--blue-bg); border-radius: 4px; padding: 3px 9px; text-decoration: none; transition: background .12s; }
+  .rchip:hover { background: rgba(91,138,245,0.18); }
+  .rchip.free-site { color: var(--teal); background: var(--teal-bg); }
+
+  .sep { border: none; border-top: 0.5px solid var(--border); margin: 8px 0; }
+
+  .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 0.5px solid var(--border); font-size: 11px; color: var(--text3); line-height: 1.7; }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  @media (max-width: 600px) {
+    .page { padding: 1.5rem 1rem 4rem; }
+    .hdr-title { font-size: 18px; }
+    .pbtn { font-size: 10px; padding: 4px 9px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="eyebrow">Personal Library Roadmap · Gap-Analysed</div>
+  <div class="hdr-title">Zero to Hero — Cybersecurity<br>From Absolute Beginner to Advanced Practitioner</div>
+  <div class="hdr-sub">Built from your 55-book collection. Every phase flows directly from the previous. Books you own are mapped to where they belong in the sequence. Critical gaps are flagged with missing resources and free alternatives to fill them.</div>
+
+  <div class="stats">
+    <span class="stat">13 phases</span>
+    <span class="stat">26 topics</span>
+    <span class="stat">55 books in your library</span>
+    <span class="stat">8 critical gaps identified</span>
+    <span class="stat">All gaps filled with free resources</span>
+  </div>
+
+  <!-- Gap Analysis Banner -->
+  <div class="gap-banner">
+    <div class="gap-banner-title">Gap Analysis — What Your Collection Is Missing</div>
+    <div class="gap-list">
+      <div class="gap-item"><span class="gap-dot">!</span><span><strong>Critical:</strong> Windows & Active Directory — zero coverage. No Windows internals, no AD exploitation, no PowerShell for attack. This is the single biggest gap; AD compromise is the core of nearly every enterprise pentest.</span></div>
+      <div class="gap-item"><span class="gap-dot">!</span><span><strong>Critical:</strong> DFIR & Memory Forensics — Blue Team Handbook exists but no dedicated incident response or memory forensics book. <em>The Art of Memory Forensics</em> (Ligh et al.) is the canonical text and is absent.</span></div>
+      <div class="gap-item"><span class="gap-dot">!</span><span><strong>Critical:</strong> Assembly Language — Hacking: Art of Exploitation touches x86 assembly but there is no dedicated primer. Binary exploitation is impossible without this foundation.</span></div>
+      <div class="gap-item"><span class="gap-dot">!</span><span><strong>Major:</strong> C Programming Basics — Secure Coding in C assumes you already know C. No introductory C book in the collection.</span></div>
+      <div class="gap-item"><span class="gap-dot">!</span><span><strong>Major:</strong> Python Basics — Black Hat Python assumes Python fluency. No introductory Python book in the collection.</span></div>
+      <div class="gap-item"><span class="gap-dot">!</span><span><strong>Major:</strong> Wireless Security — No dedicated 802.11 / WiFi attack book. A significant vector with no coverage.</span></div>
+      <div class="gap-item"><span class="gap-dot">!</span><span><strong>Major:</strong> Container & Kubernetes Security — Cloud security is partially covered (AWS) but Docker/K8s attack and defence has zero coverage.</span></div>
+      <div class="gap-item"><span class="gap-dot">~</span><span><strong>Minor:</strong> Mobile Security — No Android or iOS pentesting coverage. OSINT has partial coverage via Operator Handbook but no dedicated text.</span></div>
+    </div>
+  </div>
+
+  <div class="legend-row">
+    <span class="ll">Tier:</span>
+    <span class="bdg tier-f">Foundation</span>
+    <span class="bdg tier-i">Intermediate</span>
+    <span class="bdg tier-a">Advanced</span>
+    <span class="bdg tier-r">Research / Elite</span>
+  </div>
+  <div class="legend-row" style="margin-bottom:18px">
+    <span class="ll">Books:</span>
+    <span class="bdg b-own">In your library</span>
+    <span class="bdg b-miss">Get this — gap</span>
+    <span class="bdg b-crit">Critical missing book</span>
+    <span class="bdg b-free">Free online resource</span>
+  </div>
+
+  <div class="pnav" id="pnav"></div>
+  <div id="pcons"></div>
+
+  <div class="footer">
+    Books marked "In your library" are already on your shelf — the roadmap tells you when and in what order to read them. Books marked "Get this" or "Critical missing" are the gaps identified in your collection; most are freely discoverable as PDFs. Every free resource link is live. The amber left border on a card means the topic has gaps; red means the gap is critical to the topic's goals.
+  </div>
+</div>
+
+<script>
+const OWN  = 'b-own';
+const MISS = 'b-miss';
+const CRIT = 'b-crit';
+const FREE = 'b-free';
+
+const TIERS = { F:'tier-f', I:'tier-i', A:'tier-a', R:'tier-r' };
+const TIERL = { F:'Foundation', I:'Intermediate', A:'Advanced', R:'Research / Elite' };
+
+// gap: null | 'warn' | 'crit'
+const DATA = [
+  {
+    btn:'0 · IT Foundations', tier:'F',
+    name:'Computer Fundamentals & First Steps',
+    desc:'You cannot attack or defend systems you do not understand. Phase 0 builds the mental model of how computers, operating systems, and basic infrastructure work — before any security concept is introduced. This phase is not optional, even if you feel you know computers.',
+    topics:[
+      { n:1, name:'Hardware, Operating Systems & CompTIA A+',
+        prereq:'None', gap:null,
+        why:'CompTIA A+ covers the physical and software layer of computing — CPU, RAM, storage, network cards, Windows, macOS, Linux, virtualisation, and basic troubleshooting. This is the foundation that makes every networking and Linux concept in the next phases intuitive rather than abstract. Meyers\' books are the gold standard for this.',
+        owned:[
+          { t:'Mike Meyers\' CompTIA A+ Core 1 Certification Passport', a:'Mike Meyers', note:'Hardware, networking fundamentals, mobile devices, virtualisation. Read completely before moving to networking.' },
+          { t:'Mike Meyers\' CompTIA A+ Core 2 Certification Passport', a:'Mike Meyers', note:'Operating systems, security fundamentals, operational procedures. Covers the software layer.' }
+        ],
+        missing:[],
+        res:[
+          { l:'Professor Messer A+ Course (free, professormesser.com)', u:'https://www.professormesser.com/free-a-plus-training/220-1101/220-1101-video/220-1101-training-course/', free:true },
+          { l:'TryHackMe Pre-Security Path (free)', u:'https://tryhackme.com/path/outline/presecurity', free:true }
+        ]
+      },
+      { n:2, name:'Linux Command Line & First Hacker Steps',
+        prereq:'Topic 1', gap:null,
+        why:'Linux is the operating system of security. Servers run it, tools run on it, and most targets run it. The Linux Command Line by Shotts is the gentlest possible entry — it teaches the shell, files, processes, and I/O redirection. Linux Basics for Hackers bridges it to security context immediately after. These two books together are the complete on-ramp.',
+        owned:[
+          { t:'The Linux Command Line', a:'William Shotts', note:'Free at linuxcommand.org — the definitive gentle introduction. Bash, files, processes, permissions, I/O redirection. Read cover-to-cover before any other Linux book.' },
+          { t:'Linux Basics for Hackers', a:'OccupyTheWeb', note:'Transitions Linux fundamentals directly into security context — networking tools, scripting basics, log analysis. Read immediately after Shotts.' }
+        ],
+        missing:[],
+        res:[
+          { l:'OverTheWire: Bandit (Linux wargame, free)', u:'https://overthewire.org/wargames/bandit/', free:true },
+          { l:'Linux Journey (free, interactive)', u:'https://linuxjourney.com/', free:true },
+          { l:'TryHackMe Linux Fundamentals (free)', u:'https://tryhackme.com/module/linux-fundamentals', free:true }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'1 · Networking', tier:'F',
+    name:'Networking — From Fundamentals to Protocol Mastery',
+    desc:'Networking is the attack surface. Every intrusion travels over a network; every exploit uses protocols; every packet can be captured. You must understand networking at a level that lets you read raw packet captures and know what is normal versus anomalous.',
+    topics:[
+      { n:3, name:'Networking Fundamentals & CCNA',
+        prereq:'Phase 0 complete', gap:null,
+        why:'Kurose & Ross is the best university networking textbook in existence — it teaches protocols from application layer down to physical, with the context of why each layer exists. The CCNA books validate and operationalise this knowledge. Together they give you a complete and practical understanding of how data actually moves across networks.',
+        owned:[
+          { t:'Computer Networking: A Top-Down Approach', a:'Kurose & Ross', note:'The university-standard networking textbook. Application → transport → network → link layers. Read Chapters 1–5 completely; they are the foundation for everything in cybersecurity.' },
+          { t:'CCNA 1', a:'Cisco Press', note:'Cisco\'s official CCNA curriculum — subnetting, VLANs, routing, switching fundamentals. Hands-on lab focus.' },
+          { t:'CCNA 2', a:'Cisco Press', note:'Advanced routing (OSPF, EIGRP), WAN technologies, network security fundamentals. Completes the CCNA-level foundation.' }
+        ],
+        missing:[],
+        res:[
+          { l:'Professor Messer Network+ (free, professormesser.com)', u:'https://www.professormesser.com/network-plus/n10-008/n10-008-video/n10-008-training-course/', free:true },
+          { l:'Cisco Packet Tracer (free network simulator)', u:'https://www.netacad.com/courses/packet-tracer', free:true },
+          { l:'Subnetting Practice (subnettingpractice.com)', u:'https://subnettingpractice.com/', free:true }
+        ]
+      },
+      { n:4, name:'TCP/IP Deep Dive & Packet Analysis',
+        prereq:'Topic 3', gap:null,
+        why:'TCP/IP Illustrated is the most thorough protocol reference ever written — Stevens dissects every byte of every packet with Wireshark traces. Practical Packet Analysis teaches you to read those traces yourself. After this topic you can sit in front of Wireshark, capture live traffic, and understand every field of every packet — which is the actual skill that powers network penetration testing.',
+        owned:[
+          { t:'TCP/IP Illustrated, Volume 1', a:'Kevin R. Fall & W. Richard Stevens', note:'The canonical TCP/IP reference. Every protocol described at byte level. Read chapters on IP, TCP, UDP, DNS, DHCP, TLS, and HTTP in full.' },
+          { t:'Practical Packet Analysis', a:'Chris Sanders', note:'Wireshark-based packet analysis — real-world traffic scenarios, protocol identification, attack detection. Use Wireshark alongside every chapter.' }
+        ],
+        missing:[],
+        res:[
+          { l:'Wireshark Official Documentation & Sample Captures', u:'https://wiki.wireshark.org/SampleCaptures', free:true },
+          { l:'PacketLife Cheat Sheets (free)', u:'https://packetlife.net/library/cheat-sheets/', free:true },
+          { l:'TryHackMe Wireshark room (free)', u:'https://tryhackme.com/room/wireshark', free:true }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'2 · Linux Mastery', tier:'F',
+    name:'Deep Linux — Administration, Internals & System Programming',
+    desc:'Surface-level Linux knowledge produces surface-level security work. You need to understand how the kernel manages processes, memory, files, and networks — because exploitation, privilege escalation, and defence all happen at these layers.',
+    topics:[
+      { n:5, name:'Linux Administration & System Internals',
+        prereq:'Phase 1 complete', gap:null,
+        why:'How Linux Works explains the OS conceptually — kernel, processes, memory, devices, and networking from the inside. Linux Bible is the operational reference. UNIX and Linux System Administration Handbook teaches you to run and manage Linux systems at scale — the same skills that system administrators and attackers both need to navigate infrastructure.',
+        owned:[
+          { t:'How Linux Works', a:'Brian Ward', note:'The conceptual layer — kernel, boot process, process management, memory, devices. This is the book that makes Linux make sense rather than feel like magic.' },
+          { t:'Linux Bible', a:'Christopher Negus', note:'Comprehensive operational reference — package management, storage, networking, virtualisation. Use as a lookup reference alongside Ward.' },
+          { t:'UNIX and Linux System Administration Handbook', a:'Evi Nemeth et al.', note:'The professional sysadmin reference. Covers everything from user management to performance tuning. Essential for understanding what defenders manage.' }
+        ],
+        missing:[],
+        res:[
+          { l:'Linux From Scratch (advanced, linuxfromscratch.org)', u:'https://www.linuxfromscratch.org/', free:true },
+          { l:'TryHackMe Linux Privilege Escalation room (free)', u:'https://tryhackme.com/room/linprivesc', free:true }
+        ]
+      },
+      { n:6, name:'Linux System Programming & Shell Scripting',
+        prereq:'Topic 5', gap:null,
+        why:'System calls, file descriptors, sockets, signals, and memory maps are the API between user-space programs and the Linux kernel. Understanding this layer is what separates security professionals who can write their own tools from those who can only use existing ones. Linux System Programming (Love) and The Linux Programming Interface (Kerrisk) are the two canonical references.',
+        owned:[
+          { t:'Linux System Programming', a:'Robert Love', note:'Concise but complete — system calls, file I/O, process management, signals, IPC. Read before The Linux Programming Interface for a gentler entry.' },
+          { t:'The Linux Programming Interface', a:'Michael Kerrisk', note:'The encyclopedic reference for Linux system programming. Over 1500 pages — use as a reference after Love gives the overview.' },
+          { t:'Classic Shell Scripting', a:'Arnold Robbins', note:'Bash scripting at the depth needed for automation, tool-building, and post-exploitation scripts. Every pentester writes shell scripts.' }
+        ],
+        missing:[],
+        res:[
+          { l:'Beej\'s Guide to Network Programming (free, beej.us)', u:'https://beej.us/guide/bgnet/', free:true },
+          { l:'Bash Scripting Tutorial (tldp.org)', u:'https://tldp.org/LDP/abs/html/', free:true }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'3 · Programming', tier:'F',
+    name:'Programming for Security — Python, C & Assembly',
+    desc:'Security professionals who cannot program are permanently dependent on other people\'s tools. You need Python for automation and rapid prototyping, C for understanding vulnerabilities at the memory level, and assembly for reading disassembled binaries.',
+    topics:[
+      { n:7, name:'Python for Security Automation',
+        prereq:'Phase 2 complete', gap:'warn',
+        why:'Black Hat Python and Violent Python assume Python fluency — if you go in cold, you will struggle. Python is the language of security tooling: network scanners, exploit frameworks, OSINT scrapers, fuzzer scripts, and post-exploitation tools are all written in it. Learn the language first (filling the gap below), then apply it directly to security.',
+        owned:[
+          { t:'Black Hat Python', a:'Justin Seitz', note:'Network tools, web attacks, forensics, and malware analysis in Python. Every chapter produces a working offensive security tool. Read after the gap book below.' },
+          { t:'Violent Python', a:'TJ O\'Connor', note:'Covers network analysis, forensics, exploitation, and wireless attacks in Python. More breadth than Black Hat Python; use as companion.' }
+        ],
+        missing:[
+          { t:'Automate the Boring Stuff with Python', a:'Al Sweigart', crit:false, note:'FREE at automatetheboringstuff.com — the gentlest Python introduction in existence. Read this FIRST before Black Hat Python. Completely free, legally.', free:true }
+        ],
+        res:[
+          { l:'automatetheboringstuff.com (free book + videos)', u:'https://automatetheboringstuff.com/', free:true },
+          { l:'Python Official Tutorial (docs.python.org)', u:'https://docs.python.org/3/tutorial/', free:true },
+          { l:'CS50P — Python (Harvard, free)', u:'https://cs50.harvard.edu/python/', free:true }
+        ]
+      },
+      { n:8, name:'C Programming & Assembly Basics',
+        prereq:'Topic 7', gap:'crit',
+        why:'Buffer overflows, format string vulnerabilities, use-after-free bugs, and heap exploits are all C memory model problems. You cannot understand exploitation without understanding C\'s memory layout — the stack, the heap, pointers, and pointer arithmetic. Assembly is needed to read disassembled binaries; every reverse engineering chapter assumes you can read x86/x64 instructions. These are two of the most critical gaps in your collection.',
+        owned:[
+          { t:'Secure Coding in C & C++', a:'Robert Seacord', note:'Covers the exact vulnerabilities that are exploited — string errors, integer overflow, memory management flaws. Read AFTER learning C basics.' }
+        ],
+        missing:[
+          { t:'C Programming: A Modern Approach', a:'K. N. King', crit:true, note:'The clearest C programming textbook. Read this before Secure Coding in C and before Hacking: Art of Exploitation. Widely available PDF.' },
+          { t:'Programming from the Ground Up', a:'Jonathan Bartlett', crit:true, note:'FREE at savannah.nongnu.org — teaches x86 assembly from first principles using real Linux examples. The best free assembly introduction and the exact foundation needed for exploitation.' }
+        ],
+        res:[
+          { l:'CS50x — C fundamentals (Harvard, free)', u:'https://cs50.harvard.edu/x/', free:true },
+          { l:'Beej\'s Guide to C Programming (free)', u:'https://beej.us/guide/bgc/', free:true },
+          { l:'Programming from the Ground Up (free PDF)', u:'https://savannah.nongnu.org/projects/pgubook/', free:true },
+          { l:'OpenSecurityTraining2 — Architecture 1001 (free)', u:'https://ost2.fyi/Arch1001', free:true }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'4 · Security Fundamentals', tier:'F',
+    name:'Security Principles, Risk & Cryptography',
+    desc:'Before touching a single attack tool, you need the conceptual framework — what threats are, how risk is modelled, what cryptography actually guarantees, and how secure systems are designed. These books provide the theoretical foundation that separates security professionals from script kiddies.',
+    topics:[
+      { n:9, name:'Security Principles, Risk & CompTIA Security+',
+        prereq:'Phase 3 complete', gap:null,
+        why:'CompTIA Security+ is the industry baseline certification exam — but more importantly, it provides a comprehensive vocabulary and conceptual map of the entire security domain. Security Engineering by Ross Anderson is the academic masterwork — it covers every attack class, every defence mechanism, and every real-world case study across 30 years of the field. How to Measure Anything in Cybersecurity Risk teaches you to think about security quantitatively.',
+        owned:[
+          { t:'CompTIA Security+ All-in-One Exam Guide, Sixth Edition', a:'Chapple & Stewart', note:'Comprehensive security concepts across all domains — threats, cryptography, identity, network security, risk management. Read for breadth and vocabulary.' },
+          { t:'Security Engineering', a:'Ross Anderson', note:'The academic masterwork. 1000+ pages covering every aspect of security design from cryptographic protocols to psychological manipulation. Read selectively — Chapters 1–5 and any domain you are focused on.' },
+          { t:'How to Measure Anything in Cybersecurity Risk', a:'Douglas W. Hubbard', note:'Quantitative risk assessment — how to actually measure security risk in monetary terms. Essential for understanding the business layer of security decisions.' }
+        ],
+        missing:[],
+        res:[
+          { l:'Professor Messer Security+ (free, professormesser.com)', u:'https://www.professormesser.com/security-plus/sy0-701/sy0-701-video/sy0-701-training-course/', free:true },
+          { l:'NIST Cybersecurity Framework (free)', u:'https://www.nist.gov/cyberframework', free:true }
+        ]
+      },
+      { n:10, name:'Cryptography & Threat Modelling',
+        prereq:'Topic 9', gap:null,
+        why:'Cryptography is the mathematical foundation of authentication, confidentiality, and integrity — the three properties every security control tries to achieve. Serious Cryptography teaches how modern cryptographic primitives actually work (AES, RSA, ECDH, hash functions) and where they fail — which is directly relevant to breaking weak crypto in pentests. Threat Modelling teaches you to systematically enumerate what can go wrong before building or testing a system.',
+        owned:[
+          { t:'Serious Cryptography', a:'Jean-Philippe Aumasson', note:'The best practical cryptography book available — covers stream ciphers, block ciphers, hash functions, public-key crypto, and TLS without requiring a maths PhD. Essential before any web or network security work.' },
+          { t:'Threat Modeling: Designing for Security', a:'Adam Shostack', note:'STRIDE, attack trees, and threat modelling methodology. Teaches systematic thinking about attack surfaces — directly applicable to both penetration testing and secure design.' }
+        ],
+        missing:[],
+        res:[
+          { l:'Cryptopals Cryptography Challenges (free, cryptopals.com)', u:'https://cryptopals.com/', free:true },
+          { l:'Dan Boneh Cryptography Course (Coursera, free to audit)', u:'https://www.coursera.org/learn/crypto', free:true }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'5 · Web Security', tier:'I',
+    name:'Web Application Security — From Basics to Bug Hunting',
+    desc:'The web is the largest attack surface in the world. Every organisation has a web presence; most have web applications with vulnerabilities. Your collection has exceptional web security coverage — this is one of the strongest phases in the roadmap.',
+    topics:[
+      { n:11, name:'Web Fundamentals & Application Security',
+        prereq:'Phase 4 complete', gap:null,
+        why:'Web Security for Developers is the gentlest entry — it teaches how web applications work (HTTP, sessions, cookies, databases) and what goes wrong at each layer. The Tangled Web by Zalewski is the deep companion — it explains the browser security model, same-origin policy, and the chaotic history of web security constraints that every attacker exploits. Read in this order.',
+        owned:[
+          { t:'Web Security for Developers', a:'Malcolm McDonald', note:'HTTP, sessions, XSS, CSRF, SQLi, CORS — every major web vulnerability explained at beginner level with clear code examples. Read first.' },
+          { t:'The Tangled Web', a:'Michal Zalewski', note:'The browser security model in full depth — same-origin policy, content-type sniffing, clickjacking, HTML parsing edge cases. Written by a Google Project Zero researcher.' },
+          { t:'Web Application Security', a:'Andrew Hoffman', note:'Covers the complete application security lifecycle — recon, attack, defence, and code review. A modern comprehensive treatment.' }
+        ],
+        missing:[],
+        res:[
+          { l:'PortSwigger Web Security Academy (free, best web security training available)', u:'https://portswigger.net/web-security', free:true },
+          { l:'OWASP Top 10 (free, owasp.org)', u:'https://owasp.org/www-project-top-ten/', free:true },
+          { l:'OWASP WebGoat (deliberately vulnerable app, free)', u:'https://owasp.org/www-project-webgoat/', free:true }
+        ]
+      },
+      { n:12, name:'Advanced Web Hacking, Bug Bounty & API Security',
+        prereq:'Topic 11', gap:null,
+        why:'The Web Application Hacker\'s Handbook is the technical reference that every serious web pentester uses — it covers every attack class in systematic detail. Real-World Bug Hunting teaches the mindset and methodology for finding real vulnerabilities in production systems. Hacking APIs addresses the modern shift toward API-first architectures which are now the primary attack surface in web security.',
+        owned:[
+          { t:'The Web Application Hacker\'s Handbook', a:'Dafydd Stuttard', note:'The technical reference — methodical coverage of every web vulnerability class. Use as a reference for specific attack techniques during labs and CTFs.' },
+          { t:'Real-World Bug Hunting', a:'Peter Yaworski', note:'Methodology for finding real bugs — every chapter is a real disclosed vulnerability. Teaches the recon-to-report workflow of bug bounty hunting.' },
+          { t:'Hacking APIs', a:'Corey J. Ball', note:'The only book dedicated to API security testing — REST, GraphQL, SOAP, authentication flaws, and mass assignment. Modern and directly applicable.' }
+        ],
+        missing:[],
+        res:[
+          { l:'HackerOne Hacktivity (real bug bounty reports, free)', u:'https://hackerone.com/hacktivity', free:true },
+          { l:'PentesterLab (web labs, free tier)', u:'https://pentesterlab.com/', free:true },
+          { l:'DVWA — Damn Vulnerable Web Application (free)', u:'https://github.com/digininja/DVWA', free:true }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'6 · Network Pentesting', tier:'I',
+    name:'Network Attacks, Protocol Exploitation & Wireless',
+    desc:'Attacking networks at the protocol level — ARP spoofing, packet injection, man-in-the-middle, protocol fuzzing, and service exploitation. Your collection covers this well for wired networks but has a complete blind spot for wireless.',
+    topics:[
+      { n:13, name:'Network Protocol Attacks & Security Assessment',
+        prereq:'Phase 5 complete', gap:null,
+        why:'Attacking Network Protocols by James Forshaw (a Google Project Zero researcher) teaches how to find vulnerabilities in any protocol — network interception, fuzzing, format analysis. Network Security Assessment teaches the methodology of external and internal network assessments. The Operator Handbook is the field reference you keep open during assessments.',
+        owned:[
+          { t:'Attacking Network Protocols', a:'James Forshaw', note:'Protocol analysis and fuzzing — how to reverse-engineer proprietary protocols and find vulnerabilities in any network service. Written by a Project Zero researcher.' },
+          { t:"O'Reilly Network Security Assessment", a:'Chris McNab', note:'Methodology for external and internal network assessments — service enumeration, vulnerability identification, and exploitation workflow.' },
+          { t:'Operator Handbook — Red Team + OSINT + Blue Team Reference', a:'rmuser', note:'The field reference cheat sheet. Keep this open during assessments for command syntax, tool flags, and quick lookup.' }
+        ],
+        missing:[],
+        res:[
+          { l:'Hack The Box (network labs, free tier)', u:'https://www.hackthebox.com/', free:false },
+          { l:'TryHackMe Network Security module (free)', u:'https://tryhackme.com/module/network-security', free:true },
+          { l:'Nmap Reference Guide (free, nmap.org)', u:'https://nmap.org/book/man.html', free:true }
+        ]
+      },
+      { n:14, name:'Wireless Security',
+        prereq:'Topic 13', gap:'crit',
+        why:'Wi-Fi is an attack surface that exists in every target environment — corporate offices, hotels, coffee shops. WPA2 cracking, PMKID attacks, evil twin access points, WPS vulnerabilities, and PEAP credential capture are standard engagement techniques. Your collection has zero coverage of wireless security — the entire domain is a gap.',
+        owned:[],
+        missing:[
+          { t:'Hacking Exposed Wireless', a:'Joshua Wright & Johnny Cache', crit:true, note:'The dedicated wireless security reference — 802.11 attack techniques, WEP/WPA/WPA2 cracking, rogue AP attacks, and Bluetooth. Widely available PDF.' },
+          { t:'Penetration Testing Wireless Networks', a:'Vivek Ramachandran', crit:false, note:'Practical wireless attacks with Kali Linux — the hands-on companion for wireless pentesting labs.' }
+        ],
+        res:[
+          { l:'Aircrack-ng Documentation (free, aircrack-ng.org)', u:'https://www.aircrack-ng.org/documentation.html', free:true },
+          { l:'WiFi Hacking with Kali — Null Byte tutorials (free)', u:'https://null-byte.wonderhowto.com/how-to/wi-fi-hacking/', free:true },
+          { l:'TryHackMe — Wifi Hacking 101 (free)', u:'https://tryhackme.com/room/wifihacking101', free:true }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'7 · Windows & AD', tier:'I',
+    name:'Windows Security & Active Directory — The Critical Gap',
+    desc:'This is the single most important phase in the roadmap and the single biggest gap in your collection. The majority of enterprise environments run Windows with Active Directory. Every professional penetration test involves AD exploitation. Your collection currently has zero Windows-specific security content.',
+    topics:[
+      { n:15, name:'Windows Internals & Active Directory Fundamentals',
+        prereq:'Phase 6 complete', gap:'crit',
+        why:'Active Directory is the authentication and authorisation system for nearly every Windows enterprise network. Kerberos, NTLM, LDAP, Group Policy, and trust relationships are the mechanisms that attackers abuse to move laterally and escalate privileges. Understanding how Windows authentication works is the prerequisite for every attack in the next topic. This entire topic requires books that are missing from your collection.',
+        owned:[],
+        missing:[
+          { t:'Windows Internals, Part 1', a:'Russinovich, Solomon & Ionescu', crit:true, note:'The definitive Windows internals reference — processes, threads, memory management, I/O system, and security architecture. Essential for understanding what is being attacked.' },
+          { t:'The Hacker Playbook 2: Practical Guide to Penetration Testing', a:'Peter Kim', crit:false, note:'Volume 2 covers Windows and Active Directory attacks extensively — you have Volume 3 but Volume 2 is the AD foundation. Widely available PDF.' }
+        ],
+        res:[
+          { l:'TryHackMe — Active Directory Basics (free)', u:'https://tryhackme.com/room/activedirectorybasics', free:true },
+          { l:'Microsoft AD Documentation (free, learn.microsoft.com)', u:'https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/', free:true },
+          { l:'HackTricks — Windows & AD (free, hacktricks.xyz)', u:'https://book.hacktricks.xyz/windows-hardening/active-directory-methodology', free:true },
+          { l:'TCM Security — Practical Ethical Hacking (AD sections, free preview)', u:'https://academy.tcm-sec.com/', free:false }
+        ]
+      },
+      { n:16, name:'Active Directory Exploitation & Lateral Movement',
+        prereq:'Topic 15', gap:'crit',
+        why:'Pass-the-Hash, Pass-the-Ticket, Kerberoasting, AS-REP Roasting, DCSync, Golden Tickets, Silver Tickets, BloodHound for attack path mapping — these are the core techniques of modern enterprise pentesting. Without these, you cannot realistically claim to be a penetration tester. This is the most important skill gap in the entire collection and must be filled.',
+        owned:[],
+        missing:[
+          { t:'Penetration Testing Active Directory', a:'Joe Helle (TCM Security)', crit:true, note:'The most practical and current AD pentesting guide — covers the full kill chain from initial access to domain dominance using modern tools and techniques.' }
+        ],
+        res:[
+          { l:'harmj0y Blog — AD Attack Research (free, blog.harmj0y.net)', u:'https://blog.harmj0y.net/', free:true },
+          { l:'SpecterOps Blog — AD security research (free)', u:'https://posts.specterops.io/', free:true },
+          { l:'BloodHound Documentation (free)', u:'https://bloodhound.readthedocs.io/', free:true },
+          { l:'Impacket Suite Documentation (free, GitHub)', u:'https://github.com/fortra/impacket', free:true },
+          { l:'TCM Security AD course (paid but affordable)', u:'https://academy.tcm-sec.com/p/practical-ethical-hacking-the-complete-course', free:false }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'8 · Exploitation', tier:'A',
+    name:'Vulnerability Research & Binary Exploitation',
+    desc:'The deep technical core of offensive security. Stack overflows, heap exploitation, format string attacks, ROP chains, and shellcoding. Hacking: Art of Exploitation is one of the greatest security books ever written — but it requires the C and assembly foundation from Phase 3.',
+    topics:[
+      { n:17, name:'Binary Exploitation & Memory Corruption',
+        prereq:'Phase 7 complete, C & assembly from Topic 8', gap:null,
+        why:'Hacking: Art of Exploitation is the book that teaches exploitation as a discipline — not just techniques but the mathematical and logical reasoning behind why memory corruption creates security vulnerabilities. Every exercise is hands-on. The Art of Software Security Assessment extends this into code review — reading source code to find the same classes of vulnerability.',
+        owned:[
+          { t:'Hacking: The Art of Exploitation', a:'Jon Erickson', note:'The seminal exploitation text — x86 assembly, buffer overflows, format strings, heap exploitation, and shellcoding. Requires C and assembly knowledge. Every exploit is built from scratch.' },
+          { t:'The Art of Software Security Assessment', a:'Mark Dowd', note:'1100 pages of source code auditing — how to read C/C++ code and find memory corruption, integer errors, and logic flaws. The reference for code review work.' }
+        ],
+        missing:[],
+        res:[
+          { l:'pwn.college — Binary Exploitation (free, ASU)', u:'https://pwn.college/', free:true },
+          { l:'LiveOverflow — Binary Exploitation Series (YouTube, free)', u:'https://www.youtube.com/playlist?list=PLhixgUqwRTjxglIswKp9mpkfPNfHkzyeN', free:true },
+          { l:'exploit.education VMs (free)', u:'https://exploit.education/', free:true },
+          { l:'ROP Emporium (free, ropemporium.com)', u:'https://ropemporium.com/', free:true }
+        ]
+      },
+      { n:18, name:'Penetration Testing Methodology & Metasploit',
+        prereq:'Topic 17', gap:null,
+        why:'Georgia Weidman\'s Penetration Testing is the foundational methodology book — it builds a complete lab and walks through every phase of an engagement. Metasploit: The Penetration Tester\'s Guide is the operational reference for using the framework. Together these two books operationalise the exploitation skills from the previous topic into a complete assessment workflow.',
+        owned:[
+          { t:'Penetration Testing: A Hands-On Introduction to Hacking', a:'Georgia Weidman', note:'The most complete beginner-to-intermediate pentesting book — lab setup, reconnaissance, exploitation, post-exploitation, and reporting. Read end-to-end.' },
+          { t:"Metasploit: The Penetration Tester's Guide", a:'David Kennedy et al.', note:'The Metasploit Framework reference — modules, payloads, post-exploitation, evasion, and custom module development.' }
+        ],
+        missing:[],
+        res:[
+          { l:'Metasploit Unleashed (free, offensive-security.com)', u:'https://www.offsec.com/metasploit-unleashed/', free:true },
+          { l:'Hack The Box — Starting Point (free)', u:'https://www.hackthebox.com/hacker/start', free:true },
+          { l:'VulnHub (free vulnerable VMs)', u:'https://www.vulnhub.com/', free:true }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'9 · Reverse Engineering', tier:'A',
+    name:'Reverse Engineering & Malware Analysis',
+    desc:'The discipline of understanding software without access to its source code. Reverse engineering is the foundation of malware analysis, vulnerability research, and software security assessment. Your collection is exceptionally strong in this domain.',
+    topics:[
+      { n:19, name:'Reverse Engineering — Static & Dynamic Analysis',
+        prereq:'Phase 8 complete', gap:null,
+        why:'Practical Reverse Engineering teaches x86/x64/ARM disassembly, Windows kernel debugging, and UEFI firmware analysis — the complete reverse engineering toolkit. Reversing: Secrets of Reverse Engineering is the companion that covers the conceptual approach. Together they cover both static analysis (reading disassembly) and dynamic analysis (debugging live execution).',
+        owned:[
+          { t:'Practical Reverse Engineering', a:'Bruce Dang et al.', note:'x86/x64/ARM assembly, Windows kernel internals, and UEFI. The most comprehensive practical RE book. Work through every exercise.' },
+          { t:'Reversing: Secrets of Reverse Engineering', a:'Eldad Eilam', note:'The conceptual foundation — decompilation, obfuscation, software protection mechanisms, and the tools of the trade. Read before Dang for orientation.' }
+        ],
+        missing:[],
+        res:[
+          { l:'Ghidra Official Documentation (NSA, free)', u:'https://ghidra-sre.org/', free:true },
+          { l:'OpenSecurityTraining2 — RE courses (free)', u:'https://ost2.fyi/', free:true },
+          { l:'OALabs — Malware Reverse Engineering (YouTube, free)', u:'https://www.youtube.com/c/OALabs', free:true },
+          { l:'Crackmes.one (RE practice challenges, free)', u:'https://crackmes.one/', free:true }
+        ]
+      },
+      { n:20, name:'Malware Analysis, Rootkits & Bootkits',
+        prereq:'Topic 19', gap:null,
+        why:'Practical Malware Analysis is the bible of malware analysis — every technique from basic static analysis through dynamic debugging through kernel-mode analysis is covered with lab exercises. Rootkits and Bootkits covers the most sophisticated malware category — low-level persistence mechanisms that survive OS reinstallation. The Rootkit Arsenal is the technical companion.',
+        owned:[
+          { t:'Practical Malware Analysis', a:'Michael Sikorski & Andrew Honig', note:'The definitive malware analysis textbook — static analysis, dynamic analysis, IDA Pro, OllyDbg, anti-analysis techniques, and full labs. Work through every exercise.' },
+          { t:'Rootkits and Bootkits', a:'Alex Matrosov et al.', note:'Modern rootkit and bootkit analysis — UEFI bootkits, Windows kernel rootkits, and real-world malware case studies.' },
+          { t:'The Rootkit Arsenal', a:'Bill Blunden', note:'Deep technical companion — kernel internals, DKOM, SSDT hooking, and the low-level mechanisms rootkits use.' }
+        ],
+        missing:[],
+        res:[
+          { l:'ANY.RUN Interactive Malware Sandbox (free tier)', u:'https://any.run/', free:true },
+          { l:'MalwareBazaar — real malware samples (free)', u:'https://bazaar.abuse.ch/', free:true },
+          { l:'Flare-VM malware analysis environment (free)', u:'https://github.com/mandiant/flare-vm', free:true },
+          { l:'Mandiant/FLARE blog — malware analysis (free)', u:'https://www.mandiant.com/resources/blog', free:true }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'10 · Red Team Ops', tier:'A',
+    name:'Red Team Operations & Advanced Tradecraft',
+    desc:'The transition from penetration tester to red team operator. Red teaming emulates real adversary TTPs — stealth, persistence, lateral movement, and objective achievement against fully-staffed blue teams. Your collection is strong here.',
+    topics:[
+      { n:21, name:'Red Team Methodology & C2 Frameworks',
+        prereq:'Phase 9 complete', gap:'warn',
+        why:'The Hacker Playbook 3 covers modern red team operations — C2 channels, AV evasion, domain fronting, and objective-based scenarios. Advanced Penetration Testing extends into APT-level techniques. The Red Team Field Manual and Operator Handbook are your field reference cards during operations.',
+        owned:[
+          { t:'The Hacker Playbook 3', a:'Peter Kim', note:'Modern red team operations — C2 infrastructure, AV evasion, Active Directory attacks (limited), and full kill-chain scenarios.' },
+          { t:'Advanced Penetration Testing', a:'Wil Allsopp', note:'APT-level techniques — custom C2, out-of-band exfiltration, and advanced persistence. Beyond standard pentesting.' },
+          { t:'Red Team Field Manual (RTFM)', a:'Ben Clark', note:'The reference card for operations — every useful command for every platform. Keep open during engagements.' }
+        ],
+        missing:[
+          { t:'Red Team Development and Operations', a:'Joe Vest & James Tubberville', crit:false, note:'The operational manual for running a red team programme — planning, scoping, reporting, and metrics. Fills the operational gap.' }
+        ],
+        res:[
+          { l:'Cobalt Strike Documentation (free, cobaltstrike.com)', u:'https://www.cobaltstrike.com/help-overview', free:true },
+          { l:'Sliver C2 Framework (free, open source)', u:'https://github.com/BishopFox/sliver', free:true },
+          { l:'HackTricks — Red Teaming (free)', u:'https://book.hacktricks.xyz/', free:true },
+          { l:'VirusTotal (evasion testing, free tier)', u:'https://www.virustotal.com/', free:true }
+        ]
+      },
+      { n:22, name:'Social Engineering & Physical Security',
+        prereq:'Topic 21', gap:null,
+        why:'The most sophisticated technical defences fail when a person holds a door open or clicks a phishing link. Social Engineering by Hadnagy is the comprehensive treatment — vishing, phishing, pretexting, and influence principles applied to security. Every red team engagement involves a social element.',
+        owned:[
+          { t:'Social Engineering: The Science of Human Hacking', a:'Christopher Hadnagy', note:'Vishing, phishing, pretexting, influence principles, and physical intrusion. Real-world social engineering methodology with case studies.' },
+          { t:'Tribe of Hackers', a:'Marcus J. Carey', note:'Interviews with 70 security professionals — perspectives on careers, red teaming, and the human side of security. Read for mindset and direction, not technique.' }
+        ],
+        missing:[],
+        res:[
+          { l:'GoPhish — phishing framework (free, open source)', u:'https://getgophish.com/', free:true },
+          { l:'Social Engineering Village — DEF CON talks (free)', u:'https://www.youtube.com/c/SocialEngineeringVillage', free:true }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'11 · Cloud & Specialized', tier:'A',
+    name:'Cloud Security, APIs, Databases & DDoS',
+    desc:'Modern infrastructure lives in the cloud. Containers, serverless, IAM misconfigurations, and S3 bucket exposure are the attack vectors of the current decade. Your collection covers AWS well but has a significant container/Kubernetes gap.',
+    topics:[
+      { n:23, name:'Cloud Security & Container Attacks',
+        prereq:'Phase 10 complete', gap:'crit',
+        why:'AWS Penetration Testing teaches cloud-specific attack techniques — IAM privilege escalation, EC2 SSRF, S3 bucket attacks, and Lambda exploitation. Practical Cloud Security provides the defensive architecture. The critical gap is containers and Kubernetes — Docker escape, K8s RBAC abuse, and pod-to-pod lateral movement have no coverage in your collection.',
+        owned:[
+          { t:'AWS Penetration Testing', a:'Tudor Enache', note:'Cloud attack techniques — IAM privilege escalation, EC2 metadata SSRF, S3 misconfigurations, and Lambda abuse. Use CloudGoat alongside this book.' },
+          { t:'Practical Cloud Security', a:'Chris Dotson', note:'Cloud security architecture — identity, data protection, and incident response across AWS, Azure, and GCP.' }
+        ],
+        missing:[
+          { t:'Hacking Kubernetes', a:'Andrew Martin & Michael Hausenblas', crit:true, note:'O\'Reilly — the dedicated Kubernetes security book. Covers pod escape, RBAC abuse, network policy bypass, and supply chain attacks. Widely available PDF.' }
+        ],
+        res:[
+          { l:'CloudGoat — vulnerable AWS environment (free, Rhino Security)', u:'https://github.com/RhinoSecurityLabs/cloudgoat', free:true },
+          { l:'HackTricks Cloud (free, hacktricks.xyz)', u:'https://cloud.hacktricks.xyz/', free:true },
+          { l:'TryHackMe — Cloud Security path (free tier)', u:'https://tryhackme.com/path/outline/cloud', free:true },
+          { l:'flaws.cloud — AWS security challenges (free)', u:'http://flaws.cloud/', free:true }
+        ]
+      },
+      { n:24, name:'Database Attacks & Network-Level DoS',
+        prereq:'Topic 23', gap:'warn',
+        why:'The Database Hacker\'s Handbook covers every major database platform — Oracle, SQL Server, MySQL — attack and defence including blind SQLi, stored procedure abuse, and privilege escalation within the database engine. The Radware DDoS Handbook provides the attack taxonomy and defence architecture for volumetric and application-layer denial of service.',
+        owned:[
+          { t:"The Database Hacker's Handbook", a:'Litchfield, Anley, Heasman & Grindlay', note:'Every major database attacked and defended — Oracle, SQL Server, MySQL. SQL injection, stored procedures, privilege escalation within DB engines.' },
+          { t:"Radware's DDoS Handbook", a:'Radware', note:'DDoS attack taxonomy — volumetric, protocol, and application-layer attacks. Mitigation architectures and scrubbing centre design.' }
+        ],
+        missing:[
+          { t:'The Mobile Application Hacker\'s Handbook', a:'Dominic Chell et al.', crit:false, note:'Wiley — Android and iOS security testing from scratch. Your collection has zero mobile security coverage; this is the single book to fill it.' }
+        ],
+        res:[
+          { l:'SQLmap Documentation (free, sqlmap.org)', u:'https://sqlmap.org/', free:true },
+          { l:'OWASP Mobile Security Testing Guide (free, owasp.org)', u:'https://owasp.org/www-project-mobile-security-testing-guide/', free:true },
+          { l:'Hping3 DDoS testing (free, open source)', u:'http://www.hping.org/', free:true }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'12 · Blue Team & DFIR', tier:'R',
+    name:'Blue Team, Incident Response & Threat Intelligence',
+    desc:'Understanding the defender\'s perspective makes you a better attacker, and vice versa. Incident response and digital forensics are the disciplines that answer "what happened" after a breach — essential whether you are a responder or a red teamer trying to evade detection. Your collection has a significant DFIR gap.',
+    topics:[
+      { n:25, name:'Incident Response, Forensics & Memory Analysis',
+        prereq:'Phase 11 complete', gap:'crit',
+        why:'The Blue Team Handbook covers the operational response procedures but your collection has no memory forensics book — a critical gap. Memory forensics is how responders find malware that hides from disk-based analysis: process injection, hooks, network connections, and credential extraction from live memory. The Art of Memory Forensics is the only authoritative text and it is entirely absent.',
+        owned:[
+          { t:'Blue Team Handbook', a:'Don Murdoch', note:'SOC operations, incident response procedures, log analysis, and defensive tool reference. The operational guide for blue team work.' }
+        ],
+        missing:[
+          { t:'The Art of Memory Forensics', a:'Ligh, Case, Levy & Walters', crit:true, note:'The definitive memory forensics reference — Windows, Linux, and Mac memory analysis using Volatility. Finding malware, extracting credentials, analysing process injection. Absolutely essential and entirely missing.' },
+          { t:'The Practice of Network Security Monitoring', a:'Richard Bejtlich', crit:false, note:'Network security monitoring with Zeek, Snort, and Security Onion. Intrusion detection methodology at the network layer.' }
+        ],
+        res:[
+          { l:'Volatility Foundation Documentation (free)', u:'https://volatilityfoundation.org/', free:true },
+          { l:'SANS DFIR posters & cheat sheets (free)', u:'https://www.sans.org/posters/', free:true },
+          { l:'DFIR.training resource list (free)', u:'https://www.dfir.training/', free:true },
+          { l:'Security Onion Documentation (free SIEM platform)', u:'https://docs.securityonion.net/', free:true },
+          { l:'CyberDefenders — Blue Team Labs (free)', u:'https://cyberdefenders.org/', free:true }
+        ]
+      },
+      { n:26, name:'Threat Intelligence, MITRE ATT&CK & Security Culture',
+        prereq:'Topic 25', gap:null,
+        why:'Sandworm and The Cuckoo\'s Egg are the two greatest narrative security books ever written — they build the mental model of how nation-state adversaries operate and how defenders detect them. MITRE ATT&CK is the framework that maps adversary TTPs to detection opportunities. Reading these after the entire technical curriculum means every narrative detail connects to something you have implemented or attacked yourself.',
+        owned:[
+          { t:'Sandworm', a:'Andy Greenberg', note:'The definitive account of Russian APT operations — NotPetya, the 2016 Ukraine grid attacks, and Sandworm\'s evolution. Read for adversary mindset and geopolitical context.' },
+          { t:"The Cuckoo's Egg", a:'Cliff Stoll', note:'The 1986 hacker hunt that became the first documented APT investigation. Read for the detective methodology that still applies today.' },
+          { t:'Tribe of Hackers', a:'Marcus J. Carey', note:'Career advice and perspectives from 70 security professionals. Read for direction and community context.' }
+        ],
+        missing:[],
+        res:[
+          { l:'MITRE ATT&CK Framework (free, attack.mitre.org)', u:'https://attack.mitre.org/', free:true },
+          { l:'OSINT Framework (free, osintframework.com)', u:'https://osintframework.com/', free:true },
+          { l:'Michael Bazzell OSINT Podcast & Workbook (free)', u:'https://inteltechniques.com/podcast.html', free:true },
+          { l:'OpenCTI — open source threat intel platform (free)', u:'https://github.com/OpenCTI-Platform/opencti', free:true }
+        ]
+      }
+    ]
+  }
+];
+
+const nav  = document.getElementById('pnav');
+const cons = document.getElementById('pcons');
+
+DATA.forEach((ph, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'pbtn' + (i === 0 ? ' active' : '');
+  btn.textContent = ph.btn;
+  btn.onclick = () => {
+    document.querySelectorAll('.pbtn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.pcon').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById('pc' + i);
+    panel.classList.add('active');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  nav.appendChild(btn);
+
+  const div = document.createElement('div');
+  div.id = 'pc' + i;
+  div.className = 'pcon' + (i === 0 ? ' active' : '');
+
+  div.innerHTML = `<div class="pdesc">
+    <div class="pdesc-top">
+      <span class="pdesc-name">${ph.name}</span>
+      <span class="bdg ${TIERS[ph.tier]}">${TIERL[ph.tier]}</span>
+    </div>
+    <div class="pdesc-why">${ph.desc}</div>
+  </div>`;
+
+  const stack = document.createElement('div');
+  stack.className = 'tstack';
+
+  ph.topics.forEach(t => {
+    const card = document.createElement('div');
+    let cardClass = 'tcard';
+    if (t.gap === 'crit') cardClass += ' has-critgap';
+    else if (t.gap === 'warn') cardClass += ' has-gap';
+    card.className = cardClass;
+
+    let html = `
+      <div class="thead">
+        <span class="tnum">${t.n}</span>
+        <span class="tname">${t.name}</span>
+        <span class="prereq">Req: ${t.prereq}</span>
+      </div>
+      <div class="twhy">${t.why}</div>`;
+
+    // Gap alert
+    if (t.gap === 'crit') {
+      html += `<div class="gap-alert crit"><strong>Critical gap:</strong> This topic has books missing from your collection that are essential to its goals. Red left border indicates critical missing coverage.</div>`;
+    } else if (t.gap === 'warn') {
+      html += `<div class="gap-alert"><strong>Gap:</strong> This topic has important missing books. Amber left border indicates the gap.</div>`;
+    }
+
+    // Owned books
+    if (t.owned.length > 0) {
+      html += `<div class="book-section">
+        <div class="bsec-label">In your library <span class="bdg b-own" style="font-size:9px">owned</span></div>
+        <div class="book-list">`;
+      t.owned.forEach(b => {
+        html += `<div class="bitem">
+          <div class="bitem-dot own"></div>
+          <div class="bitem-body">
+            <div class="bitem-title">${b.t} <span class="bdg b-own">In your library</span></div>
+            <div class="bitem-auth">— ${b.a}</div>
+            <div class="bitem-note">${b.note}</div>
+          </div>
+        </div>`;
+      });
+      html += `</div></div>`;
+    }
+
+    // Missing books
+    if (t.missing.length > 0) {
+      html += `<div class="book-section">
+        <div class="bsec-label">Missing from collection</div>
+        <div class="book-list">`;
+      t.missing.forEach(b => {
+        const badge = b.crit
+          ? `<span class="bdg b-crit">Critical gap</span>`
+          : `<span class="bdg b-miss">Get this</span>`;
+        const freeBadge = b.free ? ` <span class="bdg b-free">Free online</span>` : '';
+        html += `<div class="bitem">
+          <div class="bitem-dot ${b.crit ? 'crit' : 'miss'}"></div>
+          <div class="bitem-body">
+            <div class="bitem-title">${b.t} ${badge}${freeBadge}</div>
+            <div class="bitem-auth">— ${b.a}</div>
+            <div class="bitem-note">${b.note}</div>
+          </div>
+        </div>`;
+      });
+      html += `</div></div>`;
+    }
+
+    // Resources
+    if (t.res.length > 0) {
+      const chips = t.res.map(r =>
+        `<a class="rchip${r.free ? ' free-site' : ''}" href="${r.u}" target="_blank" rel="noopener">${r.l}</a>`
+      ).join('');
+      html += `<div class="rrow"><span class="rlbl">Free resources:</span>${chips}</div>`;
+    }
+
+    card.innerHTML = html;
+    stack.appendChild(card);
+  });
+
+  div.appendChild(stack);
+  cons.appendChild(div);
+});
+</script>
+</body>
+</html>
