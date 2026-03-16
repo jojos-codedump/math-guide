@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zero to Hero — Data Science, ML, Deep Learning & Generative AI</title>
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --bg2: #141416;
+    --bg3: #1a1a1d;
+    --bg4: #202024;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.13);
+    --border3: rgba(255,255,255,0.20);
+    --text: #e8e6de;
+    --text2: #9a9890;
+    --text3: #5e5d58;
+    --blue: #5b8af5;
+    --blue-bg: rgba(91,138,245,0.1);
+    --green: #4caf7d;
+    --green-bg: rgba(76,175,125,0.1);
+    --amber: #e8a838;
+    --amber-bg: rgba(232,168,56,0.1);
+    --purple: #9b7ef8;
+    --purple-bg: rgba(155,126,248,0.1);
+    --coral: #e8724a;
+    --coral-bg: rgba(232,114,74,0.1);
+    --red: #e05c5c;
+    --red-bg: rgba(224,92,92,0.1);
+    --teal: #3ecfb2;
+    --teal-bg: rgba(62,207,178,0.1);
+    --pink: #e06fb0;
+    --pink-bg: rgba(224,111,176,0.1);
+    --radius: 10px;
+    --radius-sm: 6px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  /* Header */
+  .hdr { margin-bottom: 1.75rem; }
+  .hdr-eyebrow {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 10px;
+  }
+  .hdr-title {
+    font-size: 23px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .hdr-sub {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.65;
+    max-width: 680px;
+    margin-bottom: 14px;
+  }
+  .stats { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .stat {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 0.5px solid var(--border2);
+    color: var(--text2);
+    background: var(--bg3);
+  }
+
+  /* Legend rows */
+  .legend-row { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; margin-bottom: 7px; }
+  .ll { font-size: 11px; color: var(--text3); margin-right: 2px; }
+
+  /* Badges */
+  .bdg { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px; letter-spacing: .02em; }
+  .b-af   { background: var(--green-bg);  color: var(--green); }
+  .b-free { background: var(--blue-bg);   color: var(--blue); }
+  .b-tf   { background: var(--bg4); color: var(--text2); border: 0.5px solid var(--border2); }
+  .b-ti   { background: var(--amber-bg);  color: var(--amber); }
+  .b-ta   { background: var(--blue-bg);   color: var(--blue); }
+  .b-tr   { background: var(--red-bg);    color: var(--red); }
+
+  /* Library labels */
+  .lb { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+  .lb-np  { background: var(--blue-bg);   color: var(--blue); }
+  .lb-pd  { background: var(--green-bg);  color: var(--green); }
+  .lb-mt  { background: var(--amber-bg);  color: var(--amber); }
+  .lb-sk  { background: var(--amber-bg);  color: var(--amber); }
+  .lb-tf  { background: var(--red-bg);    color: var(--red); }
+  .lb-pt  { background: var(--purple-bg); color: var(--purple); }
+  .lb-hf  { background: var(--teal-bg);   color: var(--teal); }
+  .lb-gym { background: var(--green-bg);  color: var(--green); }
+
+  /* Math req */
+  .mreq {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--bg4);
+    color: var(--text3);
+    border: 0.5px solid var(--border);
+    white-space: nowrap;
+  }
+
+  /* Phase nav */
+  .pnav {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin: 1.75rem 0 1.25rem;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    padding: 10px 0;
+    z-index: 10;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .pbtn {
+    font-size: 11px;
+    font-family: inherit;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 0.5px solid var(--border2);
+    background: transparent;
+    cursor: pointer;
+    color: var(--text2);
+    transition: all .15s;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+  .pbtn:hover { background: var(--bg3); color: var(--text); border-color: var(--border3); }
+  .pbtn.active { background: var(--bg4); border-color: var(--border3); color: var(--text); font-weight: 600; }
+
+  /* Content panels */
+  .pcon { display: none; }
+  .pcon.active { display: block; }
+
+  /* Phase desc */
+  .pdesc {
+    border-left: 2px solid var(--border3);
+    padding: 10px 14px;
+    background: var(--bg3);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-bottom: 16px;
+  }
+  .pdesc-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+  .pdesc-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .pdesc-why  { font-size: 12px; color: var(--text2); line-height: 1.65; }
+
+  /* Topic cards */
+  .tstack { display: flex; flex-direction: column; gap: 10px; }
+  .tcard {
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    transition: border-color .15s;
+  }
+  .tcard:hover { border-color: var(--border2); }
+
+  .thead { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; flex-wrap: wrap; }
+  .tnum {
+    font-size: 10px;
+    font-weight: 600;
+    background: var(--bg4);
+    color: var(--text3);
+    border-radius: 4px;
+    padding: 2px 8px;
+    min-width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+  .tname { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; }
+
+  .lrow { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin-bottom: 9px; }
+  .lrow-lbl { font-size: 10px; color: var(--text3); margin-right: 2px; }
+
+  .twhy {
+    font-size: 12px;
+    color: var(--text2);
+    margin-bottom: 12px;
+    padding: 9px 12px;
+    background: var(--bg3);
+    border-radius: var(--radius-sm);
+    line-height: 1.7;
+    border-left: 2px solid var(--border2);
+  }
+
+  /* Books */
+  .books { display: flex; flex-direction: column; gap: 9px; margin-bottom: 11px; }
+  .brow  { display: flex; gap: 10px; align-items: flex-start; }
+  .brole {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--text3);
+    min-width: 52px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .bbody { flex: 1; }
+  .btitle {
+    font-size: 13px;
+    color: var(--text);
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    line-height: 1.4;
+  }
+  .bauth { font-size: 11px; color: var(--text2); margin-top: 2px; }
+  .bnote { font-size: 11px; color: var(--text3); margin-top: 3px; line-height: 1.55; }
+  .sep   { border: none; border-top: 0.5px solid var(--border); margin: 7px 0; }
+
+  /* Resource chips */
+  .rrow {
+    border-top: 0.5px solid var(--border);
+    padding-top: 9px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+  }
+  .rlbl { font-size: 10px; color: var(--text3); flex-shrink: 0; margin-right: 2px; }
+  .rchip {
+    font-size: 10px;
+    color: var(--blue);
+    background: var(--blue-bg);
+    border-radius: 4px;
+    padding: 3px 9px;
+    text-decoration: none;
+    transition: background .12s;
+  }
+  .rchip:hover { background: rgba(91,138,245,0.18); }
+
+  /* Footer */
+  .footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 0.5px solid var(--border);
+    font-size: 11px;
+    color: var(--text3);
+    line-height: 1.7;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  @media (max-width: 600px) {
+    .page { padding: 1.5rem 1rem 4rem; }
+    .hdr-title { font-size: 18px; }
+    .tname { font-size: 13px; }
+    .pnav { gap: 4px; }
+    .pbtn { font-size: 10px; padding: 4px 9px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hdr">
+    <div class="hdr-eyebrow">Complete Application-Based Roadmap</div>
+    <div class="hdr-title">Zero to Hero — Data Science, Machine Learning,<br>Deep Learning &amp; Generative AI</div>
+    <div class="hdr-sub">Full-stack mastery from your first Python line to LLMs, GANs, Diffusion Models, GNNs, and Reinforcement Learning. Every library completely covered. Every resource freely discoverable. Beginner to research-grade.</div>
+    <div class="stats">
+      <span class="stat">12 phases</span>
+      <span class="stat">24 topics</span>
+      <span class="stat">48 books</span>
+      <span class="stat">NumPy</span>
+      <span class="stat">Pandas</span>
+      <span class="stat">Scikit-Learn</span>
+      <span class="stat">TensorFlow / Keras</span>
+      <span class="stat">PyTorch</span>
+      <span class="stat">HuggingFace</span>
+      <span class="stat">Gymnasium / RL</span>
+    </div>
+    <div class="legend-row">
+      <span class="ll">Tier:</span>
+      <span class="bdg b-tf">Foundation</span>
+      <span class="bdg b-ti">Intermediate</span>
+      <span class="bdg b-ta">Advanced</span>
+      <span class="bdg b-tr">Research</span>
+      <span class="ll" style="margin-left:8px">Books:</span>
+      <span class="bdg b-af">Author's site — free</span>
+      <span class="bdg b-free">Freely discoverable PDF</span>
+    </div>
+    <div class="legend-row">
+      <span class="ll">Libraries covered per topic:</span>
+      <span class="lb lb-np">NumPy</span>
+      <span class="lb lb-pd">Pandas</span>
+      <span class="lb lb-mt">Matplotlib</span>
+      <span class="lb lb-sk">Scikit-Learn</span>
+      <span class="lb lb-tf">TensorFlow</span>
+      <span class="lb lb-pt">PyTorch</span>
+      <span class="lb lb-hf">HuggingFace</span>
+      <span class="lb lb-gym">Gymnasium</span>
+    </div>
+  </div>
+
+  <div class="pnav" id="pnav"></div>
+  <div id="pcons"></div>
+
+  <div class="footer">
+    Every transition in this roadmap is deliberate — each topic builds directly on the last. The math prerequisites listed per topic indicate what you need from the companion mathematics roadmap. "Author's site" books are legally free and permanently hosted. All other books are widely discoverable as PDFs. Read primary books cover-to-cover; use supplementary books for depth and alternative implementations. All resource links are live and clickable.
+  </div>
+</div>
+
+<script>
+const TIERS = { F:'b-tf', I:'b-ti', A:'b-ta', R:'b-tr' };
+const TIERL = { F:'Foundation', I:'Intermediate', A:'Advanced', R:'Research' };
+const LBC   = { np:'lb-np', pd:'lb-pd', mt:'lb-mt', sk:'lb-sk', tf:'lb-tf', pt:'lb-pt', hf:'lb-hf', gym:'lb-gym' };
+const LBN   = { np:'NumPy', pd:'Pandas', mt:'Matplotlib', sk:'Scikit-Learn', tf:'TensorFlow', pt:'PyTorch', hf:'HuggingFace', gym:'Gymnasium' };
+
+const DATA = [
+  {
+    btn:'0 · Python & NumPy', tier:'F',
+    name:'Python & Scientific Computing',
+    desc:'The programming substrate. Before any algorithm, before any model, you need total fluency in Python and NumPy. Every library in this roadmap — Pandas, Scikit-Learn, TensorFlow, PyTorch — is built on NumPy arrays at its core. There is no shortcut through this phase.',
+    topics:[
+      { n:1, name:'Python for Data Science & NumPy', math:'None required', libs:['np'],
+        why:'Programming is the medium of data science. NumPy is not just a library — it is the universal computational substrate. Vectorised operations, broadcasting, array slicing, fancy indexing, and linear algebra via np.linalg are used daily in every topic that follows. Understanding NumPy at depth means understanding how TensorFlow tensors and PyTorch tensors actually work, because they are direct descendants of this design. Every matrix multiplication in a neural network is a NumPy-style operation under the hood.',
+        pri:{ t:'Python Data Science Handbook', a:'Jake VanderPlas', note:'Free at jakevdp.github.io/PythonDataScienceHandbook — covers NumPy, Pandas, Matplotlib, and Scikit-Learn in full. The best single free reference for scientific Python that exists.', af:true },
+        sup:{ t:'Scientific Python Lectures', a:'Various (SciPy community)', note:'Free at scipy-lectures.org — concise, code-heavy, used in university courses worldwide. Perfect companion reference for NumPy internals and scientific computing patterns.', af:true },
+        res:[
+          { l:'CS50P — Python for Programmers (Harvard, free)', u:'https://cs50.harvard.edu/python/' },
+          { l:'Corey Schafer Python Tutorial Series (YouTube)', u:'https://www.youtube.com/playlist?list=PL-osiE80TeTt2d9bfVyTiXJA-UTHn6WwU' },
+          { l:'Keith Galli — Complete NumPy Tutorial (YouTube)', u:'https://www.youtube.com/watch?v=GB9ByFAIAH4' },
+          { l:'NumPy official quickstart tutorial', u:'https://numpy.org/doc/stable/user/quickstart.html' }
+        ]
+      },
+      { n:2, name:'Pandas & Data Visualisation', math:'None required', libs:['pd','mt'],
+        why:'NumPy operates on homogeneous numerical arrays; real-world datasets are heterogeneous tables — mixed types, named columns, missing values, and datetime indices. Pandas is how you handle all of it. Matplotlib and Seaborn translate numbers into visual insight — exploratory data analysis is impossible without them. Wes McKinney created Pandas itself; this is the single most authoritative text on the library.',
+        pri:{ t:'Python for Data Analysis', a:'Wes McKinney (Pandas creator)', note:'The definitive Pandas reference — written by the library\'s author. Every method, every edge case, real-world data manipulation workflows, and the full Pandas API explained from first principles.', af:false },
+        sup:{ t:'Storytelling with Data', a:'Cole Nussbaumer Knaflic', note:'The visualisation communication companion — teaches you when and how to present data visually for maximum clarity and impact. Complements the technical Pandas skills with communication principles.', af:false },
+        res:[
+          { l:'Kaggle Pandas Micro-Course (free, interactive)', u:'https://www.kaggle.com/learn/pandas' },
+          { l:'Corey Schafer Pandas Tutorial Series (YouTube)', u:'https://www.youtube.com/playlist?list=PL-osiE80TeTsWmV9i9c58mdDCSskIFdDS' },
+          { l:'Seaborn official gallery & tutorials', u:'https://seaborn.pydata.org/examples/' },
+          { l:'Pandas official 10-minute introduction', u:'https://pandas.pydata.org/docs/user_guide/10min.html' }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'1 · Data Mastery', tier:'F',
+    name:'Data Engineering & Exploratory Analysis',
+    desc:'Models learn from the data they are given. Garbage in, garbage out is not a cliché — it is a law. Data cleaning and EDA are where 80% of the practical value in data science is created, and they are consistently underestimated by beginners who want to get to the models faster.',
+    topics:[
+      { n:3, name:'Data Cleaning, Preprocessing & Feature Engineering', math:'Basic statistics (mean, median, variance, distributions)', libs:['np','pd','sk'],
+        why:'Real-world data is filthy — missing values, outliers, duplicate rows, inconsistent formats, wrong data types, and irrelevant features. Scikit-Learn\'s preprocessing module handles scaling, encoding, and imputation; Pandas handles the wrangling. Feature engineering is the discipline that closes more of the gap between a mediocre model and a great one than any algorithm choice. Competition winners are consistently made by better features, not fancier models.',
+        pri:{ t:'Feature Engineering for Machine Learning', a:'Alice Zheng & Amanda Casari', note:'The only book dedicated entirely to systematic feature engineering — covers encoding, transformation, scaling, interaction features, and selection with worked examples throughout.', af:false },
+        sup:{ t:'Python Feature Engineering Cookbook', a:'Soledad Galli', note:'Recipe-format: concrete code patterns for every feature engineering scenario. Use alongside Zheng & Casari for comprehensive implementation patterns in Scikit-Learn and Pandas.', af:false },
+        res:[
+          { l:'Kaggle Data Cleaning Course (free)', u:'https://www.kaggle.com/learn/data-cleaning' },
+          { l:'Kaggle Feature Engineering Course (free)', u:'https://www.kaggle.com/learn/feature-engineering' },
+          { l:'Krish Naik — Feature Engineering Playlist (YouTube)', u:'https://www.youtube.com/c/KrishNaik' },
+          { l:'Scikit-Learn Preprocessing Documentation', u:'https://scikit-learn.org/stable/modules/preprocessing.html' }
+        ]
+      },
+      { n:4, name:'Exploratory Data Analysis', math:'Descriptive statistics (distributions, correlation, hypothesis testing)', libs:['pd','mt'],
+        why:'Before modelling, you must understand your data — distributions, correlations, anomalies, class imbalance, temporal patterns, and data leakage. A model trained without EDA is a model trained blind. Tukey invented this discipline in 1977 and it remains the most underrated skill in data science. Your Pandas and Matplotlib skills from the previous topic are your complete toolkit for this.',
+        pri:{ t:'Exploratory Data Analysis', a:'John W. Tukey', note:'The book that created the discipline. Short, foundational, and surprisingly readable for its age. Understanding Tukey\'s thinking shapes how you approach every dataset for the rest of your career.', af:false },
+        sup:{ t:'Python Data Science Handbook (EDA chapters)', a:'Jake VanderPlas', note:'Free at jakevdp.github.io — practical EDA implementation with Pandas and Matplotlib. Use alongside Tukey for the hands-on implementation layer.', af:true },
+        res:[
+          { l:'Kaggle Titanic — Top EDA Notebooks (study these)', u:'https://www.kaggle.com/competitions/titanic/notebooks' },
+          { l:'StatQuest — Statistics Fundamentals (YouTube)', u:'https://www.youtube.com/playlist?list=PLblh5JKOoLUIcdlgu78MnlATeyx4cEVeR' },
+          { l:'ydata-profiling (automated EDA, GitHub)', u:'https://github.com/ydataai/ydata-profiling' },
+          { l:'Seaborn Statistical Plotting Tutorial', u:'https://seaborn.pydata.org/tutorial/statistical.html' }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'2 · Classical ML', tier:'F',
+    name:'Machine Learning with Scikit-Learn',
+    desc:'The complete classical ML toolkit — every algorithm a practitioner reaches for daily, implemented in Scikit-Learn, understood at mathematical depth. Géron\'s book is the single best practical ML textbook ever written, and ISLR2 is the best free mathematical companion.',
+    topics:[
+      { n:5, name:'Supervised Learning — Regression & Classification', math:'Linear algebra (vectors, matrices, dot products), basic probability (Bayes theorem, distributions)', libs:['np','pd','sk'],
+        why:'Linear regression, logistic regression, support vector machines, decision trees, and k-nearest neighbours — these are the first formal models for learning from labelled data. Scikit-Learn\'s unified API (fit/predict/score) makes implementation fast; understanding WHY each algorithm works (the cost functions, the decision boundaries, the geometric interpretations, the assumptions) makes you capable of diagnosing failures. Géron covers mathematical intuition and clean Scikit-Learn implementation simultaneously in every chapter.',
+        pri:{ t:'Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow', a:'Aurélien Géron', note:'The definitive practical ML textbook — every algorithm from linear regression to neural networks, always paired with working Scikit-Learn or TF code. Every serious ML practitioner has read this book.', af:false },
+        sup:{ t:'An Introduction to Statistical Learning (ISLR2)', a:'James, Witten, Hastie & Tibshirani', note:'Free at statlearning.com — the mathematical companion to Géron. Deeper statistical theory behind every algorithm, with free PDF and Python/R labs included.', af:true },
+        res:[
+          { l:'StatQuest — Machine Learning Series (YouTube, essential)', u:'https://www.youtube.com/playlist?list=PLblh5JKOoLUICTaGLRoHQDuF_7q2GfuJF' },
+          { l:'Andrew Ng — ML Specialization (Coursera, audit free)', u:'https://www.coursera.org/specializations/machine-learning-introduction' },
+          { l:'ISLR2 Free PDF + Python Labs (statlearning.com)', u:'https://www.statlearning.com/' },
+          { l:'Scikit-Learn User Guide', u:'https://scikit-learn.org/stable/user_guide.html' }
+        ]
+      },
+      { n:6, name:'Unsupervised Learning — Clustering & Dimensionality Reduction', math:'Linear algebra (SVD, eigendecomposition), probability (Gaussian distributions)', libs:['np','sk','mt'],
+        why:'Not all data comes with labels. K-Means, DBSCAN, hierarchical clustering, PCA, t-SNE, and UMAP are the unsupervised counterparts to supervised learning. PCA requires singular value decomposition — this is where the mathematical roadmap\'s linear algebra pays off visibly for the first time. t-SNE and UMAP are the modern tools for visualising high-dimensional data like embeddings and latent spaces — essential for all deep learning work that follows.',
+        pri:{ t:'Hands-On ML (Chapters 8 & 9)', a:'Aurélien Géron', note:'The dimensionality reduction and clustering chapters are self-contained — clear mathematical motivation followed by complete Scikit-Learn implementations of every algorithm.', af:false },
+        sup:{ t:'Pattern Recognition & Machine Learning (Chapters 9 & 12)', a:'Christopher Bishop', note:'Free from Microsoft Research — the rigorous probabilistic treatment. Gaussian mixture models, the EM algorithm, probabilistic PCA, and kernel PCA. Read for mathematical depth after Géron.', af:true },
+        res:[
+          { l:'StatQuest — PCA Step by Step (YouTube)', u:'https://www.youtube.com/watch?v=HMOI_lkzW08' },
+          { l:'UMAP Documentation & Interactive Tutorial', u:'https://umap-learn.readthedocs.io/' },
+          { l:'Scikit-Learn Clustering Documentation', u:'https://scikit-learn.org/stable/modules/clustering.html' },
+          { l:'Google ML Crash Course (free)', u:'https://developers.google.com/machine-learning/crash-course' }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'3 · ML Mastery', tier:'I',
+    name:'Ensembles, Pipelines & Production ML',
+    desc:'The gap between a notebook model and a production system. Ensemble methods win competitions; pipelines, evaluation discipline, and deployment patterns make models trustworthy and production-ready.',
+    topics:[
+      { n:7, name:'Ensemble Methods & Gradient Boosting', math:'Decision tree theory, calculus (gradient of loss function), probability (bias-variance decomposition)', libs:['np','pd','sk'],
+        why:'Random forests, gradient boosting, XGBoost, LightGBM, and stacking are the algorithms that win tabular data competitions — often by large margins over simpler models. Understanding WHY ensembles outperform single models (bias-variance tradeoff, variance reduction through bagging, boosting theory, Friedman\'s gradient boosting framework) separates practitioners who merely use these tools from practitioners who understand them. ESL\'s ensemble chapters are the mathematical gold standard.',
+        pri:{ t:'The Elements of Statistical Learning (Chapters 10, 15, 16)', a:'Hastie, Tibshirani & Friedman', note:'Free at hastie.su.domains/ElemStatLearn — Chapters 10 (Boosting and Additive Trees), 15 (Random Forests), and 16 (Ensemble Methods) are the definitive mathematical treatment of why these algorithms work.', af:true },
+        sup:{ t:'Hands-On ML (Chapter 7)', a:'Aurélien Géron', note:'The practical implementation companion — voting classifiers, bagging, random forests, gradient boosting, and XGBoost all in working Scikit-Learn code with clear explanations.', af:false },
+        res:[
+          { l:'StatQuest — Gradient Boosting series (YouTube)', u:'https://www.youtube.com/watch?v=3CC4N4z3GJc' },
+          { l:'XGBoost Official Documentation', u:'https://xgboost.readthedocs.io/' },
+          { l:'LightGBM Official Documentation', u:'https://lightgbm.readthedocs.io/' },
+          { l:'Kaggle Intermediate ML — ensembling (free course)', u:'https://www.kaggle.com/learn/intermediate-machine-learning' }
+        ]
+      },
+      { n:8, name:'ML Pipelines, Model Selection & Evaluation', math:'Probability (statistical testing, confidence intervals, p-values)', libs:['np','pd','sk'],
+        why:'Building a model and deploying a reliable system are completely different skills. Cross-validation, hyperparameter tuning (GridSearchCV, RandomizedSearchCV, Optuna), evaluation metrics (ROC-AUC, F1, precision-recall, calibration curves), and Scikit-Learn Pipelines are what make models trustworthy and reproducible. A model that performs well in a notebook but cannot be evaluated properly or deployed reliably is not a model — it is a hypothesis.',
+        pri:{ t:'Designing Machine Learning Systems', a:'Chip Huyen', note:'The best book on the complete ML system lifecycle — data, features, training, evaluation, deployment, and monitoring. Essential reading before any production work.', af:false },
+        sup:{ t:'Machine Learning Engineering', a:'Andriy Burkov', note:'Free chapters at mlebook.com — practical ML engineering patterns, data pipelines, model serving, and debugging guidance. Concise and immediately actionable.', af:true },
+        res:[
+          { l:'Scikit-Learn Pipeline Documentation', u:'https://scikit-learn.org/stable/modules/pipeline.html' },
+          { l:'Optuna Hyperparameter Optimisation (docs)', u:'https://optuna.readthedocs.io/' },
+          { l:'Weights & Biases Tutorials (free)', u:'https://docs.wandb.ai/tutorials' },
+          { l:'Made With ML — MLOps (free course)', u:'https://madewithml.com/' }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'4 · Neural Foundations', tier:'I',
+    name:'Neural Networks — From Scratch to Frameworks',
+    desc:'The most important phase in the roadmap. Build a neural network from NumPy up before touching any framework. Then master TensorFlow and PyTorch completely — both, not just one. Skipping the from-scratch step means every framework will be a black box forever.',
+    topics:[
+      { n:9, name:'Neural Networks from Scratch with NumPy', math:'Calculus (chain rule, partial derivatives, Jacobians), linear algebra (matrix multiplication, transposition)', libs:['np'],
+        why:'This is non-negotiable. Before you use TensorFlow or PyTorch, you will build a neural network from scratch using only NumPy — forward pass, backward pass, chain rule applied to matrices, gradient descent implemented by hand. If you skip this, every framework you ever use will be a black box. Karpathy\'s micrograd video and Nielsen\'s free book together cover this completely in the most compelling way possible — Karpathy\'s video alone has changed thousands of careers.',
+        pri:{ t:'Neural Networks and Deep Learning', a:'Michael Nielsen', note:'Free at neuralnetworksanddeeplearning.com — builds a neural net from scratch in Python with zero abstraction. Every equation is derived before it appears in code. Written with extraordinary clarity.', af:true },
+        sup:{ t:'Deep Learning (Part I — Chapters 6, 7, 8)', a:'Goodfellow, Bengio & Courville', note:'Free at deeplearningbook.org — the rigorous mathematical foundation. Feedforward networks, regularisation, and optimisation algorithms at full depth. Read after Nielsen for the theoretical layer.', af:true },
+        res:[
+          { l:'Andrej Karpathy: micrograd — backprop from scratch (YouTube, watch first)', u:'https://www.youtube.com/watch?v=VMj-3S1tku0' },
+          { l:'3Blue1Brown — Neural Networks series (YouTube)', u:'https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi' },
+          { l:'Karpathy: makemore — character-level language model from scratch', u:'https://www.youtube.com/watch?v=PaCmpygFfXo' },
+          { l:'CS231n Backpropagation Notes (free, Stanford)', u:'https://cs231n.github.io/optimization-2/' }
+        ]
+      },
+      { n:10, name:'Deep Learning with TensorFlow & Keras', math:'All prerequisites from Topic 9 — backprop, chain rule, gradient descent', libs:['tf','np'],
+        why:'TensorFlow and Keras are the production-grade framework — used by Google, deployed at scale, and the framework behind most enterprise ML systems. François Chollet created Keras and this book is the definitive practical guide. Every layer type, every callback, custom training loops, the GradientTape API, SavedModel format, and TF Serving — all need to be understood at the API level completely. The goal after this topic is zero uncertainty about TF/Keras.',
+        pri:{ t:'Deep Learning with Python', a:'François Chollet (Keras creator)', note:'The Keras bible — written by the person who built the library. Every design decision is explained. Covers dense networks, CNNs, RNNs, transformers, and custom training loops with working code throughout.', af:false },
+        sup:{ t:'Hands-On ML (TensorFlow & Keras chapters)', a:'Aurélien Géron', note:'Complementary implementation perspective — covers the same ground with different examples and more complete Scikit-Learn/TF API integration patterns.', af:false },
+        res:[
+          { l:'TensorFlow Official Tutorials (tensorflow.org)', u:'https://www.tensorflow.org/tutorials' },
+          { l:'DeepLearning.AI TF Developer Certificate (Coursera)', u:'https://www.coursera.org/professional-certificates/tensorflow-in-practice' },
+          { l:'TensorFlow Playground (interactive visualiser)', u:'https://playground.tensorflow.org/' },
+          { l:'Keras Code Examples (keras.io/examples)', u:'https://keras.io/examples/' }
+        ]
+      },
+      { n:11, name:'Deep Learning with PyTorch', math:'Same prerequisites as Topic 10', libs:['pt','np'],
+        why:'PyTorch is the research framework — nearly every ML paper\'s official code is in PyTorch. It is used by Meta AI, DeepMind, OpenAI, and the entire HuggingFace ecosystem. TensorFlow and PyTorch serve genuinely different workflows; mastering both makes you able to work in any context. The critical conceptual difference is PyTorch\'s dynamic computation graph (define-by-run) — you must understand this to use it correctly and debug it effectively.',
+        pri:{ t:'Deep Learning with PyTorch', a:'Stevens, Antiga & Viehmann', note:'Free PDF from pytorch.org — the official PyTorch book. Covers tensors, autograd, custom datasets, DataLoaders, training loops, CNNs, and deployment with complete working code.', af:true },
+        sup:{ t:'Dive into Deep Learning', a:'Zhang, Lipton, Li & Smola', note:'Free at d2l.ai — every equation has executable PyTorch and TensorFlow code side-by-side. The best resource for understanding the same implementation in both frameworks simultaneously.', af:true },
+        res:[
+          { l:'fast.ai Practical Deep Learning (free, uses PyTorch)', u:'https://course.fast.ai/' },
+          { l:'Aladdin Persson — Complete PyTorch Series (YouTube)', u:'https://www.youtube.com/playlist?list=PLhhyoLH6IjfxeoooqP9rhU3HJIAVAJ3Vz' },
+          { l:'PyTorch Official 60-Minute Blitz', u:'https://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html' },
+          { l:'d2l.ai — Interactive Notebooks', u:'https://d2l.ai/' }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'5 · Computer Vision', tier:'A',
+    name:'Computer Vision — CNNs to Advanced Detection & Segmentation',
+    desc:'From raw pixels to object detection, segmentation, and Vision Transformers. CV is where deep learning first proved superhuman performance — and the architecture evolution from LeNet to ResNet to ViT is the core narrative of modern deep learning.',
+    topics:[
+      { n:12, name:'CNNs & Classic Vision Architectures', math:'Linear algebra (convolution as matrix operation), calculus (backprop through conv layers)', libs:['pt','tf','np'],
+        why:'Convolutional layers are spatial feature detectors — the mathematical trick that makes vision tractable. The architecture evolution from LeNet to AlexNet to VGG to ResNet to EfficientNet to Vision Transformer is the core story of modern deep learning. ResNet\'s skip connections (residual learning) alone changed the field permanently. You must implement ResNet from scratch to genuinely understand why it works — the intuition does not transfer from just reading about it.',
+        pri:{ t:'Deep Learning for Vision Systems', a:'Mohamed Elgendy', note:'The most complete practical CV book — covers image classification, object detection, segmentation, and transfer learning with full PyTorch and Keras implementations in a clear, progressive structure.', af:false },
+        sup:{ t:'CS231n Course Notes', a:'Karpathy, Fei-Fei Li et al.', note:'Free at cs231n.github.io — the reference notes for Stanford\'s legendary CV course. Mathematical derivations plus implementation guidance. Used by practitioners worldwide as the standard reference.', af:true },
+        res:[
+          { l:'Stanford CS231n Full Course (YouTube)', u:'https://www.youtube.com/playlist?list=PL3FW7Lu3i5JvHM8ljYj-zLfQRF3EO8sYv' },
+          { l:'fast.ai Vision Lectures (free)', u:'https://course.fast.ai/' },
+          { l:'Aladdin Persson — CNN Architectures from Scratch (YouTube)', u:'https://www.youtube.com/playlist?list=PLhhyoLH6IjfxeoooqP9rhU3HJIAVAJ3Vz' },
+          { l:'PyTorch torchvision Models Documentation', u:'https://pytorch.org/vision/stable/models.html' }
+        ]
+      },
+      { n:13, name:'Advanced CV — Detection, Segmentation & Vision Transformers', math:'Anchor box geometry, IoU metrics, spatial attention mechanisms, transformer prerequisites', libs:['pt','tf'],
+        why:'Classification says "what." Detection says "where." Segmentation says "which pixels." YOLO, Faster R-CNN, U-Net, Mask R-CNN, and DETR each represent a fundamentally different formulation of the vision problem — not incremental variations but distinct paradigms. Vision Transformer (ViT) and Swin Transformer replace convolutions with attention entirely. These architectures are deployed in self-driving vehicles, medical imaging, and satellite analysis at production scale.',
+        pri:{ t:'Programming Computer Vision with Python', a:'Jan Erik Solem', note:'Free at programmingcomputervision.com — covers feature detection, image segmentation, and object recognition with complete Python implementations. The classic practical CV reference.', af:true },
+        sup:{ t:'Practical Deep Learning for Cloud, Mobile & Edge', a:'Koul, Ganju & Kasam', note:'O\'Reilly — covers deployment of detection and segmentation models across platforms. Excellent for production CV pipelines and edge deployment scenarios.', af:false },
+        res:[
+          { l:'Roboflow Detection & Segmentation Tutorials (free)', u:'https://roboflow.com/learn' },
+          { l:'Ultralytics YOLO Documentation & Tutorials', u:'https://docs.ultralytics.com/' },
+          { l:'TorchVision Detection Fine-Tuning Tutorial', u:'https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html' },
+          { l:'Papers With Code — CV Benchmarks', u:'https://paperswithcode.com/area/computer-vision' }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'6 · NLP', tier:'A',
+    name:'Natural Language Processing — Classical to Transformers',
+    desc:'From tokenisation and TF-IDF through Word2Vec to BERT, GPT, and the full HuggingFace ecosystem. NLP is where transformers were born — and the HuggingFace library is the medium through which all of modern NLP is implemented in practice.',
+    topics:[
+      { n:14, name:'Classical NLP & Text Representations', math:'Probability (language models, perplexity, information theory basics), linear algebra (word vector spaces)', libs:['np','pd','sk'],
+        why:'Before transformers, NLP required understanding tokenisation, TF-IDF, n-gram language models, word embeddings (Word2Vec, GloVe, FastText), and sequence models (RNNs, LSTMs, GRUs). These are not obsolete — they are the conceptual scaffolding that makes transformers fully legible. LSTM still outperforms transformers in specific low-data regimes. Jurafsky & Martin is the textbook every NLP researcher cites and it is perpetually updated for free.',
+        pri:{ t:'Speech and Language Processing', a:'Jurafsky & Martin', note:'Free at web.stanford.edu/~jurafsky/slp3 — the definitive NLP textbook, freely and perpetually updated. Covers everything from regular expressions through neural language models. Used at every major university worldwide.', af:true },
+        sup:{ t:'Natural Language Processing with Python (NLTK Book)', a:'Bird, Klein & Loper', note:'Free at nltk.org/book — the NLTK book. Practical NLP with Python: tokenisation, POS tagging, parsing, chunking, and sentiment analysis. Excellent hands-on complement to the theoretical Jurafsky.', af:true },
+        res:[
+          { l:'Stanford CS224N — NLP with Deep Learning (YouTube, full course)', u:'https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ' },
+          { l:'spaCy 101 Tutorial (spacy.io)', u:'https://spacy.io/usage/spacy-101' },
+          { l:'Gensim Word2Vec Tutorial', u:'https://radimrehurek.com/gensim/auto_examples/tutorials/run_word2vec.html' },
+          { l:'NLTK Documentation & Tutorials', u:'https://www.nltk.org/' }
+        ]
+      },
+      { n:15, name:'Transformers & Modern NLP', math:'Linear algebra (attention as scaled dot-product), calculus (backprop), probability (language model distributions)', libs:['pt','tf','hf'],
+        why:'"Attention Is All You Need" changed everything in 2017. BERT, GPT, T5, RoBERTa, DeBERTa, and their successors power every modern NLP application from search to translation to code generation. The HuggingFace ecosystem — transformers library, tokenizers, datasets, model hub — is how every transformer model is used in practice. Fine-tuning, tokenisation pipelines, the Trainer API, and the model hub must be completely understood after this topic.',
+        pri:{ t:'Natural Language Processing with Transformers', a:'Tunstall, von Werra & Wolf (HuggingFace team)', note:'The HuggingFace team wrote the definitive hands-on guide to their own ecosystem. Covers classification, NER, QA, summarisation, translation, and generation with complete HuggingFace code throughout.', af:false },
+        sup:{ t:'Dive into Deep Learning (NLP & Attention chapters)', a:'Zhang, Lipton, Li & Smola', note:'Free at d2l.ai — complete mathematical derivation of attention mechanisms from scratch, then full transformer implementation in both PyTorch and TensorFlow.', af:true },
+        res:[
+          { l:'HuggingFace NLP Course (free, huggingface.co/learn)', u:'https://huggingface.co/learn/nlp-course/' },
+          { l:'Jay Alammar: The Illustrated Transformer (blog)', u:'https://jalammar.github.io/illustrated-transformer/' },
+          { l:'Stanford CS224N Transformers Lectures (YouTube)', u:'https://www.youtube.com/playlist?list=PLoROMvodv4rOSH4v6133s9LFPRHjEmbmJ' },
+          { l:'HuggingFace Model Hub', u:'https://huggingface.co/models' }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'7 · Generative Models', tier:'A',
+    name:'GANs, VAEs & Diffusion Models',
+    desc:'The complete generative AI architecture family — from the original GAN (2014) through StyleGAN2 to VAEs, normalising flows, and diffusion models (Stable Diffusion). Every generative paradigm, mathematically grounded and fully implemented.',
+    topics:[
+      { n:16, name:'GANs — All Architectures & Training Dynamics', math:'Probability (KL divergence, Wasserstein distance, distribution matching), calculus (minimax optimisation)', libs:['pt','tf'],
+        why:'Generative Adversarial Networks learn to generate realistic data through adversarial training between a generator and discriminator. DCGAN, Conditional GAN, Pix2Pix, CycleGAN, WGAN, WGAN-GP, StyleGAN2, and BigGAN represent the full evolution of the idea. Training instability — mode collapse, vanishing gradients, oscillation — and the Wasserstein distance solution are essential theoretical knowledge. Every architecture should be implemented from scratch at least once.',
+        pri:{ t:'Generative Deep Learning', a:'David Foster', note:'The single book that covers GANs, VAEs, diffusion models, and music generation in one cohesive volume with excellent working code throughout. O\'Reilly — widely available as a PDF.', af:false },
+        sup:{ t:'GANs in Action', a:'Jakub Langr & Vladimir Bok', note:'Dedicated entirely to GANs — every major architecture variant with full implementation. Good as a focused reference after Foster provides the broader overview.', af:false },
+        res:[
+          { l:'DeepLearning.AI GAN Specialization (Coursera, audit free)', u:'https://www.coursera.org/specializations/generative-adversarial-networks-gans' },
+          { l:'Aladdin Persson — GAN Implementations from Scratch (YouTube)', u:'https://www.youtube.com/playlist?list=PLhhyoLH6IjfwIp8bZnzX8QR30TRcHO8Va' },
+          { l:'GAN Lab — Interactive Browser Visualisation', u:'https://poloclub.github.io/ganlab/' },
+          { l:'Papers With Code — Image Generation Benchmark', u:'https://paperswithcode.com/task/image-generation' }
+        ]
+      },
+      { n:17, name:'VAEs, Normalising Flows & Diffusion Models', math:'Probability theory (KL divergence, ELBO, variational inference), measure theory basics, score matching', libs:['pt','tf','hf'],
+        why:'Variational Autoencoders provide a probabilistic latent space — the mathematical foundation of controlled generation and disentangled representations. Normalising flows learn exact likelihoods. Diffusion models (DDPM, DDIM, Stable Diffusion) are the current state of the art in image and audio generation. Understanding the ELBO, the reparameterisation trick, and the score-matching objective connects probability theory directly to the models generating today\'s AI imagery.',
+        pri:{ t:'Generative Deep Learning (VAE & Diffusion chapters)', a:'David Foster', note:'Continuous from the GAN chapters — VAEs, VQ-VAEs, and diffusion models in the same cohesive framework with complete working PyTorch and Keras code. Read chapters 3–5.', af:false },
+        sup:{ t:'Understanding Deep Learning', a:'Simon Prince', note:'Free at udlbook.github.io — the most readable mathematical treatment of VAEs, normalising flows, and diffusion models available in any textbook. The derivations are exceptionally clear.', af:true },
+        res:[
+          { l:'Lilian Weng: What are Diffusion Models? (blog)', u:'https://lilianweng.github.io/posts/2021-07-11-diffusion-models/' },
+          { l:'HuggingFace Diffusers Documentation & Tutorials', u:'https://huggingface.co/docs/diffusers/' },
+          { l:'Annotated Diffusion Model (HuggingFace blog)', u:'https://huggingface.co/blog/annotated-diffusion' },
+          { l:'Outlier: VAE from Scratch (YouTube)', u:'https://www.youtube.com/watch?v=VELQT1-hILo' }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'8 · Architectures', tier:'A',
+    name:'Advanced Architectures — Attention Variants & Graph Neural Networks',
+    desc:'The architecture zoo that dominates NeurIPS, ICLR, and CVPR. Multi-head attention variants, Vision Transformers, and Graph Neural Networks — understanding these at implementation level means you can reproduce and extend any published paper.',
+    topics:[
+      { n:18, name:'Attention Variants & Advanced Transformer Architectures', math:'Linear algebra (multi-head projections, scaled dot-product), positional encoding mathematics', libs:['pt','hf'],
+        why:'The vanilla transformer evolves continuously — ViT, Swin Transformer, DETR, Perceiver, Flash Attention, RoPE (Rotary Positional Embeddings), ALiBi, and GQA each address real limitations and unlock new capabilities. Understanding these at full implementation level — not just conceptually — is what makes you able to read, reproduce, and extend papers from the top venues. Karpathy\'s "Let\'s build GPT" is the single best tutorial ever made for this purpose.',
+        pri:{ t:'Dive into Deep Learning (Attention & Transformer chapters)', a:'Zhang, Lipton, Li & Smola', note:'Free at d2l.ai — the attention chapters cover every variant from Bahdanau attention through multi-head through modern positional encodings, with full working implementations in both frameworks.', af:true },
+        sup:{ t:'Understanding Deep Learning', a:'Simon Prince', note:'Free at udlbook.github.io — the transformer chapters contain the clearest available mathematical derivations of attention mechanics, positional encodings, and layer normalisation.', af:true },
+        res:[
+          { l:'Andrej Karpathy: Let\'s build GPT from scratch (YouTube)', u:'https://www.youtube.com/watch?v=kCc8FmEb1nY' },
+          { l:'Harvard NLP: The Annotated Transformer (blog)', u:'https://nlp.seas.harvard.edu/annotated-transformer/' },
+          { l:'Yannic Kilcher — Paper Reviews & Walkthroughs (YouTube)', u:'https://www.youtube.com/c/YannicKilcher' },
+          { l:'Lilian Weng: Attention Survey Blog', u:'https://lilianweng.github.io/posts/2018-06-24-attention/' }
+        ]
+      },
+      { n:19, name:'Graph Neural Networks', math:'Graph theory (adjacency matrix, graph Laplacian, spectral theory), linear algebra', libs:['pt'],
+        why:'Not all data is tabular or sequential — social networks, drug molecules, knowledge graphs, recommendation systems, and traffic networks are graphs. GCN, GAT, GraphSAGE, and Message Passing Neural Networks are the architecture families that operate on this structure. Hamilton\'s book is the only text that coherently bridges graph theory to GNN implementation, and the author publishes it freely.',
+        pri:{ t:'Graph Representation Learning', a:'William L. Hamilton', note:'Free at cs.mcgill.ca/~wlh/grl_book — the only book that coherently bridges classical graph theory, node embeddings, and modern GNN architectures in one volume. Direct, concise, and research-oriented.', af:true },
+        sup:{ t:'Deep Learning on Graphs', a:'Yao Ma & Jiliang Tang', note:'Free at cse.msu.edu/~mayao4/dlg_book — broader coverage with more implementation detail and application domains including bioinformatics, social networks, and NLP with graphs.', af:true },
+        res:[
+          { l:'Stanford CS224W: Machine Learning with Graphs (YouTube, full course)', u:'https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn' },
+          { l:'PyTorch Geometric Documentation & Tutorials', u:'https://pytorch-geometric.readthedocs.io/' },
+          { l:'Deep Graph Library (DGL) Tutorials', u:'https://docs.dgl.ai/tutorials/blitz/' },
+          { l:'Papers With Code — GNN Benchmarks', u:'https://paperswithcode.com/methods/category/graph-neural-networks' }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'9 · LLMs & GenAI', tier:'R',
+    name:'Large Language Models & Multimodal Generative AI',
+    desc:'The research frontier of modern AI. Pre-training, RLHF, fine-tuning, and multimodal models — this is what every major AI lab is currently working on. Every prior topic converges here simultaneously.',
+    topics:[
+      { n:20, name:'LLMs — Architecture, Fine-tuning & RLHF', math:'All transformer prerequisites, probability (policy gradients for RLHF), information theory', libs:['pt','hf'],
+        why:'GPT-style autoregressive models at scale are the engine of modern AI products. Pre-training on text, supervised fine-tuning (SFT), Reinforcement Learning from Human Feedback (RLHF — the technique that makes ChatGPT behave helpfully), LoRA, QLoRA, and quantisation (GPTQ, AWQ) are the techniques every LLM practitioner must understand at implementation level. Raschka\'s book is the only one that builds a complete GPT-2 from tokenisation through pre-training through RLHF in clean PyTorch.',
+        pri:{ t:'Build a Large Language Model From Scratch', a:'Sebastian Raschka', note:'The definitive hands-on LLM book — builds a GPT from tokenisation through pre-training through RLHF step-by-step in clean PyTorch. Free chapters and code at rasbt.github.io/LLMs-from-scratch.', af:true },
+        sup:{ t:'Natural Language Processing with Transformers', a:'Tunstall, von Werra & Wolf', note:'Revisit with LLM lens — fine-tuning chapter, PEFT methods (LoRA, prefix tuning), and the full HuggingFace LLM ecosystem. The two books together cover the from-scratch and the ecosystem perspectives.', af:false },
+        res:[
+          { l:'Andrej Karpathy: Let\'s reproduce GPT-2 (YouTube)', u:'https://www.youtube.com/watch?v=l8pRSuU81PU' },
+          { l:'HuggingFace LLM Course (free, huggingface.co/learn)', u:'https://huggingface.co/learn/llm-course/' },
+          { l:'LLMs-from-scratch GitHub (Raschka)', u:'https://github.com/rasbt/LLMs-from-scratch' },
+          { l:'Lilian Weng: RLHF Blog Post', u:'https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/' }
+        ]
+      },
+      { n:21, name:'Multimodal Models & Production Generative AI', math:'All vision + NLP + generative model prerequisites converging simultaneously', libs:['pt','hf'],
+        why:'CLIP, DALL-E, Flamingo, GPT-4V, LLaVA, and Stable Diffusion XL combine vision and language in a single model — the current frontier of generative AI research. Contrastive learning (CLIP\'s image-text alignment), cross-modal attention, and diffusion conditioning each represent a different mechanism for fusing modalities. This topic connects every prior domain simultaneously and is where the entire roadmap converges.',
+        pri:{ t:'Generative Deep Learning (multimodal & world model chapters)', a:'David Foster', note:'The multimodal chapters complete the book\'s arc — from GANs through diffusion to text-to-image generation. The best single-volume generative AI reference for the complete picture.', af:false },
+        sup:{ t:'Deep Learning', a:'Goodfellow, Bengio & Courville', note:'Free at deeplearningbook.org — revisit the representation learning and sequence modelling chapters with multimodal applications in mind. Chapters 15 and 10 specifically.', af:true },
+        res:[
+          { l:'Yannic Kilcher: CLIP Paper Walkthrough (YouTube)', u:'https://www.youtube.com/watch?v=T9XSU0pKX2E' },
+          { l:'HuggingFace Multimodal Tutorials', u:'https://huggingface.co/docs/transformers/tasks/image_captioning' },
+          { l:'DeepLearning.AI Short Courses (free audit, many multimodal)', u:'https://www.deeplearning.ai/short-courses/' },
+          { l:'Stability AI Research Blog', u:'https://stability.ai/research' }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'10 · Reinforcement Learning', tier:'R',
+    name:'Reinforcement Learning — Foundations to Deep RL',
+    desc:'The mathematics of sequential decision-making. From Bellman equations through Q-learning to PPO and SAC — the discipline behind AlphaGo, ChatGPT\'s RLHF training, and autonomous robotics.',
+    topics:[
+      { n:22, name:'RL Foundations — MDPs, Q-Learning & Policy Gradients', math:'Probability (Markov chains, expected value, conditional probability), calculus (policy gradient theorem)', libs:['np','gym'],
+        why:'Reinforcement learning is fundamentally different from supervised and unsupervised learning — there is no labelled dataset, only an environment and a reward signal. Markov Decision Processes, the Bellman equation, temporal difference learning, Q-learning, and policy gradient methods are the theoretical bedrock. Sutton & Barto wrote the canonical text and publish it freely — it was written by the scientists who created the field of modern RL.',
+        pri:{ t:'Reinforcement Learning: An Introduction', a:'Sutton & Barto', note:'Free at incompleteideas.net/book — the founding text of modern RL, written by the field\'s creators. Every RL researcher cites this book. Approachable and comprehensive despite its foundational depth.', af:true },
+        sup:{ t:'Grokking Deep Reinforcement Learning', a:'Miguel Morales', note:'Code-first, intuition-focused companion to Sutton & Barto. Every algorithm is implemented alongside its explanation — fills the gap between theory and running code that Sutton & Barto leaves open.', af:false },
+        res:[
+          { l:'David Silver RL Course — DeepMind (YouTube, 10 lectures)', u:'https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ' },
+          { l:'HuggingFace Deep RL Course (free, unit-by-unit)', u:'https://huggingface.co/learn/deep-rl-course/' },
+          { l:'OpenAI Gymnasium Documentation', u:'https://gymnasium.farama.org/' },
+          { l:'Spinning Up: Key Papers in Deep RL (OpenAI)', u:'https://spinningup.openai.com/en/latest/spinningup/keypapers.html' }
+        ]
+      },
+      { n:23, name:'Deep Reinforcement Learning — DQN, PPO & SAC', math:'All RL foundations plus deep learning (backpropagation, neural network function approximation)', libs:['pt','tf','gym'],
+        why:'Deep Q-Networks (DQN), Proximal Policy Optimisation (PPO), Soft Actor-Critic (SAC), and Advantage Actor-Critic (A3C/A2C) combine neural networks with RL theory. DQN solved Atari from raw pixels; PPO trains robotics and is the exact algorithm behind InstructGPT\'s RLHF step; SAC is the current sample-efficient standard for continuous control. Each algorithm addresses a specific fundamental failure mode of the previous approach.',
+        pri:{ t:'Deep Reinforcement Learning Hands-On', a:'Maxim Lapan', note:'The most comprehensive practical deep RL book — every major algorithm from DQN through Rainbow through PPO through SAC implemented in PyTorch with complete training environments and hyperparameter guidance.', af:false },
+        sup:{ t:'Spinning Up in Deep RL', a:'OpenAI', note:'Free at spinningup.openai.com — OpenAI\'s own practical guide to deep RL. Key algorithms explained clearly with clean reference implementations. The best concise reference.', af:true },
+        res:[
+          { l:'HuggingFace Deep RL Course — DQN to PPO (free, full)', u:'https://huggingface.co/learn/deep-rl-course/' },
+          { l:'CleanRL — Clean Single-File Implementations (GitHub)', u:'https://github.com/vwxyzjn/cleanrl' },
+          { l:'Stable Baselines3 Documentation', u:'https://stable-baselines3.readthedocs.io/' },
+          { l:'OpenAI Spinning Up Documentation', u:'https://spinningup.openai.com/en/latest/' }
+        ]
+      }
+    ]
+  },
+  {
+    btn:'11 · MLOps', tier:'R',
+    name:'MLOps, Model Deployment & Production Systems',
+    desc:'A model that lives only in a notebook helps no one. Serving models at scale, monitoring data drift, managing experiments, and building systems that work reliably in production are the engineering skills that turn research into product.',
+    topics:[
+      { n:24, name:'MLOps, Model Deployment & Scaling', math:'None new — all prior practical skills synthesised into engineering systems', libs:['sk','tf','pt'],
+        why:'Building a model and building a machine learning system are different disciplines that require genuinely different skills. Containerisation (Docker), model serving (TorchServe, TF Serving, FastAPI, BentoML), experiment tracking (MLflow, Weights & Biases), feature stores, data versioning (DVC), CI/CD for ML workflows, and monitoring for data drift and model degradation are the engineering foundations that production ML requires. Huyen\'s book is the only ML systems reference that covers the complete lifecycle with genuine depth.',
+        pri:{ t:'Designing Machine Learning Systems', a:'Chip Huyen', note:'The definitive production ML reference — data pipelines, feature engineering, training, evaluation, deployment, and monitoring all in one cohesive systems framework. Required reading before any production deployment work.', af:false },
+        sup:{ t:'Machine Learning Engineering', a:'Andriy Burkov', note:'Free chapters at mlebook.com — practical engineering patterns, data pipeline design, model serving architectures, and system debugging guidance. More engineering-focused complement to Huyen.', af:true },
+        res:[
+          { l:'Full Stack Deep Learning (fullstackdeeplearning.com, free)', u:'https://fullstackdeeplearning.com/course/' },
+          { l:'Made With ML — MLOps by Goku Mohandas (free)', u:'https://madewithml.com/' },
+          { l:'MLflow Official Documentation', u:'https://mlflow.org/docs/latest/' },
+          { l:'Weights & Biases Tutorials (free, wandb.ai)', u:'https://docs.wandb.ai/tutorials' }
+        ]
+      }
+    ]
+  }
+];
+
+const nav  = document.getElementById('pnav');
+const cons = document.getElementById('pcons');
+
+DATA.forEach((ph, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'pbtn' + (i === 0 ? ' active' : '');
+  btn.textContent = ph.btn;
+  btn.onclick = () => {
+    document.querySelectorAll('.pbtn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.pcon').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    const panel = document.getElementById('pc' + i);
+    panel.classList.add('active');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  nav.appendChild(btn);
+
+  const div = document.createElement('div');
+  div.id = 'pc' + i;
+  div.className = 'pcon' + (i === 0 ? ' active' : '');
+
+  const pdesc = document.createElement('div');
+  pdesc.className = 'pdesc';
+  pdesc.innerHTML = `
+    <div class="pdesc-top">
+      <span class="pdesc-name">${ph.name}</span>
+      <span class="bdg ${TIERS[ph.tier]}">${TIERL[ph.tier]}</span>
+    </div>
+    <div class="pdesc-why">${ph.desc}</div>`;
+  div.appendChild(pdesc);
+
+  const stack = document.createElement('div');
+  stack.className = 'tstack';
+
+  ph.topics.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'tcard';
+
+    const libChips = t.libs.map(l =>
+      `<span class="lb ${LBC[l]}">${LBN[l]}</span>`
+    ).join('');
+
+    const priLabel = t.pri.af
+      ? `<span class="bdg b-af">Author's site — free</span>`
+      : `<span class="bdg b-free">Freely discoverable PDF</span>`;
+    const supLabel = t.sup.af
+      ? `<span class="bdg b-af">Author's site — free</span>`
+      : `<span class="bdg b-free">Freely discoverable PDF</span>`;
+
+    const resChips = t.res.map(r =>
+      `<a class="rchip" href="${r.u}" target="_blank" rel="noopener">${r.l}</a>`
+    ).join('');
+
+    card.innerHTML = `
+      <div class="thead">
+        <span class="tnum">${t.n}</span>
+        <span class="tname">${t.name}</span>
+        <span class="mreq">Math: ${t.math}</span>
+      </div>
+      <div class="lrow">
+        <span class="lrow-lbl">Libraries:</span>
+        ${libChips}
+      </div>
+      <div class="twhy">${t.why}</div>
+      <div class="books">
+        <div class="brow">
+          <span class="brole">Primary</span>
+          <div class="bbody">
+            <div class="btitle">${t.pri.t} ${priLabel}</div>
+            <div class="bauth">— ${t.pri.a}</div>
+            <div class="bnote">${t.pri.note}</div>
+          </div>
+        </div>
+        <div class="sep"></div>
+        <div class="brow">
+          <span class="brole">Suppl.</span>
+          <div class="bbody">
+            <div class="btitle">${t.sup.t} ${supLabel}</div>
+            <div class="bauth">— ${t.sup.a}</div>
+            <div class="bnote">${t.sup.note}</div>
+          </div>
+        </div>
+      </div>
+      <div class="rrow">
+        <span class="rlbl">Free resources &amp; courses:</span>
+        ${resChips}
+      </div>`;
+    stack.appendChild(card);
+  });
+
+  div.appendChild(stack);
+  cons.appendChild(div);
+});
+</script>
+</body>
+</html>
