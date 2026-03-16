@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Zero to Chip: The Complete Roadmap</title>
+<style>
+  :root {
+    --bg: #0a0c10;
+    --bg2: #111318;
+    --bg3: #181b22;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #e8eaf0;
+    --muted: #7a8096;
+    --accent: #4ade80;
+    --accent2: #38bdf8;
+    --accent3: #f59e0b;
+    --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --mono: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,222,128,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,128,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; position: relative; z-index: 1; }
+
+  /* Header */
+  .hero { text-align: center; padding: 3rem 0 2.5rem; }
+  .hero-tag { display: inline-block; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(74,222,128,0.25); border-radius: 20px; padding: 4px 12px; margin-bottom: 1rem; font-family: var(--mono); }
+  .hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+  .hero h1 span { color: var(--accent); }
+  .hero p { color: var(--muted); font-size: 1rem; max-width: 560px; margin: 0 auto 1.5rem; line-height: 1.7; }
+  .hero-stats { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 1.5rem; font-weight: 700; font-family: var(--mono); color: var(--accent2); }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+  /* Section labels */
+  .section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); font-family: var(--mono); margin-bottom: 1rem; margin-top: 2.5rem; display: flex; align-items: center; gap: 10px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* Phase cards */
+  .phase { border: 1px solid var(--border); border-radius: 14px; margin-bottom: 10px; overflow: hidden; transition: border-color 0.2s; background: var(--bg2); }
+  .phase:hover { border-color: var(--border2); }
+  .phase.open { border-color: var(--border2); }
+
+  .phase-header { padding: 16px 18px; cursor: pointer; display: flex; align-items: center; gap: 14px; user-select: none; }
+  .phase-num { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; font-family: var(--mono); flex-shrink: 0; }
+  .phase-meta { flex: 1; min-width: 0; }
+  .phase-title { font-size: 14px; font-weight: 600; color: var(--text); }
+  .phase-subtitle { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .phase-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .phase-months { font-family: var(--mono); font-size: 11px; color: var(--muted); background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; }
+  .phase-arrow { font-size: 12px; color: var(--muted); transition: transform 0.2s; }
+  .phase.open .phase-arrow { transform: rotate(90deg); }
+
+  /* Phase body */
+  .phase-body { display: none; border-top: 1px solid var(--border); padding: 18px 18px 20px; }
+  .phase.open .phase-body { display: block; }
+
+  .why-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .why-box strong { color: var(--accent); font-weight: 500; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+  @media (max-width: 600px) { .cols { grid-template-columns: 1fr; } }
+
+  .box { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .box-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-family: var(--mono); margin-bottom: 8px; }
+  .topic-group { margin-bottom: 10px; }
+  .topic-name { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .topic-items { list-style: none; }
+  .topic-items li { font-size: 12px; color: var(--muted); padding: 2px 0 2px 12px; position: relative; line-height: 1.5; }
+  .topic-items li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 3px; }
+
+  .resources-list { list-style: none; }
+  .res-item { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--border); }
+  .res-item:last-child { border-bottom: none; }
+  .res-badge { font-size: 9px; font-family: var(--mono); padding: 2px 6px; border-radius: 4px; flex-shrink: 0; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.06em; }
+  .badge-book { background: rgba(56,189,248,0.12); color: var(--accent2); border: 1px solid rgba(56,189,248,0.2); }
+  .badge-course { background: rgba(74,222,128,0.1); color: var(--accent); border: 1px solid rgba(74,222,128,0.2); }
+  .badge-video { background: rgba(245,158,11,0.1); color: var(--accent3); border: 1px solid rgba(245,158,11,0.2); }
+  .badge-tool { background: rgba(168,85,247,0.1); color: #c084fc; border: 1px solid rgba(168,85,247,0.2); }
+  .res-info { flex: 1; min-width: 0; }
+  .res-name { font-size: 12px; color: var(--text); font-weight: 500; }
+  .res-note { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+  .sw-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sw-tag { font-size: 11px; font-family: var(--mono); background: var(--bg); border: 1px solid var(--border2); border-radius: 6px; padding: 3px 8px; color: var(--muted); }
+  .sw-tag.free { border-color: rgba(74,222,128,0.3); color: #6ee7a0; }
+
+  /* Software master list */
+  .master-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  .sw-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+  .sw-cat { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-family: var(--mono); margin-bottom: 6px; }
+  .sw-items { list-style: none; }
+  .sw-items li { font-size: 12px; color: var(--text); padding: 2px 0; }
+  .sw-items li span { font-size: 10px; color: var(--accent); margin-left: 4px; }
+
+  /* Timeline bar */
+  .timeline { background: var(--bg2); border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 10px; }
+  .tl-title { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-family: var(--mono); margin-bottom: 14px; }
+  .tl-rows { display: flex; flex-direction: column; gap: 6px; }
+  .tl-row { display: flex; align-items: center; gap: 10px; }
+  .tl-name { font-size: 11px; color: var(--muted); width: 120px; flex-shrink: 0; font-family: var(--mono); }
+  .tl-bar-wrap { flex: 1; height: 14px; background: var(--bg3); border-radius: 4px; overflow: hidden; position: relative; }
+  .tl-bar { height: 100%; border-radius: 4px; opacity: 0.7; }
+  .tl-bar-label { position: absolute; right: 4px; top: 0; height: 100%; display: flex; align-items: center; font-size: 9px; color: rgba(255,255,255,0.4); font-family: var(--mono); }
+
+  /* color palette for phases */
+  .c0 { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+  .c0b { background: rgba(16,185,129,0.6); }
+  .c1 { background: rgba(56,189,248,0.15); color: var(--accent2); }
+  .c1b { background: rgba(56,189,248,0.6); }
+  .c2 { background: rgba(245,158,11,0.15); color: #fcd34d; }
+  .c2b { background: rgba(245,158,11,0.55); }
+  .c3 { background: rgba(168,85,247,0.15); color: #c084fc; }
+  .c3b { background: rgba(168,85,247,0.55); }
+  .c4 { background: rgba(239,68,68,0.15); color: #fca5a5; }
+  .c4b { background: rgba(239,68,68,0.5); }
+  .c5 { background: rgba(244,114,182,0.15); color: #f9a8d4; }
+  .c5b { background: rgba(244,114,182,0.5); }
+  .c6 { background: rgba(99,102,241,0.15); color: #a5b4fc; }
+  .c6b { background: rgba(99,102,241,0.55); }
+  .c7 { background: rgba(6,182,212,0.15); color: #67e8f9; }
+  .c7b { background: rgba(6,182,212,0.55); }
+  .c8 { background: rgba(74,222,128,0.15); color: #86efac; }
+  .c8b { background: rgba(74,222,128,0.55); }
+  .c9 { background: rgba(148,163,184,0.15); color: #cbd5e1; }
+  .c9b { background: rgba(148,163,184,0.5); }
+
+  footer { text-align: center; padding: 2rem 0; font-size: 12px; color: var(--muted); border-top: 1px solid var(--border); margin-top: 2rem; }
+  a { color: var(--accent2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* tip box */
+  .tip { border-left: 2px solid var(--accent); background: rgba(74,222,128,0.05); border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 12px; color: var(--muted); line-height: 1.6; margin-top: 14px; }
+  .tip strong { color: var(--text); }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="hero">
+    <div class="hero-tag">// Your personal learning OS</div>
+    <h1>From Class 10 to <span>Building Chips</span></h1>
+    <p>A phased, prerequisite-driven roadmap to VLSI, wireless systems, CPU design, 3D printing, and compact robotics — entirely using free resources.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">10</div><div class="stat-label">Phases</div></div>
+      <div class="stat"><div class="stat-num">~3 yrs</div><div class="stat-label">Timeline</div></div>
+      <div class="stat"><div class="stat-num">$0</div><div class="stat-label">Core cost</div></div>
+      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Ambition</div></div>
+    </div>
+  </div>
+
+  <!-- Timeline visualization -->
+  <div class="section-label">Parallel Learning Timeline</div>
+  <div class="timeline">
+    <div class="tl-title">// months into journey (approx)</div>
+    <div class="tl-rows" id="tl-rows"></div>
+  </div>
+
+  <div class="section-label">The 10 Phases — click to expand</div>
+  <div id="phases-container"></div>
+
+  <div class="section-label">Master Software List (All Free or Student)</div>
+  <div class="master-grid" id="sw-grid"></div>
+
+  <div class="tip">
+    <strong>Broke & Ambitious Strategy:</strong> Use your student email for Autodesk Fusion 360 (free), GitHub Student Pack (tons of free tools), Onshape Education (free), and JetBrains IDEs (free). For actual chip fabrication, check out Google's <a href="https://efabless.com/open_shuttle_program" target="_blank">OpenMPW shuttle</a> — they literally fab your chip for free. For PCBs, JLCPCB makes 10 PCBs for ~$2. RTL-SDR dongles cost $25 and unlock the entire RF world.
+  </div>
+
+</div>
+
+<footer>Built for the ambitious and broke. Every tool listed is free or free with a student email.<br>The only thing you need to spend is time.</footer>
+
+<script>
+const phases = [
+  {
+    title: "The Foundation",
+    subtitle: "Mathematics, Physics & Basic Chemistry",
+    months: "Months 1–4",
+    ci: 0,
+    tl: [1, 4],
+    why: "Everything in electronics is disguised mathematics. Circuits are differential equations. Signals are Fourier series. Chips are quantum mechanics. Build this foundation and every future phase will feel like recognition, not confusion.",
+    topics: [
+      { name: "Mathematics", items: ["Algebra & trigonometry — essential for signal analysis and geometry of circuits", "Differential & integral calculus — voltage/current relationships, power calculations", "Complex numbers — the language of AC circuits and frequency analysis"] },
+      { name: "Physics", items: ["Electricity & magnetism — the entire basis of electronics", "Waves & optics — needed for RF, photolithography, and communication", "Modern physics basics — quantum behaviour of electrons in semiconductors"] },
+      { name: "Chemistry", items: ["Atomic structure & the periodic table — understanding silicon, dopants like boron/phosphorus", "Chemical bonding — why silicon forms crystals, why dopants change conductivity", "States of matter & materials — how thin films, gases and etchants work in chip fab"] }
+    ],
+    resources: [
+      { type: "course", name: "Khan Academy — Math, Physics & Chemistry", url: "https://www.khanacademy.org", note: "Your best friend. Free. Covers all three in perfect depth." },
+      { type: "book", name: "Paul's Online Math Notes (Calculus I, II, III)", url: "https://tutorial.math.lamar.edu", note: "The best free calculus reference on the internet." },
+      { type: "book", name: "NCERT Physics & Chemistry Classes 11 & 12", url: "https://ncert.nic.in/textbook.php", note: "Free official PDFs. Extremely well-written foundations." },
+      { type: "course", name: "MIT OCW 18.01 — Single Variable Calculus", url: "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/", note: "Real MIT lectures, completely free." },
+      { type: "book", name: "University Physics — Young & Freedman (PDF)", url: "#", note: "PDF freely available online. The gold-standard intro physics textbook." }
+    ],
+    software: ["Wolfram Alpha (free) — verify calculations", "Desmos (free, browser) — graph anything", "PhET Simulations (free, browser) — interactive physics demos"]
+  },
+  {
+    title: "Programming Foundations",
+    subtitle: "Python, C, and Thinking Like a Machine",
+    months: "Months 3–8",
+    ci: 1,
+    tl: [3, 8],
+    why: "Every tool you'll use — SPICE simulators, FPGA toolchains, robotics frameworks — is controlled via code. Python is your productivity language. C is how hardware thinks. You need both.",
+    topics: [
+      { name: "Python", items: ["Syntax, data types, functions, classes — the essentials", "NumPy & SciPy — numerical computation (signal processing, circuit analysis)", "Matplotlib — plotting signals, filter responses, simulation results"] },
+      { name: "C & C++", items: ["Pointers, memory management, bitwise operations — critical for embedded", "Writing microcontroller firmware from scratch", "Understanding how code maps to actual hardware instructions"] },
+      { name: "CS Fundamentals", items: ["Data structures: arrays, linked lists, stacks, queues, trees", "Algorithms: search, sort, time complexity", "How compilers and linkers turn your code into machine code"] }
+    ],
+    resources: [
+      { type: "course", name: "CS50 by Harvard (edX) — free", url: "https://cs50.harvard.edu", note: "The best intro CS course ever made. Free forever." },
+      { type: "book", name: "The C Programming Language — K&R (PDF)", url: "#", note: "Written by C's creators. Short, dense, and perfect. PDF freely available." },
+      { type: "book", name: "Automate the Boring Stuff with Python — free online", url: "https://automatetheboringstuff.com", note: "Practical Python from zero. Completely free to read online." },
+      { type: "course", name: "freeCodeCamp Python + C Courses — YouTube", url: "https://www.freecodecamp.org", note: "Long-form, high quality video courses. All free." },
+      { type: "book", name: "Python Crash Course — Matthes (PDF)", url: "#", note: "PDF widely available. Excellent for structured learning." }
+    ],
+    software: ["VS Code (free) — write all your code here", "GCC/Clang (free) — C/C++ compiler", "Python 3 (free) — install via python.org", "Git + GitHub (free) — version control everything from day one"]
+  },
+  {
+    title: "Electronics Fundamentals",
+    subtitle: "Analog Circuits, Components & Hands-On Breadboarding",
+    months: "Months 5–11",
+    ci: 2,
+    tl: [5, 11],
+    why: "Before you design chips, you must understand what chips do at the circuit level. Every MOSFET in a CPU is just a voltage-controlled switch. Knowing analog fundamentals means you'll understand *why* digital circuits behave the way they do.",
+    topics: [
+      { name: "Circuit Theory", items: ["Ohm's law, Kirchhoff's voltage & current laws (KVL, KCL)", "Thevenin's & Norton's theorems — simplifying complex circuits", "AC circuits: impedance, phasors, resonance, RC/RL/RLC filters"] },
+      { name: "Active Components", items: ["Diodes: PN junction, rectifiers, Zener, LEDs (all are semiconductor devices)", "Bipolar Junction Transistors (BJTs): amplifier and switch configurations", "MOSFETs: the workhorse of all modern chips — understand these deeply"] },
+      { name: "Practical Electronics", items: ["Reading schematics and datasheets — a skill you'll use daily", "Breadboarding and prototyping circuits physically", "Using a multimeter and understanding oscilloscope traces (use simulation first)"] }
+    ],
+    resources: [
+      { type: "book", name: "All About Circuits — free online textbook", url: "https://www.allaboutcircuits.com/textbook/", note: "Six full volumes. Free. Covers everything from Ohm's law to op-amps." },
+      { type: "book", name: "Practical Electronics for Inventors — Paul Scherz (PDF)", url: "#", note: "The most practical electronics book ever written. PDF freely available." },
+      { type: "book", name: "The Art of Electronics — Horowitz & Hill (PDF)", url: "#", note: "The bible of electronics. Dense but incredibly rewarding." },
+      { type: "course", name: "MIT OCW 6.002 — Circuits and Electronics", url: "https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/", note: "Free MIT lectures. Taught with simulations." },
+      { type: "video", name: "EEVblog — YouTube", url: "https://www.youtube.com/user/EEVblog", note: "Best electronics YouTube channel. Watch the fundamentals series." }
+    ],
+    software: ["LTSpice (free) — simulate any analog circuit", "Falstad Circuit Simulator (browser, free) — instant visual circuit sim", "Tinkercad Circuits (browser, free) — virtual breadboard + Arduino"]
+  },
+  {
+    title: "Digital Logic & Computer Architecture",
+    subtitle: "From Logic Gates to Building Your First CPU",
+    months: "Months 9–15",
+    ci: 3,
+    tl: [9, 15],
+    why: "This phase is where the magic happens. You'll go from 'AND gates exist' to 'I built a working computer from scratch' by the end. Nand2Tetris is arguably the best engineering course ever made — it's completely free and you build a full CPU and OS.",
+    topics: [
+      { name: "Digital Logic", items: ["Boolean algebra, logic gates, truth tables, Karnaugh maps", "Combinational circuits: adders, multiplexers, decoders, encoders", "Sequential circuits: flip-flops, registers, counters, finite state machines"] },
+      { name: "Computer Architecture", items: ["Von Neumann vs Harvard architecture", "ALU design, control unit, instruction set architecture (ISA)", "Memory hierarchy: registers, cache, RAM — and *why* the hierarchy exists"] },
+      { name: "Assembly & Low-Level", items: ["How machine code and assembly language map to hardware operations", "RISC vs CISC philosophy — why modern chips are RISC at heart", "Understanding the fetch-decode-execute cycle in detail"] }
+    ],
+    resources: [
+      { type: "course", name: "Nand2Tetris — nand2tetris.org (completely free)", url: "https://www.nand2tetris.org", note: "Build a full computer from NAND gates up. Free. Life-changing." },
+      { type: "book", name: "Digital Design — Morris Mano (PDF)", url: "#", note: "Classic textbook. PDF freely available online." },
+      { type: "book", name: "Computer Organization & Design — Patterson & Hennessy (PDF)", url: "#", note: "'The' book on computer architecture. PDF freely available." },
+      { type: "course", name: "MIT OCW 6.004 — Computation Structures", url: "https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/", note: "Free MIT course. Covers digital logic to OS fundamentals." },
+      { type: "tool", name: "Logisim-Evolution (free)", url: "https://github.com/logisim-evolution/logisim-evolution", note: "Free GUI logic circuit simulator. Build and test your CPU designs." }
+    ],
+    software: ["Logisim-Evolution (free) — design and simulate digital circuits", "Digital (free) — another excellent logic simulator", "Nand2Tetris simulator suite (free) — comes with the course"]
+  },
+  {
+    title: "Semiconductor Physics & Chemistry",
+    subtitle: "Understanding What's Actually Happening Inside a Chip",
+    months: "Months 13–19",
+    ci: 4,
+    tl: [13, 19],
+    why: "This is where electronics meets quantum mechanics. You can't design a good transistor or understand MOSFET scaling without knowing band theory, doping, and the physics of the PN junction. Your chemistry foundation from Phase 0 will finally click into place here.",
+    topics: [
+      { name: "Quantum & Solid State Physics", items: ["Wave-particle duality, energy quantization (why electrons have discrete energy levels)", "Crystal structure, Brillouin zones, band theory — conduction and valence bands", "Fermi level, carrier statistics, intrinsic vs extrinsic semiconductors"] },
+      { name: "Semiconductor Devices", items: ["PN junction physics: depletion region, built-in potential, I-V characteristics", "BJT operation: minority carrier injection, current gain mechanisms", "MOSFET physics: threshold voltage, inversion layer, channel formation, subthreshold"] },
+      { name: "Fab Chemistry", items: ["Silicon purification and crystal growth (Czochralski process)", "Doping: ion implantation vs diffusion, boron and phosphorus as dopants", "Oxidation, photolithography, etching (wet and dry), metallization — the full fab flow"] }
+    ],
+    resources: [
+      { type: "book", name: "Semiconductor Physics & Devices — Neamen (PDF)", url: "#", note: "The most accessible semiconductor textbook. PDF freely available." },
+      { type: "book", name: "Solid State Electronic Devices — Streetman & Banerjee (PDF)", url: "#", note: "Clear explanations, excellent diagrams. PDF widely available." },
+      { type: "course", name: "MIT OCW 6.012 — Microelectronic Devices & Circuits", url: "https://ocw.mit.edu/courses/6-012-microelectronic-devices-and-circuits-fall-2005/", note: "Free MIT lectures covering physics → circuits." },
+      { type: "course", name: "NPTEL — Semiconductor Devices (YouTube, free)", url: "https://www.youtube.com/results?search_query=NPTEL+semiconductor+devices", note: "Excellent Indian IIT lectures. Free on YouTube." },
+      { type: "book", name: "Physics of Semiconductor Devices — Sze (PDF)", url: "#", note: "The advanced reference. Read Neamen first, then use this." }
+    ],
+    software: ["SILVACO TCAD (student trial) — semiconductor process and device simulation", "ngspice (free) — SPICE-level device simulation", "Python + SciPy (free) — plot energy band diagrams, IV curves"]
+  },
+  {
+    title: "VLSI Design",
+    subtitle: "Designing Real Integrated Circuits — and Taping One Out for Free",
+    months: "Months 19–27",
+    ci: 5,
+    tl: [19, 27],
+    why: "This is the core of 'making chips'. You'll learn the full IC design flow used by Intel, TSMC, and Samsung. The incredible news: Google funds a free chip fabrication program (OpenMPW) where you can submit your design and receive real silicon. This is not a simulation — you can hold your chip.",
+    topics: [
+      { name: "CMOS Circuit Design", items: ["CMOS inverter design, sizing, and static/dynamic power analysis", "Logic families: static CMOS, pass-transistor, dynamic logic", "Standard cell library design — the building blocks of all digital chips"] },
+      { name: "IC Design Flow", items: ["RTL coding → Synthesis → Place & Route → Sign-off (the full digital flow)", "Timing analysis, setup/hold time violations and how to fix them", "DRC (design rule checks), LVS (layout vs schematic), parasitic extraction"] },
+      { name: "Custom Layout", items: ["CMOS layout: n-well, p-diffusion, poly, metal layers and vias", "Layout of a full inverter, NAND, NOR gate from scratch in Magic", "Understanding lithography constraints: minimum feature size, lambda rules"] }
+    ],
+    resources: [
+      { type: "book", name: "CMOS VLSI Design — Weste & Harris (PDF)", url: "#", note: "The bible of VLSI. Every chip designer has read this. PDF freely available." },
+      { type: "book", name: "Digital Integrated Circuits — Rabaey, Chandrakasan, Nikolic (PDF)", url: "#", note: "Advanced and thorough. Cover to cover is a full VLSI education." },
+      { type: "book", name: "Microelectronic Circuits — Sedra & Smith (PDF)", url: "#", note: "Bridges electronics fundamentals into IC-level design." },
+      { type: "tool", name: "OpenLane / OpenROAD — free open-source RTL-to-GDSII", url: "https://github.com/The-OpenROAD-Project/OpenLane", note: "Full open-source VLSI flow. Used by Google's shuttle program." },
+      { type: "tool", name: "Magic VLSI Layout Tool — free", url: "http://opencircuitdesign.com/magic/", note: "Open-source IC layout editor. Industry-validated Lambda-rule based design." },
+      { type: "course", name: "Efabless OpenMPW — submit your chip for FREE fabrication", url: "https://efabless.com/open_shuttle_program", note: "Google sponsors free chip fabrication runs. This is real." }
+    ],
+    software: ["Magic VLSI (free) — IC layout editor", "OpenLane/OpenROAD (free) — automated RTL-to-GDSII flow", "ngspice (free) — analog/mixed-signal simulation", "Klayout (free) — GDSII layout viewer and DRC", "Cadence Virtuoso (student license via university email)"]
+  },
+  {
+    title: "HDL, FPGAs & Your Own CPU",
+    subtitle: "Programming Hardware — and Building Your First Real Processor",
+    months: "Months 23–32",
+    ci: 6,
+    tl: [23, 32],
+    why: "HDL (Hardware Description Language) is how you write digital hardware. FPGAs are reconfigurable chips — you upload your design and the chip becomes your custom processor. This phase lets you implement the CPU you designed conceptually in Phase 4, and run it on real hardware.",
+    topics: [
+      { name: "Verilog / SystemVerilog", items: ["RTL coding: always blocks, assign statements, modules and hierarchy", "Testbench writing: stimulus, assertions, and functional verification", "Synthesis-aware coding: understanding what maps to flip-flops vs combinational logic"] },
+      { name: "FPGA Architecture", items: ["LUTs (Look-Up Tables), flip-flops, DSP blocks, BRAMs — what's inside an FPGA", "Clock distribution, timing constraints, and the importance of setup/hold time", "Implementing a RISC-V or custom ISA processor on an FPGA"] },
+      { name: "CPU Design", items: ["Single-cycle, multi-cycle, and pipelined processor architectures", "Hazard detection: data hazards, control hazards, forwarding paths", "Memory interfaces: connecting your CPU to RAM, ROM, and peripherals"] }
+    ],
+    resources: [
+      { type: "book", name: "FPGA Prototyping by Verilog Examples — Chu (PDF)", url: "#", note: "Hands-on. Go from Verilog basics to UART, VGA, and custom CPUs." },
+      { type: "book", name: "Digital Design & Computer Architecture — Harris & Harris (PDF)", url: "#", note: "Covers digital design through CPU implementation in Verilog. Exceptional book." },
+      { type: "course", name: "Nandland — free Verilog & VHDL tutorials", url: "https://www.nandland.com", note: "Excellent free tutorials for every Verilog concept." },
+      { type: "tool", name: "RISC-V ISA Specification — free", url: "https://riscv.org/technical/specifications/", note: "The open-source ISA used in many modern chips. Free spec." },
+      { type: "course", name: "ZipCPU — Building a CPU in Verilog (blog)", url: "https://zipcpu.com", note: "Incredibly detailed free blog on building a real CPU in Verilog." }
+    ],
+    software: ["Icarus Verilog + GTKWave (free) — simulate and view waveforms", "Xilinx Vivado WebPACK (free) — FPGA synthesis and implementation", "Intel Quartus Prime Lite (free) — alternative FPGA toolchain", "Yosys (free) — open-source synthesis", "Verilator (free) — fast Verilog simulation"]
+  },
+  {
+    title: "Wireless Communications & RF",
+    subtitle: "Signals, Antennas, Modulation, and Building a Software Radio",
+    months: "Months 21–30",
+    ci: 7,
+    tl: [21, 30],
+    why: "A cell phone is useless without wireless. This phase teaches you how information travels through the air — from the math of modulation to the physics of antennas. You'll build a real software-defined radio that can receive FM, aircraft transponders, and even decode satellite imagery.",
+    topics: [
+      { name: "Signal Processing", items: ["Fourier series and Fourier transforms — seeing signals in the frequency domain", "Sampling theorem, aliasing, digital filters (FIR and IIR)", "FFT algorithm — the most important algorithm in electrical engineering"] },
+      { name: "RF & Communication Theory", items: ["Electromagnetic spectrum: from DC to light — where each wireless standard lives", "Modulation: AM, FM, PSK, QAM, OFDM (used in WiFi and 4G/5G)", "Channel capacity: Shannon's theorem — the fundamental limit of communication"] },
+      { name: "Antennas & RF Circuits", items: ["Antenna fundamentals: radiation pattern, gain, impedance, polarization", "Transmission lines: characteristic impedance, reflections, S-parameters", "RF amplifiers, mixers, PLLs — the analog front end of every radio"] }
+    ],
+    resources: [
+      { type: "book", name: "Communication Systems — Haykin (PDF)", url: "#", note: "The classic communications textbook. PDF freely available." },
+      { type: "book", name: "Wireless Communications — Goldsmith (PDF)", url: "#", note: "Modern wireless systems: MIMO, OFDM, cellular. PDF available." },
+      { type: "course", name: "MIT OCW 6.02 — Introduction to EECS II (Communication)", url: "https://ocw.mit.edu/courses/6-02-introduction-to-eecs-ii-digital-communication-systems-fall-2012/", note: "Free MIT course on digital communication systems." },
+      { type: "tool", name: "GNU Radio — free open-source SDR framework", url: "https://www.gnuradio.org", note: "Build real radios in software. Industry-standard, completely free." },
+      { type: "tool", name: "RTL-SDR Guide — ~₹2000 hardware unlocks everything", url: "https://www.rtl-sdr.com/rtl-sdr-quick-start-guide/", note: "A $25 USB dongle lets you receive and decode real RF signals." }
+    ],
+    software: ["GNU Radio (free) — build signal processing flowgraphs", "SDR# / GQRX (free) — receive and visualize RF signals", "MATLAB (student via .edu email) or GNU Octave (free alternative)", "Python SciPy signal toolbox (free) — implement filters and FFTs"]
+  },
+  {
+    title: "PCB Design & System Integration",
+    subtitle: "Designing Printed Circuit Boards and Assembling Your First Product",
+    months: "Months 27–36",
+    ci: 8,
+    tl: [27, 36],
+    why: "This is where all previous phases converge. You design a PCB that integrates your custom CPU/FPGA, RF front end, power management, and connectors. JLCPCB manufactures 10 boards for ~₹200. You will hold a physical PCB you designed.",
+    topics: [
+      { name: "PCB Design", items: ["Schematic capture: translating circuit diagrams into EDA tool schematics", "PCB layout: component placement, routing, copper pours, design rule checks", "Layer stackup: when to use 2-layer vs 4-layer vs 6-layer boards and why"] },
+      { name: "Signal Integrity", items: ["Impedance control: why trace width and spacing matter at high speeds", "Differential pairs, length matching, and minimizing crosstalk", "Power delivery network (PDN) design: decoupling capacitors and power planes"] },
+      { name: "Manufacturing & Assembly", items: ["Generating Gerber files and BOMs for fabrication", "Soldering: through-hole and SMD hand-soldering techniques", "Using JLCPCB / PCBWay for $2-5 board fabrication and PCBA assembly"] }
+    ],
+    resources: [
+      { type: "tool", name: "KiCad 7 — completely free, professional-grade PCB EDA", url: "https://www.kicad.org", note: "The best free PCB tool. Used by professional engineers worldwide." },
+      { type: "video", name: "Phil's Lab — PCB Design tutorials (YouTube, free)", url: "https://www.youtube.com/@PhilsLab", note: "Best KiCad tutorial channel. Goes from beginner to STM32 board design." },
+      { type: "book", name: "High Speed Signal Propagation — Johnson & Graham (PDF)", url: "#", note: "Signal integrity bible. Necessary for high-speed design." },
+      { type: "course", name: "Rick Hartley — PCB Design & Signal Integrity (YouTube)", url: "https://www.youtube.com/results?search_query=Rick+Hartley+PCB", note: "Industry expert. Free talks on signal integrity and stackup." },
+      { type: "tool", name: "JLCPCB — Fabrication: 5 boards for ~$2", url: "https://jlcpcb.com", note: "Upload Gerbers, receive real PCBs. Cheapest fab on earth." }
+    ],
+    software: ["KiCad (free) — schematic + PCB layout", "FreeCAD (free) — mechanical enclosure for your PCB", "JLCPCB online Gerber viewer (free, browser)", "Python (free) — automate BOM generation and checking"]
+  },
+  {
+    title: "Mechanical Engineering, 3D Printing & Robotics",
+    subtitle: "CAD, Fabrication, and Building Compact Machines",
+    months: "Months 10–36 (parallel track)",
+    ci: 9,
+    tl: [10, 36],
+    why: "Mechanical engineering runs in parallel with all other phases. Start 3D printing early — it'll accelerate every project. By the end, you're designing robot joints, gearboxes, and enclosures that house your custom PCBs. This is where you become a full-stack maker.",
+    topics: [
+      { name: "CAD & 3D Printing", items: ["Parametric CAD: sketches, features, constraints, assemblies in Fusion 360 or FreeCAD", "3D printing: FDM vs SLA, design for printing (overhangs, supports, infill)", "Engineering tolerances: why 0.2mm matters when parts need to fit together"] },
+      { name: "Mechanical Engineering Basics", items: ["Statics: forces, moments, free body diagrams — can your robot arm hold the load?", "Dynamics: velocity, acceleration, rotational motion — for moving parts", "Materials selection: plastic vs aluminum vs carbon fiber and when to use each"] },
+      { name: "Compact Robotics", items: ["DC motors, servo motors, stepper motors — characteristics and driver ICs", "Kinematic chains: forward and inverse kinematics for robot arms", "Robot Operating System (ROS2): sensor integration, motor control, path planning"] }
+    ],
+    resources: [
+      { type: "course", name: "Fusion 360 Tutorials — Autodesk Official (free)", url: "https://www.autodesk.com/campaigns/fusion-360-for-hobbyists", note: "Free with student/hobbyist email. Best tutorials are on Autodesk's site." },
+      { type: "tool", name: "FreeCAD — fully free, open-source parametric CAD", url: "https://www.freecad.org", note: "Completely free alternative. Great for 3D printing and mechanical parts." },
+      { type: "book", name: "Introduction to Robotics — John Craig (PDF)", url: "#", note: "Classic robotics text covering kinematics and dynamics. PDF available." },
+      { type: "course", name: "MIT OCW 2.001 — Mechanics & Materials I (free)", url: "https://ocw.mit.edu/courses/2-001-mechanics-materials-i-fall-2006/", note: "Free MIT engineering mechanics course." },
+      { type: "video", name: "Teaching Tech + Makers Muse — YouTube (free)", url: "https://www.youtube.com/@TeachingTech", note: "Best 3D printing channels. Every technique from beginner to advanced." },
+      { type: "course", name: "ROS2 Documentation & Tutorials — free", url: "https://docs.ros.org/en/humble/Tutorials.html", note: "Official free tutorials. The robotics standard." }
+    ],
+    software: ["Fusion 360 (free student/hobbyist)", "FreeCAD (completely free)", "Ultimaker Cura / PrusaSlicer (free) — slicers for 3D printing", "ROS2 (free, Linux) — robot software framework", "Gazebo (free) — robotics simulation", "OpenSCAD (free) — code-based 3D modeling"]
+  }
+];
+
+const software = [
+  { cat: "Math & Simulation", items: ["GNU Octave (free)", "Python + SciPy (free)", "Wolfram Alpha (free)"] },
+  { cat: "Circuit Simulation", items: ["LTSpice (free)", "Falstad (browser, free)", "ngspice (free)"] },
+  { cat: "PCB Design", items: ["KiCad 7 (free)", "FreeRoute (free)", "KiCanvas (browser)"] },
+  { cat: "VLSI / IC Design", items: ["Magic VLSI (free)", "OpenLane (free)", "Klayout (free)", "Cadence (student)"] },
+  { cat: "HDL / FPGA", items: ["Icarus Verilog (free)", "GTKWave (free)", "Yosys (free)", "Vivado WebPACK (free)"] },
+  { cat: "Embedded Dev", items: ["Arduino IDE (free)", "VS Code + PlatformIO (free)", "STM32CubeIDE (free)"] },
+  { cat: "RF / SDR", items: ["GNU Radio (free)", "GQRX (free)", "SDR# (free)"] },
+  { cat: "CAD & Mech", items: ["Fusion 360 (student free)", "FreeCAD (free)", "OpenSCAD (free)"] },
+  { cat: "Slicers / 3DP", items: ["Cura (free)", "PrusaSlicer (free)", "Bambu Studio (free)"] },
+  { cat: "Robotics", items: ["ROS2 (free)", "Gazebo (free)", "CoppeliaSim (student)"] }
+];
+
+// Build timeline
+const tlRows = document.getElementById('tl-rows');
+const tlColors = ['#10b981','#38bdf8','#f59e0b','#a855f7','#ef4444','#ec4899','#6366f1','#06b6d4','#4ade80','#94a3b8'];
+const MAX_MONTHS = 36;
+
+phases.forEach((p, i) => {
+  const row = document.createElement('div');
+  row.className = 'tl-row';
+  const start = p.tl[0], end = p.tl[1];
+  const leftPct = ((start - 1) / MAX_MONTHS) * 100;
+  const widthPct = ((end - start) / MAX_MONTHS) * 100;
+  row.innerHTML = `
+    <div class="tl-name">Ph.${i} ${p.title.split(' ')[0]}</div>
+    <div class="tl-bar-wrap">
+      <div class="tl-bar" style="margin-left:${leftPct}%;width:${widthPct}%;background:${tlColors[i]};"></div>
+      <div class="tl-bar-label">Mo.${end}</div>
+    </div>`;
+  tlRows.appendChild(row);
+});
+
+// Tick marks header
+const header = document.createElement('div');
+header.className = 'tl-row';
+header.style.marginBottom = '6px';
+header.innerHTML = `<div class="tl-name" style="font-size:9px;">MONTHS</div>
+<div style="flex:1;display:flex;justify-content:space-between;padding:0 2px;font-size:9px;color:var(--muted);font-family:var(--mono);">
+${[1,6,12,18,24,30,36].map(m => `<span>${m}</span>`).join('')}
+</div>`;
+tlRows.prepend(header);
+
+// Build phase cards
+const container = document.getElementById('phases-container');
+
+phases.forEach((p, i) => {
+  const card = document.createElement('div');
+  card.className = 'phase';
+  card.innerHTML = `
+    <div class="phase-header" onclick="togglePhase(this.parentElement)">
+      <div class="phase-num c${i}">${String(i).padStart(2,'0')}</div>
+      <div class="phase-meta">
+        <div class="phase-title">${p.title}</div>
+        <div class="phase-subtitle">${p.subtitle}</div>
+      </div>
+      <div class="phase-right">
+        <div class="phase-months">${p.months}</div>
+        <div class="phase-arrow">▶</div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <div class="why-box"><strong>Why this phase:</strong> ${p.why}</div>
+      <div class="cols">
+        <div class="box">
+          <div class="box-title">Core Topics</div>
+          ${p.topics.map(t => `
+            <div class="topic-group">
+              <div class="topic-name">${t.name}</div>
+              <ul class="topic-items">${t.items.map(it => `<li>${it}</li>`).join('')}</ul>
+            </div>`).join('')}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="box" style="flex:1">
+            <div class="box-title">Free Resources</div>
+            <ul class="resources-list">
+              ${p.resources.map(r => `
+                <li class="res-item">
+                  <span class="res-badge badge-${r.type}">${r.type}</span>
+                  <div class="res-info">
+                    <div class="res-name"><a href="${r.url}" target="_blank">${r.name}</a></div>
+                    <div class="res-note">${r.note}</div>
+                  </div>
+                </li>`).join('')}
+            </ul>
+          </div>
+          <div class="box">
+            <div class="box-title">Software for This Phase</div>
+            <div class="sw-list">
+              ${p.software.map(s => `<span class="sw-tag free">${s}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  container.appendChild(card);
+});
+
+// Build software grid
+const swGrid = document.getElementById('sw-grid');
+software.forEach(s => {
+  const card = document.createElement('div');
+  card.className = 'sw-card';
+  card.innerHTML = `<div class="sw-cat">${s.cat}</div>
+    <ul class="sw-items">${s.items.map(i => `<li>${i.replace('(free)', '<span>(free)</span>').replace('(student free)', '<span>(student free)</span>').replace('(student)', '<span>(student)</span>')}</li>`).join('')}</ul>`;
+  swGrid.appendChild(card);
+});
+
+function togglePhase(el) {
+  el.classList.toggle('open');
+}
+
+// Auto-open first phase
+document.querySelector('.phase').classList.add('open');
+</script>
+</body>
+</html>
