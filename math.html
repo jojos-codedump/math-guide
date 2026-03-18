@@ -9,425 +9,226 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:      #0a0a0c;
-    --bg2:     #111114;
-    --bg3:     #17171b;
-    --bg4:     #1e1e23;
-    --bg5:     #252529;
-    --border:  rgba(255,255,255,0.055);
-    --border2: rgba(255,255,255,0.10);
-    --border3: rgba(255,255,255,0.16);
-    --text:    #e9e7df;
-    --text2:   #8f8d85;
-    --text3:   #4e4d49;
-    --accent:  #7b9cff;
-    --accent-dim: rgba(123,156,255,0.12);
-    --green:   #52c98a;
-    --green-dim: rgba(82,201,138,0.10);
-    --amber:   #e8b84b;
-    --amber-dim: rgba(232,184,75,0.10);
-    --purple:  #b17ef8;
-    --purple-dim: rgba(177,126,248,0.10);
-    --coral:   #f07a5a;
-    --coral-dim: rgba(240,122,90,0.10);
-    --teal:    #4ec9c9;
-    --teal-dim: rgba(78,201,201,0.10);
-    --rose:    #f472b6;
-    --rose-dim: rgba(244,114,182,0.10);
-    --r: 8px;
-    --r-sm: 5px;
+    --bg:#0a0a0c; --bg2:#111114; --bg3:#17171b; --bg4:#1e1e23; --bg5:#252529;
+    --border:rgba(255,255,255,0.055); --border2:rgba(255,255,255,0.10); --border3:rgba(255,255,255,0.16);
+    --text:#e9e7df; --text2:#8f8d85; --text3:#4e4d49;
+    --accent:#7b9cff; --accent-dim:rgba(123,156,255,0.12);
+    --green:#52c98a; --green-dim:rgba(82,201,138,0.10);
+    --amber:#e8b84b; --amber-dim:rgba(232,184,75,0.10);
+    --purple:#b17ef8; --purple-dim:rgba(177,126,248,0.10);
+    --coral:#f07a5a; --coral-dim:rgba(240,122,90,0.10);
+    --teal:#4ec9c9; --teal-dim:rgba(78,201,201,0.10);
+    --gold:#f0c060; --gold-dim:rgba(240,192,96,0.10);
+    --rose:#f472b6; --rose-dim:rgba(244,114,182,0.10);
+    --r:8px; --r-sm:5px;
   }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    line-height: 1.65;
-    min-height: 100vh;
-  }
-
-  /* ── Page ── */
-  .page {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 6rem;
-  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.65;min-height:100vh;}
+  .page{max-width:940px;margin:0 auto;padding:3rem 1.5rem 6rem;}
 
   /* ── Header ── */
-  .hdr { margin-bottom: 2.5rem; }
-  .hdr-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  .hdr{margin-bottom:2rem;}
+  .hdr-eyebrow{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .hdr-eyebrow::before{content:'';display:inline-block;width:20px;height:1px;background:var(--accent);opacity:.6;}
+  .hdr-title{font-family:'DM Serif Display',serif;font-size:34px;font-weight:400;color:var(--text);line-height:1.15;margin-bottom:12px;letter-spacing:-.02em;}
+  .hdr-title em{font-style:italic;color:var(--accent);}
+  .hdr-sub{font-size:13px;color:var(--text2);line-height:1.75;max-width:680px;font-weight:300;}
+  .stats{display:flex;gap:5px;flex-wrap:wrap;margin-top:16px;}
+  .stat{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:20px;border:0.5px solid var(--border2);color:var(--text3);background:var(--bg3);letter-spacing:.04em;}
+  .stat-hi{border-color:rgba(123,156,255,0.3);color:var(--accent);background:var(--accent-dim);}
+
+  /* ── Companion Banner ── */
+  .companion-banner{
+    margin-top:20px;display:flex;align-items:flex-start;gap:14px;
+    padding:14px 16px;background:rgba(123,156,255,0.05);
+    border:0.5px solid rgba(123,156,255,0.22);border-radius:var(--r);
   }
-  .hdr-eyebrow::before {
-    content: '';
-    display: inline-block;
-    width: 20px;
-    height: 1px;
-    background: var(--accent);
-    opacity: .6;
+  .cb-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+  .cb-body{flex:1;}
+  .cb-title{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:var(--accent);letter-spacing:.10em;text-transform:uppercase;margin-bottom:5px;}
+  .cb-text{font-size:12px;color:var(--text2);line-height:1.65;font-weight:300;}
+  .cb-links{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+  .cb-link{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px;background:var(--accent-dim);color:var(--accent);text-decoration:none;transition:opacity .12s;letter-spacing:.02em;}
+  .cb-link:hover{opacity:.7;}
+
+  /* ── How to Use ── */
+  .howto{
+    margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;
   }
-  .hdr-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 32px;
-    font-weight: 400;
-    color: var(--text);
-    line-height: 1.2;
-    margin-bottom: 12px;
-    letter-spacing: -.01em;
+  .howto-card{
+    padding:12px 14px;background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--r-sm);
   }
-  .hdr-title em {
-    font-style: italic;
-    color: var(--accent);
-  }
-  .hdr-sub {
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.7;
-    max-width: 640px;
-    font-weight: 300;
-  }
-  .stats {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 18px;
-  }
-  .stat {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    padding: 3px 10px;
-    border-radius: 20px;
-    border: 0.5px solid var(--border2);
-    color: var(--text3);
-    background: var(--bg3);
-    letter-spacing: .04em;
-  }
+  .howto-num{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;color:var(--text3);letter-spacing:.08em;margin-bottom:5px;text-transform:uppercase;}
+  .howto-text{font-size:11.5px;color:var(--text2);line-height:1.6;font-weight:300;}
 
   /* ── Legend ── */
-  .legend {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-top: 20px;
-    padding: 12px 14px;
-    background: var(--bg3);
-    border: 0.5px solid var(--border);
-    border-radius: var(--r);
-  }
-  .ll { font-size: 10px; color: var(--text3); font-family: 'DM Mono', monospace; letter-spacing:.04em; margin-right: 2px; }
-  .ll-sep { width: 1px; height: 12px; background: var(--border2); margin: 0 4px; }
-  .bdg {
-    font-size: 9px;
-    font-weight: 600;
-    font-family: 'DM Mono', monospace;
-    padding: 2px 8px;
-    border-radius: 3px;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-  }
-  .b-free   { background: var(--accent-dim);  color: var(--accent); }
-  .b-af     { background: var(--green-dim);   color: var(--green); }
-  .b-found  { background: var(--bg4);         color: var(--text2); border: 0.5px solid var(--border2); }
-  .b-inter  { background: var(--amber-dim);   color: var(--amber); }
-  .b-adv    { background: var(--purple-dim);  color: var(--purple); }
-  .b-res    { background: var(--coral-dim);   color: var(--coral); }
-  .b-opt    { background: var(--teal-dim);    color: var(--teal); }
+  .legend{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin-top:18px;padding:11px 14px;background:var(--bg3);border:0.5px solid var(--border);border-radius:var(--r);}
+  .ll{font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;letter-spacing:.04em;margin-right:1px;}
+  .ll-sep{width:1px;height:12px;background:var(--border2);margin:0 4px;}
+  .bdg{font-size:9px;font-weight:600;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:3px;letter-spacing:.04em;text-transform:uppercase;}
+  .b-free{background:var(--accent-dim);color:var(--accent);}
+  .b-af{background:var(--green-dim);color:var(--green);}
+  .b-grey{background:var(--bg5);color:var(--text3);border:0.5px solid var(--border2);}
+  .b-found{background:var(--bg4);color:var(--text2);border:0.5px solid var(--border2);}
+  .b-inter{background:var(--amber-dim);color:var(--amber);}
+  .b-adv{background:var(--purple-dim);color:var(--purple);}
+  .b-res{background:var(--coral-dim);color:var(--coral);}
+  .b-opt{background:var(--teal-dim);color:var(--teal);}
 
   /* ── Phase Nav ── */
-  .pnav {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-    margin: 2.5rem 0 1.5rem;
-    position: sticky;
-    top: 0;
-    background: var(--bg);
-    padding: 10px 0 12px;
-    z-index: 20;
-    border-bottom: 0.5px solid var(--border);
-  }
-  .pbtn {
-    font-size: 11px;
-    font-family: 'DM Mono', monospace;
-    padding: 5px 13px;
-    border-radius: 20px;
-    border: 0.5px solid var(--border2);
-    background: transparent;
-    cursor: pointer;
-    color: var(--text3);
-    transition: all .15s;
-    line-height: 1.4;
-    white-space: nowrap;
-    letter-spacing: .02em;
-  }
-  .pbtn:hover { background: var(--bg3); color: var(--text2); border-color: var(--border3); }
-  .pbtn.active {
-    background: var(--bg4);
-    border-color: var(--border3);
-    color: var(--text);
-    font-weight: 500;
-  }
+  .pnav{display:flex;gap:4px;flex-wrap:wrap;margin:2.5rem 0 1.5rem;position:sticky;top:0;background:var(--bg);padding:10px 0 12px;z-index:20;border-bottom:0.5px solid var(--border);}
+  .pbtn{font-size:11px;font-family:'DM Mono',monospace;padding:5px 13px;border-radius:20px;border:0.5px solid var(--border2);background:transparent;cursor:pointer;color:var(--text3);transition:all .15s;line-height:1.4;white-space:nowrap;letter-spacing:.02em;}
+  .pbtn:hover{background:var(--bg3);color:var(--text2);border-color:var(--border3);}
+  .pbtn.active{background:var(--bg4);border-color:var(--border3);color:var(--text);font-weight:500;}
+  .pcon{display:none;}.pcon.active{display:block;}
 
-  /* ── Phase Panel ── */
-  .pcon { display: none; }
-  .pcon.active { display: block; }
+  /* ── Phase Meta Row ── */
+  .phase-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .time-pill{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:20px;background:var(--amber-dim);color:var(--amber);border:0.5px solid rgba(232,184,75,0.2);letter-spacing:.04em;}
+  .feeds-pill{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:20px;background:var(--rose-dim);color:var(--rose);border:0.5px solid rgba(244,114,182,0.2);letter-spacing:.02em;}
 
-  .pdesc {
-    border-left: 2px solid var(--border3);
-    padding: 12px 16px;
-    background: var(--bg3);
-    border-radius: 0 var(--r) var(--r) 0;
-    margin-bottom: 18px;
-  }
-  .pdesc-top {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 5px;
-    flex-wrap: wrap;
-  }
-  .pdesc-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 16px;
-    color: var(--text);
-    font-weight: 400;
-  }
-  .pdesc-why { font-size: 12px; color: var(--text2); line-height: 1.7; font-weight: 300; }
+  /* ── Review note ── */
+  .review-note{margin-bottom:14px;padding:9px 14px;background:rgba(123,156,255,0.05);border:0.5px solid rgba(123,156,255,0.18);border-radius:var(--r-sm);font-size:11.5px;color:var(--accent);font-family:'DM Mono',monospace;letter-spacing:.02em;line-height:1.6;}
 
-  /* ── Topic Stack ── */
-  .tstack { display: flex; flex-direction: column; gap: 14px; }
+  /* ── Phase Desc ── */
+  .pdesc{border-left:2px solid var(--border3);padding:12px 16px;background:var(--bg3);border-radius:0 var(--r) var(--r) 0;margin-bottom:18px;}
+  .pdesc-top{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;}
+  .pdesc-name{font-family:'DM Serif Display',serif;font-size:17px;color:var(--text);font-weight:400;}
+  .pdesc-why{font-size:12px;color:var(--text2);line-height:1.75;font-weight:300;}
 
-  /* ── Topic Card ── */
-  .tcard {
-    background: var(--bg2);
-    border: 0.5px solid var(--border);
-    border-radius: var(--r);
-    overflow: hidden;
-    transition: border-color .15s;
-  }
-  .tcard:hover { border-color: var(--border2); }
-
-  .tcard-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 13px 16px 0;
-    flex-wrap: wrap;
-  }
-  .tnum {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    font-weight: 500;
-    background: var(--bg4);
-    color: var(--text3);
-    border-radius: 3px;
-    padding: 2px 8px;
-    flex-shrink: 0;
-    letter-spacing: .06em;
-  }
-  .tname {
-    font-family: 'DM Serif Display', serif;
-    font-size: 15px;
-    color: var(--text);
-    flex: 1;
-    font-weight: 400;
-    line-height: 1.3;
-  }
-  .topt-badge {
-    font-size: 9px;
-    font-family: 'DM Mono', monospace;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 3px;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    background: var(--teal-dim);
-    color: var(--teal);
-    border: 0.5px solid rgba(78,201,201,0.2);
-    flex-shrink: 0;
-  }
-
-  .twhy {
-    font-size: 12px;
-    color: var(--text2);
-    margin: 10px 16px 0;
-    padding: 10px 13px;
-    background: var(--bg3);
-    border-radius: var(--r-sm);
-    line-height: 1.7;
-    border-left: 2px solid var(--border2);
-    font-weight: 300;
-  }
+  /* ── Topic Stack & Card ── */
+  .tstack{display:flex;flex-direction:column;gap:14px;}
+  .tcard{background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color .15s;}
+  .tcard:hover{border-color:var(--border2);}
+  .tcard-head{display:flex;align-items:center;gap:9px;padding:13px 16px 0;flex-wrap:wrap;}
+  .tnum{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;background:var(--bg4);color:var(--text3);border-radius:3px;padding:2px 8px;flex-shrink:0;letter-spacing:.06em;}
+  .tname{font-family:'DM Serif Display',serif;font-size:15px;color:var(--text);flex:1;font-weight:400;line-height:1.3;}
+  .topt{font-size:9px;font-family:'DM Mono',monospace;font-weight:600;padding:2px 8px;border-radius:3px;letter-spacing:.06em;text-transform:uppercase;background:var(--teal-dim);color:var(--teal);border:0.5px solid rgba(78,201,201,0.2);flex-shrink:0;}
+  .ttime{font-size:9px;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:3px;letter-spacing:.04em;background:var(--gold-dim);color:var(--gold);border:0.5px solid rgba(240,192,96,0.2);flex-shrink:0;}
+  .twhy{font-size:12px;color:var(--text2);margin:10px 16px 0;padding:10px 13px;background:var(--bg3);border-radius:var(--r-sm);line-height:1.75;border-left:2px solid var(--border2);font-weight:300;}
 
   /* ── Resource Sections ── */
-  .rsections {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin: 12px 0 0;
-  }
+  .rsections{display:flex;flex-direction:column;margin:12px 0 0;}
+  .rsec{padding:10px 16px;border-top:0.5px solid var(--border);display:flex;gap:10px;align-items:flex-start;}
+  .rsec:last-child{padding-bottom:14px;}
+  .rsec-icon{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-size:11px;}
+  .icon-book{background:var(--accent-dim);}
+  .icon-video{background:var(--coral-dim);}
+  .icon-doc{background:var(--green-dim);}
+  .icon-prac{background:var(--amber-dim);}
+  .icon-proj{background:var(--purple-dim);}
+  .icon-proof{background:var(--gold-dim);}
+  .rsec-body{flex:1;min-width:0;}
+  .rsec-label{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.10em;color:var(--text3);margin-bottom:6px;display:block;}
 
-  .rsec {
-    padding: 10px 16px;
-    border-top: 0.5px solid var(--border);
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .rsec:last-child { padding-bottom: 14px; }
+  /* ── Books ── */
+  .book-list{display:flex;flex-direction:column;gap:7px;}
+  .book-item{display:flex;gap:8px;align-items:flex-start;}
+  .book-role{font-family:'DM Mono',monospace;font-size:9px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--text3);min-width:44px;padding-top:3px;flex-shrink:0;}
+  .book-body{flex:1;}
+  .book-title{font-size:12.5px;color:var(--text);font-style:italic;font-family:'DM Serif Display',serif;font-weight:400;line-height:1.3;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .book-auth{font-size:11px;color:var(--text2);margin-top:1px;}
+  .book-note{font-size:11px;color:var(--text3);margin-top:2px;line-height:1.5;font-weight:300;}
+  .book-sep{border:none;border-top:0.5px dashed var(--border);margin:5px 0;}
 
-  .rsec-icon {
-    width: 22px;
-    height: 22px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-    font-size: 11px;
-  }
-  .icon-book   { background: var(--accent-dim); }
-  .icon-video  { background: var(--coral-dim); }
-  .icon-doc    { background: var(--green-dim); }
-  .icon-prac   { background: var(--amber-dim); }
-  .icon-proj   { background: var(--purple-dim); }
+  /* ── Chips ── */
+  .chip-row{display:flex;flex-wrap:wrap;gap:5px;}
+  .chip{font-size:10px;font-family:'DM Mono',monospace;border-radius:4px;padding:3px 9px;text-decoration:none;transition:opacity .12s;letter-spacing:.02em;line-height:1.4;}
+  .chip:hover{opacity:.72;}
+  .chip-video{color:var(--coral);background:var(--coral-dim);}
+  .chip-doc{color:var(--green);background:var(--green-dim);}
+  .chip-prac{color:var(--amber);background:var(--amber-dim);}
 
-  .rsec-body { flex: 1; min-width: 0; }
-  .rsec-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: .10em;
-    color: var(--text3);
-    margin-bottom: 6px;
-    display: block;
-  }
-
-  /* Books */
-  .book-list { display: flex; flex-direction: column; gap: 7px; }
-  .book-item { display: flex; gap: 8px; align-items: flex-start; }
-  .book-role {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: .07em;
-    color: var(--text3);
-    min-width: 44px;
-    padding-top: 3px;
-    flex-shrink: 0;
-  }
-  .book-body { flex: 1; }
-  .book-title {
-    font-size: 12.5px;
-    color: var(--text);
-    font-style: italic;
-    font-family: 'DM Serif Display', serif;
-    font-weight: 400;
-    line-height: 1.3;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .book-auth { font-size: 11px; color: var(--text2); margin-top: 1px; }
-  .book-note { font-size: 11px; color: var(--text3); margin-top: 2px; line-height: 1.5; font-weight: 300; }
-  .book-sep  { border: none; border-top: 0.5px dashed var(--border); margin: 4px 0; }
-
-  /* Chips row */
-  .chip-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
-  .chip {
-    font-size: 10px;
-    font-family: 'DM Mono', monospace;
-    border-radius: 4px;
-    padding: 3px 9px;
-    text-decoration: none;
-    transition: opacity .12s;
-    letter-spacing: .02em;
-    line-height: 1.4;
-  }
-  .chip:hover { opacity: .75; }
-  .chip-video { color: var(--coral);  background: var(--coral-dim); }
-  .chip-doc   { color: var(--green);  background: var(--green-dim); }
-  .chip-prac  { color: var(--amber);  background: var(--amber-dim); }
-
-  /* Project items */
-  .proj-list { display: flex; flex-direction: column; gap: 5px; }
-  .proj-item {
-    font-size: 11.5px;
-    color: var(--text2);
-    display: flex;
-    gap: 8px;
-    align-items: flex-start;
-    line-height: 1.5;
-    font-weight: 300;
-  }
-  .proj-bullet {
-    font-family: 'DM Mono', monospace;
-    color: var(--purple);
-    font-size: 10px;
-    margin-top: 3px;
-    flex-shrink: 0;
-  }
-
-  /* ── Scrollbar ── */
-  ::-webkit-scrollbar { width: 5px; height: 5px; }
-  ::-webkit-scrollbar-track { background: var(--bg2); }
-  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+  /* ── Projects ── */
+  .proj-list{display:flex;flex-direction:column;gap:6px;}
+  .proj-item{font-size:11.5px;color:var(--text2);display:flex;gap:8px;align-items:flex-start;line-height:1.6;font-weight:300;}
+  .proj-bullet{font-family:'DM Mono',monospace;font-size:11px;margin-top:2px;flex-shrink:0;}
+  .bullet-code{color:var(--purple);}
+  .bullet-proof{color:var(--gold);}
 
   /* ── Footer ── */
-  .footer {
-    margin-top: 3.5rem;
-    padding-top: 1.5rem;
-    border-top: 0.5px solid var(--border);
-    font-size: 11px;
-    color: var(--text3);
-    line-height: 1.7;
-    font-weight: 300;
-    font-family: 'DM Mono', monospace;
-    letter-spacing: .02em;
-  }
+  .footer{margin-top:3.5rem;padding-top:1.5rem;border-top:0.5px solid var(--border);font-size:11px;color:var(--text3);line-height:1.9;font-weight:300;font-family:'DM Mono',monospace;letter-spacing:.02em;}
+  .footer a{color:var(--accent);text-decoration:none;}.footer a:hover{text-decoration:underline;}
 
-  @media (max-width: 600px) {
-    .page { padding: 1.5rem 1rem 4rem; }
-    .hdr-title { font-size: 24px; }
-    .tname { font-size: 14px; }
-    .rsec { flex-direction: column; gap: 6px; }
+  /* ── Scrollbar ── */
+  ::-webkit-scrollbar{width:5px;height:5px;}
+  ::-webkit-scrollbar-track{background:var(--bg2);}
+  ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+  @media(max-width:600px){
+    .page{padding:1.5rem 1rem 4rem;}
+    .hdr-title{font-size:26px;}
+    .tname{font-size:14px;}
+    .rsec{flex-direction:column;gap:6px;}
+    .howto{grid-template-columns:1fr;}
+    .companion-banner{flex-direction:column;}
   }
 </style>
 </head>
 <body>
 <div class="page">
 
+  <!-- ══ HEADER ══ -->
   <div class="hdr">
-    <div class="hdr-eyebrow">Complete Self-Study Roadmap · Revised Edition</div>
-    <div class="hdr-title">Zero to Hero — <em>Mathematics</em><br>for Advanced Data Science &amp; Deep Learning</div>
-    <div class="hdr-sub">Starts from Class 10 (India). Every topic earns the next. 2 books per topic maximum. Every primary book is freely discoverable. Proof-writing, implementation, and project milestones throughout. Research-grade ceiling.</div>
+    <div class="hdr-eyebrow">Complete Self-Study Roadmap · Verified Edition</div>
+    <div class="hdr-title">Zero to Hero — <em>Mathematics</em><br>for Data Science &amp; Deep Learning</div>
+    <div class="hdr-sub">Starts from Class 10 (India). Every topic earns the next. PDF availability verified and honestly labelled — no false claims, no hallucinated resources. Proof-writing milestones, coding projects, time estimates, and spaced review cycles throughout. Research-grade ceiling.</div>
     <div class="stats">
-      <span class="stat">11 phases</span>
-      <span class="stat">29 topics</span>
-      <span class="stat">Books + Playlists + Docs + Practice + Projects</span>
-      <span class="stat">All primary PDFs freely discoverable</span>
+      <span class="stat">13 phases · 30 topics</span>
+      <span class="stat stat-hi">PDF availability honestly verified</span>
+      <span class="stat">◷ Time estimates per phase &amp; topic</span>
+      <span class="stat">◆ Coding projects every topic</span>
+      <span class="stat">◈ Proof milestones every topic</span>
+      <span class="stat">↩ Review cycles built in</span>
+      <span class="stat">2–2.5 years at 1–2 hrs/day</span>
       <span class="stat">Research-grade ceiling</span>
     </div>
+
+    <!-- Companion Roadmap Banner -->
+    <div class="companion-banner">
+      <div class="cb-icon">🔗</div>
+      <div class="cb-body">
+        <div class="cb-title">Companion Roadmaps</div>
+        <div class="cb-text">This is the <strong style="color:var(--text)">mathematical foundations</strong> roadmap. It is designed to be studied alongside or before the Data Science &amp; Deep Learning roadmap — every topic here maps directly to a "math prerequisite" field in that companion. Phases 0–4 (Foundation → Probability) feed into Classical ML and Neural Networks. Phases 5–9 (Analysis → Bayesian) feed into Generative Models, RL, and advanced architectures. Phases 10–12 (Complex Analysis → Frontier) feed into research-level ML theory. The two roadmaps form a complete system.</div>
+        <div class="cb-links">
+          <a class="cb-link" href="data_science.html">→ Data Science &amp; Deep Learning</a>
+          <a class="cb-link" href="cysec.html">→ Cybersecurity</a>
+          <a class="cb-link" href="dev.html">→ Full-Stack &amp; DevSecOps</a>
+          <a class="cb-link" href="android.html">→ Android Development</a>
+          <a class="cb-link" href="vlsi.html">→ VLSI &amp; Hardware</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to use -->
+    <div class="howto">
+      <div class="howto-card">
+        <div class="howto-num">01 · Sequence</div>
+        <div class="howto-text">Follow phases 0 → 12 in order. Every topic is a prerequisite for what follows. The phase nav is for reference and review — not for skipping ahead.</div>
+      </div>
+      <div class="howto-card">
+        <div class="howto-num">02 · Books</div>
+        <div class="howto-text">Read primary books cover-to-cover. Use supplementary books for depth on specific chapters and for extra problem sets. Never buy both — choose one.</div>
+      </div>
+      <div class="howto-card">
+        <div class="howto-num">03 · Projects</div>
+        <div class="howto-text">◆ coding projects are implementation milestones. ◈ proof milestones are written proofs on paper. Both are required — doing only code produces a practitioner, not a mathematician.</div>
+      </div>
+      <div class="howto-card">
+        <div class="howto-num">04 · Review Cycles</div>
+        <div class="howto-text">Review notes (in phase banners, highlighted in blue) are mandatory. Return to the cited phase before advancing. Long roadmaps without review produce knowledge that decays before it can be applied.</div>
+      </div>
+      <div class="howto-card">
+        <div class="howto-num">05 · PDF Labels</div>
+        <div class="howto-text"><span style="color:var(--green)">Author · legally free</span> = official open release. <span style="color:var(--accent)">Widely found via search</span> = university mirrors; not an official release. <span style="color:var(--text2)">Purchase recommended</span> = no consistent free version exists.</div>
+      </div>
+      <div class="howto-card">
+        <div class="howto-num">06 · DS Parallel</div>
+        <div class="howto-text">Each phase shows which DS topics it unlocks (pink pill). You can begin the DS roadmap's foundational phases as early as Phase 2 of this roadmap, running both in parallel from that point.</div>
+      </div>
+    </div>
+
+    <!-- Legend -->
     <div class="legend">
       <span class="ll">Tier —</span>
       <span class="bdg b-found">Foundation</span>
@@ -437,682 +238,518 @@
       <span class="bdg b-opt">Optional</span>
       <div class="ll-sep"></div>
       <span class="ll">Books —</span>
-      <span class="bdg b-af">Author's site · free</span>
-      <span class="bdg b-free">PDF freely discoverable</span>
+      <span class="bdg b-af">Author · legally free</span>
+      <span class="bdg b-free">Widely found via search</span>
+      <span class="bdg b-grey">Purchase recommended</span>
     </div>
   </div>
 
+  <!-- ══ PHASE NAV ══ -->
   <div class="pnav" id="pnav"></div>
   <div id="pcons"></div>
 
+  <!-- ══ FOOTER ══ -->
   <div class="footer">
-    Rebuilt for lifelong reference. Every transition is deliberate — each topic is a prerequisite for the next. Read primary books cover-to-cover with proofs. Use supplementary books for depth. All "Author's site" books are legally free; remaining books are widely available via standard PDF searches. Optional topics (marked ◈) are recommended for research paths but can be deferred without breaking the main sequence.
+    <strong style="color:var(--text2)">PDF labels explained:</strong>
+    <span style="color:var(--green)">Author/publisher · legally free</span> = permanent official release (e.g. author's site, MIT OCW, Cambridge open-access).
+    <span style="color:var(--accent)">Widely found via search</span> = circulates on university servers or unauthorised mirrors; readily discoverable but not an official open release.
+    <span style="color:var(--text2)">Purchase recommended</span> = no consistent free version found; purchase or access via institutional library. &nbsp;·&nbsp;
+    ◆ = coding project. ◈ = proof milestone (write on paper). ◷ = time estimate (assumes 1–2 focused hrs/day). &nbsp;·&nbsp;
+    Companion roadmap: <a href="data_science.html">data_science.html</a> — the "math:" field in every topic of that roadmap points to concepts covered here.
   </div>
 
-</div>
+</div><!-- .page -->
 
 <script>
-const TIERS = { F:'b-found', I:'b-inter', A:'b-adv', R:'b-res' };
-const TIERL = { F:'Foundation', I:'Intermediate', A:'Advanced', R:'Research' };
+const TIERS={F:'b-found',I:'b-inter',A:'b-adv',R:'b-res'};
+const TIERL={F:'Foundation',I:'Intermediate',A:'Advanced',R:'Research'};
 
-// Resource type helpers
-// videos: [{l,u}]
-// docs:   [{l,u}]
-// practice: [{l,u}]
-// projects: [string]
+function bookBadge(b){
+  if(b.af)   return `<span class="bdg b-af">Author · legally free</span>`;
+  if(b.disc) return `<span class="bdg b-free">Widely found via search</span>`;
+  return        `<span class="bdg b-grey">Purchase recommended</span>`;
+}
 
-const DATA = [
-  // ─────────────────────────────────────────────────────────────
-  {
-    btn:'0 · Foundation', tier:'F',
-    name:'Mathematical Foundation',
-    desc:'Bridge from Class 10 to university mathematics. Formalises the language and algebraic instincts you already have. Everything that follows is built on what you establish here.',
-    topics:[
-      {
-        n:1, name:'Pre-calculus & Algebra',
-        why:'Class 10 gave you arithmetic and basic algebra. This topic formalises functions, graphing, trigonometry, and algebraic manipulation — the grammar every future topic speaks. You cannot read a calculus page without this foundation.',
-        pri:{t:'Precalculus: Mathematics for Calculus', a:'Stewart, Redlin & Watson', note:'Comprehensive and well-paced. Builds from where Class 10 ends. The single clearest bridge text — widely available PDF.', af:false},
-        sup:{t:'Precalculus', a:'Michael Sullivan', note:'More drill problems if Stewart feels fast. Use as a problem bank for extra practice when you want more exercises.', af:false},
-        videos:[
-          {l:'Professor Leonard — Full Precalculus (YouTube)', u:'https://www.youtube.com/playlist?list=PLDesaqWTN534OnM-2d0N4q7CL3M3fXcMW'},
-          {l:'Khan Academy — Precalculus (interactive)', u:'https://www.khanacademy.org/math/precalculus'},
-        ],
-        docs:[
-          {l:"Paul's Online Math Notes — Algebra & Trig", u:'https://tutorial.math.lamar.edu'},
-        ],
-        practice:[
-          {l:'Brilliant.org — Pre-Algebra & Algebra', u:'https://brilliant.org/courses/#algebra'},
-          {l:'Art of Problem Solving — Alcumus', u:'https://artofproblemsolving.com/alcumus'},
-        ],
-        projects:['Build a graphing calculator in Python (matplotlib) that plots any user-supplied function', 'Implement trigonometric identities checker: input an identity, verify symbolically with SymPy'],
-      },
-      {
-        n:2, name:'Logic, Sets & Mathematical Proofs',
-        why:'Before calculus you need the language mathematicians use — logic, quantifiers, sets, and proof techniques. Every single topic from here onwards requires you to write and read proofs. This is the investment that makes the rest feel natural. Do not skip or rush this topic.',
-        pri:{t:'Book of Proof', a:'Richard Hammack', note:'Free at bookofproof.net — written specifically for students making this exact transition. Gentle, patient, complete. The ideal first proof-writing book.', af:true},
-        sup:{t:'How to Prove It', a:'Daniel J. Velleman', note:'Deeper treatment of logic and proof strategies. Read after Hammack to solidify and extend your proof-writing confidence.', af:false},
-        videos:[
-          {l:'MIT OCW 18.090 — Intro to Mathematical Proofs', u:'https://ocw.mit.edu/courses/18-090-introduction-to-mathematical-proofs-spring-2009/'},
-          {l:'MIT OCW 6.042J: Math for CS (first 3 weeks)', u:'https://www.youtube.com/playlist?list=PLB7540DEDD482705B'},
-        ],
-        docs:[
-          {l:'bookofproof.net — Free PDF + Solutions', u:'https://www.people.vcu.edu/~rhammack/BookOfProof/'},
-        ],
-        practice:[
-          {l:'ProofWiki — worked proof examples', u:'https://proofwiki.org/'},
-          {l:'Art of Problem Solving — Proof problems', u:'https://artofproblemsolving.com/community/c13_contests'},
-        ],
-        projects:['Write a formal proof journal: prove 20 theorems from Hammack in LaTeX', 'Build a simple propositional logic truth-table generator in Python'],
-      },
-    ],
-  },
-  // ─────────────────────────────────────────────────────────────
-  {
-    btn:'1 · Calculus', tier:'F',
-    name:'Calculus — Single & Multivariable',
-    desc:'The mathematics of change. Foundational for every ML algorithm involving gradient descent, loss functions, or rates of change. You will use calculus every day as a researcher.',
-    topics:[
-      {
-        n:3, name:'Single Variable Calculus',
-        why:'Precalculus gave you functions; calculus adds limits, derivatives, and integrals. Gradient descent is literally a derivative. Loss landscapes are integral calculus. Every training algorithm makes no mathematical sense without this — it is non-negotiable.',
-        pri:{t:'Calculus', a:'Gilbert Strang', note:'Free at MIT OCW. Conversational, intuitive, proof-aware. Use the book and video lectures together, chapter by chapter.', af:true},
-        sup:{t:'Calculus: Early Transcendentals', a:'James Stewart', note:'Comprehensive problem bank alongside Strang. Hundreds of exercises, thorough coverage of every technique.', af:false},
-        videos:[
-          {l:'MIT OCW 18.01 — Single Variable Calculus', u:'https://ocw.mit.edu/courses/18-01-single-variable-calculus-fall-2006/'},
-          {l:'3Blue1Brown — Essence of Calculus (YouTube)', u:'https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr'},
-          {l:'Professor Leonard — Full Calculus 1 (YouTube)', u:'https://www.youtube.com/playlist?list=PLF797E961509B4EB5'},
-        ],
-        docs:[
-          {l:'Paul\'s Online Math Notes — Calculus I & II', u:'https://tutorial.math.lamar.edu/Classes/CalcI/CalcI.aspx'},
-          {l:'MIT Strang Calculus — Free PDF (MIT OCW)', u:'https://ocw.mit.edu/resources/res-18-001-calculus-fall-2023/'},
-        ],
-        practice:[
-          {l:'Khan Academy — Calculus 1', u:'https://www.khanacademy.org/math/calculus-1'},
-          {l:'Brilliant.org — Calculus Fundamentals', u:'https://brilliant.org/courses/calculus/'},
-          {l:'MIT OCW 18.01 Problem Sets', u:'https://ocw.mit.edu/courses/18-01-single-variable-calculus-fall-2006/pages/assignments/'},
-        ],
-        projects:['Implement gradient descent from scratch (NumPy only): minimize a hand-specified univariate function', 'Numerical integration: implement Simpson\'s rule and compare to SciPy for 5 different integrals'],
-      },
-      {
-        n:4, name:'Multivariable Calculus & Vector Calculus',
-        why:'Single variable handles one input; deep learning operates in millions of dimensions. Gradients, Jacobians, Hessians, and the multivariate chain rule ARE backpropagation. This is not "more calculus" — it is the exact computational machinery of neural network training.',
-        pri:{t:'Calculus (Chapters 12–16)', a:'James Stewart', note:'Natural continuation — zero-friction transition. Vectors, partial derivatives, multiple integrals, and vector fields all covered thoroughly.', af:false},
-        sup:{t:'Div, Grad, Curl and All That', a:'H. M. Schey', note:'Only 160 pages. Exceptional geometric intuition for vector calculus that Stewart\'s size obscures. Read alongside Stewart Chapters 15–16.', af:false},
-        videos:[
-          {l:'MIT OCW 18.02 — Multivariable Calculus (Denis Auroux)', u:'https://ocw.mit.edu/courses/18-02-multivariable-calculus-fall-2007/'},
-          {l:'3Blue1Brown — Multivariable Calculus (YouTube)', u:'https://www.youtube.com/playlist?list=PLSQl0a2vh4HC5feHa6Rc5c0wbRTx56nF7'},
-          {l:'Khan Academy — Multivariable Calculus', u:'https://www.khanacademy.org/math/multivariable-calculus'},
-        ],
-        docs:[
-          {l:'Paul\'s Online Math Notes — Calculus III', u:'https://tutorial.math.lamar.edu/Classes/CalcIII/CalcIII.aspx'},
-        ],
-        practice:[
-          {l:'MIT OCW 18.02 Problem Sets', u:'https://ocw.mit.edu/courses/18-02-multivariable-calculus-fall-2007/pages/assignments/'},
-          {l:'Wolfram MathWorld — Multivariable Calculus', u:'https://mathworld.wolfram.com/topics/MultivariableCalculus.html'},
-        ],
-        projects:['Implement and visualise a 3D gradient field with matplotlib — compute gradient, divergence, and curl numerically', 'Build a Jacobian/Hessian auto-computer using NumPy finite differences and verify against autograd'],
-      },
-    ],
-  },
-  // ─────────────────────────────────────────────────────────────
-  {
-    btn:'2 · Core Structures', tier:'F',
-    name:'Linear Algebra & Discrete Mathematics',
-    desc:'The two structural pillars. Linear algebra is the language of data and computation. Discrete math is the language of logic, algorithms, and counting. Both are direct prerequisites for everything that follows.',
-    topics:[
-      {
-        n:5, name:'Introduction to Linear Algebra',
-        why:'Calculus is now in hand. Linear algebra is the language of data itself — every neural network is a sequence of matrix multiplications. PCA, SVD, eigendecomposition, and tensors all live here. The MIT lectures are legendary.',
-        pri:{t:'Introduction to Linear Algebra', a:'Gilbert Strang', note:'The definitive accessible introduction. Strang\'s MIT lectures are legendary — use the book and all 34 video lectures together.', af:false},
-        sup:{t:'Linear Algebra and Its Applications', a:'David C. Lay', note:'Application-focused with excellent problem sets. A different pedagogical angle that solidifies the same concepts from a practical direction.', af:false},
-        videos:[
-          {l:'MIT OCW 18.06 — Linear Algebra (Strang, all 34 lectures)', u:'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/'},
-          {l:'3Blue1Brown — Essence of Linear Algebra (YouTube)', u:'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab'},
-          {l:'Khan Academy — Linear Algebra', u:'https://www.khanacademy.org/math/linear-algebra'},
-        ],
-        docs:[
-          {l:'NumPy Linear Algebra Documentation', u:'https://numpy.org/doc/stable/reference/routines.linalg.html'},
-          {l:'SciPy Linear Algebra Reference', u:'https://docs.scipy.org/doc/scipy/reference/linalg.html'},
-        ],
-        practice:[
-          {l:'Brilliant.org — Linear Algebra', u:'https://brilliant.org/courses/linear-algebra/'},
-          {l:'MIT OCW 18.06 Problem Sets', u:'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/pages/assignments/'},
-        ],
-        projects:['Implement PCA from scratch using only NumPy (no sklearn); apply to MNIST digit compression', 'Build a PageRank implementation using the eigenvector method on a sample link graph'],
-      },
-      {
-        n:6, name:'Discrete Mathematics & Combinatorics',
-        why:'Proofs gave you the language; discrete math is where you speak it at scale — graph theory, counting, recurrences, logic, and algorithms. Combinatorics is directly required for probability. MIT\'s 6.042J alone is worth more than most semester courses.',
-        pri:{t:'Discrete Mathematics and Its Applications', a:'Kenneth H. Rosen', note:'The standard university reference. Thorough, well-organised, problem-rich. Covers everything needed before probability and algorithms.', af:false},
-        sup:{t:'Concrete Mathematics', a:'Graham, Knuth & Patashnik', note:'Hard but extraordinarily rich — especially for combinatorics and summations. Rewards multiple re-reads over years.', af:false},
-        videos:[
-          {l:'MIT OCW 6.042J — Mathematics for Computer Science (full course)', u:'https://www.youtube.com/playlist?list=PLB7540DEDD482705B'},
-          {l:'TrevTutor — Discrete Mathematics (YouTube)', u:'https://www.youtube.com/c/Trevtutor'},
-          {l:'Kimberly Brehm — Discrete Math (YouTube)', u:'https://www.youtube.com/@KimberlyBrehm'},
-        ],
-        docs:[
-          {l:'MIT OCW 6.042J — Full Course Notes (free PDF)', u:'https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/'},
-        ],
-        practice:[
-          {l:'Art of Problem Solving — Combinatorics problems', u:'https://artofproblemsolving.com/wiki/index.php/Combinatorics'},
-          {l:'Project Euler — Combinatorics problems', u:'https://projecteuler.net/archives'},
-        ],
-        projects:['Implement all classic sorting algorithms and analyse time complexity rigorously', 'Build a combinatorics problem generator that computes binomial coefficients, permutations, and Stirling numbers'],
-      },
-    ],
-  },
-  // ─────────────────────────────────────────────────────────────
-  {
-    btn:'3 · Abstract Math', tier:'I',
-    name:'Abstract Algebra (ML-Motivated)',
-    desc:'Where proof-writing deepens into structural mathematical thinking. Abstract algebra reveals the algebraic skeleton underlying numbers, polynomials, and — increasingly — transformer architectures and geometric deep learning. Number theory is included as a proof-writing lab; it can be treated as a lighter prerequisite warm-up.',
-    topics:[
-      {
-        n:7, name:'Introduction to Number Theory',
-        optional: true,
-        why:'After discrete math and proofs, number theory is the perfect proof-writing laboratory — elementary enough to be approachable, rich enough to demand real rigour. Introduces modular arithmetic and algebraic structures concretely, directly preparing you for abstract algebra. Can be treated lightly (2–3 weeks) as a warm-up; not a deep dependency.',
-        pri:{t:'Elementary Number Theory', a:'David Burton', note:'Gentle, proof-rich, well-paced. The standard introductory text. A smooth and rewarding read.', af:false},
-        sup:{t:'An Introduction to the Theory of Numbers', a:'Niven, Zuckerman & Montgomery', note:'More depth on algebraic structure of integers — useful context for understanding ring theory in abstract algebra.', af:false},
-        videos:[
-          {l:'MIT OCW 18.781 — Theory of Numbers', u:'https://ocw.mit.edu/courses/18-781-theory-of-numbers-spring-2012/'},
-          {l:'Mathologer — Number Theory (YouTube)', u:'https://www.youtube.com/@Mathologer'},
-        ],
-        docs:[
-          {l:'Art of Problem Solving — Number Theory wiki', u:'https://artofproblemsolving.com/wiki/index.php/Number_theory'},
-        ],
-        practice:[
-          {l:'Project Euler — Number theory problems (Problems 1–50)', u:'https://projecteuler.net/archives'},
-        ],
-        projects:['Implement RSA encryption from scratch using only Python\'s standard library (pure number theory)'],
-      },
-      {
-        n:8, name:'Abstract Algebra',
-        why:'Number theory introduced groups and rings concretely. Abstract algebra lifts these to full generality — groups, rings, fields, and homomorphisms. Groups underlie symmetry in neural architectures (equivariance). Fields formalise real and complex numbers. Sigma-algebras in measure theory will feel familiar after this.',
-        pri:{t:'Contemporary Abstract Algebra', a:'Joseph A. Gallian', note:'Exceptionally readable — written as a sustained conversation. The most accessible gateway to abstract algebra that exists. Does not sacrifice rigour.', af:false},
-        sup:{t:'Algebra', a:'Michael Artin', note:'More sophisticated, geometrically motivated. Read after Gallian for the deeper structural connections between algebra and geometry.', af:false},
-        videos:[
-          {l:'Harvard Math 122 — Algebra (Benedict Gross, YouTube)', u:'https://www.youtube.com/playlist?list=PLA58AC5CABC1321A3'},
-          {l:'Socratica — Abstract Algebra (YouTube, short episodes)', u:'https://www.youtube.com/playlist?list=PLi01XoE8jYoi3SgnnGorR_XOW3IcK-TP6'},
-          {l:'Benedict Gross — Algebra Lectures (Harvard Extension)', u:'https://www.extension.harvard.edu/open-learning-initiative/abstract-algebra'},
-        ],
-        docs:[
-          {l:'Visual Group Theory — Nathan Carter (interactive)', u:'http://www.groupexplorer.net/'},
-          {l:'Abstract Algebra: Theory and Applications — free textbook', u:'http://abstract.ups.edu/'},
-        ],
-        practice:[
-          {l:'Group Theory Problems — Math StackExchange curated list', u:'https://math.stackexchange.com/questions/tagged/group-theory'},
-        ],
-        projects:['Implement a group Cayley table generator and verifier for all groups of order ≤ 10', 'Write a Python class hierarchy for Groups, Rings, and Fields with arithmetic operations'],
-      },
-    ],
-  },
-  // ─────────────────────────────────────────────────────────────
-  {
-    btn:'4 · Probability', tier:'I',
-    name:'Probability & Mathematical Statistics',
-    desc:'The mathematical language of uncertainty. Foundational for every ML model that outputs a distribution, confidence score, or probabilistic prediction. You will return to this material constantly.',
-    topics:[
-      {
-        n:9, name:'Introduction to Probability Theory',
-        why:'Calculus and combinatorics both converge here. Probability is calculus applied to uncertainty — the mathematical heart of ML inference. You cannot understand loss functions, likelihoods, or Bayesian thinking without it. Blitzstein\'s book is the best self-study probability text written.',
-        pri:{t:'Introduction to Probability', a:'Blitzstein & Hwang', note:'Free at probabilitybook.net. Rigorous yet story-driven — every abstraction is earned through a compelling problem. Harvard Stat 110 lectures complement it perfectly.', af:true},
-        sup:{t:'A First Course in Probability', a:'Sheldon Ross', note:'Excellent problem sets and application examples. Use as a drill companion alongside Blitzstein for extra practice.', af:false},
-        videos:[
-          {l:'Harvard Stat 110 — Probability (Blitzstein, YouTube + edX)', u:'https://www.youtube.com/playlist?list=PL2SOU6wwxB0uwwH80KTQ6ht66KWxbzTIo'},
-          {l:'MIT OCW 6.041 — Probabilistic Systems Analysis', u:'https://ocw.mit.edu/courses/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/'},
-          {l:'StatQuest with Josh Starmer — Probability (YouTube)', u:'https://www.youtube.com/@statquest'},
-        ],
-        docs:[
-          {l:'probabilitybook.net — Free PDF + Exercises', u:'https://probabilitybook.net'},
-          {l:'NIST/SEMATECH e-Handbook of Statistical Methods', u:'https://www.itl.nist.gov/div898/handbook/'},
-        ],
-        practice:[
-          {l:'Brilliant.org — Probability', u:'https://brilliant.org/courses/probability/'},
-          {l:'Stat 110 Practice Problems (Harvard)', u:'https://projects.iq.harvard.edu/stat110/strategic-practice-problems'},
-        ],
-        projects:['Build a Monte Carlo simulator to estimate π, and verify the Law of Large Numbers empirically', 'Implement Bayesian A/B testing from scratch — beta-binomial model, posterior update, decision rule'],
-      },
-      {
-        n:10, name:'Mathematical Statistics',
-        why:'Probability is the theory of random phenomena; statistics is how you use data to reason about it. Estimation, hypothesis testing, confidence intervals, and p-values are the foundational tools of every data science workflow. Wasserman\'s book covers a full two-semester sequence in one compact volume.',
-        pri:{t:'All of Statistics', a:'Larry Wasserman', note:'Free PDF at CMU Statistics. Concise, rigorous, and modern. Covers more ground than most two-semester graduate statistics sequences.', af:true},
-        sup:{t:'Statistical Inference', a:'Casella & Berger', note:'The classical deep treatment. Read after Wasserman for complete theoretical depth — every theorem stated precisely and proved in full.', af:false},
-        videos:[
-          {l:'CMU 36-705 — Intermediate Statistics (Wasserman, lecture notes)', u:'https://www.stat.cmu.edu/~larry/=stat705/'},
-          {l:'Stanford STATS 200 — Statistical Inference (YouTube)', u:'https://www.youtube.com/playlist?list=PLoROMvodv4rNyD4FkSzuRTgfxHYB4c3Oe'},
-          {l:'StatQuest — Statistics Fundamentals (YouTube)', u:'https://www.youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9'},
-        ],
-        docs:[
-          {l:'All of Statistics — Free PDF (CMU)', u:'https://www.stat.cmu.edu/~larry/all-of-statistics/'},
-        ],
-        practice:[
-          {l:'MIT OCW 18.650 — Statistics for Applications (problem sets)', u:'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/'},
-          {l:'Kaggle — Statistics exercises', u:'https://www.kaggle.com/learn/intro-to-machine-learning'},
-        ],
-        projects:['Implement MLE and MAP estimators for Gaussian, Bernoulli, and Poisson from scratch', 'Run a full hypothesis-testing pipeline on a real dataset (t-test, chi-squared, bootstrap CI)'],
-      },
-    ],
-  },
-  // ─────────────────────────────────────────────────────────────
-  {
-    btn:'5 · Analysis & Dynamics', tier:'A',
-    name:'Real Analysis, ODEs & Advanced Linear Algebra',
-    desc:'The rigorous backbone of all prior intuition. Real analysis proves that calculus works. ODEs power modern generative models. Advanced linear algebra is the abstract form the subject takes in research papers.',
-    topics:[
-      {
-        n:11, name:'Real Analysis',
-        why:'You have used limits, derivatives, and integrals intuitively. Analysis proves WHY they work — epsilon-delta definitions, rigorous convergence, and the foundations of measure theory. The direct prerequisite for rigorous probability, convex optimisation, and functional analysis. Abbott makes this transition as smooth as it can be.',
-        pri:{t:'Understanding Analysis', a:'Stephen Abbott', note:'The gentlest rigorous entry into real analysis in existence — written specifically for students who already know calculus intuitively. Exactly the right book at this moment.', af:false},
-        sup:{t:'Principles of Mathematical Analysis', a:'Walter Rudin', note:'Baby Rudin — the canonical standard at every top university. Read after Abbott; Abbott is the key that makes Rudin readable.', af:false},
-        videos:[
-          {l:'Francis Su — Real Analysis Lectures (YouTube)', u:'https://www.youtube.com/playlist?list=PL0E754696F72137EC'},
-          {l:'Harvey Mudd College — Real Analysis (YouTube)', u:'https://www.youtube.com/playlist?list=PL04BA7A9EB907EDAF'},
-          {l:'MIT OCW 18.100B — Analysis I', u:'https://ocw.mit.edu/courses/18-100b-analysis-i-fall-2010/'},
-        ],
-        docs:[
-          {l:'MIT OCW 18.100B — Lecture Notes (free PDF)', u:'https://ocw.mit.edu/courses/18-100b-analysis-i-fall-2010/pages/lecture-notes/'},
-        ],
-        practice:[
-          {l:'Abbott — Selected Exercise Solutions (community wiki)', u:'https://math.stackexchange.com/questions/tagged/real-analysis+solution-verification'},
-        ],
-        projects:['Prove and implement: Intermediate Value Theorem, Mean Value Theorem numerically — generate counterexamples for when conditions fail', 'Implement epsilon-delta verifier: given a function and a limit claim, verify or refute numerically'],
-      },
-      {
-        n:12, name:'Ordinary Differential Equations & Dynamical Systems',
-        why:'Multivariable calculus is the direct prerequisite. ODEs describe how systems evolve over time — they are behind Neural ODEs, diffusion models, normalising flows, and physics-informed neural networks. Strogatz makes this the most enjoyable topic in the entire roadmap.',
-        pri:{t:'Nonlinear Dynamics and Chaos', a:'Steven H. Strogatz', note:'Reads like a novel. The most enjoyable mathematical text ever written. Builds genuine physical intuition for dynamical systems.', af:false},
-        sup:{t:'Ordinary Differential Equations', a:'Tenenbaum & Pollard', note:'Dover edition — inexpensive, rigorous, encyclopedic technique reference. Use for formal solution methods alongside Strogatz.', af:false},
-        videos:[
-          {l:'Strogatz\'s Cornell Lectures (YouTube — pair with his book)', u:'https://www.youtube.com/playlist?list=PLbN57C5Zdl6j_qJA-pARJnKsmROzPnO9V'},
-          {l:'MIT OCW 18.03 — Differential Equations', u:'https://ocw.mit.edu/courses/18-03-differential-equations-spring-2010/'},
-          {l:'3Blue1Brown — Differential Equations Series (YouTube)', u:'https://www.youtube.com/playlist?list=PLZHQObOWTQDNPOjrT6KVlfJuKtYTftqH6'},
-        ],
-        docs:[
-          {l:'SciPy ODE Solvers Reference (scipy.integrate)', u:'https://docs.scipy.org/doc/scipy/reference/integrate.html'},
-        ],
-        practice:[
-          {l:'MIT OCW 18.03 Problem Sets', u:'https://ocw.mit.edu/courses/18-03-differential-equations-spring-2010/pages/assignments/'},
-        ],
-        projects:['Simulate the Lorenz attractor in Python — visualise chaos and sensitivity to initial conditions', 'Implement a Neural ODE (torchdiffeq) and train it to model a simple physical system (pendulum)'],
-      },
-      {
-        n:13, name:'Advanced Linear Algebra',
-        why:'Intro linear algebra gave geometric intuition. With real analysis in hand, you can treat it abstractly — vector spaces over arbitrary fields, linear operators, spectral theory, and SVD at proof level. This is how linear algebra appears in every ML research paper.',
-        pri:{t:'Linear Algebra Done Right', a:'Sheldon Axler', note:'Free at axler.net. Proof-based, determinant-free approach. The gold standard for a rigorous second course.', af:true},
-        sup:{t:'Linear Algebra Done Wrong', a:'Sergei Treil', note:'Free on the author\'s website at Brown University. Complementary perspective with harder exercises. Both books together are complete.', af:true},
-        videos:[
-          {l:'Axler\'s own lecture videos (YouTube)', u:'https://www.youtube.com/playlist?list=PLGAnmvB9m7zOBVCZBUUmSinFV0wEir2Vw'},
-          {l:'MIT OCW 18.06 revisited (with proof-level eyes)', u:'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/'},
-        ],
-        docs:[
-          {l:'axler.net — Free PDF + Errata', u:'https://linear.axler.net/'},
-          {l:'Treil — Linear Algebra Done Wrong (Brown, free PDF)', u:'https://www.math.brown.edu/streil/papers/LADW/LADW.html'},
-        ],
-        practice:[
-          {l:'Axler supplementary exercises (axler.net)', u:'https://linear.axler.net/'},
-        ],
-        projects:['Implement full SVD from scratch using the QR algorithm (power iteration) — no NumPy SVD', 'Prove and verify the spectral theorem computationally for 10 random symmetric matrices'],
-      },
-    ],
-  },
-  // ─────────────────────────────────────────────────────────────
-  {
-    btn:'6 · Measure Theory', tier:'A',
-    name:'Measure-Theoretic Probability & Stochastic Processes',
-    desc:'The rigorous mathematical foundation of modern probability. Required to read ML theory papers, RL research, and graduate statistics literature without encountering hand-waving.',
-    topics:[
-      {
-        n:14, name:'Measure-Theoretic Probability',
-        why:'Real analysis built the machinery — sigma-algebras, Lebesgue integration, and convergence theorems. This applies all of it to probability, making every probabilistic argument completely rigorous. Without this, half of every ML theory paper is inaccessible. Rosenthal\'s book is the gentlest possible entry.',
-        pri:{t:'A First Look at Rigorous Probability Theory', a:'Jeffrey S. Rosenthal', note:'Free at probability.ca. The gentlest measure-theoretic probability text in existence. Short, clear, complete.', af:true},
-        sup:{t:'Probability and Measure', a:'Patrick Billingsley', note:'The classical encyclopedic reference. Harder and more complete. Use as a reference after Rosenthal is finished.', af:false},
-        videos:[
-          {l:'MIT OCW 18.175 — Probability Theory', u:'https://ocw.mit.edu/courses/18-175-theory-of-probability-spring-2014/'},
-          {l:'Mathematical Monk — Probability Primer (YouTube)', u:'https://www.youtube.com/playlist?list=PL17567A1A3F5DB5E4'},
-        ],
-        docs:[
-          {l:'Rick Durrett — Probability: Theory and Examples (free PDF)', u:'https://services.math.duke.edu/~rtd/PTE/PTE5_011119.pdf'},
-          {l:'Rosenthal — Free PDF (probability.ca)', u:'https://probability.ca/jeff/grprobbook.html'},
-        ],
-        practice:[
-          {l:'MIT OCW 18.175 Problem Sets', u:'https://ocw.mit.edu/courses/18-175-theory-of-probability-spring-2014/pages/assignments/'},
-        ],
-        projects:['Simulate and verify the Law of Large Numbers and Central Limit Theorem using Lebesgue-style thinking in Python', 'Build a measure-theoretic probability simulator: define sigma-algebras explicitly and compute probabilities'],
-      },
-      {
-        n:15, name:'Stochastic Processes & Markov Chains',
-        why:'Stochastic processes underlie reinforcement learning, MCMC sampling, diffusion models, and the theory of language model inference. Norris\'s Cambridge notes are a gem — rigorous, short, and free.',
-        pri:{t:'Introduction to Probability Models', a:'Sheldon Ross', note:'Accessible and application-rich. The bridge from introductory probability to stochastic processes.', af:false},
-        sup:{t:'Markov Chains', a:'J. R. Norris', note:'Free at statslab.cam.ac.uk. Cambridge lecture notes — rigorous, concise, direct. The best short treatment of Markov chain theory available.', af:true},
-        videos:[
-          {l:'MIT OCW 6.262 — Discrete Stochastic Processes', u:'https://ocw.mit.edu/courses/6-262-discrete-stochastic-processes-spring-2011/'},
-          {l:'MIT 18.445 — Introduction to Stochastic Processes', u:'https://math.mit.edu/~sheffield/2016175.html'},
-        ],
-        docs:[
-          {l:'Norris Markov Chains — Free PDF (statslab.cam.ac.uk)', u:'https://www.statslab.cam.ac.uk/~james/Markov/'},
-        ],
-        practice:[
-          {l:'MIT OCW 6.262 Problem Sets', u:'https://ocw.mit.edu/courses/6-262-discrete-stochastic-processes-spring-2011/pages/assignments/'},
-        ],
-        projects:['Implement a Markov Chain text generator (bigram/trigram model) from scratch', 'Simulate a random walk and MCMC (Metropolis-Hastings) to sample from a target distribution'],
-      },
-    ],
-  },
-  // ─────────────────────────────────────────────────────────────
-  {
-    btn:'7 · Optimization', tier:'A',
-    name:'Convex Optimization, Numerical Methods & Information Theory',
-    desc:'The three mathematical engines of deep learning — how models are trained, how computations are done on machines, and how information is measured. Together they explain WHY every training algorithm works.',
-    topics:[
-      {
-        n:16, name:'Convex Optimization',
-        why:'Real analysis + multivariable calculus + linear algebra all converge here. Gradient descent, Adam, SGD, and learning rate schedules are all special cases of optimisation theory. Boyd\'s book answers the deep "why" behind every training algorithm that has ever existed.',
-        pri:{t:'Convex Optimization', a:'Boyd & Vandenberghe', note:'Free at stanford.edu/~boyd/cvxbook. THE definitive reference — used at every major research university. Clear, complete, and rigorous.', af:true},
-        sup:{t:'Numerical Optimization', a:'Nocedal & Wright', note:'Extends beyond convex settings — covers quasi-Newton methods, line search, and trust-region algorithms that appear in modern DL optimisers.', af:false},
-        videos:[
-          {l:'Stanford EE364a — Convex Optimization (Boyd, full course YouTube)', u:'https://www.youtube.com/playlist?list=PL3940DD956CDF0622'},
-          {l:'CMU 10-725 — Convex Optimization (Tibshirani, notes free)', u:'https://www.cs.cmu.edu/~pradeepr/convexopt/'},
-        ],
-        docs:[
-          {l:'Boyd & Vandenberghe — Free PDF (stanford.edu)', u:'https://web.stanford.edu/~boyd/cvxbook/'},
-          {l:'CVXPY Documentation (Python convex optimisation)', u:'https://www.cvxpy.org/'},
-        ],
-        practice:[
-          {l:'Boyd\'s MOOC on edX — Exercises', u:'https://www.edx.org/learn/engineering/stanford-university-convex-optimization'},
-          {l:'CVXPY Examples Gallery', u:'https://www.cvxpy.org/examples/index.html'},
-        ],
-        projects:['Implement gradient descent, SGD, Adam, and RMSProp from scratch; compare convergence on a quadratic bowl', 'Formulate and solve a portfolio optimisation problem using CVXPY'],
-      },
-      {
-        n:17, name:'Numerical Methods & Numerical Linear Algebra',
-        why:'Advanced linear algebra proved theorems about matrices; numerical methods asks how to compute those results stably on a machine. Floating-point arithmetic, matrix factorisation stability, iterative solvers, LU/QR/Cholesky decompositions, and conditioning are critical for understanding GPU computation and numerical precision in deep learning.',
-        pri:{t:'Numerical Linear Algebra', a:'Trefethen & Bau', note:'The clearest exposition of computational linear algebra available. Used at MIT, Oxford, and most top programmes worldwide. Beautifully written.', af:false},
-        sup:{t:'Numerical Methods for Scientists and Engineers', a:'R. W. Hamming', note:'Covers the broader numerical methods landscape — root finding, interpolation, numerical integration, ODEs. Complements Trefethen\'s focus on linear algebra.', af:false},
-        videos:[
-          {l:'MIT OCW 18.335 — Numerical Methods', u:'https://ocw.mit.edu/courses/18-335j-introduction-to-numerical-methods-spring-2019/'},
-          {l:'fast.ai — Computational Linear Algebra (Rachel Thomas, free)', u:'https://github.com/fastai/numerical-linear-algebra'},
-          {l:'Gilbert Strang — Linear Algebra and Learning from Data (MIT)', u:'https://ocw.mit.edu/courses/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/'},
-        ],
-        docs:[
-          {l:'NumPy — Linear Algebra routines', u:'https://numpy.org/doc/stable/reference/routines.linalg.html'},
-          {l:'SciPy — Sparse linear algebra (scipy.sparse.linalg)', u:'https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html'},
-          {l:'LAPACK Users\' Guide', u:'https://www.netlib.org/lapack/lug/'},
-        ],
-        practice:[
-          {l:'fast.ai Computational LA — Jupyter notebooks', u:'https://github.com/fastai/numerical-linear-algebra'},
-        ],
-        projects:['Implement LU decomposition with partial pivoting from scratch — solve a linear system and measure numerical error', 'Build a conjugate gradient solver for sparse systems; benchmark against SciPy'],
-      },
-      {
-        n:18, name:'Information Theory',
-        why:'Probability and calculus are the prerequisites. Entropy, KL divergence, mutual information, and cross-entropy loss are the information-theoretic objects behind every single loss function in deep learning. MacKay\'s book is extraordinary — it unifies information theory, Bayesian inference, and neural networks in one framework.',
-        pri:{t:'Information Theory, Inference & Learning Algorithms', a:'David MacKay', note:'Free at inference.org.uk. A masterpiece — three subjects unified in a way no other book achieves. MacKay was a Cambridge professor and genuine pioneer.', af:true},
-        sup:{t:'Elements of Information Theory', a:'Cover & Thomas', note:'The classical rigorous treatment. More mathematical depth than MacKay — use for theorems and formal proofs after MacKay builds intuition.', af:false},
-        videos:[
-          {l:'MacKay\'s Cambridge Lectures (YouTube — chapter by chapter)', u:'https://www.youtube.com/playlist?list=PLruBu5BI5n4aFpG32iMbdWoRCLt5lNo'},
-          {l:'MIT 6.441 — Information Theory (OCW)', u:'https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/'},
-        ],
-        docs:[
-          {l:'inference.org.uk — Free PDF + Exercises', u:'http://www.inference.org.uk/mackay/itila/'},
-        ],
-        practice:[
-          {l:'MIT 6.441 Problem Sets', u:'https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/pages/assignments/'},
-        ],
-        projects:['Implement entropy, cross-entropy, KL divergence, and mutual information from scratch in NumPy — validate against SciPy', 'Build a Huffman coding compressor and measure compression ratio vs. entropy for real text files'],
-      },
-    ],
-  },
-  // ─────────────────────────────────────────────────────────────
-  {
-    btn:'8 · Advanced Stats', tier:'R',
-    name:'Bayesian Statistics, MCMC & Advanced Inference',
-    desc:'Where statistics becomes a complete probabilistic reasoning framework. Required for probabilistic ML, uncertainty quantification, variational inference, and research-grade statistical methodology.',
-    topics:[
-      {
-        n:19, name:'Bayesian Statistics & Probabilistic ML',
-        why:'Measure-theoretic probability + information theory + mathematical statistics all converge here. Bayesian reasoning is the formal framework for updating beliefs with data — it unifies every probabilistic ML model and is the mathematical language of modern generative AI.',
-        pri:{t:'Bayesian Data Analysis (BDA3)', a:'Gelman, Carlin, Stern & Rubin', note:'Free at stat.columbia.edu/~gelman/book. The definitive Bayesian reference — complete, rigorous, and surprisingly readable. Every ML researcher should own this.', af:true},
-        sup:{t:'Pattern Recognition & Machine Learning', a:'Christopher Bishop', note:'Free from Microsoft Research. The probabilistic ML bible — bridges Bayesian statistics and deep learning in one unified framework.', af:true},
-        videos:[
-          {l:'Richard McElreath — Statistical Rethinking (YouTube)', u:'https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVHUs'},
-          {l:'Aki Vehtari\'s BDA Course — Aalto University (YouTube)', u:'https://www.youtube.com/playlist?list=PLBqnAso5Dy7O0IVoVn2b-WtetXQk5CDk6'},
-        ],
-        docs:[
-          {l:'BDA3 — Free PDF (Gelman, stat.columbia.edu)', u:'http://www.stat.columbia.edu/~gelman/book/'},
-          {l:'PRML (Bishop) — Free PDF (Microsoft Research)', u:'https://www.microsoft.com/en-us/research/people/cmbishop/prml-book/'},
-          {l:'PyMC Documentation — Probabilistic Programming', u:'https://www.pymc.io/welcome.html'},
-          {l:'Stan Documentation', u:'https://mc-stan.org/docs/'},
-        ],
-        practice:[
-          {l:'PyMC Examples Gallery', u:'https://www.pymc.io/projects/examples/en/latest/'},
-          {l:'Statistical Rethinking Code (Python/PyMC)', u:'https://github.com/pymc-devs/pymc-resources/tree/main/Rethinking_2'},
-        ],
-        projects:['Implement Bayesian linear regression with conjugate priors — compare posterior to frequentist OLS', 'Build a Bayesian A/B test dashboard with PyMC: posterior predictive, ROPE, HDI'],
-      },
-      {
-        n:20, name:'MCMC, Variational Inference & Advanced Inference',
-        why:'Bayesian computation requires you to actually sample from or approximate posterior distributions. MCMC (Metropolis-Hastings, HMC, NUTS) and Variational Inference (ELBO, mean-field VI, normalising flows) are the two pillars that make Bayesian ML computationally tractable — and directly underlie modern diffusion models and VAEs.',
-        pri:{t:'Markov Chain Monte Carlo in Practice', a:'Gilks, Richardson & Spiegelhalter', note:'The applied MCMC reference. Practical, readable, and connects theory to implementation directly.', af:false},
-        sup:{t:'Pattern Recognition & Machine Learning (Chapter 10)', a:'Christopher Bishop', note:'The canonical reference for variational inference and the EM algorithm. The ELBO derivation in Chapter 10 is essential reading.', af:true},
-        videos:[
-          {l:'Tamara Broderick — MCMC & Variational Inference (MIT 6.882, YouTube)', u:'https://www.youtube.com/playlist?list=PLyGKBDfnk-iD5dK8N7UBwhFGd39gDMKTh'},
-          {l:'Shakir Mohamed — Variational Inference Tutorial (YouTube)', u:'https://www.youtube.com/watch?v=Qr6tg9oLGTA'},
-          {l:'Probabilistic ML — Philipp Hennig (Tübingen, YouTube)', u:'https://www.youtube.com/playlist?list=PL05umP7R6ij2YE8rZv57H-I6oqtAbs7FP'},
-        ],
-        docs:[
-          {l:'NumPyro Documentation — MCMC/VI in JAX', u:'https://num.pyro.ai/'},
-          {l:'Pyro Documentation — Variational Inference', u:'https://pyro.ai/examples/index.html'},
-        ],
-        practice:[
-          {l:'NumPyro MCMC Examples', u:'https://num.pyro.ai/en/latest/examples/bayesian_regression.html'},
-        ],
-        projects:['Implement Metropolis-Hastings and HMC from scratch; sample from a 2D banana-shaped posterior', 'Implement a Variational Autoencoder (VAE) and derive the ELBO from first principles in your code comments'],
-      },
-      {
-        n:21, name:'Advanced Mathematical Statistics',
-        why:'Wasserman\'s All of Statistics established the toolkit. This deepens into asymptotic theory, decision theory, minimax optimality, and nonparametric methods — the level at which statistics research is conducted and papers are refereed.',
-        pri:{t:'Statistical Inference', a:'Casella & Berger', note:'The classical deep treatment — decision theory, UMP tests, complete sufficiency, and asymptotic theory. Every theorem stated precisely and proved in full.', af:false},
-        sup:{t:'All of Nonparametric Statistics', a:'Larry Wasserman', note:'Free PDF at CMU. Completes the statistical picture beyond parametric assumptions — kernel density estimation, bootstrap, and permutation tests.', af:true},
-        videos:[
-          {l:'CMU 36-705 — Intermediate Statistics (Wasserman lecture notes)', u:'https://www.stat.cmu.edu/~larry/=stat705/'},
-          {l:'Martin Wainwright — High-Dimensional Statistics Notes (Berkeley, free)', u:'https://people.eecs.berkeley.edu/~wainwrig/'},
-        ],
-        docs:[
-          {l:'All of Nonparametric Statistics — Free PDF (CMU)', u:'https://www.stat.cmu.edu/~larry/all-of-nonpar/'},
-        ],
-        practice:[
-          {l:'CMU 36-705 Homework Assignments', u:'https://www.stat.cmu.edu/~larry/=stat705/'},
-        ],
-        projects:['Implement bootstrap confidence intervals and permutation tests for three different test statistics', 'Compare kernel density estimation bandwidths (Silverman\'s rule vs. cross-validation) on real data'],
-      },
-    ],
-  },
-  // ─────────────────────────────────────────────────────────────
-  {
-    btn:'9 · Functional Analysis', tier:'R',
-    name:'Functional Analysis & Differential Geometry',
-    desc:'Two topics absent from most DS roadmaps but required for modern ML theory. Functional analysis underpins kernel methods and infinite-dimensional optimisation. Differential geometry underpins manifold learning, geometric deep learning, and transformers on curved spaces.',
-    topics:[
-      {
-        n:22, name:'Functional Analysis',
-        why:'Measure theory and advanced linear algebra are both prerequisites. Functional analysis extends linear algebra to infinite-dimensional spaces — Hilbert spaces, Banach spaces, bounded operators. This is the foundation of kernel methods (RKHS), infinite-dimensional Bayesian inference (Gaussian processes), and the theoretical analysis of neural networks in function space.',
-        pri:{t:'Introductory Functional Analysis with Applications', a:'Erwin Kreyszig', note:'The most accessible introduction to functional analysis in existence. Kreyszig deliberately sacrifices no rigour while making every concept approachable. Widely available PDF.', af:false},
-        sup:{t:'A Course in Functional Analysis', a:'John B. Conway', note:'The standard graduate reference. More concise and abstract than Kreyszig. Use for operator theory depth and spectral theory of unbounded operators.', af:false},
-        videos:[
-          {l:'MIT OCW 18.102 — Introduction to Functional Analysis', u:'https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/'},
-          {l:'Evan Chen — Functional Analysis (YouTube, undergraduate level)', u:'https://www.youtube.com/playlist?list=PLi6h8GM1FA6yHh4gFGd0Jzf3VAnfUU5vJ'},
-          {l:'ICTP — Functional Analysis Lectures (YouTube)', u:'https://www.youtube.com/playlist?list=PLLq_gUfXAnkkvL_UoCGivS0wOYhwCtczI'},
-        ],
-        docs:[
-          {l:'MIT OCW 18.102 — Lecture Notes (free PDF)', u:'https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/pages/lecture-notes/'},
-          {l:'GPyTorch Documentation — Gaussian Processes (RKHS connection)', u:'https://gpytorch.ai/'},
-        ],
-        practice:[
-          {l:'MIT OCW 18.102 Problem Sets', u:'https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/pages/problem-sets/'},
-        ],
-        projects:['Implement a Gaussian Process regression from scratch using the RKHS framework — kernels, covariance functions, posterior', 'Implement kernel PCA and compare to standard PCA on a nonlinear 2D dataset (circles, moons)'],
-      },
-      {
-        n:23, name:'Differential Geometry & Riemannian Manifolds',
-        why:'Multivariable calculus and advanced linear algebra are the prerequisites. Differential geometry is the mathematics of curved spaces — manifolds, tangent spaces, geodesics, and Riemannian metrics. It directly underlies manifold learning (t-SNE, UMAP theory), geometric deep learning (equivariant networks, group convolutions), and the information geometry of parameter spaces in ML.',
-        pri:{t:'An Introduction to Differentiable Manifolds and Riemannian Geometry', a:'William M. Boothby', note:'The most accessible rigorous introduction to differential geometry for someone coming from calculus and linear algebra. The standard first text.', af:false},
-        sup:{t:'Geometric Deep Learning: Grids, Groups, Graphs, Geodesics, and Gauges', a:'Bronstein, Bruna, Cohen & Veličković', note:'Free at geometricdeeplearning.com. The definitive treatment of how differential geometry, group theory, and deep learning unify. Landmark paper/proto-book.', af:true},
-        videos:[
-          {l:'Frederic Schuller — Geometric Anatomy of Theoretical Physics (YouTube)', u:'https://www.youtube.com/playlist?list=PLPH7f_7ZlzxTi6kS4vCmv4ZKm9u8g5yic'},
-          {l:'Michael Bronstein — Geometric Deep Learning Lectures (YouTube)', u:'https://www.youtube.com/playlist?list=PLn2-dEmQeTfSLXW8yUT7GEfFE7Gv_QAMW'},
-          {l:'ICTP — Differential Geometry (YouTube)', u:'https://www.youtube.com/playlist?list=PLLq_gUfXAnkkdRgGg5JZTtC5S0Q2u1j-F'},
-        ],
-        docs:[
-          {l:'Geometric Deep Learning — Free PDF (geometricdeeplearning.com)', u:'https://geometricdeeplearning.com/'},
-          {l:'PyG (PyTorch Geometric) Documentation', u:'https://pytorch-geometric.readthedocs.io/'},
-        ],
-        practice:[
-          {l:'PyTorch Geometric — Tutorials', u:'https://pytorch-geometric.readthedocs.io/en/latest/get_started/colabs.html'},
-        ],
-        projects:['Implement t-SNE from scratch and analyse its connection to manifold geometry', 'Build an equivariant GNN for molecular property prediction using PyTorch Geometric'],
-      },
-    ],
-  },
-  // ─────────────────────────────────────────────────────────────
-  {
-    btn:'10 · Frontier', tier:'R',
-    name:'Applied Summit — ML Math, Complexity, Time Series, Graphs & Deep Learning',
-    desc:'Everything crystallises. Every prior topic now applies directly to modern ML and DS research. This is what all the prior work was building towards. Includes new topics on Computational Complexity, Game Theory, and Graph Neural Networks.',
-    topics:[
-      {
-        n:24, name:'Computational Complexity Theory',
-        why:'Discrete math and proof-writing are the prerequisites. Complexity theory formalises what is and is not computationally tractable — P, NP, NP-completeness, approximation algorithms, and reductions. This is directly relevant to algorithm design for ML (why certain inference problems are intractable, why approximation is necessary, and how to reason about computational cost rigorously).',
-        pri:{t:'Introduction to the Theory of Computation', a:'Michael Sipser', note:'The most readable introduction to computation and complexity theory ever written. Clear, precise, full of beautiful proofs. The universal first book in this area.', af:false},
-        sup:{t:'Computational Complexity: A Modern Approach', a:'Arora & Barak', note:'Free draft at theory.cs.princeton.edu. The definitive graduate reference. Read after Sipser for research-level depth.', af:true},
-        videos:[
-          {l:'MIT OCW 18.404 — Theory of Computation (Sipser, YouTube)', u:'https://www.youtube.com/playlist?list=PLUl4u3cNGP60_JNv2MmK3wkOt9syvfQWY'},
-          {l:'Ryan O\'Donnell — Undergrad Complexity Theory (CMU, YouTube)', u:'https://www.youtube.com/playlist?list=PLm3J0oaFux3YL5vLXpzOyJiLtqLp6dCW2'},
-        ],
-        docs:[
-          {l:'Arora & Barak — Free draft PDF (theory.cs.princeton.edu)', u:'https://theory.cs.princeton.edu/complexity/'},
-          {l:'Complexity Zoo — Complexity classes reference', u:'https://complexityzoo.net/Complexity_Zoo'},
-        ],
-        practice:[
-          {l:'MIT OCW 18.404 — Problem Sets', u:'https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/pages/assignments/'},
-        ],
-        projects:['Implement and prove the Cook-Levin theorem reduction from 3SAT to a concrete NP problem', 'Analyse the computational complexity of common ML inference algorithms (exact vs. approximate)'],
-      },
-      {
-        n:25, name:'Game Theory & Multi-Agent Mathematics',
-        why:'Probability, optimisation, and linear algebra are the prerequisites. Game theory is the mathematical foundation of multi-agent RL, mechanism design, GAN training dynamics, and auction/pricing theory. Nash equilibria, minimax theorems, and cooperative game theory appear constantly in modern ML research.',
-        pri:{t:'Game Theory', a:'Drew Fudenberg & Jean Tirole', note:'The rigorous graduate reference. Covers Nash equilibria, extensive form games, repeated games, and mechanism design in full mathematical detail.', af:false},
-        sup:{t:'Algorithmic Game Theory', a:'Nisan, Roughgarden, Tardos & Vazirani', note:'Free at Cambridge University Press. Bridges pure game theory and computational perspectives — directly relevant to mechanism design and ML.', af:true},
-        videos:[
-          {l:'Yale ECON 159 — Game Theory (Ben Polak, YouTube)', u:'https://www.youtube.com/playlist?list=PL6EF60E1027E1A10B'},
-          {l:'Tim Roughgarden — Algorithmic Game Theory (Stanford, YouTube)', u:'https://www.youtube.com/playlist?list=PLEGCF-WLh2RJh2yDxlJJjnKswWdoO8gAc'},
-        ],
-        docs:[
-          {l:'Algorithmic Game Theory — Free PDF (Cambridge)', u:'https://www.cs.cmu.edu/~sandholm/cs15-892F13/algorithmic-game-theory.pdf'},
-        ],
-        practice:[
-          {l:'Nashpy — Python library for computing Nash equilibria', u:'https://nashpy.readthedocs.io/'},
-        ],
-        projects:['Implement fictitious play and support enumeration to find Nash equilibria in 2-player zero-sum games', 'Train a GAN and analyse training instability through the lens of the minimax theorem'],
-      },
-      {
-        n:26, name:'Mathematics for Machine Learning & Matrix Calculus',
-        why:'Read this first in the final phase — it is the explicit synthesis connecting every prior topic (linear algebra, calculus, probability, optimisation) to ML formulations. After 25 topics of rigour, this book names the connections you already sense but haven\'t yet seen stated explicitly in one place.',
-        pri:{t:'Mathematics for Machine Learning', a:'Deisenroth, Faisal & Ong', note:'Free at mml-book.github.io. The only book that explicitly unifies linear algebra, calculus, probability, and optimisation for ML.', af:true},
-        sup:{t:'The Matrix Calculus You Need for Deep Learning', a:'Parr & Howard', note:'Free at arxiv.org/abs/1802.01528. Only 33 pages. Precise and complete derivation of the calculus behind backpropagation — fills a gap no textbook fills.', af:true},
-        videos:[
-          {l:'Imperial College London — MML Lectures (YouTube)', u:'https://www.youtube.com/playlist?list=PLmkn7IBuAnVcNMjRJMZ3wuJrpCmAoV6pf'},
-          {l:'fast.ai Part 2 — From Deep Learning to Foundations', u:'https://course.fast.ai/'},
-        ],
-        docs:[
-          {l:'mml-book.github.io — Free interactive textbook', u:'https://mml-book.github.io/'},
-          {l:'The Matrix Calculus You Need — arXiv PDF', u:'https://arxiv.org/abs/1802.01528'},
-        ],
-        practice:[
-          {l:'MML Book — Exercises (GitHub)', u:'https://github.com/mml-book/mml-book.github.io/tree/master/exercises'},
-        ],
-        projects:['Implement full backpropagation from scratch using only the matrix calculus rules — no autograd frameworks', 'Derive and verify gradients of softmax, cross-entropy, and layer-norm manually'],
-      },
-      {
-        n:27, name:'Time Series Analysis & Forecasting',
-        why:'Mathematical statistics and calculus are the prerequisites. Sequential modelling — ARIMA, state-space models, and transformers on sequences — is a core data science specialisation with direct applications to financial, climate, and health research.',
-        pri:{t:'Forecasting: Principles and Practice (3rd ed.)', a:'Hyndman & Athanasopoulos', note:'Free at otexts.com/fpp3. Modern, practical, and theory-grounded. The best accessible introduction to time series forecasting that exists.', af:true},
-        sup:{t:'Introduction to Time Series and Forecasting', a:'Brockwell & Davis', note:'The rigorous theoretical treatment — ARIMA, spectral analysis, and state-space models proved in full mathematical detail. Read after Hyndman.', af:false},
-        videos:[
-          {l:'Penn State STAT 510 — Applied Time Series Analysis (free online)', u:'https://online.stat.psu.edu/stat510/'},
-          {l:'Rob Hyndman — Forecasting Lectures (YouTube)', u:'https://www.youtube.com/playlist?list=PL_FMkSsxn-FU3gNH9TCK6_SxXsKm36FGY'},
-        ],
-        docs:[
-          {l:'otexts.com/fpp3 — Free interactive textbook with R code', u:'https://otexts.com/fpp3/'},
-          {l:'statsmodels — Time Series Documentation', u:'https://www.statsmodels.org/stable/tsa.html'},
-          {l:'Nixtla — TimeGPT Tutorials', u:'https://nixtlaverse.nixtla.io/'},
-        ],
-        practice:[
-          {l:'Kaggle — M5 Forecasting Competition (archived)', u:'https://www.kaggle.com/competitions/m5-forecasting-accuracy'},
-          {l:'Kaggle — Store Sales Time Series Forecasting', u:'https://www.kaggle.com/competitions/store-sales-time-series-forecasting'},
-        ],
-        projects:['Implement ARIMA from scratch (no statsmodels) — fit to a real financial time series, compare to benchmark', 'Build a Temporal Fusion Transformer for multi-step forecasting on Kaggle M5 data'],
-      },
-      {
-        n:28, name:'Graph Theory & Graph Neural Networks',
-        why:'Discrete mathematics gave you graph theory foundations; linear algebra gave you the spectral tools. GNNs are one of the fastest-growing research areas — social networks, molecular biology, knowledge graphs, and recommendation systems are all graph problems. Hamilton\'s book is the only one that bridges pure graph theory to modern GNN architectures.',
-        pri:{t:'Graph Representation Learning', a:'William L. Hamilton', note:'Free at cs.mcgill.ca/~wlh/grl_book. Written specifically to bridge graph theory and modern GNN architectures — the only book of its kind.', af:true},
-        sup:{t:'Introduction to Graph Theory', a:'Douglas B. West', note:'The rigorous pure-math foundation — formal proofs, combinatorial depth, and graph-theoretic background behind GNN theoretical analysis.', af:false},
-        videos:[
-          {l:'Stanford CS224W — Machine Learning with Graphs (Leskovec, YouTube)', u:'https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn'},
-        ],
-        docs:[
-          {l:'Hamilton GRL Book — Free PDF (cs.mcgill.ca)', u:'https://cs.mcgill.ca/~wlh/grl_book/'},
-          {l:'PyTorch Geometric Documentation', u:'https://pytorch-geometric.readthedocs.io/'},
-          {l:'NetworkX Documentation', u:'https://networkx.org/documentation/stable/'},
-        ],
-        practice:[
-          {l:'Stanford CS224W Colab Assignments (GitHub)', u:'https://github.com/snap-stanford/cs224w-colab'},
-          {l:'OGB — Open Graph Benchmark', u:'https://ogb.stanford.edu/'},
-        ],
-        projects:['Implement GCN, GraphSAGE, and GAT from scratch in PyTorch; evaluate on node classification', 'Build a molecular property predictor using GNNs on the QM9 dataset'],
-      },
-      {
-        n:29, name:'Deep Learning — Theory & Practice',
-        why:'This is the summit. Optimisation, linear algebra, probability, information theory, calculus, functional analysis, and numerical methods all converge into the mathematical framework of deep learning. You now have every single prerequisite to read this rigorously — not as a practitioner following recipes, but as a mathematician who understands every equation.',
-        pri:{t:'Deep Learning', a:'Goodfellow, Bengio & Courville', note:'Free at deeplearningbook.org. The definitive theoretical treatment. Every chapter rewards the full mathematical preparation this roadmap builds.', af:true},
-        sup:{t:'Dive into Deep Learning', a:'Zhang, Lipton, Li & Smola', note:'Free at d2l.ai. Every equation comes with executable code. Theory and practice presented simultaneously — the perfect practical companion.', af:true},
-        videos:[
-          {l:'Andrej Karpathy — Neural Networks Zero to Hero (YouTube)', u:'https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ'},
-          {l:'Stanford CS231n — CNNs (notes free)', u:'https://cs231n.github.io/'},
-          {l:'fast.ai — Practical Deep Learning for Coders (free)', u:'https://course.fast.ai/'},
-          {l:'deeplearning.ai Specialization (Andrew Ng, Coursera)', u:'https://www.deeplearning.ai/courses/deep-learning-specialization/'},
-        ],
-        docs:[
-          {l:'deeplearningbook.org — Free online textbook', u:'https://www.deeplearningbook.org/'},
-          {l:'d2l.ai — Free interactive textbook', u:'https://d2l.ai/'},
-          {l:'PyTorch Documentation', u:'https://pytorch.org/docs/stable/index.html'},
-          {l:'JAX Documentation', u:'https://jax.readthedocs.io/'},
-        ],
-        practice:[
-          {l:'Karpathy — micrograd (build your own autograd)', u:'https://github.com/karpathy/micrograd'},
-          {l:'Papers With Code — State of the Art', u:'https://paperswithcode.com/sota'},
-          {l:'Kaggle — Deep Learning Competitions', u:'https://www.kaggle.com/competitions'},
-        ],
-        projects:['Build a complete autograd engine from scratch (following Karpathy\'s micrograd), extend to support more ops', 'Implement Transformer architecture from scratch; train a character-level language model (following Karpathy\'s nanoGPT)', 'Reproduce one published deep learning paper from scratch — implement, train, and verify reported metrics'],
-      },
-    ],
-  },
-];
+/* feeds: which DS roadmap topics this phase unlocks */
+const DATA=[
 
-// ── Render ──────────────────────────────────────────────────────────────────
+/* ══════════════════════════════════════════════ PHASE 0 */
+{ btn:'0 · Foundation', tier:'F', time:'6–8 weeks',
+  feeds:'Feeds into: DS Topics 1–4 (Python, Pandas, EDA, Data Cleaning)',
+  name:'Mathematical Foundation',
+  desc:'Bridge from Class 10 to university mathematics. Formalises the language and algebraic instincts you already have. Everything that follows is built here. Do not abbreviate this phase — weak foundations compound into compounding confusion.',
+  review:null,
+  topics:[
+   { n:1, time:'3–4 wk', name:'Pre-calculus & Algebra',
+     why:'Class 10 gave you arithmetic and basic algebra. This topic formalises functions, graphing, trigonometry, and algebraic manipulation — the grammar every future topic speaks. You cannot read a single calculus page without this foundation solid.',
+     pri:{t:'Precalculus: Mathematics for Calculus',a:'Stewart, Redlin & Watson',note:'Comprehensive and well-paced. Builds from exactly where Class 10 ends. The single clearest bridge text in existence.',af:false,disc:true},
+     sup:{t:'Precalculus',a:'Michael Sullivan',note:'More drill problems if Stewart feels fast. Use as an additional problem bank alongside Stewart.',af:false,disc:true},
+     videos:[{l:'Professor Leonard — Full Precalculus (YouTube)',u:'https://www.youtube.com/playlist?list=PLDesaqWTN534OnM-2d0N4q7CL3M3fXcMW'},{l:'Khan Academy — Precalculus (interactive, free)',u:'https://www.khanacademy.org/math/precalculus'}],
+     docs:[{l:"Paul's Online Math Notes — Algebra & Trig (free)",u:'https://tutorial.math.lamar.edu'}],
+     practice:[{l:'Brilliant.org — Pre-Algebra & Algebra',u:'https://brilliant.org/courses/#algebra'},{l:'Art of Problem Solving — Alcumus',u:'https://artofproblemsolving.com/alcumus'}],
+     projects:[
+       {code:true,proof:false,text:'Build a graphing calculator in Python (matplotlib) that plots any user-supplied function — handle domains, asymptotes, and discontinuities correctly.'},
+       {code:true,proof:false,text:'Implement a trigonometric identity verifier in SymPy: input any identity, verify symbolically, generate a numerical counterexample if false.'},
+     ]},
+   { n:2, time:'3–4 wk', name:'Logic, Sets & Mathematical Proofs',
+     why:'Before calculus you need the language mathematicians use — logic, quantifiers, sets, and proof techniques. Every topic from here forward requires you to write and read proofs. This investment makes the rest feel natural rather than arbitrary. Do not skip or rush it.',
+     pri:{t:'Book of Proof',a:'Richard Hammack',note:'Free at bookofproof.net (official author release, permanently hosted). Written specifically for students making this exact transition. Gentle, patient, complete. The ideal first proof-writing book.',af:true,disc:true},
+     sup:{t:'How to Prove It',a:'Daniel J. Velleman',note:'Deeper treatment of logic and proof strategies. Read after Hammack to solidify proof-writing confidence.',af:false,disc:true},
+     videos:[{l:'MIT OCW 18.090 — Introduction to Mathematical Proofs (notes free)',u:'https://ocw.mit.edu/courses/18-090-introduction-to-mathematical-proofs-spring-2009/'},{l:'MIT OCW 6.042J — Math for CS (first 3 weeks, YouTube)',u:'https://www.youtube.com/playlist?list=PLB7540DEDD482705B'}],
+     docs:[{l:'bookofproof.net — Free PDF + Solutions (official)',u:'https://www.people.vcu.edu/~rhammack/BookOfProof/'},{l:'ProofWiki — worked proof examples',u:'https://proofwiki.org/'}],
+     practice:[{l:'Art of Problem Solving — Proof problems',u:'https://artofproblemsolving.com/community/c13_contests'}],
+     projects:[
+       {code:true,proof:false,text:'Build a propositional logic truth-table generator in Python — handle arbitrary formulas with AND, OR, NOT, IMPLIES, IFF and print the full table.'},
+       {code:false,proof:true,text:'Proof milestone: prove 20 theorems from Hammack Chapters 4–7, written on paper — at least 3 proofs by contradiction, 3 by strong induction, and 2 by contrapositive.'},
+     ]},
+  ]},
+
+/* ══════════════════════════════════════════════ PHASE 1 */
+{ btn:'1 · Calculus', tier:'F', time:'8–10 weeks',
+  feeds:'Feeds into: DS Topics 5, 9 (Supervised ML, Neural Networks from Scratch)',
+  name:'Calculus — Single & Multivariable',
+  desc:'The mathematics of change. Foundational for every ML algorithm involving gradient descent, loss functions, or rates of change. You will use calculus every day as a researcher.',
+  review:null,
+  topics:[
+   { n:3, time:'4–5 wk', name:'Single Variable Calculus',
+     why:'Precalculus gave you functions; calculus adds limits, derivatives, and integrals. Gradient descent is literally a derivative. Loss landscapes are integral calculus. Every training algorithm makes no mathematical sense without this. Non-negotiable.',
+     pri:{t:'Calculus',a:'Gilbert Strang',note:'Free at MIT OCW — officially released by the author and MIT (legally, permanently). Conversational, intuitive, proof-aware. Use the book and all lecture videos together, chapter by chapter.',af:true,disc:true},
+     sup:{t:'Calculus: Early Transcendentals',a:'James Stewart',note:'Comprehensive problem bank. Hundreds of exercises covering every technique. Use for extra practice alongside Strang.',af:false,disc:true},
+     videos:[{l:'MIT OCW 18.01 — Single Variable Calculus (official, free)',u:'https://ocw.mit.edu/courses/18-01-single-variable-calculus-fall-2006/'},{l:'3Blue1Brown — Essence of Calculus (YouTube)',u:'https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr'},{l:'Professor Leonard — Full Calculus 1 (YouTube)',u:'https://www.youtube.com/playlist?list=PLF797E961509B4EB5'}],
+     docs:[{l:"Paul's Online Math Notes — Calculus I & II (free)",u:'https://tutorial.math.lamar.edu/Classes/CalcI/CalcI.aspx'},{l:'MIT Strang Calculus — Free PDF (MIT OCW official)',u:'https://ocw.mit.edu/resources/res-18-001-calculus-fall-2023/'}],
+     practice:[{l:'Khan Academy — Calculus 1',u:'https://www.khanacademy.org/math/calculus-1'},{l:'MIT OCW 18.01 — Problem Sets',u:'https://ocw.mit.edu/courses/18-01-single-variable-calculus-fall-2006/pages/assignments/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement gradient descent from scratch (NumPy only): minimise hand-specified univariate functions, plot convergence curves for 5 different learning rates.'},
+       {code:true,proof:false,text:'Numerical integration: implement Riemann sums, Trapezoid, and Simpson\'s rule; compare error against scipy.integrate for 5 different integrands.'},
+       {code:false,proof:true,text:'Proof milestone: prove both parts of the Fundamental Theorem of Calculus from Strang Chapter 5; prove that d/dx[sin x] = cos x from first principles using only the limit definition.'},
+     ]},
+   { n:4, time:'4–5 wk', name:'Multivariable Calculus & Vector Calculus',
+     why:'Single variable handles one input; deep learning operates in millions of dimensions. Gradients, Jacobians, Hessians, and the multivariate chain rule ARE backpropagation. This is not "more calculus" — it is the exact computational machinery of neural network training.',
+     pri:{t:'Calculus, Chapters 12–16',a:'James Stewart',note:'Natural continuation from single variable — zero-friction transition. Vectors, partial derivatives, multiple integrals, and vector fields all covered thoroughly.',af:false,disc:true},
+     sup:{t:'Div, Grad, Curl and All That',a:'H. M. Schey',note:'Only 160 pages. Exceptional geometric intuition for vector calculus that Stewart\'s density obscures. Read alongside Stewart Chapters 15–16 for the intuition layer.',af:false,disc:true},
+     videos:[{l:'MIT OCW 18.02 — Multivariable Calculus (Denis Auroux)',u:'https://ocw.mit.edu/courses/18-02-multivariable-calculus-fall-2007/'},{l:'3Blue1Brown — Multivariable Calculus (YouTube)',u:'https://www.youtube.com/playlist?list=PLSQl0a2vh4HC5feHa6Rc5c0wbRTx56nF7'},{l:'Khan Academy — Multivariable Calculus',u:'https://www.khanacademy.org/math/multivariable-calculus'}],
+     docs:[{l:"Paul's Online Math Notes — Calculus III (free)",u:'https://tutorial.math.lamar.edu/Classes/CalcIII/CalcIII.aspx'}],
+     practice:[{l:'MIT OCW 18.02 — Problem Sets',u:'https://ocw.mit.edu/courses/18-02-multivariable-calculus-fall-2007/pages/assignments/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement and visualise a 3D gradient field with matplotlib — compute gradient, divergence, and curl numerically; animate the gradient flow of a scalar field.'},
+       {code:true,proof:false,text:'Build a Jacobian/Hessian auto-computer using NumPy finite differences; verify all results against PyTorch autograd on 5 multivariate functions.'},
+       {code:false,proof:true,text:'Proof milestone: prove the chain rule for f(g(x,y)) in full generality; prove from the definition that the gradient vector points in the direction of steepest ascent.'},
+     ]},
+  ]},
+
+/* ══════════════════════════════════════════════ PHASE 2 */
+{ btn:'2 · Core Structures', tier:'F', time:'8–10 weeks',
+  feeds:'Feeds into: DS Topics 5, 6, 9 (Classical ML, PCA/SVD, Neural Networks)',
+  name:'Linear Algebra & Discrete Mathematics',
+  desc:'The two structural pillars. Linear algebra is the language of data and computation. Discrete math is the language of logic, algorithms, and counting. Both are direct prerequisites for everything that follows.',
+  review:null,
+  topics:[
+   { n:5, time:'4–5 wk', name:'Introduction to Linear Algebra',
+     why:'Linear algebra is the language of data itself — every neural network is a sequence of matrix multiplications. PCA, SVD, eigendecomposition, and tensors all live here. The MIT lectures are among the best ever recorded for any mathematics subject.',
+     pri:{t:'Introduction to Linear Algebra',a:'Gilbert Strang',note:'The definitive accessible introduction. Use the book and all 34 MIT lecture videos together, chapter by chapter. The canonical starting point worldwide.',af:false,disc:true},
+     sup:{t:'Linear Algebra and Its Applications',a:'David C. Lay',note:'Application-focused with excellent problem sets. A different pedagogical angle that solidifies the same concepts from a practical direction.',af:false,disc:true},
+     videos:[{l:'MIT OCW 18.06 — Linear Algebra (Strang, all 34 lectures)',u:'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/'},{l:'3Blue1Brown — Essence of Linear Algebra (YouTube)',u:'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab'},{l:'Khan Academy — Linear Algebra',u:'https://www.khanacademy.org/math/linear-algebra'}],
+     docs:[{l:'NumPy Linear Algebra Documentation',u:'https://numpy.org/doc/stable/reference/routines.linalg.html'},{l:'SciPy Linear Algebra Reference',u:'https://docs.scipy.org/doc/scipy/reference/linalg.html'}],
+     practice:[{l:'MIT OCW 18.06 — Problem Sets',u:'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/pages/assignments/'},{l:'Brilliant.org — Linear Algebra',u:'https://brilliant.org/courses/linear-algebra/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement PCA from scratch using only NumPy (no sklearn); apply to MNIST digit compression and plot variance explained vs. number of components.'},
+       {code:true,proof:false,text:'Build a PageRank implementation using the eigenvector method on a sample link graph; compare to the power iteration method and measure convergence.'},
+       {code:false,proof:true,text:'Proof milestone: prove that eigenvalues of a real symmetric matrix are real; prove that eigenvectors for distinct eigenvalues of a symmetric matrix are orthogonal.'},
+     ]},
+   { n:6, time:'4–5 wk', name:'Discrete Mathematics & Combinatorics',
+     why:'Proofs gave you the language; discrete math is where you speak it at scale — graph theory, counting, recurrences, logic, and algorithms. Combinatorics is the direct prerequisite for probability. MIT\'s 6.042J alone is worth more than most semester university courses.',
+     pri:{t:'Discrete Mathematics and Its Applications',a:'Kenneth H. Rosen',note:'The standard university reference. Thorough, well-organised, problem-rich. Covers everything needed before probability and algorithms.',af:false,disc:true},
+     sup:{t:'Concrete Mathematics',a:'Graham, Knuth & Patashnik',note:'Extraordinarily rich for combinatorics and summations. Knuth co-authored it. Rewards multiple re-reads over years.',af:false,disc:true},
+     videos:[{l:'MIT OCW 6.042J — Mathematics for Computer Science (full course)',u:'https://www.youtube.com/playlist?list=PLB7540DEDD482705B'},{l:'TrevTutor — Discrete Mathematics (YouTube)',u:'https://www.youtube.com/@trevtutor'},{l:'Kimberly Brehm — Discrete Math (YouTube)',u:'https://www.youtube.com/@KimberlyBrehm'}],
+     docs:[{l:'MIT OCW 6.042J — Full Course Notes (free PDF)',u:'https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/'}],
+     practice:[{l:'Art of Problem Solving — Combinatorics',u:'https://artofproblemsolving.com/wiki/index.php/Combinatorics'},{l:'Project Euler — Combinatorics problems',u:'https://projecteuler.net/archives'}],
+     projects:[
+       {code:true,proof:false,text:'Implement merge sort, quick sort, and heap sort from scratch; rigorously analyse time complexity with empirical benchmarks across sizes and input distributions.'},
+       {code:true,proof:false,text:'Build a combinatorics library: binomial coefficients, permutations, Stirling numbers, Catalan numbers — verify each against known closed-form identities.'},
+       {code:false,proof:true,text:'Proof milestone: prove the Pigeonhole Principle; prove |P(S)| = 2ⁿ for an n-element set; prove Euler\'s formula V − E + F = 2 for connected planar graphs.'},
+     ]},
+  ]},
+
+/* ══════════════════════════════════════════════ PHASE 3 */
+{ btn:'3 · Abstract Math', tier:'I', time:'6–8 weeks',
+  feeds:'Feeds into: DS Topics 18, 19 (Graph NNs, Geometric Deep Learning — group equivariance)',
+  name:'Abstract Algebra (ML-Motivated)',
+  desc:'Where proof-writing deepens into structural mathematical thinking. Abstract algebra reveals the algebraic skeleton underlying numbers, polynomials, and — increasingly — transformer architectures and geometric deep learning. Number Theory is a proof-writing warm-up and is optional.',
+  review:'↩ Review: After finishing this phase, re-read Hammack Ch. 10–11 (equivalence relations, modular arithmetic) with new eyes — the connection to quotient groups will click immediately.',
+  topics:[
+   { n:7, time:'2–3 wk', name:'Introduction to Number Theory', optional:true,
+     why:'After discrete math, number theory is the ideal proof-writing laboratory — elementary enough to approach, rich enough to demand genuine rigour. Introduces modular arithmetic concretely, preparing you naturally for abstract algebra. Can be covered lightly as a 2–3 week warm-up. Not a hard dependency for the main sequence.',
+     pri:{t:'Elementary Number Theory',a:'David Burton',note:'Gentle, proof-rich, well-paced. The standard introductory text. A smooth and rewarding read from the first page.',af:false,disc:true},
+     sup:{t:'An Introduction to the Theory of Numbers',a:'Niven, Zuckerman & Montgomery',note:'More depth on the algebraic structure of integers — useful context for ring theory in abstract algebra.',af:false,disc:true},
+     videos:[{l:'MIT OCW 18.781 — Theory of Numbers (lecture notes free)',u:'https://ocw.mit.edu/courses/18-781-theory-of-numbers-spring-2012/'},{l:'Mathologer — Number Theory (YouTube)',u:'https://www.youtube.com/@Mathologer'}],
+     docs:[{l:'Art of Problem Solving — Number Theory wiki',u:'https://artofproblemsolving.com/wiki/index.php/Number_theory'}],
+     practice:[{l:'Project Euler — Number theory problems (Problems 1–50)',u:'https://projecteuler.net/archives'}],
+     projects:[
+       {code:true,proof:false,text:'Implement RSA encryption from scratch using only Python\'s standard library — key generation, encryption, and decryption, all pure number theory.'},
+       {code:false,proof:true,text:'Proof milestone: prove Fermat\'s Little Theorem; prove uniqueness of prime factorisation (Fundamental Theorem of Arithmetic); prove Bézout\'s identity.'},
+     ]},
+   { n:8, time:'4–5 wk', name:'Abstract Algebra',
+     why:'Number theory introduced groups and rings concretely. Abstract algebra lifts these to full generality — groups, rings, fields, homomorphisms, and quotient structures. Groups underlie symmetry and equivariance in neural architectures. Sigma-algebras in measure theory will feel familiar after this.',
+     pri:{t:'Contemporary Abstract Algebra',a:'Joseph A. Gallian',note:'Widely found via search (Cengage/CRC — no official free PDF). Exceptionally readable — the most accessible gateway to abstract algebra that exists. Does not sacrifice rigour for approachability.',af:false,disc:true},
+     sup:{t:'Algebra',a:'Michael Artin',note:'More sophisticated, geometrically motivated. Read after Gallian for deeper structural connections between algebra and geometry.',af:false,disc:true},
+     videos:[{l:'Harvard Math 122 — Algebra (Benedict Gross, YouTube)',u:'https://www.youtube.com/playlist?list=PLA58AC5CABC1321A3'},{l:'Socratica — Abstract Algebra (YouTube, concise episodes)',u:'https://www.youtube.com/playlist?list=PLi01XoE8jYoi3SgnnGorR_XOW3IcK-TP6'}],
+     docs:[{l:'Abstract Algebra: Theory and Applications — Judson (legally free PDF)',u:'http://abstract.ups.edu/'},{l:'Visual Group Theory — GroupExplorer (interactive)',u:'http://www.groupexplorer.net/'}],
+     practice:[{l:'MIT OCW 18.703 — Modern Algebra — Problem Sets',u:'https://ocw.mit.edu/courses/18-703-modern-algebra-spring-2013/pages/assignments/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement a group Cayley table generator and verifier for all groups of order ≤ 10; identify which pairs of groups are isomorphic.'},
+       {code:true,proof:false,text:'Write a Python class hierarchy for Groups, Rings, and Fields with arithmetic operations; implement ℤ/nℤ as a concrete quotient ring.'},
+       {code:false,proof:true,text:'Proof milestone: prove Lagrange\'s theorem; prove the First Isomorphism Theorem for groups; prove every field is an integral domain.'},
+     ]},
+  ]},
+
+/* ══════════════════════════════════════════════ PHASE 4 */
+{ btn:'4 · Probability', tier:'I', time:'6–8 weeks',
+  feeds:'Feeds into: DS Topics 5, 7, 8, 14, 22 (Classical ML, Ensembles, Model Evaluation, NLP, RL)',
+  name:'Probability & Mathematical Statistics',
+  desc:'The mathematical language of uncertainty. Foundational for every ML model that outputs a distribution, confidence score, or probabilistic prediction. You will return to this material constantly.',
+  review:'↩ Review: Return to Phase 2 (Linear Algebra) — revisit covariance matrices, quadratic forms, and positive-definiteness. Probability gives these a concrete meaning they lacked before.',
+  topics:[
+   { n:9, time:'3–4 wk', name:'Introduction to Probability Theory',
+     why:'Calculus and combinatorics both converge here. Probability is calculus applied to uncertainty — the mathematical heart of ML inference. You cannot understand loss functions, likelihoods, or Bayesian thinking without it. Blitzstein\'s book is the best self-study probability text ever written.',
+     pri:{t:'Introduction to Probability',a:'Blitzstein & Hwang',note:'Free at probabilitybook.net (official author release, permanently hosted). Rigorous yet story-driven — every abstraction earned through a compelling problem. The Harvard Stat 110 lectures complement it perfectly.',af:true,disc:true},
+     sup:{t:'A First Course in Probability',a:'Sheldon Ross',note:'Excellent problem sets and application examples. Use as a drill companion alongside Blitzstein for extra practice.',af:false,disc:true},
+     videos:[{l:'Harvard Stat 110 — Probability (Blitzstein, YouTube)',u:'https://www.youtube.com/playlist?list=PL2SOU6wwxB0uwwH80KTQ6ht66KWxbzTIo'},{l:'MIT OCW 6.041 — Probabilistic Systems Analysis',u:'https://ocw.mit.edu/courses/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/'},{l:'StatQuest — Probability (YouTube)',u:'https://www.youtube.com/@statquest'}],
+     docs:[{l:'probabilitybook.net — Free PDF + Exercises (official)',u:'https://probabilitybook.net'},{l:'NIST/SEMATECH — e-Handbook of Statistical Methods',u:'https://www.itl.nist.gov/div898/handbook/'}],
+     practice:[{l:'Harvard Stat 110 — Strategic Practice Problems',u:'https://projects.iq.harvard.edu/stat110/strategic-practice-problems'},{l:'Brilliant.org — Probability',u:'https://brilliant.org/courses/probability/'}],
+     projects:[
+       {code:true,proof:false,text:'Build a Monte Carlo simulator: estimate π, verify the Law of Large Numbers empirically, plot convergence rates for 5 different distributions.'},
+       {code:true,proof:false,text:'Implement Bayesian A/B testing from scratch — beta-binomial model, conjugate posterior update, credible interval, and decision rule.'},
+       {code:false,proof:true,text:'Proof milestone: prove Bayes\' theorem from the definition of conditional probability; prove the Law of Total Expectation; prove Chebyshev\'s inequality.'},
+     ]},
+   { n:10, time:'3–4 wk', name:'Mathematical Statistics',
+     why:'Probability is the theory of random phenomena; statistics is how you use data to reason about it. Estimation, hypothesis testing, confidence intervals, and p-values are foundational tools of every data science workflow. Wasserman covers a full two-semester sequence in one compact, legally free volume.',
+     pri:{t:'All of Statistics',a:'Larry Wasserman',note:'Free PDF at CMU (official, permanently hosted). Concise, rigorous, and modern. Covers more ground than most two-semester graduate statistics sequences.',af:true,disc:true},
+     sup:{t:'Statistical Inference',a:'Casella & Berger',note:'Purchase recommended — no consistent free PDF. The classical deep treatment — decision theory, UMP tests, sufficiency, and asymptotic theory at full rigour. Every theorem stated and proved.',af:false,disc:false},
+     videos:[{l:'CMU 36-705 — Intermediate Statistics (Wasserman, notes free)',u:'https://www.stat.cmu.edu/~larry/=stat705/'},{l:'Stanford STATS 200 — Statistical Inference (YouTube)',u:'https://www.youtube.com/playlist?list=PLoROMvodv4rNyD4FkSzuRTgfxHYB4c3Oe'},{l:'StatQuest — Statistics Fundamentals (YouTube)',u:'https://www.youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9'}],
+     docs:[{l:'All of Statistics — Free PDF (CMU official)',u:'https://www.stat.cmu.edu/~larry/all-of-statistics/'}],
+     practice:[{l:'MIT OCW 18.650 — Statistics for Applications (problem sets)',u:'https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement MLE and MAP estimators for Gaussian, Bernoulli, and Poisson from scratch; derive analytically and plot likelihood surfaces.'},
+       {code:true,proof:false,text:'Run a full hypothesis-testing pipeline on a real dataset: t-test, chi-squared test, bootstrap confidence intervals, permutation test.'},
+       {code:false,proof:true,text:'Proof milestone: prove the Cramér–Rao lower bound; prove the sample mean is the MLE for a Gaussian with known variance.'},
+     ]},
+  ]},
+
+/* ══════════════════════════════════════════════ PHASE 5 */
+{ btn:'5 · Analysis', tier:'A', time:'8–10 weeks',
+  feeds:'Feeds into: DS Topics 9, 17 (Neural Networks Theory, VAEs/Diffusion — rigorous foundations)',
+  name:'Real Analysis & Advanced Linear Algebra',
+  desc:'The rigorous backbone of all prior intuition. Real analysis proves that calculus works. Advanced linear algebra is the abstract form the subject takes in research papers. Both are prerequisites for measure theory and functional analysis.',
+  review:'↩ Review: Before starting this phase, re-read your Calculus notes on limits, continuity, and uniform convergence — analysis is formalising exactly those concepts, and recognising that immediately makes it much easier.',
+  topics:[
+   { n:11, time:'5–6 wk', name:'Real Analysis',
+     why:'Analysis proves WHY calculus works — epsilon-delta definitions, rigorous convergence, and the foundations of measure theory. The direct prerequisite for rigorous probability, convex optimisation, and functional analysis. Abbott first, then Rudin. This order matters.',
+     pri:{t:'Understanding Analysis',a:'Stephen Abbott',note:'Purchase recommended — no consistent free PDF. The gentlest rigorous entry into real analysis, written specifically for students who already know calculus intuitively. Exactly the right book at this stage.',af:false,disc:false},
+     sup:{t:'Principles of Mathematical Analysis',a:'Walter Rudin',note:'Purchase recommended — no consistent free PDF. Baby Rudin — the canonical standard for real analysis. Read after Abbott; Abbott is the key that makes Rudin readable.',af:false,disc:false},
+     videos:[{l:'Francis Su — Real Analysis Lectures (YouTube)',u:'https://www.youtube.com/playlist?list=PL0E754696F72137EC'},{l:'Harvey Mudd College — Real Analysis (YouTube)',u:'https://www.youtube.com/playlist?list=PL04BA7A9EB907EDAF'},{l:'MIT OCW 18.100B — Analysis I (lecture notes free)',u:'https://ocw.mit.edu/courses/18-100b-analysis-i-fall-2010/'}],
+     docs:[{l:'MIT OCW 18.100B — Lecture Notes (free PDF)',u:'https://ocw.mit.edu/courses/18-100b-analysis-i-fall-2010/pages/lecture-notes/'}],
+     practice:[{l:'MIT OCW 18.100B — Problem Sets',u:'https://ocw.mit.edu/courses/18-100b-analysis-i-fall-2010/pages/assignments/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement an epsilon-delta limit verifier: given a function and claimed limit L, verify or refute the claim to a specified tolerance ε numerically.'},
+       {code:false,proof:true,text:'Proof milestone: prove the Bolzano–Weierstrass theorem; prove every Cauchy sequence in ℝ converges; prove the Intermediate Value Theorem from the completeness axiom alone.'},
+     ]},
+   { n:12, time:'3–4 wk', name:'Advanced Linear Algebra',
+     why:'With real analysis in hand, you can treat linear algebra abstractly — vector spaces over arbitrary fields, linear operators, spectral theory, and SVD at proof level. This is the form linear algebra takes in every ML research paper.',
+     pri:{t:'Linear Algebra Done Right',a:'Sheldon Axler',note:'Free at axler.net (official author release, permanently hosted). Proof-based, determinant-free approach that reveals the true structure of the subject. The gold standard for a rigorous second course.',af:true,disc:true},
+     sup:{t:'Linear Algebra Done Wrong',a:'Sergei Treil',note:'Free on the author\'s website at Brown University (official, permanently hosted). A complementary perspective with harder exercises and a more classical treatment.',af:true,disc:true},
+     videos:[{l:'Axler — Lecture Videos (YouTube, official)',u:'https://www.youtube.com/playlist?list=PLGAnmvB9m7zOBVCZBUUmSinFV0wEir2Vw'},{l:'MIT OCW 18.06 — revisited with proof-level eyes',u:'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/'}],
+     docs:[{l:'axler.net — Free PDF + Errata (official)',u:'https://linear.axler.net/'},{l:'Treil — LADW Free PDF (Brown University, official)',u:'https://www.math.brown.edu/streil/papers/LADW/LADW.html'}],
+     practice:[{l:'Axler supplementary exercises (axler.net)',u:'https://linear.axler.net/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement full SVD from scratch using the QR algorithm (power iteration) — no NumPy SVD; benchmark accuracy against NumPy on random matrices of varying condition number.'},
+       {code:false,proof:true,text:'Proof milestone: prove the spectral theorem for real symmetric matrices; prove every operator on a complex vector space has at least one eigenvalue.'},
+     ]},
+  ]},
+
+/* ══════════════════════════════════════════════ PHASE 6 */
+{ btn:'6 · ODEs', tier:'A', time:'3–4 weeks',
+  feeds:'Feeds into: DS Topic 17 (Neural ODEs, Diffusion Models — continuous-time dynamics)',
+  name:'Ordinary Differential Equations & Dynamical Systems',
+  desc:'Multivariable calculus and real analysis are prerequisites. ODEs describe how systems evolve — they are behind Neural ODEs, diffusion models, normalising flows, and physics-informed neural networks.',
+  review:null,
+  topics:[
+   { n:13, time:'3–4 wk', name:'ODEs & Dynamical Systems',
+     why:'ODEs power modern generative models at the mathematical level. Strogatz\'s book is the most enjoyable mathematical text ever written — it rewards the full prerequisites you now have and reads as an extraordinary story about nonlinear dynamics.',
+     pri:{t:'Nonlinear Dynamics and Chaos',a:'Steven H. Strogatz',note:'Purchase recommended — no consistent free PDF. Reads like a novel. Builds genuine physical intuition for dynamical systems — insightful far beyond its stated scope. One of the great science books.',af:false,disc:false},
+     sup:{t:'Ordinary Differential Equations',a:'Tenenbaum & Pollard',note:'Widely found via search (Dover). Rigorous, encyclopedic technique reference — use alongside Strogatz for formal solution methods.',af:false,disc:true},
+     videos:[{l:'Strogatz — Cornell Lectures (YouTube, official)',u:'https://www.youtube.com/playlist?list=PLbN57C5Zdl6j_qJA-pARJnKsmROzPnO9V'},{l:'MIT OCW 18.03 — Differential Equations',u:'https://ocw.mit.edu/courses/18-03-differential-equations-spring-2010/'},{l:'3Blue1Brown — Differential Equations Series (YouTube)',u:'https://www.youtube.com/playlist?list=PLZHQObOWTQDNPOjrT6KVlfJuKtYTftqH6'}],
+     docs:[{l:'SciPy ODE Solvers Reference (scipy.integrate)',u:'https://docs.scipy.org/doc/scipy/reference/integrate.html'}],
+     practice:[{l:'MIT OCW 18.03 — Problem Sets',u:'https://ocw.mit.edu/courses/18-03-differential-equations-spring-2010/pages/assignments/'}],
+     projects:[
+       {code:true,proof:false,text:'Simulate the Lorenz attractor in Python — visualise chaos, plot the butterfly, demonstrate sensitivity to initial conditions with a 3D animation.'},
+       {code:true,proof:false,text:'Implement a Neural ODE using torchdiffeq; train it to model a pendulum system; compare to a standard RNN on out-of-distribution initial conditions.'},
+       {code:false,proof:true,text:'Proof milestone: prove the Picard–Lindelöf existence and uniqueness theorem for first-order ODEs; prove that fixed points of a gradient flow are exactly the critical points of the objective function.'},
+     ]},
+  ]},
+
+/* ══════════════════════════════════════════════ PHASE 7 */
+{ btn:'7 · Measure Theory', tier:'A', time:'6–8 weeks',
+  feeds:'Feeds into: DS Topics 16, 17, 22 (GANs, VAEs/Diffusion, RL — rigorous probability for research)',
+  name:'Measure-Theoretic Probability & Stochastic Processes',
+  desc:'The rigorous mathematical foundation of modern probability. Required to read ML theory papers, RL research, and graduate statistics literature without hand-waving.',
+  review:'↩ Review: Return to Phase 4 (Probability) — re-read the definitions of expectation, conditional probability, and convergence in Blitzstein with measure-theoretic eyes. Every informal argument will now be a provable theorem.',
+  topics:[
+   { n:14, time:'4–5 wk', name:'Measure-Theoretic Probability',
+     why:'Real analysis built the machinery — sigma-algebras, Lebesgue integration, and convergence theorems. This topic applies all of it to probability, making every probabilistic argument completely rigorous. Without this, half of every ML theory paper is inaccessible.',
+     pri:{t:'A First Look at Rigorous Probability Theory',a:'Jeffrey S. Rosenthal',note:'Free at probability.ca (official author release, permanently hosted). The gentlest measure-theoretic probability text in existence. Short, clear, complete. The ideal bridge from Abbott\'s analysis.',af:true,disc:true},
+     sup:{t:'Probability and Measure',a:'Patrick Billingsley',note:'Purchase recommended — no consistent free PDF. The classical encyclopedic reference. Harder and more complete — use as a reference after Rosenthal is finished.',af:false,disc:false},
+     videos:[{l:'MIT OCW 18.175 — Probability Theory (lecture notes free)',u:'https://ocw.mit.edu/courses/18-175-theory-of-probability-spring-2014/'},{l:'Mathematical Monk — Probability Primer (YouTube)',u:'https://www.youtube.com/playlist?list=PL17567A1A3F5DB5E4'}],
+     docs:[{l:'Rosenthal — Free PDF (probability.ca official)',u:'https://probability.ca/jeff/grprobbook.html'},{l:'Durrett — Probability: Theory and Examples (Duke, free official)',u:'https://services.math.duke.edu/~rtd/PTE/PTE5_011119.pdf'}],
+     practice:[{l:'MIT OCW 18.175 — Problem Sets',u:'https://ocw.mit.edu/courses/18-175-theory-of-probability-spring-2014/pages/assignments/'}],
+     projects:[
+       {code:true,proof:false,text:'Simulate and empirically verify the CLT for 5 non-normal distributions — plot convergence of normalised sample means and overlay the Gaussian limit.'},
+       {code:false,proof:true,text:'Proof milestone: prove the Monotone Convergence Theorem; prove every probability measure on (ℝ, Borel) is determined uniquely by its CDF.'},
+     ]},
+   { n:15, time:'3–4 wk', name:'Stochastic Processes & Markov Chains',
+     why:'Stochastic processes underlie reinforcement learning, MCMC sampling, diffusion models, and language model inference theory. Norris\'s Cambridge notes are rigorous, short, and officially free — a rare combination.',
+     pri:{t:'Introduction to Probability Models',a:'Sheldon Ross',note:'Widely found via search. Accessible and application-rich. The best bridge from introductory probability to stochastic processes — every concept illustrated concretely before being formalised.',af:false,disc:true},
+     sup:{t:'Markov Chains',a:'J. R. Norris',note:'Free at statslab.cam.ac.uk (official Cambridge release, permanently hosted). Rigorous, concise, direct. The best short treatment of Markov chain theory available.',af:true,disc:true},
+     videos:[{l:'MIT OCW 6.262 — Discrete Stochastic Processes',u:'https://ocw.mit.edu/courses/6-262-discrete-stochastic-processes-spring-2011/'}],
+     docs:[{l:'Norris — Markov Chains Free PDF (statslab.cam.ac.uk official)',u:'https://www.statslab.cam.ac.uk/~james/Markov/'}],
+     practice:[{l:'MIT OCW 6.262 — Problem Sets',u:'https://ocw.mit.edu/courses/6-262-discrete-stochastic-processes-spring-2011/pages/assignments/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement a Markov Chain text generator (bigram/trigram model) from scratch; compare entropy of generated vs. real text using cross-entropy.'},
+       {code:true,proof:false,text:'Simulate and visualise Markov chain mixing time; implement Metropolis-Hastings and Gibbs sampler from scratch on a 2D Gaussian target.'},
+       {code:false,proof:true,text:'Proof milestone: prove an irreducible, aperiodic, positive recurrent Markov chain has a unique stationary distribution.'},
+     ]},
+  ]},
+
+/* ══════════════════════════════════════════════ PHASE 8 */
+{ btn:'8 · Optimization', tier:'A', time:'8–10 weeks',
+  feeds:'Feeds into: DS Topics 7, 9, 10, 11 (Ensemble ML, all Neural Network training theory)',
+  name:'Convex Optimization, Numerical Methods & Information Theory',
+  desc:'The three mathematical engines of deep learning — how models are trained, how computations are done stably on machines, and how information is measured. Together they explain WHY every training algorithm works at the mathematical level.',
+  review:'↩ Review: Return to Phase 2 (Linear Algebra) — revisit eigendecomposition and positive semi-definite matrices. They are the language of convexity and will finally feel natural.',
+  topics:[
+   { n:16, time:'3–4 wk', name:'Convex Optimization',
+     why:'Real analysis + multivariable calculus + linear algebra all converge here. Gradient descent, Adam, SGD, and learning rate schedules are all special cases of optimisation theory. Boyd\'s book answers the deep "why" behind every training algorithm that has ever existed.',
+     pri:{t:'Convex Optimization',a:'Boyd & Vandenberghe',note:'Free at stanford.edu/~boyd/cvxbook (official Stanford release, permanently hosted). THE definitive reference — used at every major research university worldwide. Clear, complete, rigorous.',af:true,disc:true},
+     sup:{t:'Numerical Optimization',a:'Nocedal & Wright',note:'Widely found via search (Springer). Extends beyond convex settings — quasi-Newton methods, line search, and trust-region algorithms that appear in modern DL optimisers.',af:false,disc:true},
+     videos:[{l:'Stanford EE364a — Convex Optimization (Boyd, full course YouTube)',u:'https://www.youtube.com/playlist?list=PL3940DD956CDF0622'},{l:'CMU 10-725 — Convex Optimization (Tibshirani, notes free)',u:'https://www.cs.cmu.edu/~pradeepr/convexopt/'}],
+     docs:[{l:'Boyd & Vandenberghe — Free PDF (Stanford official)',u:'https://web.stanford.edu/~boyd/cvxbook/'},{l:'CVXPY Documentation',u:'https://www.cvxpy.org/'}],
+     practice:[{l:'Boyd\'s edX MOOC — Exercises',u:'https://www.edx.org/learn/engineering/stanford-university-convex-optimization'},{l:'CVXPY Examples Gallery',u:'https://www.cvxpy.org/examples/index.html'}],
+     projects:[
+       {code:true,proof:false,text:'Implement gradient descent, SGD, Momentum, RMSProp, and Adam from scratch; compare convergence on a quadratic bowl and on a non-convex Rosenbrock function.'},
+       {code:true,proof:false,text:'Formulate and solve a mean-variance portfolio optimisation problem using CVXPY; implement the efficient frontier and visualise the risk-return tradeoff.'},
+       {code:false,proof:true,text:'Proof milestone: prove a convex function on ℝⁿ has no local minima that are not global; prove the first-order optimality condition for differentiable convex functions.'},
+     ]},
+   { n:17, time:'3–4 wk', name:'Numerical Methods & Numerical Linear Algebra',
+     why:'Numerical methods ask how to compute mathematical results stably on a machine. Floating-point arithmetic, LU/QR/Cholesky decompositions, iterative solvers, and matrix conditioning are critical for understanding GPU computation and numerical precision in deep learning.',
+     pri:{t:'Numerical Linear Algebra',a:'Trefethen & Bau',note:'Purchase recommended — no consistent free PDF. The clearest exposition of computational linear algebra available anywhere. Used at MIT, Oxford, and most top programmes worldwide.',af:false,disc:false},
+     sup:{t:'Numerical Methods for Scientists and Engineers',a:'R. W. Hamming',note:'Widely found via search (Dover). Broader landscape — root finding, interpolation, numerical integration, ODEs. Complements Trefethen\'s focus on linear algebra.',af:false,disc:true},
+     videos:[{l:'MIT OCW 18.335 — Numerical Methods',u:'https://ocw.mit.edu/courses/18-335j-introduction-to-numerical-methods-spring-2019/'},{l:'fast.ai — Computational Linear Algebra (Rachel Thomas, free)',u:'https://github.com/fastai/numerical-linear-algebra'},{l:'Strang — Matrix Methods in Data Analysis (MIT OCW, free)',u:'https://ocw.mit.edu/courses/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/'}],
+     docs:[{l:'NumPy — Linear Algebra routines',u:'https://numpy.org/doc/stable/reference/routines.linalg.html'},{l:'SciPy — Sparse linear algebra',u:'https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html'},{l:'LAPACK Users\' Guide (netlib)',u:'https://www.netlib.org/lapack/lug/'}],
+     practice:[{l:'fast.ai Computational LA — Jupyter notebooks (free)',u:'https://github.com/fastai/numerical-linear-algebra'}],
+     projects:[
+       {code:true,proof:false,text:'Implement LU decomposition with partial pivoting from scratch; solve a linear system and measure numerical error vs. scipy.linalg.solve across varying condition numbers.'},
+       {code:true,proof:false,text:'Build a conjugate gradient solver for sparse symmetric PSD systems; benchmark convergence rate against scipy.sparse.linalg.cg on structured and random matrices.'},
+       {code:false,proof:true,text:'Proof milestone: prove QR factorisation exists for any full-rank matrix; prove the condition number of A bounds the sensitivity of Ax = b to perturbations in b.'},
+     ]},
+   { n:18, time:'2–3 wk', name:'Information Theory',
+     why:'Entropy, KL divergence, mutual information, and cross-entropy loss are the information-theoretic objects behind every single loss function in deep learning. MacKay\'s book is extraordinary — it unifies information theory, Bayesian inference, and neural networks in one framework.',
+     pri:{t:'Information Theory, Inference & Learning Algorithms',a:'David MacKay',note:'Free at inference.org.uk (official author release, permanently hosted). A genuine masterpiece — three subjects unified in a way no other book achieves. MacKay was a Cambridge professor and pioneer.',af:true,disc:true},
+     sup:{t:'Elements of Information Theory',a:'Cover & Thomas',note:'Widely found via search (Wiley). The classical rigorous treatment. More mathematical depth than MacKay — use for theorem depth after MacKay builds intuition.',af:false,disc:true},
+     videos:[{l:'MacKay — Cambridge Lectures (YouTube, chapter by chapter)',u:'https://www.youtube.com/playlist?list=PLruBu5BI5n4aFpG32iMbdWoRCLt5lNo'},{l:'MIT 6.441 — Information Theory (OCW)',u:'https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/'}],
+     docs:[{l:'inference.org.uk — Free PDF + Exercises (official)',u:'http://www.inference.org.uk/mackay/itila/'}],
+     practice:[{l:'MIT 6.441 — Problem Sets',u:'https://ocw.mit.edu/courses/6-441-information-theory-spring-2010/pages/assignments/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement entropy, cross-entropy, KL divergence, and mutual information from scratch in NumPy; validate every formula against SciPy scipy.stats.entropy.'},
+       {code:true,proof:false,text:'Build a Huffman coding compressor; measure compression ratio vs. theoretical entropy bound for 5 real text files of varying entropy.'},
+       {code:false,proof:true,text:'Proof milestone: prove entropy is maximised by the uniform distribution over a finite alphabet; prove the data processing inequality.'},
+     ]},
+  ]},
+
+/* ══════════════════════════════════════════════ PHASE 9 */
+{ btn:'9 · Bayesian & MCMC', tier:'R', time:'8–10 weeks',
+  feeds:'Feeds into: DS Topics 17, 22, 23 (VAEs/Diffusion, RL, LLMs — Bayesian reasoning throughout)',
+  name:'Bayesian Statistics, MCMC & Variational Inference',
+  desc:'Where statistics becomes a complete probabilistic reasoning framework. MCMC and Variational Inference are the computational pillars that make Bayesian ML tractable — and directly underlie diffusion models and VAEs.',
+  review:'↩ Review: Return to Phase 7 (Stochastic Processes) — revisit Markov chain stationary distributions and mixing time. They are the theoretical foundation of every MCMC algorithm.',
+  topics:[
+   { n:19, time:'3–4 wk', name:'Bayesian Statistics & Probabilistic ML',
+     why:'Measure-theoretic probability + information theory + mathematical statistics all converge here. Bayesian reasoning is the formal framework for updating beliefs with data — it unifies every probabilistic ML model and is the mathematical language of modern generative AI.',
+     pri:{t:'Bayesian Data Analysis (BDA3)',a:'Gelman, Carlin, Stern & Rubin',note:'Free at stat.columbia.edu/~gelman/book (official author release, permanently hosted). The definitive Bayesian reference — complete, rigorous, and readable.',af:true,disc:true},
+     sup:{t:'Pattern Recognition & Machine Learning',a:'Christopher Bishop',note:'Free from Microsoft Research (official release, permanently hosted). The probabilistic ML bible — bridges Bayesian statistics and deep learning in one unified framework.',af:true,disc:true},
+     videos:[{l:'Richard McElreath — Statistical Rethinking (YouTube)',u:'https://www.youtube.com/playlist?list=PLDcUM9US4XdPz-KxHM4XHt7uUVGWWVHUs'},{l:'Aki Vehtari — BDA Course, Aalto University (YouTube)',u:'https://www.youtube.com/playlist?list=PLBqnAso5Dy7O0IVoVn2b-WtetXQk5CDk6'}],
+     docs:[{l:'BDA3 — Free PDF (Gelman, official)',u:'http://www.stat.columbia.edu/~gelman/book/'},{l:'PRML (Bishop) — Free PDF (Microsoft Research official)',u:'https://www.microsoft.com/en-us/research/people/cmbishop/prml-book/'},{l:'PyMC Documentation',u:'https://www.pymc.io/welcome.html'},{l:'Stan User\'s Guide',u:'https://mc-stan.org/docs/'}],
+     practice:[{l:'PyMC Examples Gallery',u:'https://www.pymc.io/projects/examples/en/latest/'},{l:'Statistical Rethinking — Python/PyMC code (GitHub)',u:'https://github.com/pymc-devs/pymc-resources/tree/main/Rethinking_2'}],
+     projects:[
+       {code:true,proof:false,text:'Implement Bayesian linear regression with conjugate priors from scratch; compare posterior distribution to frequentist OLS; plot uncertainty bands.'},
+       {code:true,proof:false,text:'Build a Bayesian A/B testing dashboard in PyMC: posterior predictive check, ROPE analysis, HDI visualisation, sequential updating.'},
+       {code:false,proof:true,text:'Proof milestone: derive the full posterior for the Beta-Bernoulli conjugate model; derive the ELBO for a simple Gaussian latent variable model from first principles.'},
+     ]},
+   { n:20, time:'4–5 wk', name:'MCMC & Variational Inference',
+     why:'MCMC (Metropolis-Hastings, HMC, NUTS) and Variational Inference (ELBO, mean-field VI) are the two pillars that make Bayesian ML computationally tractable. They directly underlie diffusion models, VAEs, and normalising flows.',
+     pri:{t:'Monte Carlo Statistical Methods',a:'Robert & Casella',note:'Widely found via search (Springer). The rigorous modern MCMC reference — covers random variable generation, Metropolis-Hastings, Gibbs, HMC, and sequential Monte Carlo in full depth. Replaces the obsolete Gilks et al. (1995).',af:false,disc:true},
+     sup:{t:'Pattern Recognition & Machine Learning, Chapter 10',a:'Christopher Bishop',note:'Free from Microsoft Research (official). The canonical reference for variational inference and the EM algorithm — the ELBO derivation in Chapter 10 is essential reading.',af:true,disc:true},
+     videos:[{l:'Tamara Broderick — MCMC & VI (MIT 6.882, YouTube)',u:'https://www.youtube.com/playlist?list=PL05umP7R6ij2YE8rZv57H-I6oqtAbs7FP'}],
+     docs:[{l:'NumPyro Documentation — MCMC/VI in JAX',u:'https://num.pyro.ai/'},{l:'Pyro Documentation — Variational Inference',u:'https://pyro.ai/examples/index.html'}],
+     practice:[{l:'NumPyro MCMC Examples',u:'https://num.pyro.ai/en/latest/examples/bayesian_regression.html'}],
+     projects:[
+       {code:true,proof:false,text:'Implement Metropolis-Hastings and HMC from scratch; sample from a 2D banana-shaped posterior; visualise trace plots and compute effective sample size.'},
+       {code:true,proof:false,text:'Implement a VAE in PyTorch; derive the ELBO from first principles in your code comments; visualise latent space interpolation.'},
+       {code:false,proof:true,text:'Proof milestone: prove KL divergence is non-negative using Jensen\'s inequality; prove that maximising the ELBO is equivalent to minimising KL(q||p).'},
+     ]},
+   { n:21, time:'3–4 wk', name:'Advanced Mathematical Statistics',
+     why:'Deepens into asymptotic theory, decision theory, minimax optimality, and nonparametric methods — the level at which statistics research is conducted and papers are refereed.',
+     pri:{t:'Statistical Inference',a:'Casella & Berger',note:'Purchase recommended — no consistent free PDF. Decision theory, UMP tests, complete sufficiency, and asymptotic theory at full rigour.',af:false,disc:false},
+     sup:{t:'All of Nonparametric Statistics',a:'Larry Wasserman',note:'Free PDF at CMU (official, permanently hosted). Completes the statistical picture beyond parametric assumptions — kernel density estimation, bootstrap, and permutation tests.',af:true,disc:true},
+     videos:[{l:'CMU 36-705 — Intermediate Statistics (Wasserman, notes free)',u:'https://www.stat.cmu.edu/~larry/=stat705/'}],
+     docs:[{l:'All of Nonparametric Statistics — Free PDF (CMU official)',u:'https://www.stat.cmu.edu/~larry/all-of-nonpar/'}],
+     practice:[{l:'CMU 36-705 — Homework Assignments',u:'https://www.stat.cmu.edu/~larry/=stat705/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement bootstrap confidence intervals and permutation tests for three different test statistics; compare empirical vs. nominal coverage across sample sizes.'},
+       {code:false,proof:true,text:'Proof milestone: prove the Neyman-Pearson lemma; prove the bootstrap is consistent for smooth functionals of the empirical distribution.'},
+     ]},
+  ]},
+
+/* ══════════════════════════════════════════════ PHASE 10 */
+{ btn:'10 · Complex Analysis', tier:'A', time:'4–6 weeks',
+  feeds:'Feeds into: DS Topics 12, 18 (Signal processing in CNNs, Spectral methods in Transformers)',
+  name:'Complex Analysis',
+  desc:'The missing link between real analysis and Fourier methods, signal processing, and spectral theory. Often absent from DS roadmaps — a genuine gap for research-level work. The complex plane is where many real-analysis mysteries resolve themselves elegantly.',
+  review:'↩ Review: Return to Phase 5 (Real Analysis) — complex analysis is its natural extension into ℂ. Every concept (limits, derivatives, integration) carries over but becomes dramatically more powerful.',
+  topics:[
+   { n:22, time:'4–6 wk', name:'Complex Analysis',
+     why:'Complex analysis extends calculus to the complex plane — holomorphic functions, Cauchy\'s theorem, contour integration, residue theorem, and conformal mappings. It directly underlies the Fourier transform (via contour methods), signal processing in CNNs, and spectral methods in ML. Most DS roadmaps skip this — a genuine gap.',
+     pri:{t:'Visual Complex Analysis',a:'Tristan Needham',note:'Widely found via search (Oxford Press). The most geometrically intuitive treatment of complex analysis in existence. Needham\'s geometry-first approach is uniquely suited to someone with a strong visual-mathematical background.',af:false,disc:true},
+     sup:{t:'Complex Analysis (Princeton Lectures in Analysis, Vol. II)',a:'Stein & Shakarchi',note:'Widely found via search (Princeton Press). The rigorous treatment — Cauchy\'s theorem, meromorphic functions, Fourier transform via contour integration. Read after Needham for full rigour.',af:false,disc:true},
+     videos:[{l:'MIT OCW 18.04 — Complex Variables with Applications',u:'https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/'},{l:'Richard Borcherds — Complex Analysis (YouTube)',u:'https://www.youtube.com/playlist?list=PL8yHsr3EFj52xa-9kkMUAhUAADhzCnXGH'}],
+     docs:[{l:'MIT OCW 18.04 — Lecture Notes (free)',u:'https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/pages/readings/'},{l:'Wolfram MathWorld — Complex Analysis',u:'https://mathworld.wolfram.com/topics/ComplexAnalysis.html'}],
+     practice:[{l:'MIT OCW 18.04 — Problem Sets',u:'https://ocw.mit.edu/courses/18-04-complex-variables-with-applications-spring-2018/pages/assignments/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement a complex function domain colouring visualiser in Python/matplotlib — display phase and magnitude for 10 canonical holomorphic functions.'},
+       {code:true,proof:false,text:'Compute real integrals using contour integration and the residue theorem; implement the FFT and explicitly derive its connection to the Fourier integral.'},
+       {code:false,proof:true,text:'Proof milestone: prove Cauchy\'s Integral Formula; prove every holomorphic function is analytic (equals its Taylor series); prove the Residue Theorem.'},
+     ]},
+  ]},
+
+/* ══════════════════════════════════════════════ PHASE 11 */
+{ btn:'11 · Functional & Geometry', tier:'R', time:'6–8 weeks',
+  feeds:'Feeds into: DS Topics 6, 17, 18, 19 (Kernel Methods, Diffusion, Geometric DL, GNNs)',
+  name:'Functional Analysis & Differential Geometry',
+  desc:'Two topics absent from most DS roadmaps but required for modern ML theory. Functional analysis underpins kernel methods and infinite-dimensional optimisation. Differential geometry underpins manifold learning, geometric deep learning, and transformers on curved spaces.',
+  review:'↩ Review: Return to Phase 5 (Advanced Linear Algebra) — functional analysis is its infinite-dimensional generalisation. Every finite-dimensional theorem has an analogue here, and knowing when and why it fails is half the subject.',
+  topics:[
+   { n:23, time:'4–5 wk', name:'Functional Analysis',
+     why:'Functional analysis extends linear algebra to infinite-dimensional spaces — Hilbert spaces, Banach spaces, bounded operators, and spectral theory of operators. This is the foundation of kernel methods (RKHS), Gaussian processes, infinite-dimensional Bayesian inference, and the theoretical analysis of neural networks in function space.',
+     pri:{t:'Introductory Functional Analysis with Applications',a:'Erwin Kreyszig',note:'Widely found via search (Wiley). The most accessible introduction to functional analysis in existence. Kreyszig sacrifices no rigour while making every concept approachable — the standard first text for this transition.',af:false,disc:true},
+     sup:{t:'A Course in Functional Analysis',a:'John B. Conway',note:'Widely found via search (Springer GTM). The standard graduate reference. More concise and abstract than Kreyszig — use for operator theory depth and spectral theory.',af:false,disc:true},
+     videos:[{l:'MIT OCW 18.102 — Introduction to Functional Analysis (lecture notes free)',u:'https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/'},{l:'ICTP — Functional Analysis Lectures (YouTube)',u:'https://www.youtube.com/playlist?list=PLLq_gUfXAnkkdRgGg5JZTtC5S0Q2u1j-F'}],
+     docs:[{l:'MIT OCW 18.102 — Lecture Notes (free PDF)',u:'https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/pages/lecture-notes/'},{l:'GPyTorch Documentation — Gaussian Processes',u:'https://gpytorch.ai/'}],
+     practice:[{l:'MIT OCW 18.102 — Problem Sets',u:'https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/pages/problem-sets/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement Gaussian Process regression from scratch using the RKHS framework — define kernels, compute covariance matrices, compute posterior mean and variance; compare to GPyTorch.'},
+       {code:true,proof:false,text:'Implement kernel PCA and compare to standard PCA on circles and moons datasets; visualise the implicit RKHS feature map.'},
+       {code:false,proof:true,text:'Proof milestone: prove the Riesz Representation Theorem for Hilbert spaces; prove the Hahn-Banach theorem; prove every Hilbert space has an orthonormal basis.'},
+     ]},
+   { n:24, time:'4–5 wk', name:'Differential Geometry & Riemannian Manifolds',
+     why:'Differential geometry is the mathematics of curved spaces — manifolds, tangent spaces, geodesics, and Riemannian metrics. Directly underlies manifold learning (t-SNE, UMAP theory), geometric deep learning (equivariant networks, group convolutions), and the information geometry of ML parameter spaces.',
+     pri:{t:'An Introduction to Manifolds',a:'Loring W. Tu',note:'Widely found via search (Springer Universitext). The most accessible rigorous introduction to smooth manifolds — builds from minimum prerequisites. Gentler than Lee while remaining complete.',af:false,disc:true},
+     sup:{t:'Geometric Deep Learning: Grids, Groups, Graphs, Geodesics, and Gauges',a:'Bronstein, Bruna, Cohen & Veličković',note:'Free at geometricdeeplearning.com (official release, permanently hosted). The definitive treatment of how differential geometry, group theory, and deep learning unify. Landmark reference.',af:true,disc:true},
+     videos:[{l:'Frederic Schuller — Geometric Anatomy of Theoretical Physics (YouTube)',u:'https://www.youtube.com/playlist?list=PLPH7f_7ZlzxTi6kS4vCmv4ZKm9u8g5yic'},{l:'Michael Bronstein — Geometric Deep Learning Lectures (YouTube)',u:'https://www.youtube.com/playlist?list=PLn2-dEmQeTfSLXW8yUT7GEfFE7Gv_QAMW'}],
+     docs:[{l:'Geometric Deep Learning — Free PDF (geometricdeeplearning.com official)',u:'https://geometricdeeplearning.com/'},{l:'PyTorch Geometric Documentation',u:'https://pytorch-geometric.readthedocs.io/'}],
+     practice:[{l:'PyTorch Geometric — Tutorial Colabs (GitHub)',u:'https://pytorch-geometric.readthedocs.io/en/latest/get_started/colabs.html'},{l:'OGB — Open Graph Benchmark',u:'https://ogb.stanford.edu/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement t-SNE from scratch; analyse its connection to Gaussian kernels and manifold geometry; compare to UMAP on MNIST and a molecular dataset.'},
+       {code:true,proof:false,text:'Build an equivariant GNN for molecular property prediction using PyTorch Geometric; verify E(3) equivariance properties empirically.'},
+       {code:false,proof:true,text:'Proof milestone: prove every smooth manifold admits a Riemannian metric; prove the tangent space at any point of a smooth manifold is a vector space.'},
+     ]},
+  ]},
+
+/* ══════════════════════════════════════════════ PHASE 12 */
+{ btn:'12 · Frontier', tier:'R', time:'12–16 weeks',
+  feeds:'Feeds into: DS Topics 17–24 (all research-level ML — generative models, GNNs, LLMs, RL)',
+  name:'Applied Summit — Complexity, Game Theory, ML Synthesis, Time Series, Graphs & Deep Learning',
+  desc:'Everything crystallises. Every prior topic applies directly to modern ML and DS research. This is what the prior 24 topics were building towards.',
+  review:'↩ Review: Before beginning, re-read Phase 8 (Convex Optimization) — the connections between game theory, minimax optimisation, and GAN training dynamics will be immediately satisfying.',
+  topics:[
+   { n:25, time:'2–3 wk', name:'Computational Complexity Theory',
+     why:'Complexity theory formalises what is and is not computationally tractable — P, NP, NP-completeness, approximation, and reductions. Directly relevant to ML: why certain inference problems are intractable, why approximation is necessary, and how to reason about computational cost rigorously.',
+     pri:{t:'Introduction to the Theory of Computation',a:'Michael Sipser',note:'Widely found via search (Cengage). The most readable introduction to computation and complexity theory ever written. Clear, precise, full of beautiful proofs.',af:false,disc:true},
+     sup:{t:'Computational Complexity: A Modern Approach',a:'Arora & Barak',note:'Free draft at theory.cs.princeton.edu (official, permanently hosted). The definitive graduate reference. Read after Sipser for research-level depth.',af:true,disc:true},
+     videos:[{l:'MIT OCW 18.404 — Theory of Computation (Sipser, YouTube)',u:'https://www.youtube.com/playlist?list=PLUl4u3cNGP60_JNv2MmK3wkOt9syvfQWY'},{l:'Ryan O\'Donnell — Undergrad Complexity Theory (CMU, YouTube)',u:'https://www.youtube.com/playlist?list=PLm3J0oaFux3YL5vLXpzOyJiLtqLp6dCW2'}],
+     docs:[{l:'Arora & Barak — Free draft PDF (theory.cs.princeton.edu)',u:'https://theory.cs.princeton.edu/complexity/'},{l:'Complexity Zoo — Complexity classes reference',u:'https://complexityzoo.net/Complexity_Zoo'}],
+     practice:[{l:'MIT OCW 18.404 — Problem Sets',u:'https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/pages/assignments/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement and benchmark a 3SAT solver (DPLL); demonstrate empirically the hardness phase transition around the 4.27 clause/variable ratio.'},
+       {code:false,proof:true,text:'Proof milestone: prove 3-SAT is NP-complete (Cook-Levin); prove that if P = NP the polynomial hierarchy collapses.'},
+     ]},
+   { n:26, time:'2–3 wk', name:'Game Theory & Multi-Agent Mathematics',
+     why:'Game theory is the mathematical foundation of multi-agent RL, mechanism design, GAN training dynamics, and auction theory. Nash equilibria, minimax theorems, and cooperative game theory appear constantly in modern ML research.',
+     pri:{t:'A Course in Game Theory',a:'Osborne & Rubinstein',note:'Free with MIT Press permission (official, hosted at multiple university servers). Nash equilibria, extensive form games, repeated games, coalitional games — rigorous, proof-driven, written for self-study.',af:true,disc:true},
+     sup:{t:'Algorithmic Game Theory',a:'Nisan, Roughgarden, Tardos & Vazirani',note:'Free at Cambridge University Press (official open-access release). Bridges pure game theory and computation — directly relevant to mechanism design and ML training dynamics.',af:true,disc:true},
+     videos:[{l:'Yale ECON 159 — Game Theory (Ben Polak, YouTube)',u:'https://www.youtube.com/playlist?list=PL6EF60E1027E1A10B'},{l:'Tim Roughgarden — Algorithmic Game Theory (Stanford, YouTube)',u:'https://www.youtube.com/playlist?list=PLEGCF-WLh2RJh2yDxlJJjnKswWdoO8gAc'}],
+     docs:[{l:'Osborne & Rubinstein — Free PDF (MIT Press permission)',u:'https://sites.math.rutgers.edu/~zeilberg/EM20/OsborneRubinsteinMasterpiece.pdf'},{l:'Algorithmic Game Theory — Free PDF (Cambridge official)',u:'https://www.cs.cmu.edu/~sandholm/cs15-892F13/algorithmic-game-theory.pdf'},{l:'Nashpy — Python Nash equilibria library',u:'https://nashpy.readthedocs.io/'}],
+     practice:[{l:'Nashpy — Tutorial examples',u:'https://nashpy.readthedocs.io/en/stable/tutorial/index.html'}],
+     projects:[
+       {code:true,proof:false,text:'Implement fictitious play and support enumeration to find Nash equilibria in 2-player zero-sum and general-sum games using Nashpy.'},
+       {code:true,proof:false,text:'Train a GAN and analyse training instability through the lens of the minimax theorem; plot generator/discriminator loss dynamics and identify mode collapse.'},
+       {code:false,proof:true,text:'Proof milestone: prove Nash\'s existence theorem via Kakutani\'s fixed-point theorem; prove the minimax theorem for zero-sum games.'},
+     ]},
+   { n:27, time:'2–3 wk', name:'Mathematics for Machine Learning — Synthesis',
+     why:'The explicit synthesis connecting every prior topic (linear algebra, calculus, probability, optimisation) to ML formulations. After 26 topics of rigour, this book names the connections you already sense but haven\'t yet seen stated explicitly in one unified place.',
+     pri:{t:'Mathematics for Machine Learning',a:'Deisenroth, Faisal & Ong',note:'Free at mml-book.github.io (official author release). The only book that explicitly unifies linear algebra, calculus, probability, and optimisation for ML.',af:true,disc:true},
+     sup:{t:'The Matrix Calculus You Need for Deep Learning',a:'Parr & Howard',note:'Free at arxiv.org/abs/1802.01528 (official arXiv, 33 pages). Precise and complete derivation of the calculus behind backpropagation — fills a gap no textbook fills.',af:true,disc:true},
+     videos:[{l:'Imperial College London — MML Lectures (YouTube)',u:'https://www.youtube.com/playlist?list=PLmkn7IBuAnVcNMjRJMZ3wuJrpCmAoV6pf'}],
+     docs:[{l:'mml-book.github.io — Free interactive textbook (official)',u:'https://mml-book.github.io/'},{l:'The Matrix Calculus You Need — arXiv PDF (official)',u:'https://arxiv.org/abs/1802.01528'}],
+     practice:[{l:'MML Book — Exercises (GitHub)',u:'https://github.com/mml-book/mml-book.github.io/tree/master/exercises'}],
+     projects:[
+       {code:true,proof:false,text:'Implement full backpropagation from scratch using matrix calculus rules — no autograd; verify gradients against PyTorch autograd on 5 architectures.'},
+       {code:false,proof:true,text:'Proof milestone: derive the gradients of softmax, cross-entropy loss, layer normalisation, and scaled dot-product attention from first principles on paper.'},
+     ]},
+   { n:28, time:'2–3 wk', name:'Time Series Analysis & Forecasting',
+     why:'Sequential modelling — ARIMA, state-space models, and transformers on sequences — is a core DS specialisation with direct applications in finance, climate, and health research.',
+     pri:{t:'Forecasting: Principles and Practice (3rd ed.)',a:'Hyndman & Athanasopoulos',note:'Free at otexts.com/fpp3 (official author release). Modern, practical, and theory-grounded. The best accessible introduction to time series forecasting that exists.',af:true,disc:true},
+     sup:{t:'Introduction to Time Series and Forecasting',a:'Brockwell & Davis',note:'Widely found via search (Springer). The rigorous theoretical treatment — ARIMA, spectral analysis, and state-space models in full mathematical detail.',af:false,disc:true},
+     videos:[{l:'Penn State STAT 510 — Applied Time Series (free online)',u:'https://online.stat.psu.edu/stat510/'},{l:'Rob Hyndman — Forecasting Lectures (YouTube)',u:'https://www.youtube.com/playlist?list=PL_FMkSsxn-FU3gNH9TCK6_SxXsKm36FGY'}],
+     docs:[{l:'otexts.com/fpp3 — Free interactive textbook (official)',u:'https://otexts.com/fpp3/'},{l:'statsmodels — Time Series Documentation',u:'https://www.statsmodels.org/stable/tsa.html'}],
+     practice:[{l:'Kaggle — Store Sales Time Series Forecasting',u:'https://www.kaggle.com/competitions/store-sales-time-series-forecasting'},{l:'Kaggle — M5 Forecasting Competition (archived)',u:'https://www.kaggle.com/competitions/m5-forecasting-accuracy'}],
+     projects:[
+       {code:true,proof:false,text:'Implement ARIMA from scratch (no statsmodels); fit to a real financial time series; compare to seasonal decomposition and exponential smoothing baselines.'},
+       {code:true,proof:false,text:'Build a Temporal Fusion Transformer baseline for multi-step forecasting on Kaggle M5; compare to ARIMA and LSTM baselines.'},
+       {code:false,proof:true,text:'Proof milestone: prove an AR(1) process is stationary iff |φ| < 1; prove the Yule-Walker equations for AR parameter estimation.'},
+     ]},
+   { n:29, time:'2–3 wk', name:'Graph Theory & Graph Neural Networks',
+     why:'Discrete mathematics gave you graph foundations; linear algebra gave you the spectral tools. GNNs are one of the fastest-growing research areas — social networks, molecular biology, knowledge graphs, and recommendation systems are all graph problems.',
+     pri:{t:'Graph Representation Learning',a:'William L. Hamilton',note:'Free at cs.mcgill.ca/~wlh/grl_book (official author release). Written specifically to bridge graph theory and modern GNN architectures — the only book of its kind.',af:true,disc:true},
+     sup:{t:'Introduction to Graph Theory',a:'Douglas B. West',note:'Widely found via search. The rigorous pure-math foundation — formal proofs, combinatorial depth, and the graph-theoretic background behind GNN theoretical analysis.',af:false,disc:true},
+     videos:[{l:'Stanford CS224W — ML with Graphs (Leskovec, YouTube)',u:'https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn'}],
+     docs:[{l:'Hamilton — GRL Free PDF (cs.mcgill.ca official)',u:'https://cs.mcgill.ca/~wlh/grl_book/'},{l:'PyTorch Geometric Documentation',u:'https://pytorch-geometric.readthedocs.io/'},{l:'NetworkX Documentation',u:'https://networkx.org/documentation/stable/'}],
+     practice:[{l:'Stanford CS224W — Colab Assignments (GitHub)',u:'https://github.com/snap-stanford/cs224w-colab'},{l:'OGB — Open Graph Benchmark',u:'https://ogb.stanford.edu/'}],
+     projects:[
+       {code:true,proof:false,text:'Implement GCN, GraphSAGE, and GAT from scratch in PyTorch; evaluate all three on node classification on Cora and CiteSeer.'},
+       {code:true,proof:false,text:'Build a molecular property predictor using GNNs on the QM9 dataset; analyse which graph structural features correlate most with prediction error.'},
+       {code:false,proof:true,text:'Proof milestone: prove the Perron-Frobenius theorem for non-negative matrices; prove spectral clustering minimises the normalised cut objective.'},
+     ]},
+   { n:30, time:'3–4 wk', name:'Deep Learning — Theory & Practice (Summit)',
+     why:'This is the summit. Optimisation, linear algebra, probability, information theory, calculus, functional analysis, complex analysis, and numerical methods all converge into the mathematical framework of deep learning. You now have every prerequisite to read this rigorously — not as a practitioner following recipes, but as a mathematician who understands every equation.',
+     pri:{t:'Deep Learning',a:'Goodfellow, Bengio & Courville',note:'Free at deeplearningbook.org (official author release). The definitive theoretical treatment. Every chapter rewards the full mathematical preparation this roadmap builds.',af:true,disc:true},
+     sup:{t:'Dive into Deep Learning',a:'Zhang, Lipton, Li & Smola',note:'Free at d2l.ai (official release). Every equation comes with executable code. Theory and practice presented simultaneously — the perfect practical companion.',af:true,disc:true},
+     videos:[{l:'Andrej Karpathy — Neural Networks Zero to Hero (YouTube)',u:'https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ'},{l:'Stanford CS231n — CNNs (lecture notes free)',u:'https://cs231n.github.io/'},{l:'fast.ai — Practical Deep Learning for Coders (free)',u:'https://course.fast.ai/'}],
+     docs:[{l:'deeplearningbook.org — Free online textbook (official)',u:'https://www.deeplearningbook.org/'},{l:'d2l.ai — Free interactive textbook (official)',u:'https://d2l.ai/'},{l:'PyTorch Documentation',u:'https://pytorch.org/docs/stable/index.html'},{l:'JAX Documentation',u:'https://jax.readthedocs.io/'}],
+     practice:[{l:'Karpathy — micrograd (build your own autograd)',u:'https://github.com/karpathy/micrograd'},{l:'Papers With Code — State of the Art',u:'https://paperswithcode.com/sota'},{l:'Kaggle — Deep Learning Competitions',u:'https://www.kaggle.com/competitions'}],
+     projects:[
+       {code:true,proof:false,text:'Build a complete autograd engine from scratch following micrograd; extend to support conv2d, batch norm, multi-head attention, and softmax.'},
+       {code:true,proof:false,text:'Implement the Transformer architecture from scratch; train a character-level language model following Karpathy\'s nanoGPT; analyse attention patterns.'},
+       {code:true,proof:false,text:'Reproduce one published deep learning paper from scratch — implement, train, and verify reported metrics with no reference code.'},
+       {code:false,proof:true,text:'Proof milestone: derive the universal approximation theorem; prove SGD converges to a stationary point for L-smooth non-convex objectives.'},
+     ]},
+  ]},
+
+]; /* end DATA */
+
+/* ── Render ─────────────────────────────────────────────────────── */
 const nav  = document.getElementById('pnav');
 const cons = document.getElementById('pcons');
 
-const ICON = {
-  book:  '📖',
-  video: '▶',
-  doc:   '◈',
-  prac:  '◉',
-  proj:  '◆',
-};
-
 DATA.forEach((ph, i) => {
-  // Nav button
+  /* Nav button */
   const btn = document.createElement('button');
   btn.className = 'pbtn' + (i === 0 ? ' active' : '');
   btn.textContent = ph.btn;
@@ -1122,27 +759,36 @@ DATA.forEach((ph, i) => {
     btn.classList.add('active');
     const panel = document.getElementById('pc' + i);
     panel.classList.add('active');
-    panel.scrollIntoView({ behavior:'smooth', block:'start' });
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
   nav.appendChild(btn);
 
-  // Content panel
+  /* Panel */
   const div = document.createElement('div');
   div.id = 'pc' + i;
   div.className = 'pcon' + (i === 0 ? ' active' : '');
 
-  // Phase desc
-  const pdesc = document.createElement('div');
-  pdesc.className = 'pdesc';
-  pdesc.innerHTML = `
-    <div class="pdesc-top">
-      <span class="pdesc-name">${ph.name}</span>
-      <span class="bdg ${TIERS[ph.tier]}">${TIERL[ph.tier]}</span>
-    </div>
-    <div class="pdesc-why">${ph.desc}</div>`;
-  div.appendChild(pdesc);
+  /* Phase meta row */
+  const meta = document.createElement('div');
+  meta.className = 'phase-meta';
+  meta.innerHTML = `<span class="time-pill">◷ ${ph.time}</span><span class="feeds-pill">→ ${ph.feeds}</span>`;
+  div.appendChild(meta);
 
-  // Topic stack
+  /* Review note */
+  if (ph.review) {
+    const rv = document.createElement('div');
+    rv.className = 'review-note';
+    rv.textContent = ph.review;
+    div.appendChild(rv);
+  }
+
+  /* Phase desc */
+  const pd = document.createElement('div');
+  pd.className = 'pdesc';
+  pd.innerHTML = `<div class="pdesc-top"><span class="pdesc-name">${ph.name}</span><span class="bdg ${TIERS[ph.tier]}">${TIERL[ph.tier]}</span></div><div class="pdesc-why">${ph.desc}</div>`;
+  div.appendChild(pd);
+
+  /* Topics */
   const stack = document.createElement('div');
   stack.className = 'tstack';
 
@@ -1150,54 +796,31 @@ DATA.forEach((ph, i) => {
     const card = document.createElement('div');
     card.className = 'tcard';
 
-    const priLabel = t.pri.af
-      ? `<span class="bdg b-af">Author's site · free</span>`
-      : `<span class="bdg b-free">PDF discoverable</span>`;
-    const supLabel = t.sup.af
-      ? `<span class="bdg b-af">Author's site · free</span>`
-      : `<span class="bdg b-free">PDF discoverable</span>`;
-
-    const optBadge = t.optional
-      ? `<span class="topt-badge">◈ Optional</span>`
-      : '';
-
-    // Video chips
-    const videoChips = (t.videos || []).map(r =>
-      `<a class="chip chip-video" href="${r.u}" target="_blank" rel="noopener">${r.l}</a>`
-    ).join('');
-
-    // Doc chips
-    const docChips = (t.docs || []).map(r =>
-      `<a class="chip chip-doc" href="${r.u}" target="_blank" rel="noopener">${r.l}</a>`
-    ).join('');
-
-    // Practice chips
-    const pracChips = (t.practice || []).map(r =>
-      `<a class="chip chip-prac" href="${r.u}" target="_blank" rel="noopener">${r.l}</a>`
-    ).join('');
-
-    // Project items
-    const projItems = (t.projects || []).map(p =>
-      `<div class="proj-item"><span class="proj-bullet">▸</span><span>${p}</span></div>`
-    ).join('');
+    const opt  = t.optional ? `<span class="topt">◈ Optional</span>` : '';
+    const tt   = `<span class="ttime">◷ ${t.time}</span>`;
+    const vchips = (t.videos   || []).map(r => `<a class="chip chip-video" href="${r.u}" target="_blank" rel="noopener">${r.l}</a>`).join('');
+    const dchips = (t.docs     || []).map(r => `<a class="chip chip-doc"   href="${r.u}" target="_blank" rel="noopener">${r.l}</a>`).join('');
+    const pchips = (t.practice || []).map(r => `<a class="chip chip-prac"  href="${r.u}" target="_blank" rel="noopener">${r.l}</a>`).join('');
+    const cprojs = (t.projects || []).filter(p => p.code ).map(p => `<div class="proj-item"><span class="proj-bullet bullet-code">◆</span><span>${p.text}</span></div>`).join('');
+    const pprojs = (t.projects || []).filter(p => p.proof).map(p => `<div class="proj-item"><span class="proj-bullet bullet-proof">◈</span><span>${p.text}</span></div>`).join('');
 
     card.innerHTML = `
       <div class="tcard-head">
         <span class="tnum">TOPIC ${String(t.n).padStart(2,'0')}</span>
         <span class="tname">${t.name}</span>
-        ${optBadge}
+        ${tt}${opt}
       </div>
       <div class="twhy">${t.why}</div>
       <div class="rsections">
         <div class="rsec">
-          <div class="rsec-icon icon-book">${ICON.book}</div>
+          <div class="rsec-icon icon-book">📖</div>
           <div class="rsec-body">
             <span class="rsec-label">Books</span>
             <div class="book-list">
               <div class="book-item">
                 <span class="book-role">Primary</span>
                 <div class="book-body">
-                  <div class="book-title">${t.pri.t} ${priLabel}</div>
+                  <div class="book-title">${t.pri.t} ${bookBadge(t.pri)}</div>
                   <div class="book-auth">— ${t.pri.a}</div>
                   <div class="book-note">${t.pri.note}</div>
                 </div>
@@ -1206,7 +829,7 @@ DATA.forEach((ph, i) => {
               <div class="book-item">
                 <span class="book-role">Suppl.</span>
                 <div class="book-body">
-                  <div class="book-title">${t.sup.t} ${supLabel}</div>
+                  <div class="book-title">${t.sup.t} ${bookBadge(t.sup)}</div>
                   <div class="book-auth">— ${t.sup.a}</div>
                   <div class="book-note">${t.sup.note}</div>
                 </div>
@@ -1214,38 +837,11 @@ DATA.forEach((ph, i) => {
             </div>
           </div>
         </div>
-        ${videoChips ? `
-        <div class="rsec">
-          <div class="rsec-icon icon-video">${ICON.video}</div>
-          <div class="rsec-body">
-            <span class="rsec-label">Video Playlists &amp; Courses</span>
-            <div class="chip-row">${videoChips}</div>
-          </div>
-        </div>` : ''}
-        ${docChips ? `
-        <div class="rsec">
-          <div class="rsec-icon icon-doc">${ICON.doc}</div>
-          <div class="rsec-body">
-            <span class="rsec-label">Documentation &amp; References</span>
-            <div class="chip-row">${docChips}</div>
-          </div>
-        </div>` : ''}
-        ${pracChips ? `
-        <div class="rsec">
-          <div class="rsec-icon icon-prac">${ICON.prac}</div>
-          <div class="rsec-body">
-            <span class="rsec-label">Practice Resources</span>
-            <div class="chip-row">${pracChips}</div>
-          </div>
-        </div>` : ''}
-        ${projItems ? `
-        <div class="rsec">
-          <div class="rsec-icon icon-proj">${ICON.proj}</div>
-          <div class="rsec-body">
-            <span class="rsec-label">Project Milestones</span>
-            <div class="proj-list">${projItems}</div>
-          </div>
-        </div>` : ''}
+        ${vchips ? `<div class="rsec"><div class="rsec-icon icon-video">▶</div><div class="rsec-body"><span class="rsec-label">Video Playlists &amp; Courses</span><div class="chip-row">${vchips}</div></div></div>` : ''}
+        ${dchips ? `<div class="rsec"><div class="rsec-icon icon-doc">◈</div><div class="rsec-body"><span class="rsec-label">Documentation &amp; References</span><div class="chip-row">${dchips}</div></div></div>` : ''}
+        ${pchips ? `<div class="rsec"><div class="rsec-icon icon-prac">◉</div><div class="rsec-body"><span class="rsec-label">Practice Resources</span><div class="chip-row">${pchips}</div></div></div>` : ''}
+        ${cprojs ? `<div class="rsec"><div class="rsec-icon icon-proj">◆</div><div class="rsec-body"><span class="rsec-label">Coding Projects</span><div class="proj-list">${cprojs}</div></div></div>` : ''}
+        ${pprojs ? `<div class="rsec"><div class="rsec-icon icon-proof">◈</div><div class="rsec-body"><span class="rsec-label">Proof Milestones</span><div class="proj-list">${pprojs}</div></div></div>` : ''}
       </div>`;
 
     stack.appendChild(card);
