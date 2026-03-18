@@ -1,0 +1,2916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full-Stack × DevSecOps Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inconsolata:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:    #1a1208;
+    --paper:  #faf6ee;
+    --paper2: #f3ede0;
+    --paper3: #ece4d0;
+    --amber:  #c8880a;
+    --amber2: #e8a020;
+    --amber3: #f5c050;
+    --rust:   #b84020;
+    --teal:   #1a7a6e;
+    --blue:   #1e4d8c;
+    --green:  #2e7d32;
+    --purple: #5b2d8e;
+    --red:    #b71c1c;
+    --steel:  #4a5568;
+    --steel2: #718096;
+    --java:   #b5591a;
+    --java2:  #e07328;
+    --ai:     #0e6655;
+    --ai2:    #1abc9c;
+    --line:   rgba(26,18,8,0.12);
+    --shadow: 0 2px 12px rgba(26,18,8,0.10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper2);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── PAPER TEXTURE ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(26,18,8,0.025) 0px, transparent 1px, transparent 24px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 20px 100px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  .masthead {
+    padding: 60px 0 36px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 10px;
+  }
+  .masthead-eyebrow {
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .masthead-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--amber);
+  }
+  .masthead h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 6vw, 64px);
+    line-height: 1.0;
+    color: var(--ink);
+    letter-spacing: -1px;
+  }
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--amber);
+  }
+  .masthead-sub {
+    margin-top: 14px;
+    font-size: 15px;
+    color: var(--steel);
+    font-weight: 300;
+    max-width: 600px;
+  }
+  .masthead-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .meta-chip {
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 2px;
+    background: var(--ink);
+    color: var(--amber3);
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 16px 20px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--amber);
+    margin: 24px 0 40px;
+    font-size: 13px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 500;
+  }
+  .badge {
+    font-family: 'Inconsolata', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .b-seq   { background: rgba(30,77,140,0.12); color: var(--blue); border: 1px solid rgba(30,77,140,0.3); }
+  .b-para  { background: rgba(46,125,50,0.12); color: var(--green); border: 1px solid rgba(46,125,50,0.3); }
+  .b-opt   { background: rgba(91,45,142,0.10); color: var(--purple); border: 1px solid rgba(91,45,142,0.25); }
+  .b-cont  { background: rgba(200,136,10,0.12); color: var(--amber); border: 1px solid rgba(200,136,10,0.3); }
+  .b-warn  { background: rgba(184,64,32,0.10); color: var(--rust); border: 1px solid rgba(184,64,32,0.25); }
+  .b-java  { background: rgba(181,89,26,0.12); color: var(--java); border: 1px solid rgba(181,89,26,0.35); }
+  .b-ai    { background: rgba(14,102,85,0.10); color: var(--ai); border: 1px solid rgba(14,102,85,0.3); }
+
+  /* ── PHASE HEADER ── */
+  .phase-block {
+    margin: 56px 0 0;
+  }
+  .phase-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0;
+    align-items: stretch;
+    margin-bottom: 20px;
+  }
+  .phase-num-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 20px;
+  }
+  .phase-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 72px;
+    line-height: 0.85;
+    color: var(--paper3);
+    -webkit-text-stroke: 1.5px var(--ink);
+    text-stroke: 1.5px var(--ink);
+    min-width: 72px;
+    text-align: center;
+    user-select: none;
+  }
+  .phase-vert-line {
+    flex: 1;
+    width: 1px;
+    background: var(--line);
+    margin-top: 8px;
+  }
+  .phase-main { padding-top: 6px; }
+  .phase-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .phase-title span { color: var(--amber); }
+  .phase-desc {
+    font-size: 13.5px;
+    color: var(--steel);
+    margin-top: 6px;
+    font-style: italic;
+    max-width: 600px;
+  }
+  .phase-prereq {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    color: var(--rust);
+    margin-top: 8px;
+    padding: 4px 10px;
+    background: rgba(184,64,32,0.06);
+    border: 1px solid rgba(184,64,32,0.2);
+    border-radius: 2px;
+  }
+
+  /* ── STEP CARD ── */
+  .steps { display: flex; flex-direction: column; gap: 2px; margin-left: 92px; }
+
+  .step-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: box-shadow 0.2s;
+  }
+  .step-card:hover { box-shadow: 0 4px 20px rgba(26,18,8,0.14); }
+
+  .step-card.accent-amber  { border-left: 3px solid var(--amber); }
+  .step-card.accent-blue   { border-left: 3px solid var(--blue); }
+  .step-card.accent-teal   { border-left: 3px solid var(--teal); }
+  .step-card.accent-green  { border-left: 3px solid var(--green); }
+  .step-card.accent-rust   { border-left: 3px solid var(--rust); }
+  .step-card.accent-purple { border-left: 3px solid var(--purple); }
+  .step-card.accent-java   { border-left: 3px solid var(--java); }
+  .step-card.accent-ai     { border-left: 3px solid var(--ai); }
+
+  .step-head {
+    padding: 16px 20px 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .step-num-tag {
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+  }
+  .step-title-wrap { flex: 1; }
+  .step-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .step-sub {
+    font-size: 12px;
+    color: var(--steel2);
+    font-style: italic;
+    margin-top: 2px;
+  }
+  .step-badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .step-body {
+    padding: 0 20px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .step-desc {
+    font-size: 13.5px;
+    color: var(--steel);
+    line-height: 1.7;
+  }
+
+  /* Tags row */
+  .tech-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tech-tag {
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    padding: 2px 9px;
+    background: var(--paper3);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    color: var(--steel);
+    letter-spacing: 0.3px;
+  }
+
+  /* Resource row */
+  .resource-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  @media(max-width:600px) { .resource-row { grid-template-columns: 1fr; } }
+
+  .resource-card {
+    padding: 10px 14px;
+    background: var(--paper2);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+  }
+  .resource-label {
+    font-family: 'Inconsolata', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--steel2);
+    margin-bottom: 4px;
+  }
+  .resource-label.book { color: var(--blue); }
+  .resource-label.practice { color: var(--green); }
+  .resource-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .resource-note {
+    font-size: 11.5px;
+    color: var(--steel2);
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  /* Parallel group */
+  .parallel-group {
+    display: flex;
+    gap: 2px;
+    position: relative;
+  }
+  .parallel-group::before {
+    content: 'PARALLEL';
+    position: absolute;
+    left: -70px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-family: 'Inconsolata', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--green);
+    white-space: nowrap;
+    opacity: 0.7;
+  }
+  .parallel-group .step-card { flex: 1; min-width: 0; }
+
+  /* Connector arrow */
+  .connector {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 0 6px 20px;
+    margin-left: 20px;
+  }
+  .conn-line {
+    width: 1px;
+    height: 20px;
+    background: var(--line);
+  }
+  .conn-label {
+    font-family: 'Inconsolata', monospace;
+    font-size: 10px;
+    color: var(--steel2);
+    letter-spacing: 1px;
+  }
+
+  /* ── PROJECT ACCORDION ── */
+  .project-accordion {
+    border: 1px solid rgba(200,136,10,0.3);
+    border-radius: 3px;
+    background: rgba(200,136,10,0.04);
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .proj-toggle {
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 11px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    text-align: left;
+  }
+  .proj-toggle:hover { background: rgba(200,136,10,0.06); }
+  .proj-toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inconsolata', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+  .proj-toggle-label::before {
+    content: '◆';
+    font-size: 8px;
+  }
+  .proj-chevron {
+    font-size: 12px;
+    color: var(--amber);
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .proj-content {
+    display: none;
+    padding: 0 16px 14px;
+  }
+  .proj-content.open { display: block; }
+  .proj-chevron.open { transform: rotate(180deg); }
+
+  .project-item {
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+  }
+  .project-item:first-child { border-top: none; }
+  .proj-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .proj-desc {
+    font-size: 12.5px;
+    color: var(--steel);
+    margin-top: 3px;
+    line-height: 1.55;
+  }
+  .proj-revises {
+    font-family: 'Inconsolata', monospace;
+    font-size: 10px;
+    color: var(--purple);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+  .proj-revises::before { content: 'REVISES: '; opacity: 0.6; }
+
+  /* ── CONTINUOUS BANNER ── */
+  .continuous-banner {
+    background: var(--ink);
+    color: var(--amber3);
+    padding: 16px 24px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 32px 0;
+    font-family: 'Inconsolata', monospace;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  .cb-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(245,192,80,0.6);
+    flex-shrink: 0;
+  }
+  .cb-items {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .cb-item {
+    padding: 3px 10px;
+    border: 1px solid rgba(245,192,80,0.3);
+    border-radius: 2px;
+    font-size: 12px;
+  }
+
+  /* phase divider */
+  .phase-div {
+    height: 1px;
+    background: linear-gradient(90deg, var(--line), transparent);
+    margin: 56px 0 0;
+  }
+
+  /* Milestone box */
+  .milestone-box {
+    background: var(--paper3);
+    border-radius: 3px;
+    padding: 10px 14px;
+    border-left: 2px solid var(--teal);
+  }
+  .milestone-box-label {
+    font-family: 'Inconsolata', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 5px;
+  }
+  .milestone-box ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .milestone-box ul li {
+    font-size: 12.5px;
+    color: var(--ink);
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+  }
+  .milestone-box ul li::before {
+    content: '→';
+    font-size: 10px;
+    color: var(--teal);
+    flex-shrink: 0;
+  }
+
+  @media(max-width:700px) {
+    .steps { margin-left: 20px; }
+    .phase-num-col { display: none; }
+    .phase-header { grid-template-columns: 1fr; }
+    .parallel-group { flex-direction: column; }
+    .parallel-group::before { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-eyebrow">Field Manual — Issue 01</div>
+  <h1>Full-Stack<br><em>× DevSecOps</em></h1>
+  <p class="masthead-sub">A complete, sequenced roadmap from zero to production-secure deployment. Every step is a prerequisite for the next. Sourced from your notebook, structured for execution.</p>
+  <div class="masthead-meta">
+    <span class="meta-chip">51 topics</span>
+    <span class="meta-chip">9 phases</span>
+    <span class="meta-chip">~18–24 months</span>
+    <span class="meta-chip">LeetCode 2/day throughout</span>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><span class="badge b-seq">sequential</span> must complete in order</div>
+  <div class="legend-item"><span class="badge b-para">parallel</span> can be learned simultaneously</div>
+  <div class="legend-item"><span class="badge b-opt">optional</span> valuable but not blocking</div>
+  <div class="legend-item"><span class="badge b-cont">continuous</span> do throughout the roadmap</div>
+  <div class="legend-item"><span class="badge b-warn">prereq</span> hard dependency</div>
+</div>
+
+<!-- CONTINUOUS -->
+<div class="continuous-banner">
+  <span class="cb-label">Always On</span>
+  <div class="cb-items">
+    <span class="cb-item">LeetCode — 2 problems/day (Easy→Medium→Hard, cycled)</span>
+    <span class="cb-item">Build something every phase — no passive-only learning</span>
+    <span class="cb-item">Read 1 tech blog daily (Bytes, TLDR, Engineering blogs)</span>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  PHASE 0: GROUND ZERO                            -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="phase-block" id="phase0">
+  <div class="phase-header">
+    <div class="phase-num-col">
+      <div class="phase-num">0</div>
+      <div class="phase-vert-line"></div>
+    </div>
+    <div class="phase-main">
+      <div class="phase-title">Ground <span>Zero</span></div>
+      <div class="phase-desc">The invisible foundations. Skip these and you'll hit ceilings everywhere. Nothing else in this roadmap works without them.</div>
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <!-- 0.1 -->
+    <div class="step-card accent-amber">
+      <div class="step-head">
+        <span class="step-num-tag">0.1</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Computer Networking → CCNA Track</div>
+          <div class="step-sub">How data moves across wires — the entire internet in one mental model</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">You will touch servers, deploy to cloud, debug latency issues, and configure Docker networks every single day. Without knowing IP addressing, DNS, TCP/IP, and HTTP deeply, you're guessing. CCNA level is the target — you don't need to sit the exam, but understand everything it covers.</p>
+        <div class="tech-row">
+          <span class="tech-tag">OSI / TCP-IP model</span>
+          <span class="tech-tag">IP addressing / CIDR</span>
+          <span class="tech-tag">DNS / DHCP / ARP</span>
+          <span class="tech-tag">TCP vs UDP</span>
+          <span class="tech-tag">HTTP/1.1 · HTTP/2 · HTTP/3</span>
+          <span class="tech-tag">TLS / HTTPS</span>
+          <span class="tech-tag">Routing basics</span>
+          <span class="tech-tag">Firewalls / NAT</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Computer Networking: A Top-Down Approach</div>
+            <div class="resource-note">Kurose & Ross — definitive, Chs. 1–4 cover everything needed</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">Cisco NetAcad (free) + Professor Messer CCNA videos</div>
+            <div class="resource-note">Free structured course with labs, widely used</div>
+          </div>
+        </div>
+        <div class="project-accordion">
+          <button class="proj-toggle" onclick="toggle(this)">
+            <span class="proj-toggle-label">Projects</span>
+            <span class="proj-chevron">▼</span>
+          </button>
+          <div class="proj-content">
+            <div class="project-item">
+              <div class="proj-name">Network Topology Sketch</div>
+              <div class="proj-desc">Draw and explain the complete network path of a browser request to google.com — every hop, every protocol layer, every translation. Write it up as a blog post.</div>
+            </div>
+            <div class="project-item">
+              <div class="proj-name">Packet Capture Analysis</div>
+              <div class="proj-desc">Use Wireshark to capture a real HTTP vs HTTPS session. Annotate every packet. See exactly what TLS hides.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div><span class="conn-label">unlocks all version-controlled work below</span></div>
+
+    <!-- 0.2 -->
+    <div class="step-card accent-amber">
+      <div class="step-head">
+        <span class="step-num-tag">0.2</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Git & Git Workflows</div>
+          <div class="step-sub">Version control is not optional — it's air</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Every line of code you write from this point forward lives in Git. Learn Git internals, not just commands — understand commits as snapshots, the three trees (working dir, index, HEAD), and branching strategies used in real teams (GitFlow, trunk-based development).</p>
+        <div class="tech-row">
+          <span class="tech-tag">init · add · commit · push · pull</span>
+          <span class="tech-tag">branches & merging</span>
+          <span class="tech-tag">rebase (interactive)</span>
+          <span class="tech-tag">cherry-pick</span>
+          <span class="tech-tag">git bisect</span>
+          <span class="tech-tag">stash · reflog</span>
+          <span class="tech-tag">GitFlow / trunk-based dev</span>
+          <span class="tech-tag">GitHub PRs & code review</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Pro Git — Scott Chacon</div>
+            <div class="resource-note">Free at git-scm.com/book — the only Git book you need</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">learngitbranching.js.org</div>
+            <div class="resource-note">Interactive visual sandbox — best Git practice resource available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 0.3 -->
+    <div class="step-card accent-amber">
+      <div class="step-head">
+        <span class="step-num-tag">0.3</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Shell Scripting & the Terminal</div>
+          <div class="step-sub">All DevOps, CI/CD, and server work happens here</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">CI/CD pipelines, Dockerfiles, deployment scripts, cron jobs — they're all shell. You need to be fluent enough to read and write bash without hesitation. Also sets you up for Phase 7 (DevOps) where you'll be scripting everything from health checks to rollback procedures.</p>
+        <div class="tech-row">
+          <span class="tech-tag">bash syntax & control flow</span>
+          <span class="tech-tag">pipes & redirects</span>
+          <span class="tech-tag">grep / awk / sed</span>
+          <span class="tech-tag">cron jobs</span>
+          <span class="tech-tag">environment variables</span>
+          <span class="tech-tag">process management (ps, kill, htop)</span>
+          <span class="tech-tag">ssh & scp</span>
+          <span class="tech-tag">file permissions</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">The Linux Command Line — William Shotts</div>
+            <div class="resource-note">Free at linuxcommand.org — complete, practical, readable</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">OverTheWire: Bandit (wargames)</div>
+            <div class="resource-note">Gamified shell challenges — 34 levels, each builds on last</div>
+          </div>
+        </div>
+        <div class="project-accordion">
+          <button class="proj-toggle" onclick="toggle(this)">
+            <span class="proj-toggle-label">Projects</span>
+            <span class="proj-chevron">▼</span>
+          </button>
+          <div class="proj-content">
+            <div class="project-item">
+              <div class="proj-name">Dev Setup Automation Script</div>
+              <div class="proj-desc">Write a bash script that bootstraps a fresh Ubuntu machine: installs Node, Python, Docker, git, sets up SSH keys, configures dotfiles. One command, full setup.</div>
+            </div>
+          </div>
+        </div>
+        <div class="milestone-box">
+          <div class="milestone-box-label">// optional parallel — start anytime</div>
+          <ul>
+            <li><strong>CompTIA A+/Security+</strong> — study alongside Phase 0–1. TryHackMe + Professor Messer materials.</li>
+            <li><strong>Vue.js</strong> — alternative to React, viable after Phase 2. Pick one framework and go deep first.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /steps -->
+</div><!-- /phase0 -->
+
+
+<div class="phase-div"></div>
+<!-- ══════════════════════════════════════════════════ -->
+<!--  PHASE 1: FRONTEND CORE                          -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="phase-block" id="phase1">
+  <div class="phase-header">
+    <div class="phase-num-col">
+      <div class="phase-num">1</div>
+      <div class="phase-vert-line"></div>
+    </div>
+    <div class="phase-main">
+      <div class="phase-title">Frontend <span>Core</span></div>
+      <div class="phase-desc">The raw materials of the web. HTML, CSS, and JS are strictly sequential — each builds on the previous. Do not skip to a framework until you can do all three without Googling basics.</div>
+      <div class="phase-prereq">⬆ Requires: Phase 0 complete</div>
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <!-- 1.1 HTML5 -->
+    <div class="step-card accent-blue">
+      <div class="step-head">
+        <span class="step-num-tag">1.1</span>
+        <div class="step-title-wrap">
+          <div class="step-title">HTML5</div>
+          <div class="step-sub">Structure before style — the skeleton of every web page</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Learn semantic HTML properly. Divs are not the only element. Accessibility (ARIA roles, landmark elements, form labeling) is a professional skill that distinguishes senior engineers. Forms, inputs, media elements, and the DOM tree are what React sits on top of — understand what React is abstracting.</p>
+        <div class="tech-row">
+          <span class="tech-tag">Semantic tags (article, section, nav, main)</span>
+          <span class="tech-tag">Forms & validation</span>
+          <span class="tech-tag">Accessibility & ARIA</span>
+          <span class="tech-tag">Meta tags / SEO basics</span>
+          <span class="tech-tag">Canvas & SVG basics</span>
+          <span class="tech-tag">DOM tree mental model</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">HTML and CSS: Design and Build Websites</div>
+            <div class="resource-note">Jon Duckett — visual layout, beginner-perfect, covers both 1.1 & 1.2</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">MDN Web Docs (HTML reference)</div>
+            <div class="resource-note">The authoritative reference — make it your first stop, always</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 1.2 CSS3 -->
+    <div class="step-card accent-blue">
+      <div class="step-head">
+        <span class="step-num-tag">1.2</span>
+        <div class="step-title-wrap">
+          <div class="step-title">CSS3</div>
+          <div class="step-sub">Layout, the cascade, and making things look intentional</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">CSS is deceptively deep. The cascade, specificity, and inheritance trip up most beginners and many seniors. Flexbox and Grid are not optional — they're the layout primitives everything else (Tailwind, CSS-in-JS, component libraries) is built on. Master these before using any shortcut.</p>
+        <div class="tech-row">
+          <span class="tech-tag">Box model</span>
+          <span class="tech-tag">Flexbox</span>
+          <span class="tech-tag">CSS Grid</span>
+          <span class="tech-tag">Cascade & specificity</span>
+          <span class="tech-tag">Responsive design / media queries</span>
+          <span class="tech-tag">CSS variables (custom properties)</span>
+          <span class="tech-tag">Transitions & animations</span>
+          <span class="tech-tag">Pseudo-elements & pseudo-classes</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">CSS: The Definitive Guide (Eric Meyer)</div>
+            <div class="resource-note">Exhaustive — use as reference, not cover-to-cover. Free Duckett book covers the essentials.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">CSS Battle + Flexbox Froggy + Grid Garden</div>
+            <div class="resource-note">Game-based drill for layout — genuinely builds muscle memory</div>
+          </div>
+        </div>
+        <div class="project-accordion">
+          <button class="proj-toggle" onclick="toggle(this)">
+            <span class="proj-toggle-label">Projects</span>
+            <span class="proj-chevron">▼</span>
+          </button>
+          <div class="proj-content">
+            <div class="project-item">
+              <div class="proj-name">Portfolio Page (HTML + CSS only)</div>
+              <div class="proj-desc">Build your personal portfolio using zero JS, zero frameworks. Responsive on mobile. Semantic HTML. Clean Grid/Flexbox layout. This will be your most-visited page as you job hunt.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 1.3 JavaScript -->
+    <div class="step-card accent-blue">
+      <div class="step-head">
+        <span class="step-num-tag">1.3</span>
+        <div class="step-title-wrap">
+          <div class="step-title">JavaScript (ES6+)</div>
+          <div class="step-sub">The only programming language that runs natively in every browser</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">JavaScript is the language of the entire web stack — frontend, backend (Node), and tooling. ES6+ features (arrow functions, destructuring, modules, async/await, generators) are table stakes. Understand the event loop deeply — it explains every async quirk you'll ever encounter, and it's a frequent interview question.</p>
+        <div class="tech-row">
+          <span class="tech-tag">ES6+ syntax (arrow fns, destructuring, spread)</span>
+          <span class="tech-tag">Closures & scope chain</span>
+          <span class="tech-tag">Prototypes & the prototype chain</span>
+          <span class="tech-tag">The Event Loop (call stack, task queue, microtask queue)</span>
+          <span class="tech-tag">Promises & async/await</span>
+          <span class="tech-tag">Modules (ESM & CJS)</span>
+          <span class="tech-tag">DOM manipulation & Events</span>
+          <span class="tech-tag">Fetch API</span>
+          <span class="tech-tag">Error handling</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Eloquent JavaScript — Marijn Haverbeke</div>
+            <div class="resource-note">Free at eloquentjavascript.net — exercises built-in, excellent depth</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">javascript.info + Exercism.io (JS track)</div>
+            <div class="resource-note">javascript.info is the best JS reference on the internet, period</div>
+          </div>
+        </div>
+        <div class="project-accordion">
+          <button class="proj-toggle" onclick="toggle(this)">
+            <span class="proj-toggle-label">Projects</span>
+            <span class="proj-chevron">▼</span>
+          </button>
+          <div class="proj-content">
+            <div class="project-item">
+              <div class="proj-name">Vanilla JS App — No Libraries</div>
+              <div class="proj-desc">Build a Kanban board (drag and drop, local storage persistence, add/edit/delete cards) using only vanilla JS, HTML, CSS. No React, no jQuery. This forces real DOM mastery.</div>
+              <div class="proj-revises">HTML5 semantics, CSS Grid, DOM events</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 1.4 bundlers + tooling -->
+    <div class="step-card accent-blue">
+      <div class="step-head">
+        <span class="step-num-tag">1.4</span>
+        <div class="step-title-wrap">
+          <div class="step-title">npm/yarn & Bundlers (Vite, webpack, Babel)</div>
+          <div class="step-sub">How modern JS code gets packaged and delivered</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Before React, you need to understand the toolchain it runs on. Vite is now the standard (fast HMR, ESM-native). webpack is still everywhere in existing codebases. Babel transpiles modern JS for older browsers. ESLint + Prettier are not optional on any professional team.</p>
+        <div class="tech-row">
+          <span class="tech-tag">npm scripts & package.json</span>
+          <span class="tech-tag">Semantic versioning</span>
+          <span class="tech-tag">Vite (primary)</span>
+          <span class="tech-tag">webpack config basics</span>
+          <span class="tech-tag">Babel presets</span>
+          <span class="tech-tag">ESLint (rules + plugins)</span>
+          <span class="tech-tag">Prettier</span>
+          <span class="tech-tag">Husky (pre-commit hooks)</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Docs</div>
+            <div class="resource-title">Vite official docs + webpack.js.org</div>
+            <div class="resource-note">Official docs are comprehensive — understand the "why" behind each config option</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">Set up a project from scratch (no CRA/scaffolding)</div>
+            <div class="resource-note">Configure Vite + ESLint + Prettier + Husky manually once</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /steps -->
+</div><!-- /phase1 -->
+
+
+<div class="phase-div"></div>
+<!-- ══════════════════════════════════════════════════ -->
+<!--  PHASE 2: FRONTEND FRAMEWORK                     -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="phase-block" id="phase2">
+  <div class="phase-header">
+    <div class="phase-num-col">
+      <div class="phase-num">2</div>
+      <div class="phase-vert-line"></div>
+    </div>
+    <div class="phase-main">
+      <div class="phase-title">Frontend <span>Framework</span></div>
+      <div class="phase-desc">React is the industry default. TypeScript and Tailwind can be learned in parallel with React. Redux → React Query → Framer Motion are sequential additions once React basics are solid.</div>
+      <div class="phase-prereq">⬆ Requires: Phase 1 complete</div>
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <!-- Parallel: TypeScript + Tailwind alongside React -->
+    <div style="margin-bottom:2px; padding: 6px 0 4px; font-family:'Inconsolata',monospace; font-size:10px; color:var(--green); letter-spacing:2px;">▶ START THESE IN PARALLEL</div>
+    <div class="parallel-group">
+      <!-- 2.1 TypeScript -->
+      <div class="step-card accent-teal">
+        <div class="step-head">
+          <span class="step-num-tag">2.1</span>
+          <div class="step-title-wrap">
+            <div class="step-title">TypeScript</div>
+            <div class="step-sub">Typed superset of JS — now the default in every serious codebase</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 2.2</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">TypeScript will appear in every job description. Learn it alongside React — it makes React component props and state far safer and more readable. Focus on structural typing, generics, and utility types first. Type-safe APIs with Zod (Phase 6) build directly on this.</p>
+          <div class="tech-row">
+            <span class="tech-tag">Types & Interfaces</span>
+            <span class="tech-tag">Generics</span>
+            <span class="tech-tag">Utility types (Partial, Pick, Omit)</span>
+            <span class="tech-tag">Narrowing & type guards</span>
+            <span class="tech-tag">tsconfig.json</span>
+            <span class="tech-tag">Declaration files (.d.ts)</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Book</div>
+              <div class="resource-title">Programming TypeScript — Boris Cherny</div>
+              <div class="resource-note">O'Reilly — dense but complete. Total TypeScript (Matt Pocock) online is also excellent.</div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-label practice">⚡ Practice</div>
+              <div class="resource-title">typescript-exercises.github.io</div>
+              <div class="resource-note">Incremental challenges, in-browser, immediate feedback</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.2 Tailwind -->
+      <div class="step-card accent-teal">
+        <div class="step-head">
+          <span class="step-num-tag">2.2</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Tailwind CSS</div>
+            <div class="step-sub">Utility-first CSS that collocates style with structure</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 2.1</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Tailwind is now the dominant CSS approach in React/Next.js projects. It doesn't replace understanding CSS (Phase 1.2 is mandatory first) — it accelerates applying it. Master responsive modifiers (sm:, md:), dark mode, and custom config. You'll use it in every project from here on.</p>
+          <div class="tech-row">
+            <span class="tech-tag">Utility class system</span>
+            <span class="tech-tag">Responsive prefixes</span>
+            <span class="tech-tag">Dark mode</span>
+            <span class="tech-tag">Custom config (tailwind.config.js)</span>
+            <span class="tech-tag">@apply directive</span>
+            <span class="tech-tag">Tailwind plugins</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Docs</div>
+              <div class="resource-title">Tailwind CSS official docs</div>
+              <div class="resource-note">Exceptionally well-written docs with live Playground — first-party resource is best</div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-label practice">⚡ Practice</div>
+              <div class="resource-title">Rebuild your Phase 1.2 portfolio in Tailwind</div>
+              <div class="resource-note">Same HTML, replace all CSS with Tailwind — forces 1:1 comparison</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 2.3 React -->
+    <div class="step-card accent-teal">
+      <div class="step-head">
+        <span class="step-num-tag">2.3</span>
+        <div class="step-title-wrap">
+          <div class="step-title">React.js</div>
+          <div class="step-sub">Component model, hooks, reconciliation, and the React mental model</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">React is the most-used UI library in the world. Understand it from first principles: why components exist, how the virtual DOM and reconciler work, what hooks actually do (useState is a closure, useEffect is a lifecycle hook, useRef bypasses renders). The new React docs (react.dev) are outstanding.</p>
+        <div class="tech-row">
+          <span class="tech-tag">JSX</span>
+          <span class="tech-tag">Component composition</span>
+          <span class="tech-tag">useState / useEffect / useRef / useMemo / useCallback</span>
+          <span class="tech-tag">Custom hooks</span>
+          <span class="tech-tag">Context API</span>
+          <span class="tech-tag">React Router v6</span>
+          <span class="tech-tag">Error boundaries</span>
+          <span class="tech-tag">Suspense & lazy loading</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">The Road to React — Robin Wieruch</div>
+            <div class="resource-note">Project-based, updated annually, free version available at roadtoreact.com</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">react.dev (official docs) + Frontend Mentor challenges</div>
+            <div class="resource-note">react.dev's interactive challenges are best first-party content. Frontend Mentor has real-world designs to implement.</div>
+          </div>
+        </div>
+        <div class="project-accordion">
+          <button class="proj-toggle" onclick="toggle(this)">
+            <span class="proj-toggle-label">Projects</span>
+            <span class="proj-chevron">▼</span>
+          </button>
+          <div class="proj-content">
+            <div class="project-item">
+              <div class="proj-name">GitHub Profile Explorer</div>
+              <div class="proj-desc">React + TypeScript + Tailwind app that searches GitHub users, displays repos, commits, and stats. Fetches the real GitHub REST API. Routing between user detail pages with React Router. No state management library yet — use Context + hooks.</div>
+              <div class="proj-revises">HTML5, CSS3, Fetch API, TypeScript, Tailwind</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 2.4 Redux + React Query sequential -->
+    <div class="parallel-group">
+      <div class="step-card accent-teal">
+        <div class="step-head">
+          <span class="step-num-tag">2.4</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Redux Toolkit</div>
+            <div class="step-sub">Predictable global state for complex apps</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 2.5</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Redux Toolkit (RTK) is the modern Redux — no boilerplate, built-in Immer for immutable updates. Use it for truly global client state (auth, theme, user preferences). Understand when you need it vs when Context is enough. RTK Query (built-in) also handles server state.</p>
+          <div class="tech-row">
+            <span class="tech-tag">createSlice / createReducer</span>
+            <span class="tech-tag">createAsyncThunk</span>
+            <span class="tech-tag">RTK Query</span>
+            <span class="tech-tag">Selectors (reselect)</span>
+            <span class="tech-tag">Redux DevTools</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Docs</div>
+              <div class="resource-title">Redux Toolkit official docs</div>
+              <div class="resource-note">redux-toolkit.js.org — "Quick Start" + "Fundamentals" are all you need</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card accent-teal">
+        <div class="step-head">
+          <span class="step-num-tag">2.5</span>
+          <div class="step-title-wrap">
+            <div class="step-title">React Query (TanStack Query) / SWR</div>
+            <div class="step-sub">Server-state synchronization — the most underrated React skill</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 2.4</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Most "state management" problems are actually server-state problems. React Query handles caching, refetching, stale-while-revalidate, optimistic updates, and pagination automatically. This will replace useEffect + useState for all API calls in your codebase once you learn it.</p>
+          <div class="tech-row">
+            <span class="tech-tag">useQuery / useMutation</span>
+            <span class="tech-tag">Query invalidation</span>
+            <span class="tech-tag">Optimistic updates</span>
+            <span class="tech-tag">Infinite queries</span>
+            <span class="tech-tag">QueryClient configuration</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Docs</div>
+              <div class="resource-title">TanStack Query docs + TkDodo's blog</div>
+              <div class="resource-note">TkDodo's "Practical React Query" series is the definitive practical guide</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 2.6 Framer Motion + GSAP -->
+    <div class="step-card accent-teal">
+      <div class="step-head">
+        <span class="step-num-tag">2.6</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Framer Motion & GSAP</div>
+          <div class="step-sub">Animation libraries that make UIs feel alive</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Framer Motion is React-native and handles most UI animations (page transitions, layout animations, gesture-based). GSAP is the power tool for timeline-based, complex animations and works anywhere. Learn Framer Motion first — it integrates directly with React's render cycle.</p>
+        <div class="tech-row">
+          <span class="tech-tag">motion components</span>
+          <span class="tech-tag">AnimatePresence</span>
+          <span class="tech-tag">Layout animations</span>
+          <span class="tech-tag">Variants system</span>
+          <span class="tech-tag">GSAP timelines</span>
+          <span class="tech-tag">ScrollTrigger</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Docs</div>
+            <div class="resource-title">Framer Motion docs + GSAP "Getting Started"</div>
+            <div class="resource-note">Both have excellent interactive examples — code alongside the docs</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">Rebuild your portfolio with animated transitions</div>
+            <div class="resource-note">Animate page entry/exit, hover states, scroll reveals on your Phase 1 portfolio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div><span class="conn-label">now validate your frontend with tests</span></div>
+
+    <!-- 2.7 Testing -->
+    <div class="parallel-group">
+      <div class="step-card accent-teal">
+        <div class="step-head">
+          <span class="step-num-tag">2.7</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Jest & React Testing Library</div>
+            <div class="step-sub">Unit + integration testing for components</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 2.8</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Test behavior, not implementation. React Testing Library's philosophy: render a component, interact with it as a user would (click, type, submit), assert on visible output. Jest handles the runner, assertions, and mocks. This is what separates professional code from demo code.</p>
+          <div class="tech-row">
+            <span class="tech-tag">describe / it / expect</span>
+            <span class="tech-tag">render + screen queries</span>
+            <span class="tech-tag">userEvent vs fireEvent</span>
+            <span class="tech-tag">Mocking (jest.fn, jest.mock)</span>
+            <span class="tech-tag">Testing async code</span>
+            <span class="tech-tag">Code coverage</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Book</div>
+              <div class="resource-title">Testing JavaScript Applications — Lucas da Costa</div>
+              <div class="resource-note">Manning — covers unit through integration. testing-library.com/docs is free and equally good.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card accent-teal">
+        <div class="step-head">
+          <span class="step-num-tag">2.8</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Cypress / Playwright</div>
+            <div class="step-sub">End-to-end testing — the full user journey automated</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 2.7</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">E2E tests click through your actual UI in a real browser. Playwright is now preferred (faster, cross-browser, better CI support). Cypress has better DX. Learn either — the concepts transfer. These become critical when you add a real backend (Phase 4) and need to test full user flows.</p>
+          <div class="tech-row">
+            <span class="tech-tag">Page Object Model</span>
+            <span class="tech-tag">Selectors & assertions</span>
+            <span class="tech-tag">Network interception/mocking</span>
+            <span class="tech-tag">Visual regression basics</span>
+            <span class="tech-tag">CI integration</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Docs</div>
+              <div class="resource-title">Playwright official docs (playwright.dev)</div>
+              <div class="resource-note">Microsoft-maintained, excellent docs. Cypress.io docs also top-tier.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /phase2 -->
+
+
+<div class="phase-div"></div>
+<!-- ══════════════════════════════════════════════════ -->
+<!--  PHASE 3: BACKEND                                -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="phase-block" id="phase3">
+  <div class="phase-header">
+    <div class="phase-num-col">
+      <div class="phase-num">3</div>
+      <div class="phase-vert-line"></div>
+    </div>
+    <div class="phase-main">
+      <div class="phase-title">Backend <span>Engineering</span></div>
+      <div class="phase-desc">Node.js first (extends your JS knowledge). Python/FastAPI is a parallel alternative track — relevant for AI integrations and can be learned simultaneously with Node advanced topics.</div>
+      <div class="phase-prereq">⬆ Requires: Phase 1 complete. Can start in parallel with Phase 2 advanced topics.</div>
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <!-- 3.1 Node.js -->
+    <div class="step-card accent-rust">
+      <div class="step-head">
+        <span class="step-num-tag">3.1</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Node.js</div>
+          <div class="step-sub">JavaScript on the server — the event loop, streams, and the module ecosystem</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Node isn't just "JS on the server." It's a different runtime environment with a different event loop, filesystem access, streams, and module system. Understand the libuv thread pool, worker threads, and when Node's single-thread model becomes a bottleneck. This is the foundation for Express, Nest, and all Node tooling.</p>
+        <div class="tech-row">
+          <span class="tech-tag">Node event loop (phases, libuv)</span>
+          <span class="tech-tag">Streams (readable, writable, transform)</span>
+          <span class="tech-tag">fs / path / os / events modules</span>
+          <span class="tech-tag">Worker threads</span>
+          <span class="tech-tag">Cluster module</span>
+          <span class="tech-tag">CommonJS vs ESM in Node</span>
+          <span class="tech-tag">Error handling (domains, uncaughtException)</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Node.js Design Patterns — Casciaro & Mammino</div>
+            <div class="resource-note">The definitive Node.js book — 3rd edition covers modern patterns, streams, microservices</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">nodeschool.io (learnyounode, stream-adventure)</div>
+            <div class="resource-note">CLI-based interactive workshops — hands-on from first command</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 3.2 Express → Fastify → Nest sequential -->
+    <div class="step-card accent-rust">
+      <div class="step-head">
+        <span class="step-num-tag">3.2</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Express.js → Fastify → NestJS</div>
+          <div class="step-sub">Learn the minimal framework before the full framework — understand what each adds</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential within</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Express is minimal and shows you the raw HTTP abstraction. Fastify is a modern, typed, faster alternative. NestJS is the opinionated enterprise framework (Angular-inspired, decorator-based) used in large codebases. Learn in order — each one makes the next one comprehensible. Don't start with Nest.</p>
+        <div class="tech-row">
+          <span class="tech-tag">Express middleware pipeline</span>
+          <span class="tech-tag">Routing (static, dynamic, nested)</span>
+          <span class="tech-tag">Request/Response lifecycle</span>
+          <span class="tech-tag">Fastify schema validation</span>
+          <span class="tech-tag">Fastify plugins</span>
+          <span class="tech-tag">NestJS modules / controllers / services</span>
+          <span class="tech-tag">NestJS decorators & DI</span>
+          <span class="tech-tag">NestJS pipes / guards / interceptors</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Docs</div>
+            <div class="resource-title">NestJS official docs (docs.nestjs.com)</div>
+            <div class="resource-note">Best framework docs in the Node ecosystem. Start Express with "Express in Action" (Manning).</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">Build a REST API for your Phase 2 project's data</div>
+            <div class="resource-note">Add a real backend to your GitHub Explorer — first Express, then migrate to Nest</div>
+          </div>
+        </div>
+        <div class="project-accordion">
+          <button class="proj-toggle" onclick="toggle(this)">
+            <span class="proj-toggle-label">Projects</span>
+            <span class="proj-chevron">▼</span>
+          </button>
+          <div class="proj-content">
+            <div class="project-item">
+              <div class="proj-name">NestJS REST API — Blog Platform Backend</div>
+              <div class="proj-desc">Build a full CRUD REST API for a blog: users, posts, comments, tags. Auth with JWT. Validation with class-validator. Documented with Swagger. Rate limiting. Proper error handling with filters. Uses Fastify as the HTTP adapter (drop-in swap from Express).</div>
+              <div class="proj-revises">Node.js streams, HTTP concepts, Networking (Phase 0)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 3.3 tRPC -->
+    <div class="step-card accent-rust">
+      <div class="step-head">
+        <span class="step-num-tag">3.3</span>
+        <div class="step-title-wrap">
+          <div class="step-title">tRPC</div>
+          <div class="step-sub">End-to-end type safety between your TypeScript backend and frontend</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">tRPC removes the client–server contract problem entirely: you define procedures on the server, and TypeScript automatically infers the correct types on the client — no code generation, no Swagger, no manual type sync. Pairs with Next.js and Nest. Requires TypeScript fluency (2.1) and either Express or Nest (3.2).</p>
+        <div class="tech-row">
+          <span class="tech-tag">Procedures (query / mutation)</span>
+          <span class="tech-tag">Input validation (Zod)</span>
+          <span class="tech-tag">Context & middleware</span>
+          <span class="tech-tag">React Query integration</span>
+          <span class="tech-tag">Error handling (TRPCError)</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Docs</div>
+            <div class="resource-title">trpc.io/docs — official documentation</div>
+            <div class="resource-note">Short, well-structured. The create-t3-app starter is the fastest way to see it in context.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div><span class="conn-label">parallel: Python track (can start anytime after JS basics)</span></div>
+
+    <!-- 3.4 Python/Flask/FastAPI - parallel optional -->
+    <div class="step-card accent-rust">
+      <div class="step-head">
+        <span class="step-num-tag">3.4</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Python → Flask → FastAPI</div>
+          <div class="step-sub">The AI/ML backend stack — parallel to the Node track</div>
+        </div>
+        <div class="step-badges"><span class="badge b-para">parallel with 3.2–3.3</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">FastAPI is the modern Python web framework — async, typed, auto-generates OpenAPI docs. Learn Flask first (minimal, shows raw WSGI) then FastAPI (ASGI, fully async). This gives you a second full backend stack and is directly relevant to AI/ML microservices (your AI Workspace project already uses this).</p>
+        <div class="tech-row">
+          <span class="tech-tag">Python async/await (asyncio)</span>
+          <span class="tech-tag">Flask routing & blueprints</span>
+          <span class="tech-tag">FastAPI path operations</span>
+          <span class="tech-tag">Pydantic models</span>
+          <span class="tech-tag">Dependency injection (Depends)</span>
+          <span class="tech-tag">Background tasks</span>
+          <span class="tech-tag">OpenAPI auto-docs</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">FastAPI official docs (fastapi.tiangolo.com)</div>
+            <div class="resource-note">The docs ARE the tutorial — step by step from zero. Best framework docs in Python ecosystem.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">Port your NestJS blog API to FastAPI</div>
+            <div class="resource-note">Same domain, different language — forces genuine learning vs just following tutorials</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /phase3 -->
+
+
+<div class="phase-div"></div>
+<!-- ══════════════════════════════════════════════════ -->
+<!--  PHASE 4: DATABASES                              -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="phase-block" id="phase4">
+  <div class="phase-header">
+    <div class="phase-num-col">
+      <div class="phase-num">4</div>
+      <div class="phase-vert-line"></div>
+    </div>
+    <div class="phase-main">
+      <div class="phase-title">Databases <span>& Persistence</span></div>
+      <div class="phase-desc">Learn relational first — SQL fundamentals transfer everywhere. NoSQL comes after. Redis is a specialization. Prisma (ORM) pairs with PostgreSQL. All of these can be learned in parallel with Phase 3.</div>
+      <div class="phase-prereq">⬆ Requires: Phase 0 complete. Parallel with Phase 3.</div>
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <div class="parallel-group">
+      <!-- 4.1 PostgreSQL -->
+      <div class="step-card accent-green">
+        <div class="step-head">
+          <span class="step-num-tag">4.1</span>
+          <div class="step-title-wrap">
+            <div class="step-title">PostgreSQL</div>
+            <div class="step-sub">The gold standard relational database — learn this as your primary DB</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 4.2</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">PostgreSQL is the most powerful open-source relational database. Learn SQL properly: joins, window functions, CTEs, indexes, query planning. Understand ACID guarantees and when they matter. PostGIS, full-text search, JSONB columns — Postgres does more than you think.</p>
+          <div class="tech-row">
+            <span class="tech-tag">DDL / DML / DCL</span>
+            <span class="tech-tag">Joins (inner, outer, cross)</span>
+            <span class="tech-tag">Window functions</span>
+            <span class="tech-tag">CTEs & recursive queries</span>
+            <span class="tech-tag">Indexes (B-tree, partial, composite)</span>
+            <span class="tech-tag">EXPLAIN ANALYZE</span>
+            <span class="tech-tag">Transactions & isolation levels</span>
+            <span class="tech-tag">JSONB columns</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Book</div>
+              <div class="resource-title">Learning SQL — Alan Beaulieu (O'Reilly)</div>
+              <div class="resource-note">Concise and complete. pgexercises.com for hands-on SQL drills after.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4.2 MySQL -->
+      <div class="step-card accent-green">
+        <div class="step-head">
+          <span class="step-num-tag">4.2</span>
+          <div class="step-title-wrap">
+            <div class="step-title">MySQL</div>
+            <div class="step-sub">Widely deployed — important for reading legacy codebases and interviews</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 4.1</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">MySQL differs from PostgreSQL mainly in storage engines (InnoDB vs MyISAM), locking behavior, and some SQL dialect differences. If you master PostgreSQL first, MySQL is a small delta. Many companies (Meta, Airbnb originally) use MySQL at scale — it's essential job knowledge.</p>
+          <div class="tech-row">
+            <span class="tech-tag">InnoDB storage engine</span>
+            <span class="tech-tag">MySQL vs Postgres SQL dialect diffs</span>
+            <span class="tech-tag">Replication basics</span>
+            <span class="tech-tag">MySQL workbench</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Resource</div>
+              <div class="resource-title">MySQL Documentation + SQLZoo (practice)</div>
+              <div class="resource-note">After Postgres, MySQL docs + SQLZoo are sufficient. Same SQL fundamentals.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 4.3 Prisma ORM -->
+    <div class="step-card accent-green">
+      <div class="step-head">
+        <span class="step-num-tag">4.3</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Prisma ORM</div>
+          <div class="step-sub">Type-safe database access — the modern Node.js ORM</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">after 4.1</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Prisma generates a fully typed client from your schema — you get autocomplete on every query and TypeScript errors if you query columns that don't exist. Prisma Migrate manages your schema evolution. Use it with PostgreSQL in all Node.js projects going forward.</p>
+        <div class="tech-row">
+          <span class="tech-tag">schema.prisma (models, relations)</span>
+          <span class="tech-tag">Prisma Migrate</span>
+          <span class="tech-tag">Prisma Client (CRUD, relations, aggregates)</span>
+          <span class="tech-tag">Raw SQL fallback ($queryRaw)</span>
+          <span class="tech-tag">Prisma Studio</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Docs</div>
+            <div class="resource-title">prisma.io/docs — Data Modeling + Client sections</div>
+            <div class="resource-note">Prisma docs are beautifully written with interactive examples</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 4.4 MongoDB -->
+    <div class="step-card accent-green">
+      <div class="step-head">
+        <span class="step-num-tag">4.4</span>
+        <div class="step-title-wrap">
+          <div class="step-title">MongoDB + Firebase & Supabase</div>
+          <div class="step-sub">Document database + BaaS platforms for rapid development</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">after 4.1–4.2</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">MongoDB is the canonical NoSQL document database. Understand when document modeling is better than relational (flexible schema, nested data, horizontal scale). Firebase Realtime DB + Firestore are BaaS options you're already using. Supabase is "open-source Firebase built on PostgreSQL" — bridging both worlds.</p>
+        <div class="tech-row">
+          <span class="tech-tag">BSON document model</span>
+          <span class="tech-tag">Aggregation pipeline</span>
+          <span class="tech-tag">Indexes in MongoDB</span>
+          <span class="tech-tag">Mongoose ODM</span>
+          <span class="tech-tag">Firebase Firestore (rules, real-time listeners)</span>
+          <span class="tech-tag">Supabase (Auth, Storage, Realtime)</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">MongoDB: The Definitive Guide (O'Reilly)</div>
+            <div class="resource-note">Shannon Bradshaw et al. — 3rd edition, covers aggregation pipelines and indexing thoroughly</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">MongoDB University (free courses)</div>
+            <div class="resource-note">mongodb.com/learn — official free courses with in-browser practice environment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 4.5 Redis -->
+    <div class="step-card accent-green">
+      <div class="step-head">
+        <span class="step-num-tag">4.5</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Redis</div>
+          <div class="step-sub">In-memory data store — caching, sessions, pub/sub, queues</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">after 4.1</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Redis is the glue of production backends. Cache expensive DB queries, store sessions, implement rate limiting, build pub/sub messaging, and manage job queues — all with one tool. Understanding cache invalidation strategy is one of the "hard problems" of engineering. This step is directly referenced in your AI Workspace project.</p>
+        <div class="tech-row">
+          <span class="tech-tag">Data structures (Strings, Hashes, Lists, Sets, Sorted Sets)</span>
+          <span class="tech-tag">TTL & expiration policies</span>
+          <span class="tech-tag">Pub/Sub</span>
+          <span class="tech-tag">Redis Streams</span>
+          <span class="tech-tag">LRU eviction policies</span>
+          <span class="tech-tag">Redis Cluster basics</span>
+          <span class="tech-tag">ioredis (Node client)</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Redis in Action — Josiah Carlson (Manning)</div>
+            <div class="resource-note">Practical, project-based. Older but concepts are timeless. redis.io/docs for current API reference.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">try.redis.io — in-browser REPL</div>
+            <div class="resource-note">Then add Redis caching to your NestJS blog API — measure query time before vs after</div>
+          </div>
+        </div>
+        <div class="project-accordion">
+          <button class="proj-toggle" onclick="toggle(this)">
+            <span class="proj-toggle-label">Projects</span>
+            <span class="proj-chevron">▼</span>
+          </button>
+          <div class="proj-content">
+            <div class="project-item">
+              <div class="proj-name">Full-Stack Blog with All Four Databases</div>
+              <div class="proj-desc">Extend your NestJS blog API: PostgreSQL + Prisma for structured data (users, posts), MongoDB for flexible content (rich text, embedded comments), Redis for session management + API rate limiting + caching, Firebase for real-time notifications. You pick what goes where — justify each choice.</div>
+              <div class="proj-revises">NestJS, TypeScript, REST API design, JWT auth</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /phase4 -->
+
+
+<div class="phase-div"></div>
+<!-- ══════════════════════════════════════════════════ -->
+<!--  PHASE 5: APIs, AUTH & REALTIME                  -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="phase-block" id="phase5">
+  <div class="phase-header">
+    <div class="phase-num-col">
+      <div class="phase-num">5</div>
+      <div class="phase-vert-line"></div>
+    </div>
+    <div class="phase-main">
+      <div class="phase-title">APIs, Auth <span>& Real-time</span></div>
+      <div class="phase-desc">The contract between frontend and backend. JWT → GraphQL → WebSockets → Swagger build sequentially. Zod ties back to TypeScript and validates the data boundary end-to-end.</div>
+      <div class="phase-prereq">⬆ Requires: Phase 3 + Phase 4</div>
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <!-- 5.1 JWT / OAuth2 -->
+    <div class="step-card accent-purple">
+      <div class="step-head">
+        <span class="step-num-tag">5.1</span>
+        <div class="step-title-wrap">
+          <div class="step-title">JWT & OAuth2 — Auth0, Firebase Auth, Passport.js</div>
+          <div class="step-sub">Authentication and authorization — the security boundary of every app</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Authentication is where most security vulnerabilities live. Understand the full auth flow: session-based vs token-based, JWT structure (header.payload.signature), OAuth2 grant types, and why you shouldn't build auth from scratch (use Auth0 or Firebase Auth for production). Passport.js is the Node middleware that glues strategies together.</p>
+        <div class="tech-row">
+          <span class="tech-tag">JWT (sign, verify, refresh tokens)</span>
+          <span class="tech-tag">OAuth2 flows (authorization code, PKCE)</span>
+          <span class="tech-tag">OIDC (OpenID Connect)</span>
+          <span class="tech-tag">Passport.js strategies</span>
+          <span class="tech-tag">Auth0 / Firebase Auth integration</span>
+          <span class="tech-tag">RBAC (roles & permissions)</span>
+          <span class="tech-tag">Secure cookie handling</span>
+          <span class="tech-tag">CSRF protection</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">OAuth 2 in Action — Justin Richer (Manning)</div>
+            <div class="resource-note">The most thorough treatment of OAuth2 available. Dense but essential.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">Add full auth to your NestJS blog API</div>
+            <div class="resource-note">Local + Google OAuth via Passport → JWT → refresh token rotation. Then add RBAC (admin vs user).</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 5.2 GraphQL -->
+    <div class="step-card accent-purple">
+      <div class="step-head">
+        <span class="step-num-tag">5.2</span>
+        <div class="step-title-wrap">
+          <div class="step-title">GraphQL — Apollo Server & Client</div>
+          <div class="step-sub">Query exactly what you need — no over-fetching, no under-fetching</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">GraphQL is the API design language used at Facebook, GitHub, Shopify, and Airbnb. It solves REST's over-fetching problem by letting clients specify exactly what fields they need. Apollo Server (NestJS-compatible) and Apollo Client (React) are the dominant ecosystem. Understand N+1 query problem and DataLoader to solve it.</p>
+        <div class="tech-row">
+          <span class="tech-tag">SDL (Schema Definition Language)</span>
+          <span class="tech-tag">Queries / Mutations / Subscriptions</span>
+          <span class="tech-tag">Resolvers</span>
+          <span class="tech-tag">DataLoader (N+1 batching)</span>
+          <span class="tech-tag">Apollo Client (cache, reactive vars)</span>
+          <span class="tech-tag">Code-first vs Schema-first</span>
+          <span class="tech-tag">Persisted queries</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Learning GraphQL — Eve Porcello & Alex Banks (O'Reilly)</div>
+            <div class="resource-note">Practical intro. graphql.org/learn is also comprehensive and free.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">Expose your blog API as a GraphQL endpoint alongside REST</div>
+            <div class="resource-note">Same data, two API styles — forces you to see the tradeoffs clearly</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 5.3 WebSockets -->
+    <div class="step-card accent-purple">
+      <div class="step-head">
+        <span class="step-num-tag">5.3</span>
+        <div class="step-title-wrap">
+          <div class="step-title">WebSockets — Socket.io</div>
+          <div class="step-sub">Persistent bidirectional connections for real-time features</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">HTTP is request-response. WebSockets are persistent connections — the server can push data to clients at any time. Socket.io adds namespaces, rooms, reconnection logic, and fallbacks. Essential for chat, live notifications, collaborative editing, real-time dashboards, and multiplayer features.</p>
+        <div class="tech-row">
+          <span class="tech-tag">WebSocket protocol (handshake, frames)</span>
+          <span class="tech-tag">Socket.io rooms & namespaces</span>
+          <span class="tech-tag">Event-based architecture</span>
+          <span class="tech-tag">Scaling WebSockets with Redis adapter</span>
+          <span class="tech-tag">Reconnection & heartbeat</span>
+          <span class="tech-tag">Server-Sent Events (SSE) vs WebSockets</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Docs</div>
+            <div class="resource-title">Socket.io official docs + NestJS WebSockets gateway docs</div>
+            <div class="resource-note">NestJS has first-class WebSocket support via @WebSocketGateway decorator</div>
+          </div>
+        </div>
+        <div class="project-accordion">
+          <button class="proj-toggle" onclick="toggle(this)">
+            <span class="proj-toggle-label">Projects</span>
+            <span class="proj-chevron">▼</span>
+          </button>
+          <div class="proj-content">
+            <div class="project-item">
+              <div class="proj-name">Real-time Collaborative Notes App</div>
+              <div class="proj-desc">Full-stack app: React + NestJS + Socket.io. Multiple users can edit the same document simultaneously — changes broadcast instantly. Operational Transform or last-write-wins. Auth from step 5.1. Stored in PostgreSQL + Prisma. Redis pub/sub to scale across multiple backend instances.</div>
+              <div class="proj-revises">JWT auth, PostgreSQL, Redis, React hooks, NestJS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 5.4 Swagger + Zod parallel -->
+    <div class="parallel-group">
+      <div class="step-card accent-purple">
+        <div class="step-head">
+          <span class="step-num-tag">5.4</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Swagger / OpenAPI</div>
+            <div class="step-sub">Document your API so consumers don't have to guess</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 5.5</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">OpenAPI is the industry standard for REST API documentation. NestJS generates Swagger UI automatically from decorators — add @ApiProperty() and @ApiOperation() throughout your codebase. Also enables client SDK generation (openapi-generator) for typed frontend clients without tRPC.</p>
+          <div class="tech-row">
+            <span class="tech-tag">OpenAPI 3.0 spec</span>
+            <span class="tech-tag">NestJS @nestjs/swagger</span>
+            <span class="tech-tag">Swagger UI</span>
+            <span class="tech-tag">Client generation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card accent-purple">
+        <div class="step-head">
+          <span class="step-num-tag">5.5</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Zod — End-to-End Type Safety</div>
+            <div class="step-sub">Runtime validation that matches your TypeScript types</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 5.4</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">TypeScript's types disappear at runtime. Zod validates data at the boundary (API inputs, env vars, form data) and infers TypeScript types from the schema — one source of truth. Works with tRPC, React Hook Form, and NestJS. Paired with TypeScript, it eliminates an entire class of runtime bugs.</p>
+          <div class="tech-row">
+            <span class="tech-tag">Schema definition (z.object, z.string, z.enum)</span>
+            <span class="tech-tag">parse vs safeParse</span>
+            <span class="tech-tag">Schema inference (z.infer)</span>
+            <span class="tech-tag">Transforms & refinements</span>
+            <span class="tech-tag">React Hook Form integration</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Docs</div>
+              <div class="resource-title">zod.dev — official docs</div>
+              <div class="resource-note">Concise reference. Total TypeScript's Zod tutorial is also excellent.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /phase5 -->
+
+
+<div class="phase-div"></div>
+<!-- ══════════════════════════════════════════════════ -->
+<!--  PHASE 6: DEVOPS & CLOUD                         -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="phase-block" id="phase6">
+  <div class="phase-header">
+    <div class="phase-num-col">
+      <div class="phase-num">6</div>
+      <div class="phase-vert-line"></div>
+    </div>
+    <div class="phase-main">
+      <div class="phase-title">DevOps <span>& Cloud</span></div>
+      <div class="phase-desc">Docker first — everything in this phase runs inside containers. Kubernetes after Docker. GitHub Actions and AWS can be learned in parallel once you have Docker down. Terraform comes last.</div>
+      <div class="phase-prereq">⬆ Requires: Phase 0 (Shell + Git) + Phase 3 (Backend). Recommended: Phase 4–5 to have real apps to deploy.</div>
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <!-- 6.1 Docker -->
+    <div class="step-card accent-amber">
+      <div class="step-head">
+        <span class="step-num-tag">6.1</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Docker & Docker Compose</div>
+          <div class="step-sub">Containerization — the atomic unit of modern software deployment</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Every production deployment runs in containers. Understanding Docker internals — namespaces, cgroups, overlay filesystems, layer caching — makes you significantly better at debugging production issues. Docker Compose orchestrates multi-container local dev environments (your Node app + Postgres + Redis, all up in one command).</p>
+        <div class="tech-row">
+          <span class="tech-tag">Dockerfile (multi-stage builds)</span>
+          <span class="tech-tag">Image layers & build cache</span>
+          <span class="tech-tag">Namespaces & cgroups</span>
+          <span class="tech-tag">Container networking (bridge, host)</span>
+          <span class="tech-tag">Volumes & bind mounts</span>
+          <span class="tech-tag">Docker Compose (services, depends_on, healthchecks)</span>
+          <span class="tech-tag">Docker Hub / GHCR registry</span>
+          <span class="tech-tag">.dockerignore</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Docker Deep Dive — Nigel Poulton</div>
+            <div class="resource-note">Short, cheap, and practical. Pair with Docker's official "Get Started" docs for hands-on labs.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">Dockerize your entire NestJS + Postgres + Redis stack</div>
+            <div class="resource-note">Write a production-grade Dockerfile (non-root user, multi-stage, minimal image) + docker-compose.yml for local dev</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 6.2 GitHub Actions + AWS S3 parallel -->
+    <div class="parallel-group">
+      <div class="step-card accent-amber">
+        <div class="step-head">
+          <span class="step-num-tag">6.2</span>
+          <div class="step-title-wrap">
+            <div class="step-title">GitHub Actions (CI/CD)</div>
+            <div class="step-sub">Automate test, build, and deployment on every push</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 6.3</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">GitHub Actions is the most-used CI/CD platform for open source and most startups. Define workflows in YAML — run tests, build Docker images, push to registry, deploy to AWS. The entire software delivery lifecycle automated. This is where your Phase 0 shell scripting pays off.</p>
+          <div class="tech-row">
+            <span class="tech-tag">Workflow YAML syntax</span>
+            <span class="tech-tag">Triggers (push, PR, schedule)</span>
+            <span class="tech-tag">Jobs & steps</span>
+            <span class="tech-tag">Secrets management</span>
+            <span class="tech-tag">Caching (actions/cache)</span>
+            <span class="tech-tag">Docker build+push action</span>
+            <span class="tech-tag">Reusable workflows</span>
+            <span class="tech-tag">Matrix strategy</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Docs</div>
+              <div class="resource-title">GitHub Actions official docs</div>
+              <div class="resource-note">docs.github.com/en/actions — thorough, with complete workflow examples</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card accent-amber">
+        <div class="step-head">
+          <span class="step-num-tag">6.3</span>
+          <div class="step-title-wrap">
+            <div class="step-title">AWS S3 + EC2 + Lambda</div>
+            <div class="step-sub">The cloud primitives — storage, compute, serverless</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 6.2</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">AWS is the dominant cloud. Start with the three primitives: S3 (object storage — static sites, file uploads, backups), EC2 (virtual machines — deploy your Docker containers), Lambda (serverless functions — event-driven, auto-scaling, pay-per-invocation). These three cover 80% of real-world cloud use cases.</p>
+          <div class="tech-row">
+            <span class="tech-tag">S3 (buckets, policies, presigned URLs, static hosting)</span>
+            <span class="tech-tag">EC2 (AMI, security groups, SSH, user data)</span>
+            <span class="tech-tag">Lambda (triggers, layers, cold starts)</span>
+            <span class="tech-tag">IAM (roles, policies, least privilege)</span>
+            <span class="tech-tag">VPC basics</span>
+            <span class="tech-tag">CloudWatch logs</span>
+            <span class="tech-tag">AWS CLI + SDK</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Course</div>
+              <div class="resource-title">Stephane Maarek — AWS SAA-C03 (Udemy)</div>
+              <div class="resource-note">Most comprehensive AWS course. Sale price is ~$12. Covers all core services deeply.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 6.4 Kubernetes -->
+    <div class="step-card accent-amber">
+      <div class="step-head">
+        <span class="step-num-tag">6.4</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Kubernetes</div>
+          <div class="step-sub">Container orchestration at scale — runs everything Docker can't manage alone</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">after 6.1</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Kubernetes (K8s) manages containerized applications across clusters: scheduling, scaling, self-healing, rolling updates. Understand the control plane, the scheduler, and the reconciliation loop. EKS (AWS), GKE (GCP) are managed K8s — you'll use these in production. This also directly feeds into your GPU cluster work at UEM.</p>
+        <div class="tech-row">
+          <span class="tech-tag">Pods / Deployments / ReplicaSets</span>
+          <span class="tech-tag">Services (ClusterIP, NodePort, LoadBalancer)</span>
+          <span class="tech-tag">Ingress + cert-manager</span>
+          <span class="tech-tag">ConfigMaps & Secrets</span>
+          <span class="tech-tag">Persistent Volume Claims</span>
+          <span class="tech-tag">Horizontal Pod Autoscaler</span>
+          <span class="tech-tag">Helm charts</span>
+          <span class="tech-tag">kubectl</span>
+          <span class="tech-tag">RBAC in K8s</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Kubernetes in Action — Marko Luksa (Manning)</div>
+            <div class="resource-note">The most thorough K8s book. Pair with killer.sh for hands-on practice environments.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">killer.sh + Play with Kubernetes (labs.play-with-k8s.com)</div>
+            <div class="resource-note">Free browser-based K8s environments — no local cluster needed to start</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 6.5 Terraform + Serverless parallel -->
+    <div class="parallel-group">
+      <div class="step-card accent-amber">
+        <div class="step-head">
+          <span class="step-num-tag">6.5</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Terraform (IaC)</div>
+            <div class="step-sub">Infrastructure as Code — your AWS setup, version-controlled and repeatable</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 6.6</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Terraform lets you define your entire infrastructure in HCL files: EC2 instances, S3 buckets, VPC config, DNS records — all in Git, all reproducible, all reviewable. The difference between "I clicked around in the AWS console" and "I have auditable, repeatable infrastructure."</p>
+          <div class="tech-row">
+            <span class="tech-tag">HCL syntax (resources, variables, outputs)</span>
+            <span class="tech-tag">State management (remote state in S3)</span>
+            <span class="tech-tag">Modules</span>
+            <span class="tech-tag">Plan / Apply / Destroy lifecycle</span>
+            <span class="tech-tag">Workspaces</span>
+            <span class="tech-tag">Terraform Cloud basics</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Book</div>
+              <div class="resource-title">Terraform: Up & Running — Yevgeniy Brikman (O'Reilly)</div>
+              <div class="resource-note">Project-based, shows real patterns. 3rd edition covers Terraform 1.x</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card accent-amber">
+        <div class="step-head">
+          <span class="step-num-tag">6.6</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Serverless Functions — AWS Lambda & Netlify</div>
+            <div class="step-sub">Deploy code without managing servers</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 6.5</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Serverless is the ultimate scaling abstraction: write a function, AWS runs it on demand, scales to zero when idle, scales to millions when busy. Perfect for event-driven workloads, webhooks, image processing, and scheduled jobs. Netlify Functions bring this to JAMStack frontends.</p>
+          <div class="tech-row">
+            <span class="tech-tag">Lambda execution model (cold start, warm instance)</span>
+            <span class="tech-tag">Event sources (API Gateway, S3, SQS)</span>
+            <span class="tech-tag">Lambda layers</span>
+            <span class="tech-tag">Serverless Framework / AWS SAM</span>
+            <span class="tech-tag">Netlify Functions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 6.7 Prometheus + Grafana -->
+    <div class="step-card accent-amber">
+      <div class="step-head">
+        <span class="step-num-tag">6.7</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Prometheus & Grafana — Monitoring & Observability</div>
+          <div class="step-sub">When something breaks at 3AM, this is how you find out and understand why</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Prometheus scrapes metrics from your services. Grafana visualizes them as dashboards. Together they give you visibility into request rates, error rates, latency, CPU/memory, and any custom business metric you care about. The industry standard observability stack — used at every company from startups to FAANG.</p>
+        <div class="tech-row">
+          <span class="tech-tag">Prometheus data model (counters, gauges, histograms)</span>
+          <span class="tech-tag">PromQL</span>
+          <span class="tech-tag">Alertmanager</span>
+          <span class="tech-tag">Grafana dashboards & panels</span>
+          <span class="tech-tag">Loki (log aggregation)</span>
+          <span class="tech-tag">NestJS /metrics endpoint (prom-client)</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Prometheus: Up & Running — Julien Pivotto (O'Reilly)</div>
+            <div class="resource-note">Comprehensive. prometheus.io/docs for reference. Grafana Play (play.grafana.org) for zero-setup practice.</div>
+          </div>
+        </div>
+        <div class="project-accordion">
+          <button class="proj-toggle" onclick="toggle(this)">
+            <span class="proj-toggle-label">Projects</span>
+            <span class="proj-chevron">▼</span>
+          </button>
+          <div class="proj-content">
+            <div class="project-item">
+              <div class="proj-name">Production-Ready Deployment on AWS</div>
+              <div class="proj-desc">Deploy your full-stack blog app to AWS: Terraform provisions VPC + EC2 + RDS + ElastiCache. GitHub Actions builds the Docker image on push, pushes to ECR, deploys to EC2 via SSH. Prometheus + Grafana running in Docker on the same instance, dashboards showing API latency, error rate, DB query times. Everything in Git — no console clicking.</div>
+              <div class="proj-revises">Docker, Git workflows, NestJS, PostgreSQL, Redis, Shell scripting, Networking</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /phase6 -->
+
+
+<div class="phase-div"></div>
+<!-- ══════════════════════════════════════════════════ -->
+<!--  PHASE 7: DEVSECOPS                              -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="phase-block" id="phase7">
+  <div class="phase-header">
+    <div class="phase-num-col">
+      <div class="phase-num">7</div>
+      <div class="phase-vert-line"></div>
+    </div>
+    <div class="phase-main">
+      <div class="phase-title">Dev<span>SecOps</span></div>
+      <div class="phase-desc">Security baked into the development pipeline — not bolted on at the end. These tools integrate into your CI/CD pipeline (Phase 6) to catch vulnerabilities before they reach production. Optional CompTIA Security+ certification pairs perfectly with this phase.</div>
+      <div class="phase-prereq">⬆ Requires: Phase 6 complete. CompTIA A+/Security+ optional but synergistic.</div>
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <!-- 7.1 SAST + DAST parallel -->
+    <div class="parallel-group">
+      <div class="step-card accent-rust">
+        <div class="step-head">
+          <span class="step-num-tag">7.1</span>
+          <div class="step-title-wrap">
+            <div class="step-title">SonarQube — SAST</div>
+            <div class="step-sub">Static Application Security Testing — scan code without running it</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 7.2</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">SonarQube analyzes your source code for bugs, code smells, security vulnerabilities, and technical debt without executing it. Integrates into GitHub Actions — every PR gets a quality gate. SAST catches things like SQL injection patterns, XSS vulnerabilities, hardcoded secrets, and insecure random number usage.</p>
+          <div class="tech-row">
+            <span class="tech-tag">Quality gates & thresholds</span>
+            <span class="tech-tag">OWASP Top 10 vulnerability categories</span>
+            <span class="tech-tag">Rule customization</span>
+            <span class="tech-tag">GitHub Actions integration</span>
+            <span class="tech-tag">SonarLint (IDE plugin)</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Resource</div>
+              <div class="resource-title">OWASP Top 10 (owasp.org/Top10) — free</div>
+              <div class="resource-note">The canonical list of web security vulnerabilities. Read before configuring any SAST tool.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card accent-rust">
+        <div class="step-head">
+          <span class="step-num-tag">7.2</span>
+          <div class="step-title-wrap">
+            <div class="step-title">OWASP ZAP — DAST</div>
+            <div class="step-sub">Dynamic Application Security Testing — scan a running app</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 7.1</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">DAST tests your running application from the outside — like an attacker would. ZAP (now maintained by Checkmarx) spiders your API, injects malicious payloads, and reports vulnerabilities found. Run it in CI/CD against a staging environment before every release.</p>
+          <div class="tech-row">
+            <span class="tech-tag">Active vs passive scanning</span>
+            <span class="tech-tag">Spider / AJAX spider</span>
+            <span class="tech-tag">ZAP API for CI integration</span>
+            <span class="tech-tag">Report interpretation</span>
+            <span class="tech-tag">False positive management</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label practice">⚡ Practice</div>
+              <div class="resource-title">OWASP WebGoat (intentionally vulnerable app)</div>
+              <div class="resource-note">Run WebGoat locally, scan it with ZAP — learn to find and understand real vulnerabilities</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 7.3 IaC Security + Container Security parallel -->
+    <div class="parallel-group">
+      <div class="step-card accent-rust">
+        <div class="step-head">
+          <span class="step-num-tag">7.3</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Checkov & tfsec — IaC Security Scanning</div>
+            <div class="step-sub">Catch misconfigured Terraform before it becomes a breach</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 7.4</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">The biggest AWS breaches (Capital One, etc.) came from misconfigured IaC — S3 buckets left public, overly permissive IAM roles. Checkov and tfsec scan your Terraform/CloudFormation files for these misconfigurations before you apply them. They integrate into your GitHub Actions pipeline from Phase 6.</p>
+          <div class="tech-row">
+            <span class="tech-tag">CIS benchmark checks</span>
+            <span class="tech-tag">Custom policy rules</span>
+            <span class="tech-tag">Pre-commit + CI integration</span>
+            <span class="tech-tag">SARIF report format</span>
+            <span class="tech-tag">Suppression mechanisms</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Docs</div>
+              <div class="resource-title">checkov.io/docs + tfsec.dev</div>
+              <div class="resource-note">Both have quick-start guides. Run against your Phase 6 Terraform code first.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card accent-rust">
+        <div class="step-head">
+          <span class="step-num-tag">7.4</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Trivy — Container Image Scanning</div>
+            <div class="step-sub">Find vulnerabilities in your Docker images before deployment</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 7.3</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Your Docker image inherits every vulnerability in its base image (ubuntu:20.04 might have 200+ CVEs). Trivy scans images, filesystems, and Git repos for OS and library vulnerabilities. Add it to your GitHub Actions pipeline — fail the build if any CRITICAL vulnerabilities are found.</p>
+          <div class="tech-row">
+            <span class="tech-tag">Image scanning (OS + language packages)</span>
+            <span class="tech-tag">CVE database (NVD)</span>
+            <span class="tech-tag">Severity filtering (CRITICAL, HIGH)</span>
+            <span class="tech-tag">GitHub Actions integration</span>
+            <span class="tech-tag">SBOM generation</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Docs</div>
+              <div class="resource-title">aquasecurity.github.io/trivy</div>
+              <div class="resource-note">Scan your Phase 6 Docker images immediately — you'll likely find real CVEs to fix</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 7.5 HashiCorp Vault + Dependabot parallel -->
+    <div class="parallel-group">
+      <div class="step-card accent-rust">
+        <div class="step-head">
+          <span class="step-num-tag">7.5</span>
+          <div class="step-title-wrap">
+            <div class="step-title">HashiCorp Vault — Secret Management</div>
+            <div class="step-sub">The right way to store API keys, DB passwords, and certificates</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 7.6</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Hardcoded secrets in code is the #1 cause of data breaches. Vault provides dynamic secrets (generate a DB password on-demand, expire it after 1 hour), encryption as a service, and PKI. In K8s, Vault integrates via sidecar injection. AWS Secrets Manager is the managed alternative.</p>
+          <div class="tech-row">
+            <span class="tech-tag">Vault architecture (storage backends, policies)</span>
+            <span class="tech-tag">Secret engines (KV, AWS, database)</span>
+            <span class="tech-tag">Dynamic secrets</span>
+            <span class="tech-tag">Vault Agent sidecar (K8s)</span>
+            <span class="tech-tag">Token vs AppRole authentication</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Docs</div>
+              <div class="resource-title">developer.hashicorp.com/vault/docs</div>
+              <div class="resource-note">HashiCorp Learn has guided tutorials (learn.hashicorp.com/vault) — browser-based labs included</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card accent-rust">
+        <div class="step-head">
+          <span class="step-num-tag">7.6</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Dependabot & Renovate — Dependency Updates</div>
+            <div class="step-sub">Automate keeping your dependencies patched</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 7.5</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">The Log4Shell vulnerability affected 3 billion devices because teams didn't update their Log4j dependency. Dependabot (GitHub-native) and Renovate (more configurable) automatically open PRs to update vulnerable dependencies. Enable both on every repo you create from this point forward.</p>
+          <div class="tech-row">
+            <span class="tech-tag">dependabot.yml configuration</span>
+            <span class="tech-tag">Auto-merge for patch updates</span>
+            <span class="tech-tag">Renovate config.json</span>
+            <span class="tech-tag">Grouped updates</span>
+            <span class="tech-tag">GitHub Security Advisories</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 7.7 OPA + AWS WAF parallel -->
+    <div class="parallel-group">
+      <div class="step-card accent-rust">
+        <div class="step-head">
+          <span class="step-num-tag">7.7</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Open Policy Agent (OPA) — Policy as Code</div>
+            <div class="step-sub">Enforce security rules across your entire stack in one language</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 7.8</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">OPA decouples policy decisions from your application logic. Write policies in Rego (OPA's language), evaluate them in K8s admission controllers (Gatekeeper), API gateways, or CI pipelines. Example: "No container may run as root" or "All S3 buckets must have versioning enabled."</p>
+          <div class="tech-row">
+            <span class="tech-tag">Rego language</span>
+            <span class="tech-tag">OPA server / sidecar patterns</span>
+            <span class="tech-tag">K8s Gatekeeper integration</span>
+            <span class="tech-tag">Conftest (policy testing)</span>
+            <span class="tech-tag">RBAC policies in OPA</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Docs</div>
+              <div class="resource-title">openpolicyagent.org/docs + Rego Playground (play.openpolicyagent.org)</div>
+              <div class="resource-note">Interactive playground makes Rego approachable — write and test policies in-browser</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-card accent-rust">
+        <div class="step-head">
+          <span class="step-num-tag">7.8</span>
+          <div class="step-title-wrap">
+            <div class="step-title">AWS WAF — Web Application Firewall</div>
+            <div class="step-sub">Layer 7 protection for your deployed applications</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 7.7</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">AWS WAF sits in front of your ALB or CloudFront distribution and blocks malicious traffic before it hits your application: SQL injection, XSS, bad bots, rate-based rules (DDoS mitigation). AWS Managed Rules cover OWASP Top 10 out of the box. Combine with Shield for advanced DDoS protection.</p>
+          <div class="tech-row">
+            <span class="tech-tag">WebACL configuration</span>
+            <span class="tech-tag">AWS Managed Rules (OWASP)</span>
+            <span class="tech-tag">Rate-based rules</span>
+            <span class="tech-tag">Geo-blocking</span>
+            <span class="tech-tag">WAF logging to S3 / CloudWatch</span>
+            <span class="tech-tag">WAF + CloudFront integration</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-accordion" style="margin-top:12px; margin-left:0">
+      <button class="proj-toggle" onclick="toggle(this)">
+        <span class="proj-toggle-label">Phase 7 Capstone Project</span>
+        <span class="proj-chevron">▼</span>
+      </button>
+      <div class="proj-content">
+        <div class="project-item">
+          <div class="proj-name">Hardened CI/CD Pipeline with Full DevSecOps Stack</div>
+          <div class="proj-desc">Extend your Phase 6 deployment pipeline with a complete security layer: SonarQube quality gate on every PR → Trivy container scan on every Docker build → Checkov/tfsec on every Terraform change → OWASP ZAP scan on staging deployment → Dependabot auto-PRs for vulnerabilities → Vault for all secrets (no GitHub Secrets for sensitive credentials) → AWS WAF protecting the live endpoint → OPA admission controller ensuring no privileged pods in K8s.</div>
+          <div class="proj-revises">GitHub Actions, Docker, Kubernetes, Terraform, AWS, NestJS, Shell scripting, Networking</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /phase7 -->
+
+
+<div class="phase-div"></div>
+<!-- ══════════════════════════════════════════════════ -->
+<!--  PHASE 8: ADVANCED FULL-STACK — NEXT.JS          -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="phase-block" id="phase8">
+  <div class="phase-header">
+    <div class="phase-num-col">
+      <div class="phase-num">8</div>
+      <div class="phase-vert-line"></div>
+    </div>
+    <div class="phase-main">
+      <div class="phase-title">Advanced Full-Stack — <span>Next.js</span></div>
+      <div class="phase-desc">The production React meta-framework. Server Components, SSR, SSG, ISR, and the App Router combine everything you've learned into one cohesive full-stack framework. This is the capstone of the entire frontend-to-backend journey.</div>
+      <div class="phase-prereq">⬆ Requires: Phase 2 (React + TypeScript + Tailwind) + Phase 3 (Backend + Databases) + Phase 5 (APIs + Auth)</div>
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <div class="step-card accent-blue">
+      <div class="step-head">
+        <span class="step-num-tag">8.1</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Next.js — App Router, RSC, SSR/SSG/ISR</div>
+          <div class="step-sub">The framework that collapses frontend + backend into a single codebase</div>
+        </div>
+        <div class="step-badges"><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Next.js is now the standard for production React applications. The App Router (Next 13+) introduces React Server Components — components that render on the server and stream HTML to the client, with zero JavaScript sent for those components. SSR (server-side rendering), SSG (static generation), and ISR (incremental static regeneration) let you choose the right rendering strategy per page. Next.js also handles API routes, middleware, image optimization, and font loading.</p>
+        <div class="tech-row">
+          <span class="tech-tag">App Router (layouts, pages, loading, error)</span>
+          <span class="tech-tag">React Server Components (RSC)</span>
+          <span class="tech-tag">Server Actions</span>
+          <span class="tech-tag">SSR / SSG / ISR rendering modes</span>
+          <span class="tech-tag">Next.js API routes</span>
+          <span class="tech-tag">Middleware (edge functions)</span>
+          <span class="tech-tag">next/image & next/font</span>
+          <span class="tech-tag">Parallel & intercepted routes</span>
+          <span class="tech-tag">next-auth (auth.js)</span>
+          <span class="tech-tag">Deployment on Vercel / self-hosted</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Resource</div>
+            <div class="resource-title">nextjs.org/learn — official interactive tutorial</div>
+            <div class="resource-note">The best Next.js learning resource — free, project-based, covers the full App Router paradigm</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">Josh tried coding (YouTube) + Matt Pocock RSC tutorials</div>
+            <div class="resource-note">Practical project walkthroughs that go beyond the official docs</div>
+          </div>
+        </div>
+        <div class="project-accordion">
+          <button class="proj-toggle" onclick="toggle(this)">
+            <span class="proj-toggle-label">Final Capstone Project</span>
+            <span class="proj-chevron">▼</span>
+          </button>
+          <div class="proj-content">
+            <div class="project-item">
+              <div class="proj-name">Production SaaS App — The Everything Project</div>
+              <div class="proj-desc">Build a full SaaS product with Next.js App Router: multi-tenant architecture, auth (next-auth with Google + GitHub), Stripe payments, real-time features (WebSockets via Socket.io), file uploads to S3, PostgreSQL + Prisma + Redis, tRPC or GraphQL for the API layer, Zod for all validation, deployed on AWS (ECS + RDS + ElastiCache) via GitHub Actions, monitored by Prometheus/Grafana, secured with WAF + Vault for secrets, Trivy + SonarQube + Dependabot in the pipeline. Every phase of the roadmap is exercised simultaneously.</div>
+              <div class="proj-revises">All phases — HTML/CSS/JS/React/TypeScript/Tailwind/Next.js/NestJS/PostgreSQL/MongoDB/Redis/Docker/K8s/Terraform/AWS/GitHub Actions/JWT/GraphQL/WebSockets/Swagger/Zod/Prometheus/Vault/Trivy/SonarQube/OPA/WAF</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /phase8 -->
+
+<!-- FOOTER NOTE -->
+<div style="margin-top:64px; padding: 24px; background: var(--paper); border: 1px solid var(--line); border-top: 2px solid var(--ink); font-family:'Inconsolata',monospace; font-size:12px; color:var(--steel);">
+  <div style="font-size:10px;letter-spacing:3px;color:var(--amber);margin-bottom:8px;">// NOTE ON PARALLEL TRACKS</div>
+  Angular.js (from your notes) is a viable alternative to React — it's used heavily in enterprise India. If targeting TCS, Infosys, Wipro large enterprise contracts, Angular knowledge is valuable. Learn React first to completion (Phase 2), then Angular as a second framework takes 4–6 weeks given React knowledge. Vue.js is a similar story — excellent DX, popular in Southeast Asia and indie projects. Pick React as primary, branch out only after Phase 2 is complete.
+</div>
+
+<div class="phase-div"></div>
+<!-- ══════════════════════════════════════════════════ -->
+<!--  PHASE 3B: JAVA & SPRING BOOT                   -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="phase-block" id="phase3b">
+  <div class="phase-header">
+    <div class="phase-num-col">
+      <div class="phase-num" style="-webkit-text-stroke-color:var(--java);">3B</div>
+      <div class="phase-vert-line"></div>
+    </div>
+    <div class="phase-main">
+      <div class="phase-title" style="">Java <span style="color:var(--java);">& Spring Boot</span></div>
+      <div class="phase-desc">The enterprise backend workhorse. Java dominates Indian IT (TCS, Infosys, Wipro, Cognizant, Accenture India run millions of Java microservices). Spring Boot is the NestJS of the Java world — and once you know NestJS, Spring Boot's mental model maps almost 1:1.</div>
+      <div class="phase-prereq" style="color:var(--java); background:rgba(181,89,26,0.06); border-color:rgba(181,89,26,0.2);">⬆ Best start: After Phase 3 (NestJS) complete + Phase 4 (Databases) in progress</div>
+
+      <!-- WHY / WHEN reasoning box -->
+      <div style="margin-top:16px; background:rgba(181,89,26,0.06); border:1px solid rgba(181,89,26,0.2); border-radius:4px; padding:16px 20px;">
+        <div style="font-family:'Inconsolata',monospace; font-size:10px; letter-spacing:3px; color:var(--java); margin-bottom:10px;">// WHY &amp; WHEN</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:13px;">
+          <div>
+            <div style="font-weight:600; color:var(--ink); margin-bottom:4px;">Why learn Java after NestJS?</div>
+            <div style="color:var(--steel); line-height:1.6;">NestJS gives you Dependency Injection, decorators, modules, and REST APIs. Spring Boot uses the exact same patterns — just verbose Java syntax instead of TypeScript. Your NestJS knowledge cuts Java's learning curve by ~50%. The concepts aren't new; only the ecosystem is.</div>
+          </div>
+          <div>
+            <div style="font-weight:600; color:var(--ink); margin-bottom:4px;">Why not earlier?</div>
+            <div style="color:var(--steel); line-height:1.6;">Java before TypeScript/NestJS is painful — Java's verbosity feels arbitrary without a comparison point. After NestJS, you'll immediately understand <em>why</em> every Spring annotation exists. Also: Java without SQL knowledge (Phase 4) means you can't use Spring Data JPA effectively, which is 60% of Spring Boot's value.</div>
+          </div>
+          <div>
+            <div style="font-weight:600; color:var(--ink); margin-bottom:4px;">Market reality 2026</div>
+            <div style="color:var(--steel); line-height:1.6;">Java + Spring Boot is still the <strong>dominant backend stack in Indian enterprise IT</strong>. BFSI (banks, insurance), telecom, government systems — all Java. New greenfield startups prefer Node/Python, but the volume of Java jobs in India dwarfs every other backend language combined. It's a parallel career track, not a replacement.</div>
+          </div>
+          <div>
+            <div style="font-weight:600; color:var(--ink); margin-bottom:4px;">Java in the AI era</div>
+            <div style="color:var(--steel); line-height:1.6;">Spring AI (Spring's official LLM integration library) now brings ChatGPT/Claude integration, RAG pipelines, and vector store connectors into the Spring ecosystem. Enterprise companies integrating AI will do it through Java stacks. This makes Java + AI a highly monetizable niche in the Indian IT upgrade cycle.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <!-- 3B.1 Java Core -->
+    <div class="step-card accent-java">
+      <div class="step-head">
+        <span class="step-num-tag" style="background:var(--java);">3B.1</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Java Core — OOP, Collections, Concurrency</div>
+          <div class="step-sub">Strongly typed, verbose, but once learnt — extremely legible at scale</div>
+        </div>
+        <div class="step-badges"><span class="badge b-java">java track</span><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Java's OOP is stricter than TypeScript's — everything is a class, interfaces are enforced at compile time, and generics are explicit. The payoff: large codebases are far more navigable. Focus on Java 17+ (LTS) — records, sealed classes, and text blocks massively reduce boilerplate. Understand the JVM (heap, stack, GC) because Spring Boot performance tuning requires it.</p>
+        <div class="tech-row">
+          <span class="tech-tag">Classes, interfaces, abstract classes</span>
+          <span class="tech-tag">Generics</span>
+          <span class="tech-tag">Collections (List, Map, Set, Queue)</span>
+          <span class="tech-tag">Streams API (functional Java)</span>
+          <span class="tech-tag">Optional</span>
+          <span class="tech-tag">Records (Java 17)</span>
+          <span class="tech-tag">Exception handling (checked vs unchecked)</span>
+          <span class="tech-tag">Concurrency (threads, ExecutorService, CompletableFuture)</span>
+          <span class="tech-tag">JVM memory model (heap, stack, GC basics)</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Head First Java — Sierra & Bates (O'Reilly)</div>
+            <div class="resource-note">Visual, fun, and remarkably complete. 3rd edition covers modern Java. Best first Java book — period.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">Exercism.io — Java Track (48 exercises)</div>
+            <div class="resource-note">Mentor-reviewed exercises. Each builds a distinct Java concept. Completion = solid core Java.</div>
+          </div>
+        </div>
+        <div class="project-accordion">
+          <button class="proj-toggle" onclick="toggle(this)">
+            <span class="proj-toggle-label">Projects</span>
+            <span class="proj-chevron">▼</span>
+          </button>
+          <div class="proj-content">
+            <div class="project-item">
+              <div class="proj-name">Port Your Node.js Utility to Java</div>
+              <div class="proj-desc">Take a medium-complexity Node.js script you've already written (e.g. the log parser from Phase 0, or a data processing script) and rewrite it in Java. Same logic, different language. This forces direct comparison and anchors Java concepts to things you already understand. Use Java Streams API where you'd use array .map/.filter in JS.</div>
+              <div class="proj-revises">Shell scripting, Node.js streams, functional programming concepts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div><span class="conn-label">Java core → Spring Boot maps exactly like Node.js → NestJS</span></div>
+
+    <!-- 3B.2 Spring Boot Core -->
+    <div class="step-card accent-java">
+      <div class="step-head">
+        <span class="step-num-tag" style="background:var(--java);">3B.2</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Spring Boot — Core, IoC, REST</div>
+          <div class="step-sub">NestJS concepts, Java syntax — the mental model transfers almost entirely</div>
+        </div>
+        <div class="step-badges"><span class="badge b-java">java track</span><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Spring Boot is NestJS's older, more verbose sibling. @RestController = @Controller. @Service = @Injectable. @Autowired = constructor injection. The IoC (Inversion of Control) container is Spring's DI system — identical concept to NestJS's module system. Spring Boot auto-configures everything — you declare what you need, it wires it together.</p>
+        <div class="tech-row">
+          <span class="tech-tag">@SpringBootApplication, @ComponentScan</span>
+          <span class="tech-tag">IoC container &amp; Bean lifecycle</span>
+          <span class="tech-tag">@RestController / @RequestMapping</span>
+          <span class="tech-tag">@Service / @Repository / @Component</span>
+          <span class="tech-tag">@Autowired / constructor injection</span>
+          <span class="tech-tag">application.properties / YAML config</span>
+          <span class="tech-tag">Spring Profiles (dev/staging/prod)</span>
+          <span class="tech-tag">Exception handling (@ControllerAdvice)</span>
+          <span class="tech-tag">Validation (javax.validation / @Valid)</span>
+          <span class="tech-tag">Spring Boot Actuator (health endpoints)</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Spring Boot in Action — Craig Walls (Manning)</div>
+            <div class="resource-note">Concise and project-driven. Covers the full Spring Boot development loop. spring.io/guides also has free project-based tutorials.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">start.spring.io + Spring Guides (spring.io/guides)</div>
+            <div class="resource-note">Spring Initializr generates scaffolding. Official guides each target one specific Spring concept — short and executable.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 3B.3 Spring Data JPA -->
+    <div class="step-card accent-java">
+      <div class="step-head">
+        <span class="step-num-tag" style="background:var(--java);">3B.3</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Spring Data JPA + Hibernate</div>
+          <div class="step-sub">The Prisma of the Java world — ORM that maps Java objects to database tables</div>
+        </div>
+        <div class="step-badges"><span class="badge b-java">java track</span><span class="badge b-warn">prereq: Phase 4 (SQL)</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">JPA (Java Persistence API) is the standard ORM interface; Hibernate is the most-used implementation. Spring Data JPA wraps Hibernate with repositories — you define an interface, Spring generates all the SQL. Understand the N+1 problem (same as in GraphQL Phase 5.2 — you already know this!), fetch strategies (LAZY vs EAGER), and transaction management (@Transactional).</p>
+        <div class="tech-row">
+          <span class="tech-tag">@Entity / @Table / @Column</span>
+          <span class="tech-tag">Relationships (@OneToMany, @ManyToOne, @ManyToMany)</span>
+          <span class="tech-tag">JpaRepository (CRUD + paging)</span>
+          <span class="tech-tag">JPQL &amp; native queries</span>
+          <span class="tech-tag">@Transactional (propagation, isolation)</span>
+          <span class="tech-tag">LAZY vs EAGER fetching</span>
+          <span class="tech-tag">N+1 problem &amp; @EntityGraph</span>
+          <span class="tech-tag">Flyway / Liquibase (DB migrations)</span>
+          <span class="tech-tag">Spring Data with PostgreSQL</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Java Persistence with Spring Data and Hibernate — Cătălin Tudose</div>
+            <div class="resource-note">Manning — the single most complete resource on Spring Data JPA + Hibernate. Covers every fetch strategy pitfall.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">Rebuild your Phase 4 blog schema in Spring Data JPA</div>
+            <div class="resource-note">Same PostgreSQL DB, same tables — now accessed through JPA. Compare Prisma vs JPA ergonomics directly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 3B.4 Spring Security -->
+    <div class="step-card accent-java">
+      <div class="step-head">
+        <span class="step-num-tag" style="background:var(--java);">3B.4</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Spring Security — JWT, OAuth2, Method Security</div>
+          <div class="step-sub">The most complex Spring module — but Phase 5.1 (JWT/OAuth2) makes it navigable</div>
+        </div>
+        <div class="step-badges"><span class="badge b-java">java track</span><span class="badge b-warn">prereq: Phase 5.1 (Auth)</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Spring Security has a steep learning curve because its filter chain is not intuitive. But if you already understand JWT structure and OAuth2 flows from Phase 5.1, you'll know <em>what</em> you're configuring — you just need to learn <em>where</em> the Spring Security config goes. Focus on the new lambda DSL (Spring Security 6+) — the old WebSecurityConfigurerAdapter is deprecated.</p>
+        <div class="tech-row">
+          <span class="tech-tag">SecurityFilterChain (lambda DSL)</span>
+          <span class="tech-tag">JWT filter (OncePerRequestFilter)</span>
+          <span class="tech-tag">UserDetailsService</span>
+          <span class="tech-tag">OAuth2 Resource Server config</span>
+          <span class="tech-tag">Method security (@PreAuthorize, @Secured)</span>
+          <span class="tech-tag">CORS configuration</span>
+          <span class="tech-tag">CSRF handling in stateless APIs</span>
+          <span class="tech-tag">Password encoding (BCrypt)</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Book</div>
+            <div class="resource-title">Spring Security in Action — Laurentiu Spilca (Manning)</div>
+            <div class="resource-note">The only comprehensive Spring Security book. 2nd edition covers Spring Security 6 + Spring Boot 3.</div>
+          </div>
+          <div class="resource-card">
+            <div class="resource-label practice">⚡ Practice</div>
+            <div class="resource-title">Add JWT auth to your Spring Boot blog API</div>
+            <div class="resource-note">Replicate the exact auth flow you built in NestJS Phase 5.1 — same logic, different framework. This is revision through port.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 3B.5 Spring Microservices + Spring AI -->
+    <div class="parallel-group">
+      <div class="step-card accent-java">
+        <div class="step-head">
+          <span class="step-num-tag" style="background:var(--java);">3B.5</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Spring Microservices</div>
+            <div class="step-sub">Spring Cloud — the enterprise microservices toolkit</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 3B.6</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Spring Cloud adds service discovery (Eureka), API gateway (Spring Cloud Gateway), config server, circuit breaker (Resilience4j), and distributed tracing (Micrometer + Zipkin) to your Spring Boot services. This is what enterprise Java microservices architectures look like. Pairs directly with Phase 6 (Docker + K8s).</p>
+          <div class="tech-row">
+            <span class="tech-tag">Spring Cloud Gateway</span>
+            <span class="tech-tag">Eureka Service Discovery</span>
+            <span class="tech-tag">Spring Cloud Config Server</span>
+            <span class="tech-tag">Resilience4j (circuit breaker, retry)</span>
+            <span class="tech-tag">OpenFeign (declarative REST client)</span>
+            <span class="tech-tag">Micrometer + Prometheus (metrics)</span>
+            <span class="tech-tag">Docker Compose for Spring services</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Book</div>
+              <div class="resource-title">Spring Microservices in Action — John Carnell (Manning)</div>
+              <div class="resource-note">2nd edition with Docker + K8s chapters. Best single book for enterprise Spring architecture.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3B.6 Spring AI -->
+      <div class="step-card accent-java">
+        <div class="step-head">
+          <span class="step-num-tag" style="background:var(--java);">3B.6</span>
+          <div class="step-title-wrap">
+            <div class="step-title">Spring AI</div>
+            <div class="step-sub">LLM integration, RAG, and vector stores — in the Java ecosystem</div>
+          </div>
+          <div class="step-badges"><span class="badge b-para">parallel w/ 3B.5</span><span class="badge b-ai">AI-relevant</span></div>
+        </div>
+        <div class="step-body">
+          <p class="step-desc">Spring AI (1.0 GA released 2024) brings the entire AI integration stack into Spring Boot: ChatClient for LLM calls, EmbeddingModel for vector generation, VectorStore integrations (PgVector, Qdrant, Redis), and RAG pipelines — all with the familiar Spring DI model. This is the skill that makes you uniquely valuable: you can integrate AI into <em>existing Java enterprise systems</em>, which is worth far more than building greenfield AI demos.</p>
+          <div class="tech-row">
+            <span class="tech-tag">ChatClient (OpenAI, Anthropic, Gemini adapters)</span>
+            <span class="tech-tag">Prompt templates &amp; PromptTemplate</span>
+            <span class="tech-tag">EmbeddingModel</span>
+            <span class="tech-tag">VectorStore (PgVector, Qdrant)</span>
+            <span class="tech-tag">RAG pipeline (QuestionAnswerAdvisor)</span>
+            <span class="tech-tag">Tool / Function calling</span>
+            <span class="tech-tag">Streaming responses (Flux)</span>
+            <span class="tech-tag">Structured output (@OutputParser)</span>
+          </div>
+          <div class="resource-row">
+            <div class="resource-card">
+              <div class="resource-label book">📖 Docs</div>
+              <div class="resource-title">docs.spring.io/spring-ai/reference</div>
+              <div class="resource-note">Official Spring AI docs are comprehensive and have working examples for each adapter. The community is growing fast — Stack Overflow coverage is improving weekly.</div>
+            </div>
+            <div class="resource-card">
+              <div class="resource-label practice">⚡ Practice</div>
+              <div class="resource-title">Build a RAG-powered Java API over your existing PostgreSQL data</div>
+              <div class="resource-note">Embed your blog post content, store in PgVector, wire up Spring AI's QuestionAnswerAdvisor. You'll have an AI-searchable knowledge base in ~100 lines of Java.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="connector"><div class="conn-line"></div></div>
+
+    <!-- 3B.7 Capstone -->
+    <div class="step-card accent-java">
+      <div class="step-head">
+        <span class="step-num-tag" style="background:var(--java);">3B.7</span>
+        <div class="step-title-wrap">
+          <div class="step-title">Testing in Spring Boot</div>
+          <div class="step-sub">@SpringBootTest, MockMvc, Testcontainers — the Java testing stack</div>
+        </div>
+        <div class="step-badges"><span class="badge b-java">java track</span><span class="badge b-seq">sequential</span></div>
+      </div>
+      <div class="step-body">
+        <p class="step-desc">Testing in Java is more verbose but also more powerful than Jest. JUnit 5 is the test runner. Mockito handles mocking (same concept as jest.mock — you already know this). MockMvc lets you make fake HTTP requests to your controllers without starting a real server. Testcontainers spins up real Docker containers (real Postgres, real Redis) for integration tests — far more reliable than in-memory fakes.</p>
+        <div class="tech-row">
+          <span class="tech-tag">JUnit 5 (@Test, @BeforeEach, @ParameterizedTest)</span>
+          <span class="tech-tag">Mockito (@Mock, @InjectMocks, verify())</span>
+          <span class="tech-tag">@WebMvcTest + MockMvc</span>
+          <span class="tech-tag">@SpringBootTest (integration tests)</span>
+          <span class="tech-tag">Testcontainers (PostgreSQL, Redis containers)</span>
+          <span class="tech-tag">@DataJpaTest</span>
+          <span class="tech-tag">AssertJ fluent assertions</span>
+        </div>
+        <div class="resource-row">
+          <div class="resource-card">
+            <div class="resource-label book">📖 Resource</div>
+            <div class="resource-title">rieckpil.de/guides — Philip Riecks Spring Boot Testing Guide</div>
+            <div class="resource-note">Free, comprehensive, and the most practical Spring Boot testing resource available online. Better than any book for this specific topic.</div>
+          </div>
+        </div>
+        <div class="project-accordion">
+          <button class="proj-toggle" onclick="toggle(this)">
+            <span class="proj-toggle-label">Java Track Capstone Project</span>
+            <span class="proj-chevron">▼</span>
+          </button>
+          <div class="proj-content">
+            <div class="project-item">
+              <div class="proj-name">Enterprise Java Microservices — AI-Enhanced Blog Platform</div>
+              <div class="proj-desc">Build a microservices system in Java: (1) User Service — Spring Boot + Spring Security + JWT + PostgreSQL + JPA. (2) Content Service — CRUD for posts, tags, media. (3) AI Service — Spring AI + RAG pipeline, semantic search over posts, content summarization via LLM. (4) API Gateway — Spring Cloud Gateway routing all three. (5) Docker Compose for local + K8s manifests for deployment. Prometheus metrics, Flyway migrations, full JUnit 5 + Testcontainers test suite. Exposes the same REST API as your NestJS blog — two full-stack implementations of the same product, different ecosystems.</div>
+              <div class="proj-revises">NestJS DI patterns, PostgreSQL, Redis, Docker, K8s, JWT/OAuth2, GraphQL (compare REST here), Prometheus monitoring, Phase 6 CI/CD pipeline</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /phase3b -->
+
+<div class="phase-div"></div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--  AI ERA REALITY CHECK                            -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="phase-block" id="ai-check">
+  <div class="phase-header">
+    <div class="phase-num-col">
+      <div class="phase-num" style="-webkit-text-stroke-color:var(--ai); color:rgba(14,102,85,0.08);">?</div>
+      <div class="phase-vert-line"></div>
+    </div>
+    <div class="phase-main">
+      <div class="phase-title">Is this roadmap <span style="color:var(--ai);">enough in 2026+?</span></div>
+      <div class="phase-desc">An honest, direct answer — what this roadmap does well, what it's missing, and what the AI era actually demands from engineers.</div>
+    </div>
+  </div>
+
+  <div class="steps">
+
+    <!-- Verdict card -->
+    <div class="step-card accent-ai">
+      <div class="step-head">
+        <span class="step-num-tag" style="background:var(--ai);">VERDICT</span>
+        <div class="step-title-wrap">
+          <div class="step-title">The short answer: Yes, the foundation is correct — but it needs an AI layer on top</div>
+          <div class="step-sub">The fundamentals are MORE valuable now, not less. But without AI-native skills, you're only half-complete.</div>
+        </div>
+        <div class="step-badges"><span class="badge b-ai">important</span></div>
+      </div>
+      <div class="step-body">
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+
+          <!-- What holds up -->
+          <div style="background:rgba(14,102,85,0.06); border:1px solid rgba(14,102,85,0.2); border-radius:4px; padding:14px 16px;">
+            <div style="font-family:'Inconsolata',monospace; font-size:10px; letter-spacing:3px; color:var(--ai); margin-bottom:8px;">✓ WHAT HOLDS UP COMPLETELY</div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:6px; font-size:13px; color:var(--steel);">
+              <li style="display:flex; gap:8px;"><span style="color:var(--ai); flex-shrink:0;">→</span><span><strong>Phase 0 (Networking, Git, Shell)</strong> — AI can't replace knowing what a TCP packet is or how to debug a broken deployment pipeline at 2AM.</span></li>
+              <li style="display:flex; gap:8px;"><span style="color:var(--ai); flex-shrink:0;">→</span><span><strong>Phase 6 (DevOps/Cloud)</strong> — AI doesn't deploy itself. Docker, K8s, Terraform, CI/CD are more critical than ever as AI services need reliable infrastructure.</span></li>
+              <li style="display:flex; gap:8px;"><span style="color:var(--ai); flex-shrink:0;">→</span><span><strong>Phase 7 (DevSecOps)</strong> — AI products handle sensitive user data at scale. Security expertise becomes a rare differentiator, not a checkbox.</span></li>
+              <li style="display:flex; gap:8px;"><span style="color:var(--ai); flex-shrink:0;">→</span><span><strong>Databases (Phase 4)</strong> — Every AI product needs a data layer. Vector databases are additions to, not replacements for, relational + cache databases.</span></li>
+              <li style="display:flex; gap:8px;"><span style="color:var(--ai); flex-shrink:0;">→</span><span><strong>DSA (continuous)</strong> — AI doesn't pass your technical interview. Coding rounds at product companies haven't gotten easier — if anything they've gotten harder as applicant volume grows.</span></li>
+            </ul>
+          </div>
+
+          <!-- What's missing -->
+          <div style="background:rgba(184,64,32,0.05); border:1px solid rgba(184,64,32,0.2); border-radius:4px; padding:14px 16px;">
+            <div style="font-family:'Inconsolata',monospace; font-size:10px; letter-spacing:3px; color:var(--rust); margin-bottom:8px;">✗ WHAT'S MISSING / NEEDS AUGMENTATION</div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:6px; font-size:13px; color:var(--steel);">
+              <li style="display:flex; gap:8px;"><span style="color:var(--rust); flex-shrink:0;">→</span><span><strong>LLM API Integration</strong> — Every product company expects engineers to know how to call OpenAI/Anthropic/Gemini APIs, handle streaming, manage token budgets, and implement retry logic.</span></li>
+              <li style="display:flex; gap:8px;"><span style="color:var(--rust); flex-shrink:0;">→</span><span><strong>RAG Systems</strong> — Mentioned in Track D of the AI roadmap but not in this one. Chunking, embedding, vector search, re-ranking — these are now standard backend engineering skills.</span></li>
+              <li style="display:flex; gap:8px;"><span style="color:var(--rust); flex-shrink:0;">→</span><span><strong>Prompt Engineering</strong> — Not "prompt hacking" — structured, systematic prompt design for reliable, consistent output. Chain-of-thought, few-shot, system prompts, output parsers.</span></li>
+              <li style="display:flex; gap:8px;"><span style="color:var(--rust); flex-shrink:0;">→</span><span><strong>AI-Native Product Patterns</strong> — Streaming UI (SSE), tool/function calling, agent orchestration, fallback chains. These are frontend + backend patterns unique to AI products.</span></li>
+              <li style="display:flex; gap:8px;"><span style="color:var(--rust); flex-shrink:0;">→</span><span><strong>Observability for AI</strong> — LLM observability (Langfuse, Braintrust) is a new category. Tracking prompt cost, latency per token, output quality regression — none of this is in Prometheus/Grafana by default.</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- The real picture -->
+        <div style="background:var(--paper3); border-radius:4px; padding:16px; border-left:3px solid var(--ai);">
+          <div style="font-family:'Inconsolata',monospace; font-size:10px; letter-spacing:3px; color:var(--ai); margin-bottom:10px;">// THE ACTUAL PICTURE</div>
+          <div style="display:flex; flex-direction:column; gap:10px; font-size:13.5px; color:var(--ink); line-height:1.7;">
+            <p><strong>AI has not eliminated software engineering jobs — it has bifurcated them.</strong> There are now two tiers: (1) engineers who understand systems deeply and use AI as a 10x force-multiplier, and (2) people who prompt AI tools without understanding the output. Tier 1 earns more than ever. Tier 2 is being commoditised. This roadmap builds Tier 1 foundations.</p>
+            <p><strong>What AI has changed:</strong> The bar for <em>getting started</em> on a project is lower (AI writes boilerplate). The bar for <em>finishing it correctly</em>, deploying it securely, scaling it, and maintaining it is the same or higher — because now teams are smaller and each person owns more. This roadmap teaches exactly those skills.</p>
+            <p><strong>What you should add to this roadmap</strong> — in order of ROI:</p>
+          </div>
+        </div>
+
+        <!-- Additions table -->
+        <div style="margin-top:12px; border:1px solid var(--line); border-radius:4px; overflow:hidden;">
+          <div style="background:var(--ink); padding:10px 16px; display:grid; grid-template-columns:2fr 1fr 3fr; gap:12px; font-family:'Inconsolata',monospace; font-size:10px; letter-spacing:2px; color:var(--amber3);">
+            <span>SKILL TO ADD</span><span>WHEN</span><span>WHAT TO LEARN</span>
+          </div>
+          <div style="display:flex; flex-direction:column;">
+            <div style="display:grid; grid-template-columns:2fr 1fr 3fr; gap:12px; padding:10px 16px; border-bottom:1px solid var(--line); font-size:12.5px; background:rgba(14,102,85,0.03);">
+              <span style="font-weight:600; color:var(--ink);">LLM API Integration</span>
+              <span style="color:var(--ai); font-family:'Inconsolata',monospace; font-size:11px;">After Phase 3</span>
+              <span style="color:var(--steel);">OpenAI / Anthropic / Gemini APIs. Streaming (SSE). Token counting. Function/tool calling. Error handling + fallbacks. Start adding AI calls to your NestJS projects immediately.</span>
+            </div>
+            <div style="display:grid; grid-template-columns:2fr 1fr 3fr; gap:12px; padding:10px 16px; border-bottom:1px solid var(--line); font-size:12.5px;">
+              <span style="font-weight:600; color:var(--ink);">RAG & Vector Databases</span>
+              <span style="color:var(--ai); font-family:'Inconsolata',monospace; font-size:11px;">After Phase 4</span>
+              <span style="color:var(--steel);">Embeddings (what they are, how to generate them), vector stores (Qdrant, PgVector), chunking strategies, hybrid search (BM25 + vector), re-ranking. Your AI Workspace project already touches this.</span>
+            </div>
+            <div style="display:grid; grid-template-columns:2fr 1fr 3fr; gap:12px; padding:10px 16px; border-bottom:1px solid var(--line); font-size:12.5px; background:rgba(14,102,85,0.03);">
+              <span style="font-weight:600; color:var(--ink);">AI Agents & Orchestration</span>
+              <span style="color:var(--ai); font-family:'Inconsolata',monospace; font-size:11px;">After Phase 5</span>
+              <span style="color:var(--steel);">Tool calling, ReAct pattern, multi-step agents. LangGraph or direct API orchestration. Build something that can browse, write code, run it, and iterate. This is the frontier of applied engineering.</span>
+            </div>
+            <div style="display:grid; grid-template-columns:2fr 1fr 3fr; gap:12px; padding:10px 16px; border-bottom:1px solid var(--line); font-size:12.5px;">
+              <span style="font-weight:600; color:var(--ink);">LLM Observability</span>
+              <span style="color:var(--ai); font-family:'Inconsolata',monospace; font-size:11px;">Parallel w/ Phase 6</span>
+              <span style="color:var(--steel);">Langfuse or Braintrust — open source, self-hostable. Tracks every prompt, response, cost, and latency. Add to every AI project. Non-negotiable for production AI.</span>
+            </div>
+            <div style="display:grid; grid-template-columns:2fr 1fr 3fr; gap:12px; padding:10px 16px; font-size:12.5px; background:rgba(14,102,85,0.03);">
+              <span style="font-weight:600; color:var(--ink);">Fine-tuning Fundamentals</span>
+              <span style="color:var(--ai); font-family:'Inconsolata',monospace; font-size:11px;">Optional, after Phase 8</span>
+              <span style="color:var(--steel);">When to fine-tune vs RAG vs prompt engineering. Using OpenAI fine-tuning API or open models via HuggingFace PEFT / LoRA. Not needed for most product engineering roles — but a strong differentiator for AI-native companies.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom line -->
+        <div style="margin-top:14px; padding:14px 16px; background:var(--ink); border-radius:4px; color:var(--amber3); font-family:'Inconsolata',monospace; font-size:12.5px; line-height:1.7;">
+          <span style="font-size:10px; letter-spacing:3px; opacity:0.6; display:block; margin-bottom:6px;">// BOTTOM LINE</span>
+          Complete this roadmap as-is and add LLM API integration starting at Phase 3. The engineering depth here (networking, DevSecOps, distributed systems, testing) is exactly what separates engineers who <em>build AI products</em> from people who <em>wrap AI APIs</em>. The former earn 3–5x more. The roadmap builds the former. Add the AI layer on top, and you are genuinely hard to replace.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /ai-check -->
+
+<div style="margin-top:64px; padding: 24px; background: var(--paper); border: 1px solid var(--line); border-top: 2px solid var(--ink); font-family:'Inconsolata',monospace; font-size:12px; color:var(--steel);">
+  <div style="font-size:10px;letter-spacing:3px;color:var(--amber);margin-bottom:8px;">// NOTE ON PARALLEL TRACKS</div>
+  Angular.js (from your notes) is a viable alternative to React — it's used heavily in enterprise India. If targeting TCS, Infosys, Wipro large enterprise contracts, Angular knowledge is valuable. Learn React first to completion (Phase 2), then Angular as a second framework takes 4–6 weeks given React knowledge. Vue.js is a similar story — excellent DX, popular in Southeast Asia and indie projects. Pick React as primary, branch out only after Phase 2 is complete.
+</div>
+
+</div><!-- /page -->
+
+<script>
+function toggle(btn) {
+  const content = btn.nextElementSibling;
+  const chevron = btn.querySelector('.proj-chevron');
+  content.classList.toggle('open');
+  chevron.classList.toggle('open');
+}
+</script>
+</body>
+</html>
