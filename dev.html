@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Android Mastery — Complete Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400&family=Epilogue:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & BASE ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:#080B0F;
+  color:#DDD8CC;
+  font-family:'Epilogue',sans-serif;
+  font-size:15px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ── TOKENS ── */
+:root{
+  --bg:      #080B0F;
+  --bg2:     #0D1218;
+  --bg3:     #121922;
+  --bg4:     #18212C;
+  --bg5:     #1E2A38;
+  --b1:      rgba(255,255,255,0.055);
+  --b2:      rgba(255,255,255,0.1);
+  --b3:      rgba(255,255,255,0.16);
+  --text:    #DDD8CC;
+  --text2:   #8A9099;
+  --text3:   #4A525C;
+  --amber:   #F2A007;
+  --amber2:  rgba(242,160,7,0.12);
+  --amber3:  rgba(242,160,7,0.22);
+  --teal:    #0FB8A2;
+  --teal2:   rgba(15,184,162,0.1);
+  --purple:  #9278F5;
+  --purple2: rgba(146,120,245,0.1);
+  --coral:   #E8684A;
+  --coral2:  rgba(232,104,74,0.1);
+  --green:   #4CCA60;
+  --green2:  rgba(76,202,96,0.1);
+  --blue:    #4BA0E8;
+  --blue2:   rgba(75,160,232,0.1);
+  --gold:    #D4A843;
+  --gold2:   rgba(212,168,67,0.1);
+  --pink:    #E878A8;
+  --pink2:   rgba(232,120,168,0.1);
+  --r:       10px;
+  --rsm:     6px;
+  --rlg:     14px;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity:.5;
+}
+
+/* ── PROGRESS BAR ── */
+#progress-bar{
+  position:fixed;top:0;left:0;height:2px;background:var(--amber);
+  z-index:999;transition:width .1s;border-radius:0 2px 2px 0;
+  box-shadow:0 0 10px rgba(242,160,7,0.5);
+}
+
+/* ── NAV ── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,11,15,0.9);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--b1);
+}
+.nav-inner{
+  max-width:1060px;margin:0 auto;padding:0 24px;
+  display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;
+}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav-logo{
+  font-family:'Fraunces',serif;font-size:15px;font-weight:700;
+  color:var(--amber);white-space:nowrap;padding:13px 16px 13px 0;
+  border-right:1px solid var(--b1);margin-right:4px;letter-spacing:-.01em;
+}
+.nav-a{
+  font-size:11.5px;padding:13px 11px;color:var(--text3);
+  white-space:nowrap;text-decoration:none;font-weight:500;
+  letter-spacing:.03em;transition:color .15s;font-family:'JetBrains Mono',monospace;
+  border-bottom:2px solid transparent;
+}
+.nav-a:hover{color:var(--text2)}
+.nav-a.active{color:var(--amber);border-bottom-color:var(--amber)}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* ── HERO ── */
+.hero{
+  padding:90px 0 72px;border-bottom:1px solid var(--b1);
+  position:relative;overflow:hidden;
+}
+.hero-glow{
+  position:absolute;top:-200px;right:-150px;width:600px;height:600px;
+  background:radial-gradient(ellipse,rgba(242,160,7,0.05) 0%,transparent 65%);
+  pointer-events:none;
+}
+.hero-glow2{
+  position:absolute;bottom:-200px;left:-100px;width:500px;height:500px;
+  background:radial-gradient(ellipse,rgba(146,120,245,0.04) 0%,transparent 65%);
+  pointer-events:none;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--amber);
+  border:1px solid var(--amber3);padding:5px 12px;border-radius:20px;
+  background:var(--amber2);margin-bottom:22px;
+}
+.eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--amber)}
+
+h1{
+  font-family:'Fraunces',serif;font-size:clamp(36px,5.5vw,64px);
+  font-weight:900;line-height:1.02;letter-spacing:-.03em;color:#EDE9DE;
+  margin-bottom:20px;
+}
+h1 em{font-style:italic;color:var(--amber);font-weight:300}
+
+.hero-sub{
+  font-size:16px;color:var(--text2);max-width:560px;
+  font-weight:300;line-height:1.7;margin-bottom:44px;
+}
+
+.stats-bar{
+  display:flex;gap:0;border:1px solid var(--b1);border-radius:var(--r);
+  overflow:hidden;max-width:520px;
+}
+.stat{
+  flex:1;padding:16px 20px;background:var(--bg2);
+  border-right:1px solid var(--b1);
+}
+.stat:last-child{border-right:none}
+.stat-n{
+  font-family:'Fraunces',serif;font-size:26px;font-weight:700;
+  color:#EDE9DE;letter-spacing:-.02em;
+}
+.stat-l{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text3);margin-top:3px;letter-spacing:.06em;text-transform:uppercase}
+
+/* ── LEGEND BAR ── */
+.legend-bar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:16px;
+  padding:18px 0;border-bottom:1px solid var(--b1);
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;
+}
+.legend-item{display:flex;align-items:center;gap:6px;color:var(--text3)}
+.legend-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.legend-label{color:var(--text2)}
+
+/* ── SECTIONS ── */
+.section{padding:64px 0;border-bottom:1px solid var(--b1)}
+.section:last-child{border-bottom:none}
+
+.sec-eye{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--text3);
+  margin-bottom:10px;
+}
+.sec-title{
+  font-family:'Fraunces',serif;font-size:clamp(22px,3vw,32px);
+  font-weight:700;color:#EDE9DE;letter-spacing:-.02em;margin-bottom:10px;
+}
+.sec-desc{
+  color:var(--text2);font-size:14px;font-weight:300;
+  max-width:580px;margin-bottom:36px;line-height:1.7;
+}
+
+/* ── WHAT YOU'LL BUILD ── */
+.build-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:2px;
+  border-radius:var(--rlg);overflow:hidden;
+}
+@media(max-width:600px){.build-grid{grid-template-columns:1fr}}
+.build-card{
+  background:var(--bg2);padding:28px 26px;
+  transition:background .2s;position:relative;overflow:hidden;
+}
+.build-card:hover{background:var(--bg3)}
+.build-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--b2),transparent);
+}
+.bc-phase{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;
+  display:inline-block;
+}
+.bc-title{
+  font-family:'Fraunces',serif;font-size:17px;font-weight:700;
+  color:#EDE9DE;margin-bottom:8px;letter-spacing:-.01em;
+}
+.bc-desc{font-size:13px;color:var(--text2);line-height:1.6;font-weight:300}
+.bc-chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:14px}
+.chip{
+  font-size:11px;padding:3px 9px;border-radius:20px;
+  background:rgba(255,255,255,0.04);border:1px solid var(--b1);
+  color:var(--text3);font-family:'JetBrains Mono',monospace;
+}
+
+.examples-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;
+  margin-top:28px;
+}
+.ex-card{
+  background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);
+  padding:22px;transition:border-color .2s,background .2s;
+}
+.ex-card:hover{border-color:var(--b2);background:var(--bg3)}
+.ex-icon{font-size:20px;margin-bottom:10px}
+.ex-title{
+  font-family:'Fraunces',serif;font-size:15px;font-weight:700;
+  color:#EDE9DE;margin-bottom:6px;letter-spacing:-.01em;
+}
+.ex-desc{font-size:12px;color:var(--text2);line-height:1.55;font-weight:300}
+
+.limit-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px;
+  margin-top:16px;
+}
+.limit-card{
+  background:var(--bg2);border:1px solid var(--b1);
+  border-radius:var(--rsm);padding:14px 16px;
+}
+.limit-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px}
+.limit-desc{font-size:11px;color:var(--text3);line-height:1.45}
+
+/* ── CALLOUT ── */
+.callout{
+  border-radius:var(--r);padding:16px 20px;
+  display:flex;gap:12px;align-items:flex-start;margin-top:20px;
+}
+.callout.amber{background:var(--amber2);border:1px solid var(--amber3)}
+.callout.red{background:rgba(232,90,90,0.07);border:1px solid rgba(232,90,90,0.18)}
+.callout.blue{background:var(--blue2);border:1px solid rgba(75,160,232,0.18)}
+.callout-ico{font-size:15px;line-height:1.6;flex-shrink:0}
+.callout p{font-size:13px;color:var(--text);line-height:1.65;font-weight:300}
+.callout strong{font-weight:600}
+.callout.amber strong{color:var(--amber)}
+.callout.red strong{color:#E85A5A}
+.callout.blue strong{color:var(--blue)}
+
+/* ── TIMELINE PHASES ── */
+.phases{
+  position:relative;
+  padding-left:0;
+}
+
+.phase-wrap{
+  display:grid;grid-template-columns:52px 1fr;gap:0;
+  margin-bottom:12px;align-items:start;
+}
+@media(max-width:600px){
+  .phase-wrap{grid-template-columns:36px 1fr}
+}
+
+/* Left timeline column */
+.phase-left{
+  display:flex;flex-direction:column;align-items:center;
+  padding-top:22px;
+}
+.phase-dot{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;
+  flex-shrink:0;position:relative;z-index:2;
+  border:1.5px solid;
+  transition:box-shadow .3s;
+}
+.phase-line{
+  width:1px;flex:1;min-height:20px;margin-top:6px;
+  background:linear-gradient(to bottom,var(--b2),var(--b1));
+}
+.phase-wrap:last-child .phase-line{display:none}
+
+/* Phase card */
+.phase-card{
+  border:1px solid var(--b1);border-radius:var(--rlg);
+  overflow:hidden;transition:border-color .2s;
+  background:var(--bg2);
+}
+.phase-card:hover{border-color:var(--b2)}
+.phase-card.open{border-color:var(--b2)}
+
+.phase-head{
+  display:flex;align-items:center;gap:16px;
+  padding:20px 22px;cursor:pointer;
+  transition:background .15s;user-select:none;
+}
+.phase-head:hover{background:var(--bg3)}
+.phase-card.open .phase-head{background:var(--bg3)}
+
+.phase-info{flex:1;min-width:0}
+.phase-title{
+  font-family:'Fraunces',serif;font-size:16px;font-weight:700;
+  color:#EDE9DE;letter-spacing:-.01em;
+}
+.phase-sub{font-size:12px;color:var(--text2);margin-top:3px;font-weight:300}
+
+.phase-meta{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.phase-dur{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  padding:4px 10px;border-radius:20px;font-weight:500;white-space:nowrap;
+}
+.phase-chevron{
+  width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.04);
+  border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:var(--text3);transition:transform .25s,background .15s;
+  flex-shrink:0;
+}
+.phase-card.open .phase-chevron{transform:rotate(180deg);background:rgba(255,255,255,0.08)}
+
+/* Phase body */
+.phase-body{display:none;border-top:1px solid var(--b1)}
+.phase-card.open .phase-body{display:block}
+
+/* TABS */
+.tabs{
+  display:flex;gap:0;border-bottom:1px solid var(--b1);
+  padding:0 22px;overflow-x:auto;scrollbar-width:none;
+}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  padding:12px 14px;color:var(--text3);cursor:pointer;
+  border-bottom:2px solid transparent;white-space:nowrap;
+  transition:color .15s,border-color .15s;letter-spacing:.04em;
+  text-transform:uppercase;
+}
+.tab:hover{color:var(--text2)}
+.tab.active{color:var(--text);border-bottom-color:var(--b3)}
+
+.tab-panel{display:none;padding:22px}
+.tab-panel.active{display:block}
+
+/* TOPICS GRID */
+.topics-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:8px;
+}
+.topic{
+  background:var(--bg);border-radius:var(--rsm);padding:12px 14px;
+  border-left:3px solid;transition:background .15s;
+}
+.topic:hover{background:var(--bg4)}
+.topic-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px}
+.topic-desc{font-size:11px;color:var(--text2);line-height:1.45;font-weight:300}
+
+/* WATCH LIST */
+.watch-list{display:flex;flex-direction:column;gap:8px}
+.watch-item{
+  background:var(--bg);border:1px solid var(--b1);border-radius:var(--r);
+  overflow:hidden;transition:border-color .2s;
+}
+.watch-item:hover{border-color:var(--b2)}
+
+.wi-head{display:flex;align-items:center;gap:12px;padding:14px 16px}
+.wi-num{
+  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;
+  width:26px;height:26px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;
+}
+.wi-info{flex:1;min-width:0}
+.wi-title{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wi-meta{display:flex;align-items:center;gap:7px;margin-top:3px;flex-wrap:wrap}
+.wi-src{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--text3);display:flex;align-items:center;gap:4px;
+}
+.wi-sdot{width:4px;height:4px;border-radius:50%}
+.wi-badge{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  padding:2px 7px;border-radius:3px;font-weight:500;
+  text-transform:uppercase;letter-spacing:.05em;
+}
+.wi-link{
+  display:inline-flex;align-items:center;gap:5px;font-size:11px;
+  color:var(--text2);text-decoration:none;padding:5px 11px;
+  border-radius:var(--rsm);border:1px solid var(--b1);
+  background:var(--bg3);transition:border-color .15s,color .15s;
+  white-space:nowrap;flex-shrink:0;
+}
+.wi-link:hover{border-color:var(--b2);color:var(--text)}
+.wi-desc{
+  padding:0 16px 14px;font-size:12px;color:var(--text2);
+  line-height:1.6;font-weight:300;border-top:1px solid var(--b1);
+  padding-top:12px;margin-top:0;
+}
+.wi-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.wi-chip{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  padding:2px 7px;border-radius:20px;background:rgba(255,255,255,0.03);
+  border:1px solid var(--b1);color:var(--text3);
+}
+
+.gap-badge{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  padding:2px 8px;border-radius:20px;
+  background:rgba(232,90,90,0.12);border:1px solid rgba(232,90,90,0.22);
+  color:#E85A5A;font-weight:500;text-transform:uppercase;letter-spacing:.06em;
+  flex-shrink:0;
+}
+
+/* TOOLS PANEL */
+.tools-section{margin-bottom:20px}
+.tools-heading{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--text3);
+  margin-bottom:10px;
+}
+.tools-chips{display:flex;flex-wrap:wrap;gap:6px}
+.tool-chip{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  padding:5px 12px;border-radius:20px;font-weight:400;border:1px solid;
+  transition:opacity .15s;
+}
+.tool-chip:hover{opacity:.8}
+
+.resources-list{display:flex;flex-direction:column;gap:6px}
+.res-link{
+  display:flex;align-items:center;gap:10px;font-size:12px;
+  color:var(--text2);text-decoration:none;padding:9px 12px;
+  border-radius:var(--rsm);border:1px solid var(--b1);
+  background:var(--bg);transition:border-color .15s,color .15s,background .15s;
+}
+.res-link:hover{border-color:var(--b2);color:var(--text);background:var(--bg4)}
+.res-link span{flex:1}
+.res-link .arr{font-size:10px;color:var(--text3);flex-shrink:0}
+.res-src{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  padding:2px 7px;border-radius:3px;font-weight:500;
+  text-transform:uppercase;letter-spacing:.05em;flex-shrink:0;
+}
+
+/* CHANNELS SECTION */
+.channels-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;
+  margin-top:24px;
+}
+.channel-card{
+  background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r);
+  padding:20px;transition:border-color .2s,background .2s;text-decoration:none;
+  display:block;
+}
+.channel-card:hover{border-color:var(--b2);background:var(--bg3)}
+.ch-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.ch-avatar{
+  width:38px;height:38px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-family:'Fraunces',serif;font-size:14px;
+  font-weight:700;flex-shrink:0;
+}
+.ch-name{font-size:13px;font-weight:600;color:var(--text)}
+.ch-role{font-size:11px;color:var(--text3);margin-top:2px;font-family:'JetBrains Mono',monospace}
+.ch-desc{font-size:12px;color:var(--text2);line-height:1.55;font-weight:300}
+.ch-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.ch-tag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;border-radius:20px;background:rgba(255,255,255,0.04);border:1px solid var(--b1);color:var(--text3)}
+
+/* GAPS SECTION */
+.gaps-list{display:flex;flex-direction:column;gap:10px}
+.gap-card{
+  background:var(--bg2);border:1px solid rgba(232,90,90,0.15);
+  border-radius:var(--r);overflow:hidden;
+}
+.gap-head{display:flex;align-items:center;gap:14px;padding:18px 20px}
+.gap-ico{font-size:20px;flex-shrink:0}
+.gap-info{flex:1}
+.gap-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px}
+.gap-phase-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:#E85A5A;letter-spacing:.06em}
+.gap-body{padding:0 20px 18px;border-top:1px solid var(--b1);padding-top:14px;margin-top:0}
+.gap-desc{font-size:13px;color:var(--text2);line-height:1.65;font-weight:300;margin-bottom:14px}
+.gap-fills{display:flex;flex-direction:column;gap:6px}
+.gap-fill{
+  display:flex;align-items:center;gap:10px;font-size:12px;
+  color:var(--text2);text-decoration:none;padding:9px 12px;
+  border-radius:var(--rsm);border:1px solid var(--b1);background:var(--bg);
+  transition:border-color .15s,color .15s,background .15s;
+}
+.gap-fill:hover{border-color:var(--b2);color:var(--text);background:var(--bg4)}
+.gap-fill span{flex:1}
+.gf-src{
+  font-family:'JetBrains Mono',monospace;font-size:9px;
+  padding:2px 7px;border-radius:3px;font-weight:500;
+  text-transform:uppercase;letter-spacing:.05em;flex-shrink:0;
+}
+
+/* FOOTER */
+footer{
+  padding:48px 0 40px;border-top:1px solid var(--b1);
+  text-align:center;
+}
+footer p{font-size:12px;color:var(--text3);line-height:1.8}
+footer strong{color:var(--text2);font-weight:500}
+
+@media(max-width:700px){
+  .phase-dur{display:none}
+  .hero{padding:60px 0 48px}
+  h1{font-size:34px}
+  .wi-head{flex-wrap:wrap}
+  .wi-link{margin-top:4px;width:100%}
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar" style="width:0%"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">Android Mastery</div>
+    <a class="nav-a" href="#overview">Overview</a>
+    <a class="nav-a" href="#builds">What You'll Build</a>
+    <a class="nav-a" href="#roadmap">Roadmap</a>
+    <a class="nav-a" href="#channels">Channels</a>
+    <a class="nav-a" href="#gaps">All Gaps</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="overview">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="wrap">
+    <div class="eyebrow"><span class="eyebrow-dot"></span>Complete zero-to-production guide</div>
+    <h1>Master Android with<br><em>Kotlin &amp; Compose</em></h1>
+    <p class="hero-sub">8 phases. 60+ topics. Every Philipp Lackner playlist in order. Every gap filled. All resources in one place. Built for 4 hours a day — no prerequisites needed.</p>
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-n">8</div><div class="stat-l">Phases</div></div>
+      <div class="stat"><div class="stat-n">60+</div><div class="stat-l">Topics</div></div>
+      <div class="stat"><div class="stat-n">~9mo</div><div class="stat-l">At 4 hrs/day</div></div>
+      <div class="stat"><div class="stat-n">~80h</div><div class="stat-l">Free video</div></div>
+      <div class="stat"><div class="stat-n">0</div><div class="stat-l">Prerequisites</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- LEGEND -->
+<div class="wrap">
+  <div class="legend-bar">
+    <span style="color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.08em;">Sources:</span>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div><span class="legend-label">Philipp Lackner</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div><span class="legend-label">Google / Official</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div><span class="legend-label">Stevdza-San</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div><span class="legend-label">Other quality channels</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#E85A5A"></div><span class="legend-label">Gap fill (PL doesn't cover)</span></div>
+  </div>
+</div>
+
+<!-- WHAT YOU'LL BUILD -->
+<section class="section" id="builds">
+  <div class="wrap">
+    <div class="sec-eye">Capabilities</div>
+    <h2 class="sec-title">What you'll be able to build</h2>
+    <p class="sec-desc">Your abilities unlock phase by phase. By the end you can ship nearly any app on the Play Store.</p>
+
+    <div class="build-grid">
+      <div class="build-card">
+        <span class="bc-phase" style="color:var(--amber)">After Phase 1–2</span>
+        <div class="bc-title">Simple standalone apps</div>
+        <div class="bc-desc">Single-screen, installable APKs on a real device. No internet required yet.</div>
+        <div class="bc-chips">
+          <span class="chip">Calculator</span><span class="chip">Tip splitter</span>
+          <span class="chip">Unit converter</span><span class="chip">Flashcard app</span><span class="chip">Countdown timer</span>
+        </div>
+      </div>
+      <div class="build-card">
+        <span class="bc-phase" style="color:var(--teal)">After Phase 3–4</span>
+        <div class="bc-title">Full-stack mobile apps</div>
+        <div class="bc-desc">Internet-connected, database-backed apps with proper architecture. Unlocks ~70% of the Play Store.</div>
+        <div class="bc-chips">
+          <span class="chip">News reader</span><span class="chip">Weather app</span>
+          <span class="chip">Movie browser</span><span class="chip">Expense tracker</span><span class="chip">Habit tracker</span>
+        </div>
+      </div>
+      <div class="build-card">
+        <span class="bc-phase" style="color:var(--purple)">After Phase 5</span>
+        <div class="bc-title">Polished, feature-rich apps</div>
+        <div class="bc-desc">Smooth animations, camera, maps, background sync, push notifications — production-quality UI.</div>
+        <div class="bc-chips">
+          <span class="chip">QR scanner</span><span class="chip">Delivery tracker</span>
+          <span class="chip">Infinite scroll feed</span><span class="chip">Photo editor</span><span class="chip">Map finder</span>
+        </div>
+      </div>
+      <div class="build-card">
+        <span class="bc-phase" style="color:var(--coral)">After Phase 6–7</span>
+        <div class="bc-title">Production-shipped apps</div>
+        <div class="bc-desc">Tested, crash-monitored, performance-optimised apps live on the Play Store with real users.</div>
+        <div class="bc-chips">
+          <span class="chip">Play Store published</span><span class="chip">Firebase monitored</span>
+          <span class="chip">Analytics tracked</span><span class="chip">Tested codebase</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="examples-grid">
+      <div class="ex-card"><div class="ex-icon">🎵</div><div class="ex-title">Spotify-style player</div><div class="ex-desc">Audio streaming, playlists, local DB, background playback service.</div></div>
+      <div class="ex-card"><div class="ex-icon">💪</div><div class="ex-title">Fitness tracker</div><div class="ex-desc">CameraX for form analysis, Room DB, progress charts, background step counting.</div></div>
+      <div class="ex-card"><div class="ex-icon">📰</div><div class="ex-title">Social feed</div><div class="ex-desc">Paginated posts, likes, comments, real-time updates via Firebase.</div></div>
+      <div class="ex-card"><div class="ex-icon">🍕</div><div class="ex-title">Food delivery UI</div><div class="ex-desc">Maps, cart, order tracking, push notifications, payment flow.</div></div>
+      <div class="ex-card"><div class="ex-icon">💰</div><div class="ex-title">Finance tracker</div><div class="ex-desc">Room, charts, categories, budgets, export to CSV.</div></div>
+      <div class="ex-card"><div class="ex-icon">🌤️</div><div class="ex-title">Weather app</div><div class="ex-desc">REST API, location permissions, animations, home screen widget.</div></div>
+    </div>
+
+    <div class="callout amber" style="margin-top:28px">
+      <div class="callout-ico">💡</div>
+      <p>The honest ceiling isn't the stack — it's the <strong>backend</strong>. This roadmap makes you a complete Android developer. Firebase and Supabase (covered in Phase 7) handle the backend for most app ideas without writing any server code.</p>
+    </div>
+
+    <div style="margin-top:36px">
+      <div class="sec-eye" style="margin-bottom:12px">Outside this roadmap</div>
+      <div class="limit-grid">
+        <div class="limit-card"><div class="limit-title">Wear OS / Android TV</div><div class="limit-desc">Platform-specific form factors — separate path.</div></div>
+        <div class="limit-card"><div class="limit-title">Game development</div><div class="limit-desc">Unity or Godot — a completely different discipline.</div></div>
+        <div class="limit-card"><div class="limit-title">Bluetooth / IoT</div><div class="limit-desc">Hardware integration requires additional specialist knowledge.</div></div>
+        <div class="limit-card"><div class="limit-title">Kotlin Multiplatform</div><div class="limit-desc">KMP / Compose Multiplatform is a natural extension layer after this roadmap.</div></div>
+        <div class="limit-card"><div class="limit-title">Flutter</div><div class="limit-desc">Separate framework, Dart language, different mental model entirely.</div></div>
+        <div class="limit-card"><div class="limit-title">Advanced DSP / Audio</div><div class="limit-desc">Signal processing and low-level media work is a niche specialty.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP PHASES -->
+<section class="section" id="roadmap">
+  <div class="wrap">
+    <div class="sec-eye">Roadmap</div>
+    <h2 class="sec-title">All 8 phases, in sequence</h2>
+    <p class="sec-desc">Each phase has three tabs: <strong>Topics</strong> to learn, <strong>Watch Order</strong> with exact videos/playlists, and <strong>Tools &amp; Links</strong>. Follow them in order.</p>
+
+    <div class="callout amber" style="margin-bottom:28px;margin-top:0">
+      <div class="callout-ico">⚠️</div>
+      <p>The most common beginner mistake is jumping to Compose before Kotlin is solid. <strong>Give Phase 1 its full time.</strong> Null safety, lambdas, coroutines, and sealed classes in Phase 4 all require a strong Kotlin foundation.</p>
+    </div>
+
+    <div class="phases" id="phases-container">
+
+<!-- ────────── PHASE 0 ────────── -->
+<div class="phase-wrap">
+  <div class="phase-left">
+    <div class="phase-dot" style="background:rgba(148,163,184,0.1);color:#94A3B8;border-color:rgba(148,163,184,0.3)">P0</div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="phase-card" id="ph0">
+    <div class="phase-head" onclick="toggle('ph0')">
+      <div class="phase-info">
+        <div class="phase-title">Setup &amp; Environment</div>
+        <div class="phase-sub">Tools, Android Studio, Git, and how everything fits together</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-dur" style="background:rgba(148,163,184,0.08);color:#94A3B8;border:1px solid rgba(148,163,184,0.2)">1–2 weeks</span>
+        <div class="phase-chevron">▼</div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <div class="tabs" data-phase="ph0">
+        <div class="tab active" onclick="switchTab('ph0','topics')">Topics</div>
+        <div class="tab" onclick="switchTab('ph0','watch')">Watch Order</div>
+        <div class="tab" onclick="switchTab('ph0','tools')">Tools &amp; Links</div>
+      </div>
+      <div class="tab-panel active" id="ph0-topics">
+        <div class="topics-grid">
+          <div class="topic" style="border-left-color:#94A3B8"><div class="topic-name">Install Android Studio</div><div class="topic-desc">Flamingo/Hedgehog edition, SDK setup, AVD emulator configuration, first project run</div></div>
+          <div class="topic" style="border-left-color:#94A3B8"><div class="topic-name">Git &amp; GitHub basics</div><div class="topic-desc">init, add, commit, push, branches, .gitignore — version control from day one, every project</div></div>
+          <div class="topic" style="border-left-color:#94A3B8"><div class="topic-name">JVM &amp; Android overview</div><div class="topic-desc">How Android runs Kotlin — Dalvik, ART runtime, APK structure, the build pipeline</div></div>
+          <div class="topic" style="border-left-color:#94A3B8"><div class="topic-name">Kotlin Playground</div><div class="topic-desc">Use play.kotlinlang.org to experiment without the emulator overhead</div></div>
+          <div class="topic" style="border-left-color:#94A3B8"><div class="topic-name">Gradle basics</div><div class="topic-desc">build.gradle(.kts), dependencies block, sync, version catalogs — you'll use this daily</div></div>
+          <div class="topic" style="border-left-color:#94A3B8"><div class="topic-name">ADB (Android Debug Bridge)</div><div class="topic-desc">Logcat, device commands, install APK, clear data — essential debugging tool</div></div>
+          <div class="topic" style="border-left-color:#94A3B8"><div class="topic-name">Android project structure</div><div class="topic-desc">AndroidManifest, res/ folder, src/, build variants, module system</div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph0-watch">
+        <div class="watch-list">
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(242,160,7,0.1);color:var(--amber);border:1px solid rgba(242,160,7,0.2)">1</div>
+              <div class="wi-info">
+                <div class="wi-title">Android &amp; KMP Development Roadmap 2025 — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~20 min · Single video</div><span class="wi-badge" style="background:rgba(242,160,7,0.1);color:var(--amber)">Watch first</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=EExSSotojVI" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Watch this before anything else. PL maps out the entire learning path, links all his playlists in the description, tells you which tools to install, and sets expectations for the journey ahead.<div class="wi-chips"><span class="wi-chip">tool setup</span><span class="wi-chip">learning order</span><span class="wi-chip">what to install</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(75,160,232,0.1);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">2</div>
+              <div class="wi-info">
+                <div class="wi-title">Git in 100 Seconds — Fireship</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--blue)"></span>Fireship · ~2 min + ~12 min follow-up</div><span class="gap-badge">Gap fill</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=HkdAHXoRtos" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">PL doesn't cover Git. Fireship's 100-second format then his slightly longer Git &amp; GitHub tutorial cover everything you need.<div class="wi-chips"><span class="wi-chip">git init</span><span class="wi-chip">commit</span><span class="wi-chip">push</span><span class="wi-chip">branches</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(15,184,162,0.1);color:var(--teal);border:1px solid rgba(15,184,162,0.2)">3</div>
+              <div class="wi-info">
+                <div class="wi-title">Android Studio Setup &amp; First App — Google Codelabs</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--teal)"></span>Google · Free written codelab</div><span class="wi-badge" style="background:rgba(15,184,162,0.1);color:var(--teal)">Supplement</span></div>
+              </div>
+              <a class="wi-link" href="https://developer.android.com/codelabs/basic-android-kotlin-compose-first-app" target="_blank">Open ↗</a>
+            </div>
+            <div class="wi-desc">Hands-on: install Studio, create first project, run it on an emulator. Reinforces the setup video with actual doing.<div class="wi-chips"><span class="wi-chip">first app</span><span class="wi-chip">emulator</span><span class="wi-chip">project structure</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph0-tools">
+        <div class="tools-section">
+          <div class="tools-heading">Tools to install</div>
+          <div class="tools-chips">
+            <span class="tool-chip" style="color:#94A3B8;border-color:rgba(148,163,184,0.25);background:rgba(148,163,184,0.07)">Android Studio</span>
+            <span class="tool-chip" style="color:#94A3B8;border-color:rgba(148,163,184,0.25);background:rgba(148,163,184,0.07)">JDK 17+</span>
+            <span class="tool-chip" style="color:#94A3B8;border-color:rgba(148,163,184,0.25);background:rgba(148,163,184,0.07)">Git</span>
+            <span class="tool-chip" style="color:#94A3B8;border-color:rgba(148,163,184,0.25);background:rgba(148,163,184,0.07)">GitHub account</span>
+            <span class="tool-chip" style="color:#94A3B8;border-color:rgba(148,163,184,0.25);background:rgba(148,163,184,0.07)">Android SDK</span>
+            <span class="tool-chip" style="color:#94A3B8;border-color:rgba(148,163,184,0.25);background:rgba(148,163,184,0.07)">Kotlin Playground</span>
+            <span class="tool-chip" style="color:#94A3B8;border-color:rgba(148,163,184,0.25);background:rgba(148,163,184,0.07)">ADB</span>
+          </div>
+        </div>
+        <div class="resources-list">
+          <a class="res-link" href="https://developer.android.com/studio/install" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Android Studio install guide</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://kotlinlang.org/docs/home.html" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Official Kotlin documentation</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://play.kotlinlang.org/" target="_blank"><span class="res-src" style="background:rgba(146,120,245,0.1);color:var(--purple)">TOOL</span><span>Kotlin Playground — browser-based practice</span><span class="arr">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ────────── PHASE 1 ────────── -->
+<div class="phase-wrap">
+  <div class="phase-left">
+    <div class="phase-dot" style="background:var(--purple2);color:var(--purple);border-color:rgba(146,120,245,0.35)">P1</div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="phase-card" id="ph1">
+    <div class="phase-head" onclick="toggle('ph1')">
+      <div class="phase-info">
+        <div class="phase-title">Kotlin Fundamentals</div>
+        <div class="phase-sub">Master the language before touching Compose — this phase is non-negotiable</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-dur" style="background:var(--purple2);color:var(--purple);border:1px solid rgba(146,120,245,0.2)">3–4 weeks</span>
+        <div class="phase-chevron">▼</div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <div class="tabs" data-phase="ph1">
+        <div class="tab active" onclick="switchTab('ph1','topics')">Topics</div>
+        <div class="tab" onclick="switchTab('ph1','watch')">Watch Order</div>
+        <div class="tab" onclick="switchTab('ph1','tools')">Tools &amp; Links</div>
+      </div>
+      <div class="tab-panel active" id="ph1-topics">
+        <div class="topics-grid">
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Variables &amp; type system</div><div class="topic-desc">val vs var, type inference, basic types (Int, String, Boolean, Double), String templates</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Control flow</div><div class="topic-desc">if/else as expressions, when (Kotlin's switch), for, while, ranges</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Functions</div><div class="topic-desc">Default params, named args, single-expression functions, vararg, Unit vs return types</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Null safety</div><div class="topic-desc">Nullable types (?), not-null assertion (!!), safe call (?.), elvis operator (?:), let</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Classes &amp; objects</div><div class="topic-desc">Primary/secondary constructors, init blocks, properties, companion objects, object keyword</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Inheritance &amp; interfaces</div><div class="topic-desc">open, abstract, override, interface default methods, multiple interface inheritance</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Data classes</div><div class="topic-desc">Auto-generated copy(), equals(), hashCode(), toString() — used everywhere in Android</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Sealed &amp; enum classes</div><div class="topic-desc">Exhaustive when expressions, modelling UI state (Loading/Success/Error pattern)</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Collections</div><div class="topic-desc">List, MutableList, Map, Set — plus filter, map, reduce, find, groupBy, sortedBy</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Lambdas &amp; higher-order functions</div><div class="topic-desc">Passing functions, function types, trailing lambda syntax — foundation of Compose's DSL</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Extension functions</div><div class="topic-desc">Add methods to any class without inheritance — how Kotlin DSLs and Compose are built</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Scope functions</div><div class="topic-desc">let, run, with, apply, also — know exactly when to use each one</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Generics</div><div class="topic-desc">Type parameters, in/out variance — needed for collections, flows, repositories</div></div>
+          <div class="topic" style="border-left-color:var(--purple)"><div class="topic-name">Object expressions &amp; delegation</div><div class="topic-desc">Anonymous objects, by keyword, lazy delegation, observable delegation</div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph1-watch">
+        <div class="watch-list">
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--purple2);color:var(--purple);border:1px solid rgba(146,120,245,0.2)">1</div>
+              <div class="wi-info">
+                <div class="wi-title">Full 2025 Kotlin Crash Course For Beginners — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~3h 12min · Single video</div><span class="wi-badge" style="background:var(--purple2);color:var(--purple)">Core · Watch fully</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=EExSSotojVI" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">The most important video for this phase. Covers every topic listed above — variables, null safety, classes, data classes, sealed classes, lambdas, extension functions, scope functions, generics — all in one thorough session. Do not skip ahead.<div class="wi-chips"><span class="wi-chip">variables</span><span class="wi-chip">null safety</span><span class="wi-chip">classes</span><span class="wi-chip">sealed classes</span><span class="wi-chip">lambdas</span><span class="wi-chip">extension fns</span><span class="wi-chip">generics</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(15,184,162,0.1);color:var(--teal);border:1px solid rgba(15,184,162,0.2)">2</div>
+              <div class="wi-info">
+                <div class="wi-title">Kotlin Bootcamp for Programmers — Google (free codelab course)</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--teal)"></span>Google · Free interactive codelabs · Run alongside video</div><span class="wi-badge" style="background:rgba(15,184,162,0.1);color:var(--teal)">Supplement</span></div>
+              </div>
+              <a class="wi-link" href="https://developer.android.com/courses/kotlin-bootcamp/overview" target="_blank">Open ↗</a>
+            </div>
+            <div class="wi-desc">Run in parallel with PL's crash course — not instead of it. Google's bootcamp is hands-on: you write Kotlin in IntelliJ and complete exercises for every concept. Use it to reinforce what Philipp explains.<div class="wi-chips"><span class="wi-chip">interactive exercises</span><span class="wi-chip">functions</span><span class="wi-chip">classes</span><span class="wi-chip">collections</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--purple2);color:var(--purple);border:1px solid rgba(146,120,245,0.2)">3</div>
+              <div class="wi-info">
+                <div class="wi-title">Kotlin Scope Functions Explained — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~15 min · Single video</div><span class="wi-badge" style="background:var(--purple2);color:var(--purple)">Deep dive</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=Vy-dS2SVoHk" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Scope functions (let, run, with, apply, also) are one of the most confused Kotlin topics for beginners. This dedicated video clarifies when to use each one with practical Android examples.<div class="wi-chips"><span class="wi-chip">let</span><span class="wi-chip">run</span><span class="wi-chip">with</span><span class="wi-chip">apply</span><span class="wi-chip">also</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph1-tools">
+        <div class="tools-section">
+          <div class="tools-heading">Tools &amp; environments</div>
+          <div class="tools-chips">
+            <span class="tool-chip" style="color:var(--purple);border-color:rgba(146,120,245,0.25);background:var(--purple2)">Kotlin Playground</span>
+            <span class="tool-chip" style="color:var(--purple);border-color:rgba(146,120,245,0.25);background:var(--purple2)">IntelliJ IDEA</span>
+            <span class="tool-chip" style="color:var(--purple);border-color:rgba(146,120,245,0.25);background:var(--purple2)">Kotlin REPL in AS</span>
+            <span class="tool-chip" style="color:var(--purple);border-color:rgba(146,120,245,0.25);background:var(--purple2)">Kotlin docs</span>
+          </div>
+        </div>
+        <div class="resources-list">
+          <a class="res-link" href="https://developer.android.com/courses/kotlin-bootcamp/overview" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">FREE</span><span>Kotlin Bootcamp — Google (interactive codelabs)</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://kotlinlang.org/docs/basic-syntax.html" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Kotlin official documentation — Basic Syntax</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://play.kotlinlang.org/koans/overview" target="_blank"><span class="res-src" style="background:var(--purple2);color:var(--purple)">PRACTICE</span><span>Kotlin Koans — 42 exercises covering all fundamentals</span><span class="arr">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ────────── PHASE 2 ────────── -->
+<div class="phase-wrap">
+  <div class="phase-left">
+    <div class="phase-dot" style="background:var(--teal2);color:var(--teal);border-color:rgba(15,184,162,0.35)">P2</div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="phase-card" id="ph2">
+    <div class="phase-head" onclick="toggle('ph2')">
+      <div class="phase-info">
+        <div class="phase-title">Jetpack Compose — Foundations</div>
+        <div class="phase-sub">Build your first real declarative UIs — Philipp Lackner's strongest phase</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-dur" style="background:var(--teal2);color:var(--teal);border:1px solid rgba(15,184,162,0.2)">3–4 weeks</span>
+        <div class="phase-chevron">▼</div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <div class="tabs" data-phase="ph2">
+        <div class="tab active" onclick="switchTab('ph2','topics')">Topics</div>
+        <div class="tab" onclick="switchTab('ph2','watch')">Watch Order</div>
+        <div class="tab" onclick="switchTab('ph2','tools')">Tools &amp; Links</div>
+      </div>
+      <div class="tab-panel active" id="ph2-topics">
+        <div class="topics-grid">
+          <div class="topic" style="border-left-color:var(--teal)"><div class="topic-name">Composable functions</div><div class="topic-desc">@Composable annotation, recomposition model, the UI = f(state) mental model</div></div>
+          <div class="topic" style="border-left-color:var(--teal)"><div class="topic-name">Text, Button, Image</div><div class="topic-desc">Core building blocks, ContentDescription for accessibility, painters, icons</div></div>
+          <div class="topic" style="border-left-color:var(--teal)"><div class="topic-name">Modifiers</div><div class="topic-desc">Chaining order matters — size, padding, background, border, clip, clickable, semantics</div></div>
+          <div class="topic" style="border-left-color:var(--teal)"><div class="topic-name">Column, Row, Box</div><div class="topic-desc">Arrangement, alignment, weights, fillMaxSize/fillMaxWidth, Spacer</div></div>
+          <div class="topic" style="border-left-color:var(--teal)"><div class="topic-name">LazyColumn &amp; LazyRow</div><div class="topic-desc">Efficient large lists — items{}, itemsIndexed, keys for stable recomposition</div></div>
+          <div class="topic" style="border-left-color:var(--teal)"><div class="topic-name">LazyVerticalGrid</div><div class="topic-desc">Grid layouts, GridCells.Fixed vs Adaptive, item spanning</div></div>
+          <div class="topic" style="border-left-color:var(--teal)"><div class="topic-name">State — remember &amp; mutableStateOf</div><div class="topic-desc">Local state, state hoisting principle, why you hoist state</div></div>
+          <div class="topic" style="border-left-color:var(--teal)"><div class="topic-name">TextField &amp; user input</div><div class="topic-desc">Controlled inputs, keyboard options, ImeAction, focus management</div></div>
+          <div class="topic" style="border-left-color:var(--teal)"><div class="topic-name">Scaffold &amp; TopAppBar</div><div class="topic-desc">Material3 page shell, SnackbarHost, FAB placement, bottom bar</div></div>
+          <div class="topic" style="border-left-color:var(--teal)"><div class="topic-name">Icons &amp; vector assets</div><div class="topic-desc">Icons.Default, painterResource, ImageVector, vector drawables</div></div>
+          <div class="topic" style="border-left-color:var(--teal)"><div class="topic-name">Surface &amp; Card</div><div class="topic-desc">Elevation, shape, content color, Material3 tokens and color roles</div></div>
+          <div class="topic" style="border-left-color:var(--teal)"><div class="topic-name">@Preview &amp; hot reload</div><div class="topic-desc">@Preview annotations, interactive mode, live edit, multi-preview</div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph2-watch">
+        <div class="watch-list">
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--teal2);color:var(--teal);border:1px solid rgba(15,184,162,0.2)">1</div>
+              <div class="wi-info">
+                <div class="wi-title">Jetpack Compose Beginner Crash Course (2024) — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~3–4h · Single video</div><span class="wi-badge" style="background:var(--teal2);color:var(--teal)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=6_wK_Ud8--0" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">The canonical beginner Compose video. Covers composable functions, modifiers, layouts (Column/Row/Box), LazyColumn, state with remember &amp; mutableStateOf, TextField, Scaffold, and Material3 from absolute scratch.<div class="wi-chips"><span class="wi-chip">@Composable</span><span class="wi-chip">Modifiers</span><span class="wi-chip">LazyColumn</span><span class="wi-chip">State</span><span class="wi-chip">Material3</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(15,184,162,0.1);color:var(--teal);border:1px solid rgba(15,184,162,0.2)">2</div>
+              <div class="wi-info">
+                <div class="wi-title">Compose Basics Codelab — Google</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--teal)"></span>Google · Free codelab · Do after video</div><span class="wi-badge" style="background:rgba(15,184,162,0.1);color:var(--teal)">Supplement</span></div>
+              </div>
+              <a class="wi-link" href="https://developer.android.com/codelabs/jetpack-compose-basics" target="_blank">Open ↗</a>
+            </div>
+            <div class="wi-desc">Do this codelab right after PL's crash course. Google guides you through building a real UI from scratch, cementing the mental model of state hoisting and recomposition.<div class="wi-chips"><span class="wi-chip">state hoisting</span><span class="wi-chip">recomposition</span><span class="wi-chip">Material3 theme</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--teal2);color:var(--teal);border:1px solid rgba(15,184,162,0.2)">3</div>
+              <div class="wi-info">
+                <div class="wi-title">Modifier Deep Dive — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~20 min · Single video</div><span class="wi-badge" style="background:var(--teal2);color:var(--teal)">Deep dive</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=07gHCPiLgTs" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Modifier chaining order is one of the most confusing aspects of Compose. This dedicated video explains why order matters with visual examples — padding before size is different from size before padding.<div class="wi-chips"><span class="wi-chip">chaining order</span><span class="wi-chip">padding vs size</span><span class="wi-chip">clickable</span><span class="wi-chip">graphicsLayer</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph2-tools">
+        <div class="tools-section">
+          <div class="tools-heading">Key libraries &amp; tools</div>
+          <div class="tools-chips">
+            <span class="tool-chip" style="color:var(--teal);border-color:rgba(15,184,162,0.25);background:var(--teal2)">Compose BOM</span>
+            <span class="tool-chip" style="color:var(--teal);border-color:rgba(15,184,162,0.25);background:var(--teal2)">Material3</span>
+            <span class="tool-chip" style="color:var(--teal);border-color:rgba(15,184,162,0.25);background:var(--teal2)">Layout Inspector</span>
+            <span class="tool-chip" style="color:var(--teal);border-color:rgba(15,184,162,0.25);background:var(--teal2)">AS Preview</span>
+            <span class="tool-chip" style="color:var(--teal);border-color:rgba(15,184,162,0.25);background:var(--teal2)">Coil (image loading)</span>
+          </div>
+        </div>
+        <div class="resources-list">
+          <a class="res-link" href="https://developer.android.com/jetpack/compose/documentation" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Official Jetpack Compose documentation</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://developer.android.com/jetpack/compose/designsystems/material3" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Material Design 3 in Compose</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://m3.material.io/" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DESIGN</span><span>Material Design 3 — component reference &amp; guidelines</span><span class="arr">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ────────── PHASE 3 ────────── -->
+<div class="phase-wrap">
+  <div class="phase-left">
+    <div class="phase-dot" style="background:var(--blue2);color:var(--blue);border-color:rgba(75,160,232,0.35)">P3</div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="phase-card" id="ph3">
+    <div class="phase-head" onclick="toggle('ph3')">
+      <div class="phase-info">
+        <div class="phase-title">Compose — Intermediate UI</div>
+        <div class="phase-sub">Navigation, ViewModel, side effects, theming — multi-screen apps begin here</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-dur" style="background:var(--blue2);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">3–4 weeks</span>
+        <div class="phase-chevron">▼</div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <div class="tabs" data-phase="ph3">
+        <div class="tab active" onclick="switchTab('ph3','topics')">Topics</div>
+        <div class="tab" onclick="switchTab('ph3','watch')">Watch Order</div>
+        <div class="tab" onclick="switchTab('ph3','tools')">Tools &amp; Links</div>
+      </div>
+      <div class="tab-panel active" id="ph3-topics">
+        <div class="topics-grid">
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">Navigation Component</div><div class="topic-desc">NavHost, NavController, composable routes, argument passing, back stack management</div></div>
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">Type-safe navigation</div><div class="topic-desc">2024 approach using serializable data classes instead of string routes</div></div>
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">ViewModel</div><div class="topic-desc">Survives recomposition and config changes, viewModel(), separation of concerns</div></div>
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">StateFlow &amp; collectAsState</div><div class="topic-desc">Reactive state from ViewModel flowing into Compose UI, UiState data class pattern</div></div>
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">Side effects — LaunchedEffect</div><div class="topic-desc">Running a coroutine inside a composable, key-based restarts, one-time events</div></div>
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">DisposableEffect &amp; SideEffect</div><div class="topic-desc">Cleanup on leave, syncing with non-Compose systems like lifecycle observers</div></div>
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">derivedStateOf</div><div class="topic-desc">Computed state that only triggers recomposition when the derived value actually changes</div></div>
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">rememberSaveable</div><div class="topic-desc">Surviving configuration changes (screen rotation) with state, custom savers</div></div>
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">Material Design 3 theming</div><div class="topic-desc">ColorScheme, Typography, Shapes, custom themes, MaterialTheme.colorScheme tokens</div></div>
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">Dark mode support</div><div class="topic-desc">isSystemInDarkTheme(), dynamic color (Android 12+), LocalContentColor</div></div>
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">Custom composables</div><div class="topic-desc">Reusable components, slot APIs with content lambdas, default slot patterns</div></div>
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">Dropdown, Dialog, BottomSheet</div><div class="topic-desc">Transient UI overlays, state management for open/closed, modal vs non-modal sheets</div></div>
+          <div class="topic" style="border-left-color:var(--blue)"><div class="topic-name">Android SDK basics</div><div class="topic-desc">Activity lifecycle, configuration changes, Intents, Services overview — the platform layer</div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph3-watch">
+        <div class="watch-list">
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--blue2);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">1</div>
+              <div class="wi-info">
+                <div class="wi-title">Jetpack Compose Navigation for Beginners — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~30 min · Single video</div><span class="wi-badge" style="background:var(--blue2);color:var(--blue)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=4gUeyNkGE3g" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">The most-watched Compose navigation video on YouTube. Covers NavHost, NavController, routes, and passing arguments between screens. The foundational pattern you'll use in every multi-screen app.<div class="wi-chips"><span class="wi-chip">NavHost</span><span class="wi-chip">NavController</span><span class="wi-chip">routes</span><span class="wi-chip">arguments</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--blue2);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">2</div>
+              <div class="wi-info">
+                <div class="wi-title">Type-Safe Compose Navigation (2024 update) — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~20 min · Single video</div><span class="wi-badge" style="background:rgba(242,160,7,0.1);color:var(--amber)">Modern approach</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=AIC_OFQ1r3k" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Navigation 2.8+ changed to type-safe routes using serializable objects instead of string paths. Watch this right after the beginner video — this is the approach to use in all new projects.<div class="wi-chips"><span class="wi-chip">type-safe routes</span><span class="wi-chip">@Serializable</span><span class="wi-chip">custom NavTypes</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--blue2);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">3</div>
+              <div class="wi-info">
+                <div class="wi-title">Android Basics 2024 Playlist — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · Playlist · ~2h total</div><span class="wi-badge" style="background:var(--blue2);color:var(--blue)">Core playlist</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/playlist?list=PLQkwcJG4YTCSpJ2NLhDTHhi6XBNfk9WiC" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">The Android SDK fundamentals playlist — Activity lifecycle, configuration changes, ViewModels, Intents, foreground services. Essential Android concepts that sit underneath Compose but aren't covered in the UI tutorials.<div class="wi-chips"><span class="wi-chip">Activity lifecycle</span><span class="wi-chip">config changes</span><span class="wi-chip">Intents</span><span class="wi-chip">Services</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--blue2);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">4</div>
+              <div class="wi-info">
+                <div class="wi-title">Clean Architecture Note App (Full Project) — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · Playlist · ~3h total</div><span class="wi-badge" style="background:rgba(76,202,96,0.1);color:var(--green)">Phase capstone</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=8YPXv7xKh2w" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">PL's most-cited project for beginners. Builds a complete note-taking app with MVVM, ViewModel, Compose Navigation, Room, and Hilt end-to-end. Watch this at the end of Phase 3 / beginning of Phase 4 — it ties everything together.<div class="wi-chips"><span class="wi-chip">MVVM</span><span class="wi-chip">ViewModel</span><span class="wi-chip">StateFlow</span><span class="wi-chip">Navigation</span><span class="wi-chip">Room</span><span class="wi-chip">Hilt</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph3-tools">
+        <div class="tools-section">
+          <div class="tools-heading">Key libraries</div>
+          <div class="tools-chips">
+            <span class="tool-chip" style="color:var(--blue);border-color:rgba(75,160,232,0.25);background:var(--blue2)">Navigation Compose</span>
+            <span class="tool-chip" style="color:var(--blue);border-color:rgba(75,160,232,0.25);background:var(--blue2)">lifecycle-viewmodel-compose</span>
+            <span class="tool-chip" style="color:var(--blue);border-color:rgba(75,160,232,0.25);background:var(--blue2)">Material3</span>
+            <span class="tool-chip" style="color:var(--blue);border-color:rgba(75,160,232,0.25);background:var(--blue2)">kotlinx.serialization</span>
+          </div>
+        </div>
+        <div class="resources-list">
+          <a class="res-link" href="https://developer.android.com/guide/navigation/design" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Navigation for Compose — official guide</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://developer.android.com/codelabs/android-navigation" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">FREE</span><span>Navigation codelab — Google</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://developer.android.com/topic/libraries/architecture/viewmodel" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>ViewModel + StateFlow official guide</span><span class="arr">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ────────── PHASE 4 ────────── -->
+<div class="phase-wrap">
+  <div class="phase-left">
+    <div class="phase-dot" style="background:var(--coral2);color:var(--coral);border-color:rgba(232,104,74,0.35)">P4</div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="phase-card" id="ph4">
+    <div class="phase-head" onclick="toggle('ph4')">
+      <div class="phase-info">
+        <div class="phase-title">Architecture &amp; Data Layer</div>
+        <div class="phase-sub">Coroutines, Flow, Hilt, Room, Retrofit — the patterns that separate junior from senior</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-dur" style="background:var(--coral2);color:var(--coral);border:1px solid rgba(232,104,74,0.2)">4–5 weeks</span>
+        <div class="phase-chevron">▼</div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <div class="tabs" data-phase="ph4">
+        <div class="tab active" onclick="switchTab('ph4','topics')">Topics</div>
+        <div class="tab" onclick="switchTab('ph4','watch')">Watch Order</div>
+        <div class="tab" onclick="switchTab('ph4','tools')">Tools &amp; Links</div>
+      </div>
+      <div class="tab-panel active" id="ph4-topics">
+        <div class="topics-grid">
+          <div class="topic" style="border-left-color:var(--coral)"><div class="topic-name">Coroutines — advanced</div><div class="topic-desc">Structured concurrency, SupervisorJob, CoroutineScope, exception handling, cancellation</div></div>
+          <div class="topic" style="border-left-color:var(--coral)"><div class="topic-name">Kotlin Flow — advanced</div><div class="topic-desc">cold vs hot flows, SharedFlow, StateFlow, flowOn, combine, zip, flatMapLatest</div></div>
+          <div class="topic" style="border-left-color:var(--coral)"><div class="topic-name">MVVM architecture</div><div class="topic-desc">UI layer → ViewModel → Repository → Data sources, unidirectional data flow</div></div>
+          <div class="topic" style="border-left-color:var(--coral)"><div class="topic-name">Repository pattern</div><div class="topic-desc">Single source of truth, abstracting local &amp; remote data sources behind one interface</div></div>
+          <div class="topic" style="border-left-color:var(--coral)"><div class="topic-name">Room database</div><div class="topic-desc">@Entity, @Dao, @Database, suspend queries, Flow-based reactive queries, migrations</div></div>
+          <div class="topic" style="border-left-color:var(--coral)"><div class="topic-name">Retrofit + OkHttp</div><div class="topic-desc">REST API setup, Gson/Moshi converters, logging interceptor, timeout configuration</div></div>
+          <div class="topic" style="border-left-color:var(--coral)"><div class="topic-name">Error handling in flows</div><div class="topic-desc">Result/Resource wrapper pattern, catch{}, retry{}, onEach — resilient pipelines</div></div>
+          <div class="topic" style="border-left-color:var(--coral)"><div class="topic-name">Hilt (Dependency Injection)</div><div class="topic-desc">@HiltAndroidApp, @Inject, @HiltViewModel, @Module, @Provides, @Binds, component scopes</div></div>
+          <div class="topic" style="border-left-color:var(--coral)"><div class="topic-name">DataStore</div><div class="topic-desc">Preferences DataStore replacing SharedPreferences, typed Proto DataStore, Flow-based reads</div></div>
+          <div class="topic" style="border-left-color:var(--coral)"><div class="topic-name">Use cases / Interactors</div><div class="topic-desc">Clean Architecture domain layer — encapsulating business logic in single-responsibility classes</div></div>
+          <div class="topic" style="border-left-color:var(--coral)"><div class="topic-name">Offline-first architecture</div><div class="topic-desc">Cache-then-network strategy, Room as single source of truth, network-bound resource pattern</div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph4-watch">
+        <div class="watch-list">
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--coral2);color:var(--coral);border:1px solid rgba(232,104,74,0.2)">1</div>
+              <div class="wi-info">
+                <div class="wi-title">Kotlin Coroutines — Complete Guide — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~3h+ · Playlist</div><span class="wi-badge" style="background:var(--coral2);color:var(--coral)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=6manrgTPzyA" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">One of the most thorough free coroutines resources available. Covers launch vs async, suspend functions, dispatchers (Main/IO/Default), coroutine scope, lifecycle-aware coroutines in Compose, viewModelScope, and cancellation.<div class="wi-chips"><span class="wi-chip">launch vs async</span><span class="wi-chip">Dispatchers</span><span class="wi-chip">viewModelScope</span><span class="wi-chip">cancellation</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--coral2);color:var(--coral);border:1px solid rgba(232,104,74,0.2)">2</div>
+              <div class="wi-info">
+                <div class="wi-title">Kotlin Flows — Complete Guide — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~2h · Video/playlist</div><span class="wi-badge" style="background:var(--coral2);color:var(--coral)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=ZX8VsqTO9Cs" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Cold Flow vs StateFlow vs SharedFlow, operators (map, filter, combine, zip), flowOn for thread switching, and collectAsState in Compose. This powers your entire reactive data pipeline.<div class="wi-chips"><span class="wi-chip">cold Flow</span><span class="wi-chip">StateFlow</span><span class="wi-chip">SharedFlow</span><span class="wi-chip">flowOn</span><span class="wi-chip">combine</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--coral2);color:var(--coral);border:1px solid rgba(232,104,74,0.2)">3</div>
+              <div class="wi-info">
+                <div class="wi-title">Dagger-Hilt Dependency Injection Full Guide — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~2h · Single video</div><span class="wi-badge" style="background:var(--coral2);color:var(--coral)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=bbMsuI2p1DQ" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Hilt is the hardest conceptual leap of Phase 4. PL's dedicated video walks through @HiltAndroidApp, @Inject, @Module, @Provides, @Binds, @HiltViewModel, component scopes, and qualifier annotations clearly.<div class="wi-chips"><span class="wi-chip">@Inject</span><span class="wi-chip">@Module</span><span class="wi-chip">@HiltViewModel</span><span class="wi-chip">scopes</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--coral2);color:var(--coral);border:1px solid rgba(232,104,74,0.2)">4</div>
+              <div class="wi-info">
+                <div class="wi-title">Room Database Full Guide — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~45 min · Single video</div><span class="wi-badge" style="background:var(--coral2);color:var(--coral)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=bOd3wO0uFr8" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Covers @Entity, @Dao, @Database, suspend queries, Flow-based reactive queries for automatic UI updates, and type converters. Also covered in the Note App project but this goes deeper on the concepts.<div class="wi-chips"><span class="wi-chip">@Entity</span><span class="wi-chip">@Dao</span><span class="wi-chip">Flow queries</span><span class="wi-chip">migrations</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--coral2);color:var(--coral);border:1px solid rgba(232,104,74,0.2)">5</div>
+              <div class="wi-info">
+                <div class="wi-title">Retrofit + REST API Full Guide with Hilt — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~1.5h · Single video</div><span class="wi-badge" style="background:var(--coral2);color:var(--coral)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=t6Sql3WMAnk" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Covers Retrofit setup with OkHttp, Moshi converters, creating a repository that calls the API, injecting it with Hilt, and surfacing data through ViewModel to Compose UI. This is the video that unlocks internet-connected apps.<div class="wi-chips"><span class="wi-chip">Retrofit</span><span class="wi-chip">OkHttp</span><span class="wi-chip">Moshi</span><span class="wi-chip">Repository</span><span class="wi-chip">error handling</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(75,160,232,0.1);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">6</div>
+              <div class="wi-info">
+                <div class="wi-title">DataStore with Compose &amp; Hilt — Stevdza-San</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--purple)"></span>Stevdza-San · ~30 min</div><span class="gap-badge">Gap fill</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=McR-_ydWFOE" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">PL doesn't have an updated DataStore video. Stevdza-San's tutorial covers Preferences DataStore as a SharedPreferences replacement, with Hilt injection and Flow-based reads — the modern approach for persisting small data.<div class="wi-chips"><span class="wi-chip">DataStore</span><span class="wi-chip">Preferences</span><span class="wi-chip">Flow reads</span><span class="wi-chip">Hilt injection</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(76,202,96,0.1);color:var(--green);border:1px solid rgba(76,202,96,0.2)">7</div>
+              <div class="wi-info">
+                <div class="wi-title">MVVM News App Full Build (Retrofit + Room + Hilt) — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · Playlist · ~5–6h total</div><span class="wi-badge" style="background:rgba(76,202,96,0.1);color:var(--green)">Phase capstone</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/playlist?list=PLQkwcJG4YTCQTEjtNcbMnVYe7GDZThEde" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">The Phase 4 capstone project. Complete news app with Retrofit for API calls, Room for offline caching, Hilt for DI, and MVVM architecture — all combined in a single production-quality codebase.<div class="wi-chips"><span class="wi-chip">full MVVM app</span><span class="wi-chip">offline-first</span><span class="wi-chip">search</span><span class="wi-chip">pagination</span><span class="wi-chip">bookmark to DB</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph4-tools">
+        <div class="tools-section">
+          <div class="tools-heading">Key libraries (add to build.gradle)</div>
+          <div class="tools-chips">
+            <span class="tool-chip" style="color:var(--coral);border-color:rgba(232,104,74,0.25);background:var(--coral2)">Hilt</span>
+            <span class="tool-chip" style="color:var(--coral);border-color:rgba(232,104,74,0.25);background:var(--coral2)">Room</span>
+            <span class="tool-chip" style="color:var(--coral);border-color:rgba(232,104,74,0.25);background:var(--coral2)">Retrofit</span>
+            <span class="tool-chip" style="color:var(--coral);border-color:rgba(232,104,74,0.25);background:var(--coral2)">OkHttp</span>
+            <span class="tool-chip" style="color:var(--coral);border-color:rgba(232,104,74,0.25);background:var(--coral2)">Moshi / Gson</span>
+            <span class="tool-chip" style="color:var(--coral);border-color:rgba(232,104,74,0.25);background:var(--coral2)">DataStore</span>
+            <span class="tool-chip" style="color:var(--coral);border-color:rgba(232,104,74,0.25);background:var(--coral2)">kotlinx.coroutines</span>
+          </div>
+        </div>
+        <div class="resources-list">
+          <a class="res-link" href="https://developer.android.com/topic/architecture" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Guide to app architecture — Google</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://developer.android.com/codelabs/android-hilt" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">FREE</span><span>Hilt dependency injection codelab</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://developer.android.com/codelabs/android-room-with-a-view-kotlin" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">FREE</span><span>Room database codelab — Google</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://developer.android.com/topic/libraries/architecture/datastore" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>DataStore official guide</span><span class="arr">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ────────── PHASE 5 ────────── -->
+<div class="phase-wrap">
+  <div class="phase-left">
+    <div class="phase-dot" style="background:var(--green2);color:var(--green);border-color:rgba(76,202,96,0.35)">P5</div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="phase-card" id="ph5">
+    <div class="phase-head" onclick="toggle('ph5')">
+      <div class="phase-info">
+        <div class="phase-title">Advanced Compose &amp; Android APIs</div>
+        <div class="phase-sub">Animations, Canvas, Paging, WorkManager, Camera, Maps, Notifications</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-dur" style="background:var(--green2);color:var(--green);border:1px solid rgba(76,202,96,0.2)">3–4 weeks</span>
+        <div class="phase-chevron">▼</div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <div class="tabs" data-phase="ph5">
+        <div class="tab active" onclick="switchTab('ph5','topics')">Topics</div>
+        <div class="tab" onclick="switchTab('ph5','watch')">Watch Order</div>
+        <div class="tab" onclick="switchTab('ph5','tools')">Tools &amp; Links</div>
+      </div>
+      <div class="tab-panel active" id="ph5-topics">
+        <div class="topics-grid">
+          <div class="topic" style="border-left-color:var(--green)"><div class="topic-name">Animations — basics</div><div class="topic-desc">animateFloatAsState, animateDpAsState, AnimatedVisibility, crossfade</div></div>
+          <div class="topic" style="border-left-color:var(--green)"><div class="topic-name">Animations — advanced</div><div class="topic-desc">updateTransition, rememberInfiniteTransition, AnimatedContent, spring/tween specs</div></div>
+          <div class="topic" style="border-left-color:var(--green)"><div class="topic-name">Canvas &amp; custom drawing</div><div class="topic-desc">DrawScope, drawCircle, drawPath, drawText, Bezier curves, custom chart components</div></div>
+          <div class="topic" style="border-left-color:var(--green)"><div class="topic-name">Gestures &amp; touch</div><div class="topic-desc">detectTapGestures, draggable, swipeable, transformable, nestedScroll</div></div>
+          <div class="topic" style="border-left-color:var(--green)"><div class="topic-name">Paging 3</div><div class="topic-desc">PagingSource, Pager, PagingData, LazyPagingItems in Compose, load states</div></div>
+          <div class="topic" style="border-left-color:var(--green)"><div class="topic-name">WorkManager</div><div class="topic-desc">One-time &amp; periodic background tasks, chaining workers, constraints, input/output data</div></div>
+          <div class="topic" style="border-left-color:var(--green)"><div class="topic-name">Notifications</div><div class="topic-desc">NotificationCompat, notification channels, deep links, actions, expandable notifications</div></div>
+          <div class="topic" style="border-left-color:var(--green)"><div class="topic-name">Runtime permissions</div><div class="topic-desc">rememberLauncherForActivityResult, rationale flows, multiple permission requests</div></div>
+          <div class="topic" style="border-left-color:var(--green)"><div class="topic-name">CameraX</div><div class="topic-desc">Preview use case, ImageCapture, ImageAnalysis, video capture</div></div>
+          <div class="topic" style="border-left-color:var(--green)"><div class="topic-name">Google Maps Compose</div><div class="topic-desc">GoogleMap composable, CameraPositionState, markers, polylines, info windows</div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph5-watch">
+        <div class="watch-list">
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--green2);color:var(--green);border:1px solid rgba(76,202,96,0.2)">1</div>
+              <div class="wi-info">
+                <div class="wi-title">Jetpack Compose Animations — Complete Guide — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~1h · Single video</div><span class="wi-badge" style="background:var(--green2);color:var(--green)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=PqFLgTuEbzM" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Covers AnimatedVisibility, animateFloatAsState, animateDpAsState, updateTransition, AnimatedContent, and rememberInfiniteTransition with clear side-by-side comparisons of when to use each.<div class="wi-chips"><span class="wi-chip">AnimatedVisibility</span><span class="wi-chip">animateAsState</span><span class="wi-chip">updateTransition</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--green2);color:var(--green);border:1px solid rgba(76,202,96,0.2)">2</div>
+              <div class="wi-info">
+                <div class="wi-title">Compose Canvas Playlist — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · Playlist · ~2h total</div><span class="wi-badge" style="background:var(--green2);color:var(--green)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/playlist?list=PLQkwcJG4YTCSCd7ySmVGVeKP-yx0nJNpq" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Multi-video deep dive into Canvas. Covers DrawScope, drawCircle, drawPath, Bezier curves, and building custom UI components like clocks, progress indicators, and bar charts from scratch.<div class="wi-chips"><span class="wi-chip">DrawScope</span><span class="wi-chip">paths</span><span class="wi-chip">Bezier</span><span class="wi-chip">custom components</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--green2);color:var(--green);border:1px solid rgba(76,202,96,0.2)">3</div>
+              <div class="wi-info">
+                <div class="wi-title">Paging 3 Full Guide with Compose — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~40 min · Single video</div><span class="wi-badge" style="background:var(--green2);color:var(--green)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=Dk9t9V4NWTM" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">PagingSource, Pager, PagingData, LazyPagingItems in Compose, and load states (loading, error, append). Essential for any social feed, search results, or catalogue-style app.<div class="wi-chips"><span class="wi-chip">PagingSource</span><span class="wi-chip">LazyPagingItems</span><span class="wi-chip">load states</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--green2);color:var(--green);border:1px solid rgba(76,202,96,0.2)">4</div>
+              <div class="wi-info">
+                <div class="wi-title">WorkManager — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · ~30 min · Single video</div><span class="wi-badge" style="background:var(--green2);color:var(--green)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=2Zt4v2c3R5Q" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Background tasks that need to survive app restarts. Covers one-time vs periodic workers, chaining, constraints (network/battery), input data, and observing work status from Compose.<div class="wi-chips"><span class="wi-chip">CoroutineWorker</span><span class="wi-chip">constraints</span><span class="wi-chip">chaining</span><span class="wi-chip">work status</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(75,160,232,0.1);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">5</div>
+              <div class="wi-info">
+                <div class="wi-title">CameraX Getting Started Codelab — Google</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--teal)"></span>Google · Free codelab</div><span class="gap-badge">Gap fill</span></div>
+              </div>
+              <a class="wi-link" href="https://developer.android.com/codelabs/camerax-getting-started" target="_blank">Open ↗</a>
+            </div>
+            <div class="wi-desc">PL doesn't have an up-to-date CameraX video. Google's official codelab covers the preview, image capture, and image analysis use cases — the foundation for any camera feature.<div class="wi-chips"><span class="wi-chip">Preview</span><span class="wi-chip">ImageCapture</span><span class="wi-chip">ImageAnalysis</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(75,160,232,0.1);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">6</div>
+              <div class="wi-info">
+                <div class="wi-title">Google Maps Compose Quickstart — Google Official</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--teal)"></span>Google · Free guide + codelab</div><span class="gap-badge">Gap fill</span></div>
+              </div>
+              <a class="wi-link" href="https://developers.google.com/maps/documentation/android-sdk/maps-compose" target="_blank">Open ↗</a>
+            </div>
+            <div class="wi-desc">PL's Maps content is outdated. The official Google Maps Compose library guide covers GoogleMap composable, CameraPositionState, markers, info windows, and camera animation — the modern approach.<div class="wi-chips"><span class="wi-chip">GoogleMap</span><span class="wi-chip">markers</span><span class="wi-chip">camera state</span><span class="wi-chip">polylines</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph5-tools">
+        <div class="tools-section">
+          <div class="tools-heading">Key libraries</div>
+          <div class="tools-chips">
+            <span class="tool-chip" style="color:var(--green);border-color:rgba(76,202,96,0.25);background:var(--green2)">Paging 3</span>
+            <span class="tool-chip" style="color:var(--green);border-color:rgba(76,202,96,0.25);background:var(--green2)">WorkManager</span>
+            <span class="tool-chip" style="color:var(--green);border-color:rgba(76,202,96,0.25);background:var(--green2)">CameraX</span>
+            <span class="tool-chip" style="color:var(--green);border-color:rgba(76,202,96,0.25);background:var(--green2)">Google Maps Compose</span>
+            <span class="tool-chip" style="color:var(--green);border-color:rgba(76,202,96,0.25);background:var(--green2)">Accompanist</span>
+          </div>
+        </div>
+        <div class="resources-list">
+          <a class="res-link" href="https://developer.android.com/jetpack/compose/animation/introduction" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Compose animations guide — official</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://developer.android.com/codelabs/android-paging" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">FREE</span><span>Paging 3 codelab — Google</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://developer.android.com/topic/libraries/architecture/workmanager" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>WorkManager guide — official</span><span class="arr">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ────────── PHASE 6 ────────── -->
+<div class="phase-wrap">
+  <div class="phase-left">
+    <div class="phase-dot" style="background:var(--gold2);color:var(--gold);border-color:rgba(212,168,67,0.35)">P6</div>
+    <div class="phase-line"></div>
+  </div>
+  <div class="phase-card" id="ph6">
+    <div class="phase-head" onclick="toggle('ph6')">
+      <div class="phase-info">
+        <div class="phase-title">Testing</div>
+        <div class="phase-sub">Unit tests, Flow testing, Compose UI tests — the mark of a professional codebase</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-dur" style="background:var(--gold2);color:var(--gold);border:1px solid rgba(212,168,67,0.2)">2–3 weeks</span>
+        <div class="phase-chevron">▼</div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <div class="tabs" data-phase="ph6">
+        <div class="tab active" onclick="switchTab('ph6','topics')">Topics</div>
+        <div class="tab" onclick="switchTab('ph6','watch')">Watch Order</div>
+        <div class="tab" onclick="switchTab('ph6','tools')">Tools &amp; Links</div>
+      </div>
+      <div class="tab-panel active" id="ph6-topics">
+        <div class="topics-grid">
+          <div class="topic" style="border-left-color:var(--gold)"><div class="topic-name">Unit testing — JUnit 4/5</div><div class="topic-desc">@Test, @Before, @After, assertions, test structure, what to test vs what not to</div></div>
+          <div class="topic" style="border-left-color:var(--gold)"><div class="topic-name">MockK</div><div class="topic-desc">Kotlin-first mocking — mockk{}, every{}, coEvery{} for suspending fns, verify{}</div></div>
+          <div class="topic" style="border-left-color:var(--gold)"><div class="topic-name">Testing coroutines</div><div class="topic-desc">StandardTestDispatcher, runTest, advanceUntilIdle, TestCoroutineScope</div></div>
+          <div class="topic" style="border-left-color:var(--gold)"><div class="topic-name">Testing Flows with Turbine</div><div class="topic-desc">turbine.test{}, awaitItem(), awaitComplete(), awaitError() — asserting Flow emissions</div></div>
+          <div class="topic" style="border-left-color:var(--gold)"><div class="topic-name">Compose UI testing</div><div class="topic-desc">createComposeRule(), onNodeWithText(), onNodeWithTag(), performClick(), assertIsDisplayed()</div></div>
+          <div class="topic" style="border-left-color:var(--gold)"><div class="topic-name">Integration testing</div><div class="topic-desc">Testing Room DAOs with in-memory database, fake repositories, end-to-end flows</div></div>
+          <div class="topic" style="border-left-color:var(--gold)"><div class="topic-name">Test doubles patterns</div><div class="topic-desc">Fake vs Mock vs Stub — when to use each, why fakes are often better than mocks</div></div>
+          <div class="topic" style="border-left-color:var(--gold)"><div class="topic-name">Code coverage</div><div class="topic-desc">JaCoCo setup, reading reports, what coverage actually means (and its limits)</div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph6-watch">
+        <div class="callout blue" style="margin-bottom:16px">
+          <div class="callout-ico">ℹ️</div>
+          <p><strong>Note on PL's testing content:</strong> His testing playlist is his weakest area — it covers JUnit and MockK well but is missing Compose UI testing and Turbine. The gap fills here are essential, not optional.</p>
+        </div>
+        <div class="watch-list">
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--gold2);color:var(--gold);border:1px solid rgba(212,168,67,0.2)">1</div>
+              <div class="wi-info">
+                <div class="wi-title">Android Testing Full Guide (JUnit, MockK, Coroutines) — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · Playlist · ~4h</div><span class="wi-badge" style="background:var(--gold2);color:var(--gold)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/playlist?list=PLQkwcJG4YTCQHCppNAQmLsj_jW38rU9sC" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">PL's testing series covers unit tests with JUnit, MockK for mocking Kotlin code, testing ViewModels with fake dependencies, testing Room DAOs, and testing coroutines. Start here before the gap fills.<div class="wi-chips"><span class="wi-chip">JUnit</span><span class="wi-chip">MockK</span><span class="wi-chip">ViewModel testing</span><span class="wi-chip">Room testing</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(15,184,162,0.1);color:var(--teal);border:1px solid rgba(15,184,162,0.2)">2</div>
+              <div class="wi-info">
+                <div class="wi-title">Testing in Jetpack Compose Codelab — Google</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--teal)"></span>Google · Free codelab</div><span class="gap-badge">Gap fill</span></div>
+              </div>
+              <a class="wi-link" href="https://developer.android.com/codelabs/jetpack-compose-testing" target="_blank">Open ↗</a>
+            </div>
+            <div class="wi-desc">The essential resource for Compose UI testing — PL doesn't cover this. Covers ComposeTestRule, node finders (onNodeWithText, onNodeWithTag), actions (performClick, performTextInput), and assertions in depth.<div class="wi-chips"><span class="wi-chip">ComposeTestRule</span><span class="wi-chip">finders</span><span class="wi-chip">actions</span><span class="wi-chip">assertions</span><span class="wi-chip">semantics</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(146,120,245,0.1);color:var(--purple);border:1px solid rgba(146,120,245,0.2)">3</div>
+              <div class="wi-info">
+                <div class="wi-title">Testing Kotlin Flows with Turbine — Stevdza-San</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--purple)"></span>Stevdza-San · ~25 min</div><span class="gap-badge">Gap fill</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=uSw7PjCPMFQ" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Testing Flows is notoriously awkward — Turbine makes it clean. This video covers the library's API (test{}, awaitItem(), awaitComplete()) for asserting exactly which emissions your flows produce.<div class="wi-chips"><span class="wi-chip">Turbine</span><span class="wi-chip">awaitItem()</span><span class="wi-chip">Flow assertions</span><span class="wi-chip">test scope</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(15,184,162,0.1);color:var(--teal);border:1px solid rgba(15,184,162,0.2)">4</div>
+              <div class="wi-info">
+                <div class="wi-title">Testing Coroutines Guide — Google</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--teal)"></span>Google · Written guide</div><span class="wi-badge" style="background:rgba(15,184,162,0.1);color:var(--teal)">Reference</span></div>
+              </div>
+              <a class="wi-link" href="https://developer.android.com/kotlin/coroutines/test" target="_blank">Open ↗</a>
+            </div>
+            <div class="wi-desc">The definitive reference for coroutine testing — StandardTestDispatcher, UnconfinedTestDispatcher, runTest, advanceTimeBy, advanceUntilIdle. Bookmark this and refer back as you write tests.<div class="wi-chips"><span class="wi-chip">runTest</span><span class="wi-chip">TestDispatcher</span><span class="wi-chip">advanceUntilIdle</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph6-tools">
+        <div class="tools-section">
+          <div class="tools-heading">Key testing libraries</div>
+          <div class="tools-chips">
+            <span class="tool-chip" style="color:var(--gold);border-color:rgba(212,168,67,0.25);background:var(--gold2)">JUnit 4</span>
+            <span class="tool-chip" style="color:var(--gold);border-color:rgba(212,168,67,0.25);background:var(--gold2)">MockK</span>
+            <span class="tool-chip" style="color:var(--gold);border-color:rgba(212,168,67,0.25);background:var(--gold2)">Turbine</span>
+            <span class="tool-chip" style="color:var(--gold);border-color:rgba(212,168,67,0.25);background:var(--gold2)">ComposeTestRule</span>
+            <span class="tool-chip" style="color:var(--gold);border-color:rgba(212,168,67,0.25);background:var(--gold2)">JaCoCo</span>
+            <span class="tool-chip" style="color:var(--gold);border-color:rgba(212,168,67,0.25);background:var(--gold2)">Robolectric</span>
+            <span class="tool-chip" style="color:var(--gold);border-color:rgba(212,168,67,0.25);background:var(--gold2)">Truth (Google)</span>
+          </div>
+        </div>
+        <div class="resources-list">
+          <a class="res-link" href="https://mockk.io/" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>MockK official documentation</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://cashapp.github.io/turbine/" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Turbine — Flow testing library by Cash App</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://developer.android.com/jetpack/compose/testing" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Compose testing cheat sheet — Google</span><span class="arr">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ────────── PHASE 7 ────────── -->
+<div class="phase-wrap">
+  <div class="phase-left">
+    <div class="phase-dot" style="background:var(--pink2);color:var(--pink);border-color:rgba(232,120,168,0.35)">P7</div>
+    <div class="phase-line" style="display:none"></div>
+  </div>
+  <div class="phase-card" id="ph7">
+    <div class="phase-head" onclick="toggle('ph7')">
+      <div class="phase-info">
+        <div class="phase-title">Production &amp; Publishing</div>
+        <div class="phase-sub">Firebase, performance, app signing, accessibility, and shipping to the Play Store</div>
+      </div>
+      <div class="phase-meta">
+        <span class="phase-dur" style="background:var(--pink2);color:var(--pink);border:1px solid rgba(232,120,168,0.2)">2–3 weeks</span>
+        <div class="phase-chevron">▼</div>
+      </div>
+    </div>
+    <div class="phase-body">
+      <div class="tabs" data-phase="ph7">
+        <div class="tab active" onclick="switchTab('ph7','topics')">Topics</div>
+        <div class="tab" onclick="switchTab('ph7','watch')">Watch Order</div>
+        <div class="tab" onclick="switchTab('ph7','tools')">Tools &amp; Links</div>
+      </div>
+      <div class="tab-panel active" id="ph7-topics">
+        <div class="topics-grid">
+          <div class="topic" style="border-left-color:var(--pink)"><div class="topic-name">Performance profiling</div><div class="topic-desc">Android Studio Profiler — CPU traces, memory allocation, network, frame rendering</div></div>
+          <div class="topic" style="border-left-color:var(--pink)"><div class="topic-name">Compose performance</div><div class="topic-desc">Stable types, @Stable/@Immutable, skippable composables, finding unnecessary recompositions</div></div>
+          <div class="topic" style="border-left-color:var(--pink)"><div class="topic-name">ProGuard &amp; R8</div><div class="topic-desc">Code shrinking, obfuscation, keep rules for reflection/Retrofit/Room</div></div>
+          <div class="topic" style="border-left-color:var(--pink)"><div class="topic-name">Firebase Crashlytics</div><div class="topic-desc">Crash reporting, non-fatal exceptions, custom keys and logs, issue grouping</div></div>
+          <div class="topic" style="border-left-color:var(--pink)"><div class="topic-name">Firebase Analytics</div><div class="topic-desc">Custom events, user properties, conversion funnels, audience building</div></div>
+          <div class="topic" style="border-left-color:var(--pink)"><div class="topic-name">Firebase Cloud Messaging</div><div class="topic-desc">Push notifications, foreground vs background handling, data vs notification messages</div></div>
+          <div class="topic" style="border-left-color:var(--pink)"><div class="topic-name">App signing</div><div class="topic-desc">Keystore generation, upload key vs app signing key, Play App Signing program</div></div>
+          <div class="topic" style="border-left-color:var(--pink)"><div class="topic-name">Play Store publishing</div><div class="topic-desc">Internal testing → closed beta → open beta → production, store listing, screenshots, ASO</div></div>
+          <div class="topic" style="border-left-color:var(--pink)"><div class="topic-name">Accessibility in Compose</div><div class="topic-desc">TalkBack, contentDescription, Semantics modifier, custom actions, traversal order</div></div>
+          <div class="topic" style="border-left-color:var(--pink)"><div class="topic-name">Baseline profiles</div><div class="topic-desc">Pre-compiling critical code paths for faster startup, Macrobenchmark library</div></div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph7-watch">
+        <div class="watch-list">
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:var(--pink2);color:var(--pink);border:1px solid rgba(232,120,168,0.2)">1</div>
+              <div class="wi-info">
+                <div class="wi-title">Firebase Auth &amp; Firestore Full App (Compose) — Philipp Lackner</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--amber)"></span>Philipp Lackner · Playlist</div><span class="wi-badge" style="background:var(--pink2);color:var(--pink)">Core</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=H_kHNMFNJXg" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Builds a full Firebase-backed app with Compose — email/password auth, Google Sign-In, Firestore for realtime data, and proper architecture. The most practical intro to Firebase on PL's channel.<div class="wi-chips"><span class="wi-chip">Firebase Auth</span><span class="wi-chip">Google Sign-In</span><span class="wi-chip">Firestore</span><span class="wi-chip">realtime</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(75,160,232,0.1);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">2</div>
+              <div class="wi-info">
+                <div class="wi-title">Firebase Crashlytics Setup for Android — Google</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--teal)"></span>Google · Official guide</div><span class="gap-badge">Gap fill</span></div>
+              </div>
+              <a class="wi-link" href="https://firebase.google.com/docs/crashlytics/get-started?platform=android" target="_blank">Open ↗</a>
+            </div>
+            <div class="wi-desc">PL covers Firebase Auth/Firestore but not production monitoring. Google's Crashlytics setup guide walks through adding the SDK, symbolication, non-fatal exceptions, and reading the Firebase console.<div class="wi-chips"><span class="wi-chip">crash reporting</span><span class="wi-chip">non-fatal</span><span class="wi-chip">custom logs</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(146,120,245,0.1);color:var(--purple);border:1px solid rgba(146,120,245,0.2)">3</div>
+              <div class="wi-info">
+                <div class="wi-title">Firebase Analytics for Android — Stevdza-San</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--purple)"></span>Stevdza-San · ~30 min</div><span class="gap-badge">Gap fill</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=Xj5EIU3NZOM" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Practical walkthrough of Firebase Analytics — logging custom events, setting user properties, and reading the Firebase console. Covers the patterns you'll use to understand how real users interact with your app.<div class="wi-chips"><span class="wi-chip">custom events</span><span class="wi-chip">user properties</span><span class="wi-chip">Firebase console</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(75,160,232,0.1);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">4</div>
+              <div class="wi-info">
+                <div class="wi-title">Compose Performance Guide — Google</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--teal)"></span>Google · Official docs + I/O talk</div><span class="gap-badge">Gap fill</span></div>
+              </div>
+              <a class="wi-link" href="https://developer.android.com/jetpack/compose/performance" target="_blank">Open ↗</a>
+            </div>
+            <div class="wi-desc">PL has no dedicated Compose performance content. The Google guide covers stable types, @Stable/@Immutable, skippable composables, the Layout Inspector for recomposition debugging, and Baseline Profiles.<div class="wi-chips"><span class="wi-chip">stable types</span><span class="wi-chip">skippable</span><span class="wi-chip">recomposition</span><span class="wi-chip">Baseline Profiles</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(75,160,232,0.1);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">5</div>
+              <div class="wi-info">
+                <div class="wi-title">Publish Your App on the Play Store — Android Developers</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--blue)"></span>Android Developers YT · Walkthrough video</div><span class="gap-badge">Gap fill</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=5GHT4QtotE4" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">PL doesn't cover Play Store publishing. This official walkthrough covers keystore generation, signing, creating a Play Console listing, internal testing track, and promoting to production.<div class="wi-chips"><span class="wi-chip">keystore</span><span class="wi-chip">Play Console</span><span class="wi-chip">internal track</span><span class="wi-chip">production release</span></div></div>
+          </div>
+          <div class="watch-item">
+            <div class="wi-head">
+              <div class="wi-num" style="background:rgba(75,160,232,0.1);color:var(--blue);border:1px solid rgba(75,160,232,0.2)">6</div>
+              <div class="wi-info">
+                <div class="wi-title">Accessibility in Jetpack Compose — Android Developers</div>
+                <div class="wi-meta"><div class="wi-src"><span class="wi-sdot" style="background:var(--blue)"></span>Android Developers YT · Google I/O talk</div><span class="gap-badge">Gap fill</span></div>
+              </div>
+              <a class="wi-link" href="https://www.youtube.com/watch?v=Om7pBBRBHCk" target="_blank">Watch ↗</a>
+            </div>
+            <div class="wi-desc">Accessibility is not covered on PL's channel at all. This Google I/O session covers TalkBack support, contentDescription, Semantics modifier, custom actions, and testing accessibility — important for Play Store quality.<div class="wi-chips"><span class="wi-chip">TalkBack</span><span class="wi-chip">Semantics</span><span class="wi-chip">contentDescription</span><span class="wi-chip">a11y testing</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="ph7-tools">
+        <div class="tools-section">
+          <div class="tools-heading">Key tools &amp; services</div>
+          <div class="tools-chips">
+            <span class="tool-chip" style="color:var(--pink);border-color:rgba(232,120,168,0.25);background:var(--pink2)">Firebase Console</span>
+            <span class="tool-chip" style="color:var(--pink);border-color:rgba(232,120,168,0.25);background:var(--pink2)">Play Console</span>
+            <span class="tool-chip" style="color:var(--pink);border-color:rgba(232,120,168,0.25);background:var(--pink2)">Android Profiler</span>
+            <span class="tool-chip" style="color:var(--pink);border-color:rgba(232,120,168,0.25);background:var(--pink2)">Layout Inspector</span>
+            <span class="tool-chip" style="color:var(--pink);border-color:rgba(232,120,168,0.25);background:var(--pink2)">R8 / ProGuard</span>
+            <span class="tool-chip" style="color:var(--pink);border-color:rgba(232,120,168,0.25);background:var(--pink2)">Baseline Profiles</span>
+            <span class="tool-chip" style="color:var(--pink);border-color:rgba(232,120,168,0.25);background:var(--pink2)">Macrobenchmark</span>
+          </div>
+        </div>
+        <div class="resources-list">
+          <a class="res-link" href="https://firebase.google.com/docs/android/setup" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Firebase for Android — setup and SDK guide</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://developer.android.com/studio/publish" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Publish your app — official Play Store guide</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://developer.android.com/jetpack/compose/accessibility" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Accessibility in Compose — official guide</span><span class="arr">↗</span></a>
+          <a class="res-link" href="https://developer.android.com/topic/performance/baselineprofiles/overview" target="_blank"><span class="res-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Baseline Profiles overview</span><span class="arr">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div><!-- /phases -->
+  </div>
+</section>
+
+<!-- CHANNELS -->
+<section class="section" id="channels">
+  <div class="wrap">
+    <div class="sec-eye">Recommended channels</div>
+    <h2 class="sec-title">Who to follow for this stack</h2>
+    <p class="sec-desc">Your primary resource throughout the roadmap, plus the channels you'll use to fill PL's gaps.</p>
+    <div class="channels-grid">
+      <a class="channel-card" href="https://www.youtube.com/@PhilippLackner" target="_blank">
+        <div class="ch-head">
+          <div class="ch-avatar" style="background:var(--amber2);color:var(--amber);border:1px solid var(--amber3)">PL</div>
+          <div><div class="ch-name">Philipp Lackner</div><div class="ch-role">Primary channel</div></div>
+        </div>
+        <div class="ch-desc">The best channel for modern Android. Covers Kotlin, Compose, MVVM, Hilt, Room, Retrofit, testing — all updated. Your go-to for 80% of this roadmap.</div>
+        <div class="ch-tags"><span class="ch-tag">Kotlin</span><span class="ch-tag">Compose</span><span class="ch-tag">MVVM</span><span class="ch-tag">Hilt</span><span class="ch-tag">Room</span><span class="ch-tag">Coroutines</span></div>
+      </a>
+      <a class="channel-card" href="https://www.youtube.com/@AndroidDevelopers" target="_blank">
+        <div class="ch-head">
+          <div class="ch-avatar" style="background:var(--teal2);color:var(--teal);border:1px solid rgba(15,184,162,0.25)">AD</div>
+          <div><div class="ch-name">Android Developers</div><div class="ch-role">Official Google channel</div></div>
+        </div>
+        <div class="ch-desc">Official channel. Google I/O talks, deep-dives into new APIs, Compose-specific series. Use for performance, accessibility, and new platform features.</div>
+        <div class="ch-tags"><span class="ch-tag">Official</span><span class="ch-tag">Performance</span><span class="ch-tag">Accessibility</span><span class="ch-tag">New APIs</span></div>
+      </a>
+      <a class="channel-card" href="https://www.youtube.com/@stevdza-san" target="_blank">
+        <div class="ch-head">
+          <div class="ch-avatar" style="background:var(--purple2);color:var(--purple);border:1px solid rgba(146,120,245,0.25)">SS</div>
+          <div><div class="ch-name">Stevdza-San</div><div class="ch-role">Gap fill specialist</div></div>
+        </div>
+        <div class="ch-desc">Excellent project-based Compose tutorials. Best source for DataStore, Turbine testing, Firebase Analytics, and topics PL doesn't cover in depth.</div>
+        <div class="ch-tags"><span class="ch-tag">DataStore</span><span class="ch-tag">Turbine</span><span class="ch-tag">Firebase</span><span class="ch-tag">Projects</span></div>
+      </a>
+      <a class="channel-card" href="https://developer.android.com/courses" target="_blank">
+        <div class="ch-head">
+          <div class="ch-avatar" style="background:var(--blue2);color:var(--blue);border:1px solid rgba(75,160,232,0.25)">CL</div>
+          <div><div class="ch-name">Android Codelabs</div><div class="ch-role">Hands-on practice</div></div>
+        </div>
+        <div class="ch-desc">Free interactive codelabs from Google for every phase. "Learn by doing" — use them after watching videos to build real things. Every codelab earns you a completion badge.</div>
+        <div class="ch-tags"><span class="ch-tag">Interactive</span><span class="ch-tag">Every phase</span><span class="ch-tag">Free</span><span class="ch-tag">Badges</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ALL GAPS SUMMARY -->
+<section class="section" id="gaps">
+  <div class="wrap">
+    <div class="sec-eye">Gap summary</div>
+    <h2 class="sec-title">Everything PL doesn't cover</h2>
+    <p class="sec-desc">Consolidated view of every topic Philipp Lackner skips or has outdated content for — and exactly what to use instead.</p>
+    <div class="gaps-list">
+      <div class="gap-card">
+        <div class="gap-head"><div class="gap-ico">🔀</div><div class="gap-info"><div class="gap-title">Git &amp; version control</div><div class="gap-phase-tag">Gap in Phase 0</div></div></div>
+        <div class="gap-body">
+          <div class="gap-desc">PL assumes you already know Git. You don't need much — just enough to commit and push your projects from day one. Fireship's 100-second format is the fastest way in.</div>
+          <div class="gap-fills">
+            <a class="gap-fill" href="https://www.youtube.com/watch?v=HkdAHXoRtos" target="_blank"><span class="gf-src" style="background:rgba(75,160,232,0.1);color:var(--blue)">YT</span><span>Git in 100 Seconds — Fireship</span>↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-head"><div class="gap-ico">💾</div><div class="gap-info"><div class="gap-title">DataStore (replacing SharedPreferences)</div><div class="gap-phase-tag">Gap in Phase 4</div></div></div>
+        <div class="gap-body">
+          <div class="gap-desc">PL mentions DataStore but has no dedicated, up-to-date video. Stevdza-San's tutorial covers Preferences DataStore as a modern replacement for SharedPreferences, with Hilt integration.</div>
+          <div class="gap-fills">
+            <a class="gap-fill" href="https://www.youtube.com/watch?v=McR-_ydWFOE" target="_blank"><span class="gf-src" style="background:var(--purple2);color:var(--purple)">YT</span><span>DataStore with Compose &amp; Hilt — Stevdza-San</span>↗</a>
+            <a class="gap-fill" href="https://developer.android.com/topic/libraries/architecture/datastore" target="_blank"><span class="gf-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>DataStore official guide — Google</span>↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-head"><div class="gap-ico">📸</div><div class="gap-info"><div class="gap-title">CameraX</div><div class="gap-phase-tag">Gap in Phase 5</div></div></div>
+        <div class="gap-body">
+          <div class="gap-desc">PL doesn't have updated CameraX content. Google's official codelab covers the three use cases (Preview, ImageCapture, ImageAnalysis) and integrating them into a Compose screen.</div>
+          <div class="gap-fills">
+            <a class="gap-fill" href="https://developer.android.com/codelabs/camerax-getting-started" target="_blank"><span class="gf-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">CODELAB</span><span>CameraX Getting Started — Google</span>↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-head"><div class="gap-ico">🗺️</div><div class="gap-info"><div class="gap-title">Google Maps Compose</div><div class="gap-phase-tag">Gap in Phase 5</div></div></div>
+        <div class="gap-body">
+          <div class="gap-desc">PL's Maps content uses an older XML-based API. The modern Google Maps Compose library is completely different — use the official quickstart guide.</div>
+          <div class="gap-fills">
+            <a class="gap-fill" href="https://developers.google.com/maps/documentation/android-sdk/maps-compose" target="_blank"><span class="gf-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Maps Compose — Google official quickstart</span>↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-head"><div class="gap-ico">🧪</div><div class="gap-info"><div class="gap-title">Compose UI Testing &amp; Turbine</div><div class="gap-phase-tag">Gap in Phase 6 — Critical</div></div></div>
+        <div class="gap-body">
+          <div class="gap-desc">PL's testing playlist skips Compose UI testing entirely and doesn't cover Turbine for Flow testing. Both are essential for professional-grade Android code. Use Google's codelab and Stevdza-San's Turbine video.</div>
+          <div class="gap-fills">
+            <a class="gap-fill" href="https://developer.android.com/codelabs/jetpack-compose-testing" target="_blank"><span class="gf-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">CODELAB</span><span>Testing in Compose — Google official codelab</span>↗</a>
+            <a class="gap-fill" href="https://www.youtube.com/watch?v=uSw7PjCPMFQ" target="_blank"><span class="gf-src" style="background:var(--purple2);color:var(--purple)">YT</span><span>Turbine — Testing Flows — Stevdza-San</span>↗</a>
+            <a class="gap-fill" href="https://cashapp.github.io/turbine/" target="_blank"><span class="gf-src" style="background:rgba(148,163,184,0.1);color:#94A3B8">DOCS</span><span>Turbine library documentation — Cash App</span>↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-head"><div class="gap-ico">🔥</div><div class="gap-info"><div class="gap-title">Firebase Crashlytics &amp; Analytics</div><div class="gap-phase-tag">Gap in Phase 7</div></div></div>
+        <div class="gap-body">
+          <div class="gap-desc">PL's Firebase content focuses on Auth and Firestore — the production monitoring tools (Crashlytics, Analytics, FCM) are not covered. These are critical for any live app.</div>
+          <div class="gap-fills">
+            <a class="gap-fill" href="https://firebase.google.com/docs/crashlytics/get-started?platform=android" target="_blank"><span class="gf-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Crashlytics setup for Android — Google</span>↗</a>
+            <a class="gap-fill" href="https://www.youtube.com/watch?v=Xj5EIU3NZOM" target="_blank"><span class="gf-src" style="background:var(--purple2);color:var(--purple)">YT</span><span>Firebase Analytics — Stevdza-San</span>↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-head"><div class="gap-ico">⚡</div><div class="gap-info"><div class="gap-title">Compose performance &amp; Baseline Profiles</div><div class="gap-phase-tag">Gap in Phase 7</div></div></div>
+        <div class="gap-body">
+          <div class="gap-desc">No Compose performance content on PL's channel. The Google official guide and I/O talks cover everything from stable types and skippable composables to Baseline Profiles for startup speed.</div>
+          <div class="gap-fills">
+            <a class="gap-fill" href="https://developer.android.com/jetpack/compose/performance" target="_blank"><span class="gf-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Compose performance guide — Google</span>↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-head"><div class="gap-ico">🚀</div><div class="gap-info"><div class="gap-title">Play Store publishing &amp; app signing</div><div class="gap-phase-tag">Gap in Phase 7</div></div></div>
+        <div class="gap-body">
+          <div class="gap-desc">PL doesn't cover the actual publishing process. The Android Developers channel walkthrough and Google's documentation cover keystore generation, signing configs, Play Console, and release tracks.</div>
+          <div class="gap-fills">
+            <a class="gap-fill" href="https://developer.android.com/studio/publish" target="_blank"><span class="gf-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Publish your app — official guide</span>↗</a>
+            <a class="gap-fill" href="https://www.youtube.com/watch?v=5GHT4QtotE4" target="_blank"><span class="gf-src" style="background:rgba(75,160,232,0.1);color:var(--blue)">YT</span><span>Play Store publishing walkthrough — Android Developers</span>↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-head"><div class="gap-ico">♿</div><div class="gap-info"><div class="gap-title">Accessibility in Compose</div><div class="gap-phase-tag">Gap in Phase 7</div></div></div>
+        <div class="gap-body">
+          <div class="gap-desc">Accessibility is not covered on PL's channel at all — not even mentioned. The Google I/O session and official docs cover TalkBack, Semantics modifier, custom actions, and accessibility testing.</div>
+          <div class="gap-fills">
+            <a class="gap-fill" href="https://developer.android.com/jetpack/compose/accessibility" target="_blank"><span class="gf-src" style="background:rgba(15,184,162,0.1);color:var(--teal)">DOCS</span><span>Accessibility in Compose — official guide</span>↗</a>
+            <a class="gap-fill" href="https://www.youtube.com/watch?v=Om7pBBRBHCk" target="_blank"><span class="gf-src" style="background:rgba(75,160,232,0.1);color:var(--blue)">YT</span><span>Accessibility in Compose — Android Developers YT</span>↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Android Mastery — Complete Roadmap</strong></p>
+    <p>8 phases · 60+ topics · ~80h free video content · All gaps filled</p>
+    <p style="margin-top:6px;font-size:11px">Primary source: Philipp Lackner · Gaps: Google Codelabs, Android Developers YT, Stevdza-San · All resources free</p>
+    <p style="margin-top:4px;font-size:11px;color:var(--text3)">Tip: Search YouTube for "[topic] Philipp Lackner 2024" or "2025" to always find the most updated version of each video.</p>
+  </div>
+</footer>
+
+<script>
+/* ── ACCORDION ── */
+function toggle(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('open');
+  /* reset to first tab on open */
+  if(el.classList.contains('open')){
+    const tabs=el.querySelectorAll('.tab');
+    const panels=el.querySelectorAll('.tab-panel');
+    tabs.forEach((t,i)=>{t.classList.toggle('active',i===0)});
+    panels.forEach((p,i)=>{p.classList.toggle('active',i===0)});
+  }
+}
+
+/* ── TABS ── */
+function switchTab(phaseId,tab){
+  const ph=document.getElementById(phaseId);
+  const tabs=ph.querySelectorAll('.tab');
+  const panels=ph.querySelectorAll('.tab-panel');
+  const order=['topics','watch','tools'];
+  const idx=order.indexOf(tab);
+  tabs.forEach((t,i)=>t.classList.toggle('active',i===idx));
+  panels.forEach((p,i)=>p.classList.toggle('active',i===idx));
+}
+
+/* ── PROGRESS BAR ── */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progress-bar').style.width=pct+'%';
+});
+
+/* ── ACTIVE NAV ── */
+const sections=['overview','builds','roadmap','channels','gaps'];
+const navLinks=document.querySelectorAll('.nav-a');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      navLinks.forEach(l=>{
+        l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id);
+      });
+    }
+  });
+},{rootMargin:'-40% 0px -55% 0px'});
+sections.forEach(id=>{const el=document.getElementById(id);if(el)obs.observe(el)});
+
+/* open first phase by default */
+document.getElementById('ph0').classList.add('open');
+</script>
+</body>
+</html>
